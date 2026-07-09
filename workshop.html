@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>语录点唱机 · 哈拉少</title>
-  <meta name="description" content="范德彪语录点唱机：点一句播一句。" />
+  <title>锻造工坊 · 哈拉少</title>
+  <meta name="description" content="交互式锻造流程模拟器。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/pages.css" />
-  
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -45,7 +44,7 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -83,17 +82,23 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker gold">JUKEBOX</p>
-      <h1 class="page-title">语录<br /><span class="karaoke">点唱机</span></h1>
-      <p class="page-lead">点一句，彪哥替你说。土味音频，现场感拉满。</p>
+      <p class="page-kicker">WORKSHOP</p>
+      <h1 class="page-title">锻造工坊<br /><em>四步出刃</em></h1>
+      <p class="page-lead">点步骤推进。火花、锤击、淬火——把项目锻成形态。</p>
     </header>
-    <section class="juke">
-      <div class="juke-screen" id="jukeScreen">
-        <p class="juke-now">待机中 · 点歌吧</p>
-        <div class="juke-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <section class="shop">
+      <div class="shop-stage">
+        <canvas id="shopFx" width="900" height="360"></canvas>
+        <p class="shop-status" id="shopStatus">炉火已备 · 等你动手</p>
       </div>
-      <div class="juke-pad" id="jukePad"></div>
-      <p class="juke-tip">「这个用户正在生气，稍后再拨」——忙线时也礼貌。</p>
+      <div class="shop-steps" id="shopSteps">
+        <button type="button" data-step="0" class="is-on">1 投料 · 需求</button>
+        <button type="button" data-step="1">2 锻打 · 策略</button>
+        <button type="button" data-step="2">3 淬火 · 设计</button>
+        <button type="button" data-step="3">4 开刃 · 上线</button>
+      </div>
+      <p class="shop-biao" id="shopBiao">「工作范围内，硬仗才算数」</p>
+      <a class="btn solid" href="contact.html">拿真项目来锻</a>
     </section>
   
   </main>
@@ -109,7 +114,7 @@
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 11 模块</p>
+      <p>Design OS · 土酷标杆 · 24 模块</p>
       <div class="foot-links">
         <a href="os.html">地图</a>
         <a href="night.html">夜场</a>
@@ -121,6 +126,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/jukebox.js"></script>
+  <script src="js/workshop.js"></script>
 </body>
 </html>

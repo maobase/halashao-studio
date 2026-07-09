@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>语录点唱机 · 哈拉少</title>
-  <meta name="description" content="范德彪语录点唱机：点一句播一句。" />
+  <title>土酷电台 · 哈拉少</title>
+  <meta name="description" content="土酷电台：语录电台 + 频谱可视化。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/pages.css" />
-  
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -45,7 +44,7 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -83,17 +82,21 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker gold">JUKEBOX</p>
-      <h1 class="page-title">语录<br /><span class="karaoke">点唱机</span></h1>
-      <p class="page-lead">点一句，彪哥替你说。土味音频，现场感拉满。</p>
+      <p class="page-kicker gold">RADIO</p>
+      <h1 class="page-title">土酷电台<br /><span class="karaoke">FM 彪哥</span></h1>
+      <p class="page-lead">调频到辽北狠人频道。按下播放，频谱跟着炸。</p>
     </header>
-    <section class="juke">
-      <div class="juke-screen" id="jukeScreen">
-        <p class="juke-now">待机中 · 点歌吧</p>
-        <div class="juke-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <section class="radio">
+      <div class="radio-deck">
+        <canvas id="radioViz" width="800" height="220"></canvas>
+        <p class="radio-now" id="radioNow">频率锁定中…</p>
+        <div class="radio-controls">
+          <button type="button" class="btn solid" id="radioPlay">播放 / 暂停</button>
+          <button type="button" class="btn gold" id="radioNext">下一首硬话</button>
+          <button type="button" class="btn line" id="radioRand">随机</button>
+        </div>
       </div>
-      <div class="juke-pad" id="jukePad"></div>
-      <p class="juke-tip">「这个用户正在生气，稍后再拨」——忙线时也礼貌。</p>
+      <ol class="radio-list" id="radioList"></ol>
     </section>
   
   </main>
@@ -109,7 +112,7 @@
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 11 模块</p>
+      <p>Design OS · 土酷标杆 · 24 模块</p>
       <div class="foot-links">
         <a href="os.html">地图</a>
         <a href="night.html">夜场</a>
@@ -121,6 +124,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/jukebox.js"></script>
+  <script src="js/radio.js"></script>
 </body>
 </html>

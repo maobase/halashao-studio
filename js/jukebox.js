@@ -8,6 +8,8 @@
     { t: "论成败，人生豪迈…", src: "assets/biao-6.mp3", tip: "TRACK 06" },
     { t: "时光能不能倒流？豆角…", src: "assets/biao-7.mp3", tip: "TRACK 07" },
     { t: "这个用户正在生气…", src: "assets/biao-8.mp3", tip: "TRACK 08" },
+    { t: "工作范围内…", src: "assets/biao-9.mp3", tip: "TRACK 09" },
+    { t: "遵纪守法积极进取…", src: "assets/biao-10.mp3", tip: "TRACK 10" },
   ];
 
   const pad = document.getElementById("jukePad");

@@ -1,40 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://maobase.github.io/halashao-studio/</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/work.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/hard.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/reel.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/xin2.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/live.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/wall.html</loc>
-  </url>
-  <url>
     <loc>https://maobase.github.io/halashao-studio/arena.html</loc>
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/biao.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/jukebox.html</loc>
+    <loc>https://maobase.github.io/halashao-studio/billboard.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/cast.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/docs.html</loc>
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/fx.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/cast.html</loc>
+    <loc>https://maobase.github.io/halashao-studio/gallery.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/hard.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/jukebox.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/karaoke.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/live.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/menu.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/mood.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/night.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/os.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/radio.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/reel.html</loc>
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/studio.html</loc>
@@ -43,12 +64,15 @@
     <loc>https://maobase.github.io/halashao-studio/timeline.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/menu.html</loc>
+    <loc>https://maobase.github.io/halashao-studio/wall.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/os.html</loc>
+    <loc>https://maobase.github.io/halashao-studio/work.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/contact.html</loc>
+    <loc>https://maobase.github.io/halashao-studio/workshop.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/xin2.html</loc>
   </url>
 </urlset>
