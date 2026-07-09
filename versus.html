@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>服务菜单 · 哈拉少</title>
-  <meta name="description" content="哈拉少服务价目与档期。土酷菜单风。" />
+  <title>前后对比 · 哈拉少</title>
+  <meta name="description" content="拖动滑杆看土/酷前后对比。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/pages.css" />
-  
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -44,8 +43,8 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
+      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -91,35 +90,24 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker">MENU</p>
-      <h1 class="page-title">服务菜单<br /><em class="hot">硬菜上桌</em></h1>
-      <p class="page-lead">不玩虚的。点菜、谈档期、开干。价格面议，态度不议。</p>
-      <span class="stamp" style="margin-top:1rem">本季 2 席</span>
+      <p class="page-kicker">VERSUS</p>
+      <h1 class="page-title">前后对比<br /><em>拖一下</em></h1>
+      <p class="page-lead">左土右酷。拖中间的刃，看反差怎么长出来的。</p>
     </header>
-    <section class="menu-board">
-      <div class="menu-col">
-        <h2>硬菜</h2>
-        <div class="menu-row"><span>品牌识别系统</span><span class="dots"></span><span>6–10 周</span></div>
-        <div class="menu-row"><span>产品界面 / 设计系统</span><span class="dots"></span><span>4–12 周</span></div>
-        <div class="menu-row"><span>发布片 / 动效语言</span><span class="dots"></span><span>3–6 周</span></div>
-        <div class="menu-row"><span>官网 / 活动页</span><span class="dots"></span><span>3–8 周</span></div>
+    <section class="versus">
+      <div class="vs-frame" id="vsFrame">
+        <div class="vs-layer before" style="background-image:url(assets/work-brand.jpg)"></div>
+        <div class="vs-layer after" id="vsAfter" style="background-image:url(assets/hero-still.jpg)"></div>
+        <div class="vs-handle" id="vsHandle"><i></i></div>
+        <span class="vs-tag left">土</span>
+        <span class="vs-tag right">酷</span>
       </div>
-      <div class="menu-col">
-        <h2>小炒</h2>
-        <div class="menu-row"><span>标识快改</span><span class="dots"></span><span>1–2 周</span></div>
-        <div class="menu-row"><span>15s 竖版片子</span><span class="dots"></span><span>1–3 周</span></div>
-        <div class="menu-row"><span>演示日共创</span><span class="dots"></span><span>1 天</span></div>
-        <div class="menu-row"><span>设计审计</span><span class="dots"></span><span>3–5 天</span></div>
+      <div class="vs-switch">
+        <button type="button" data-pair="0" class="is-on">品牌</button>
+        <button type="button" data-pair="1">产品</button>
+        <button type="button" data-pair="2">动效</button>
       </div>
-      <div class="menu-col menu-col-biao">
-        <h2>彪哥套餐</h2>
-        <p class="menu-biao">「本市几场著名硬仗都是我主打的」</p>
-        <p>全案：品牌 + 产品 + 影像。一仗打完，不拆着卖虚的。</p>
-        <a class="btn gold" href="contact.html" data-magnetic>点这桌</a>
-      </div>
-    </section>
-    <section class="menu-note">
-      <p>时光能不能倒流？豆角能不能煮熟？项目能不能成？——先把菜点了。</p>
+      <p class="vs-quote">「肉眼凡胎，量你也看不出来」——拖完你就看出来了。</p>
     </section>
   
   </main>
@@ -135,7 +123,7 @@
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 11 模块</p>
+      <p>Design OS · 土酷标杆 · 32 模块 · ⌘K</p>
       <div class="foot-links">
         <a href="os.html">地图</a>
         <a href="storm.html">风暴</a>
@@ -147,6 +135,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  
+  <script src="js/versus.js"></script>
 </body>
 </html>

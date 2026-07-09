@@ -10,6 +10,8 @@
     { t: "这个用户正在生气…", src: "assets/biao-8.mp3", tip: "TRACK 08" },
     { t: "工作范围内…", src: "assets/biao-9.mp3", tip: "TRACK 09" },
     { t: "遵纪守法积极进取…", src: "assets/biao-10.mp3", tip: "TRACK 10" },
+    { t: "你说你是谁…", src: "assets/biao-11.mp3", tip: "TRACK 11" },
+    { t: "该出手时就出手", src: "assets/biao-12.mp3", tip: "TRACK 12" },
   ];
 
   const pad = document.getElementById("jukePad");

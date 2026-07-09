@@ -262,11 +262,111 @@
     setInterval(show, 14000);
   }
 
+  // command palette ⌘K / Ctrl+K
+  const MODULES = [
+    ["首页", "index.html"], ["系统地图", "os.html"], ["使用手册", "docs.html"],
+    ["作品库", "work.html"], ["影库", "gallery.html"], ["故事条", "stories.html"],
+    ["硬仗档案", "hard.html"], ["前后对比", "versus.html"], ["片源台", "reel.html"],
+    ["新二流", "xin2.html"], ["直播感", "live.html"], ["夜场", "night.html"],
+    ["文字风暴", "storm.html"], ["硬仗骰子", "dice.html"], ["土味盖章", "stamp.html"],
+    ["老板看板", "boss.html"], ["土酷电台", "radio.html"], ["卡拉OK", "karaoke.html"],
+    ["城市灯牌", "billboard.html"], ["锻造工坊", "workshop.html"], ["审美罗盘", "mood.html"],
+    ["土酷对决", "arena.html"], ["弹幕墙", "wall.html"], ["特效场", "fx.html"],
+    ["点唱机", "jukebox.html"], ["彪哥语录", "biao.html"], ["人设卡", "cast.html"],
+    ["招人", "recruit.html"], ["媒体包", "press.html"], ["工作室", "studio.html"],
+    ["时间线", "timeline.html"], ["服务菜单", "menu.html"], ["开干", "contact.html"],
+  ];
+
+  const ensureCmd = () => {
+    let overlay = document.getElementById("cmdOverlay");
+    if (overlay) return overlay;
+    overlay = document.createElement("div");
+    overlay.id = "cmdOverlay";
+    overlay.className = "cmd-overlay";
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <div class="cmd-panel" role="dialog" aria-label="模块搜索">
+        <input class="cmd-input" id="cmdInput" placeholder="搜模块… 欧了 / 硬仗 / 夜场" autocomplete="off" />
+        <ul class="cmd-list" id="cmdList"></ul>
+        <p class="cmd-hint">↑↓ 选择 · Enter 前往 · Esc 关闭</p>
+      </div>`;
+    document.body.appendChild(overlay);
+    return overlay;
+  };
+
+  let cmdIndex = 0;
+  let cmdItems = MODULES.slice();
+
+  const renderCmd = (q = "") => {
+    const list = document.getElementById("cmdList");
+    if (!list) return;
+    const qq = q.trim().toLowerCase();
+    cmdItems = MODULES.filter(([name, href]) => !qq || name.toLowerCase().includes(qq) || href.includes(qq));
+    cmdIndex = 0;
+    list.innerHTML = cmdItems
+      .map(([name, href], i) => `<li><button type="button" data-href="${href}" class="${i === 0 ? "is-on" : ""}"><b>${name}</b><span>${href}</span></button></li>`)
+      .join("") || `<li class="cmd-empty">没有找到 · 大不了从头再来</li>`;
+  };
+
+  const openCmd = () => {
+    const overlay = ensureCmd();
+    overlay.hidden = false;
+    renderCmd("");
+    const input = document.getElementById("cmdInput");
+    input?.focus();
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeCmd = () => {
+    const overlay = document.getElementById("cmdOverlay");
+    if (overlay) overlay.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  document.getElementById("cmdBtn")?.addEventListener("click", openCmd);
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      const overlay = document.getElementById("cmdOverlay");
+      if (overlay && !overlay.hidden) closeCmd();
+      else openCmd();
+      return;
+    }
+    const overlay = document.getElementById("cmdOverlay");
+    if (!overlay || overlay.hidden) return;
+    if (e.key === "Escape") closeCmd();
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      cmdIndex = Math.min(cmdItems.length - 1, cmdIndex + 1);
+      overlay.querySelectorAll(".cmd-list button").forEach((b, i) => b.classList.toggle("is-on", i === cmdIndex));
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      cmdIndex = Math.max(0, cmdIndex - 1);
+      overlay.querySelectorAll(".cmd-list button").forEach((b, i) => b.classList.toggle("is-on", i === cmdIndex));
+    }
+    if (e.key === "Enter" && cmdItems[cmdIndex]) {
+      location.href = cmdItems[cmdIndex][1];
+    }
+  });
+  document.addEventListener("input", (e) => {
+    if (e.target?.id === "cmdInput") renderCmd(e.target.value);
+  });
+  document.addEventListener("click", (e) => {
+    const overlay = document.getElementById("cmdOverlay");
+    if (!overlay || overlay.hidden) return;
+    if (e.target === overlay) closeCmd();
+    const btn = e.target.closest?.(".cmd-list button[data-href]");
+    if (btn) location.href = btn.dataset.href;
+  });
+
   // expose helpers
   window.HALASHAO = {
     reduce,
     fine,
     quotes: lines,
     scramble,
+    modules: MODULES,
+    openCmd,
   };
 })();
