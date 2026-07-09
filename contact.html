@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开干 · 哈拉少</title>
+  <meta name="description" content="联系哈拉少设计工作室。" />
+  <meta name="theme-color" content="#050506" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="top">
+    <a class="brand" href="index.html" data-scramble>哈拉少</a>
+    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
+
+    <nav class="top-nav" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="reel.html" data-nav>片源</a>
+      <a href="studio.html" data-nav>工作室</a>
+      <a href="biao.html" data-nav>彪哥</a>
+      <a href="fx.html" data-nav>特效</a>
+      <a href="contact.html" data-nav class="top-cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+
+    <nav class="drawer-nav" aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="reel.html" data-close>片源</a>
+      <a href="studio.html" data-close>工作室</a>
+      <a href="biao.html" data-close>彪哥语录</a>
+      <a href="fx.html" data-close>特效场</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <header class="page-hero">
+      <p class="page-kicker">CONTACT</p>
+      <h1 class="page-title">有<em class="hot">火花</em>？</h1>
+      <p class="page-lead">描述产品、时间线、想要的感觉。48 小时内回复。</p>
+      <p class="biao-line" style="margin-top:1rem;color:var(--gold);font-weight:800">「时光能不能倒流？豆角能不能煮熟？」——项目能不能成？先聊。</p>
+    </header>
+    <section class="contact-grid">
+      <div>
+        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
+        <p style="margin-top:1rem;color:var(--muted)">本季度剩余 <em style="color:var(--acid);font-style:normal;font-weight:700">2</em> 个项目位</p>
+        <p class="stamp" style="margin-top:1.25rem">处不好你自己找原因</p>
+      </div>
+      <form class="contact-form" id="form" novalidate>
+        <label><span>名字</span><input name="name" required autocomplete="name" placeholder="陈以安" /></label>
+        <label><span>邮箱</span><input name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></label>
+        <label class="full"><span>项目简述</span><textarea name="message" rows="4" required placeholder="品牌 / 界面 / 发布片……"></textarea></label>
+        <div class="full" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
+          <button class="btn solid" type="submit" data-magnetic>发送消息</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </div>
+      </form>
+    </section>
+  
+  </main>
+
+  <footer class="foot">
+    <div class="foot-marquee" aria-hidden="true">
+      <div class="foot-marquee-track">
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+      </div>
+    </div>
+    <p class="foot-big" data-scramble>哈拉少</p>
+    <div class="foot-row">
+      <p>Design OS · 土酷标杆系统</p>
+      <div class="foot-links">
+        <a href="work.html">作品</a>
+        <a href="reel.html">片源</a>
+        <a href="biao.html">彪哥</a>
+        <a href="fx.html">特效</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/system.js"></script>
+  <script>
+  document.getElementById("form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const d = new FormData(f);
+    const st = document.getElementById("formStatus");
+    if (![...d.values()].every(v => String(v).trim())) { st.textContent = "请填写完整。"; return; }
+    st.textContent = "已收到。欧了，我们尽快回。";
+    f.reset();
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>彪哥语录 · 哈拉少土酷</title>
+  <meta name="description" content="范德彪语录墙 + 土酷互动。哈拉少标杆案例模块。" />
+  <meta name="theme-color" content="#050506" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="top">
+    <a class="brand" href="index.html" data-scramble>哈拉少</a>
+    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
+
+    <nav class="top-nav" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="reel.html" data-nav>片源</a>
+      <a href="studio.html" data-nav>工作室</a>
+      <a href="biao.html" data-nav>彪哥</a>
+      <a href="fx.html" data-nav>特效</a>
+      <a href="contact.html" data-nav class="top-cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+
+    <nav class="drawer-nav" aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="reel.html" data-close>片源</a>
+      <a href="studio.html" data-close>工作室</a>
+      <a href="biao.html" data-close>彪哥语录</a>
+      <a href="fx.html" data-close>特效场</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <header class="page-hero">
+      <p class="page-kicker hot">BIAO PROTOCOL</p>
+      <h1 class="page-title">彪哥<br /><span class="karaoke">语录系统</span></h1>
+      <p class="page-lead">把辽北狠人装进 Awwwards 外壳。土味不是缺陷，是武器。</p>
+      <div class="biao-hero-extra">
+        <span class="stamp">辽北第一狠人</span>
+        <span class="stamp" style="transform:rotate(6deg);border-color:var(--gold);color:var(--gold)">欧了</span>
+      </div>
+    </header>
+    <section class="biao-stage">
+      <div class="biao-banner">
+        <h2 id="biaoMain">小树不倒我就不倒</h2>
+        <p class="sub">点击下方按钮切换 · 或砸一下互动台</p>
+        <div class="biao-hit">
+          <button type="button" class="btn gold" data-quote>随机语录</button>
+          <button type="button" class="btn hot" data-quote-all>连发三连</button>
+          <a class="btn line" href="fx.html">去特效场</a>
+        </div>
+      </div>
+      <div class="shock" id="shock" data-hot>
+        <div class="shock-burst" aria-hidden="true"></div>
+        <p class="shock-text" id="shockText">砸我一下 · 欧了</p>
+      </div>
+      <div class="biao-grid quote-wall" id="quoteWall" style="margin-top:1.5rem"></div>
+    </section>
+  
+  </main>
+
+  <footer class="foot">
+    <div class="foot-marquee" aria-hidden="true">
+      <div class="foot-marquee-track">
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+      </div>
+    </div>
+    <p class="foot-big" data-scramble>哈拉少</p>
+    <div class="foot-row">
+      <p>Design OS · 土酷标杆系统</p>
+      <div class="foot-links">
+        <a href="work.html">作品</a>
+        <a href="reel.html">片源</a>
+        <a href="biao.html">彪哥</a>
+        <a href="fx.html">特效</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/system.js"></script>
+  <script src="js/biao.js"></script>
+</body>
+</html>

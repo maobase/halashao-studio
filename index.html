@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>哈拉少 HALASHAO · 设计工作室</title>
-  <meta name="description" content="哈拉少设计工作室。品牌、产品、动态。不生产模板，只锻造记忆。" />
+  <title>哈拉少 HALASHAO · 设计操作系统</title>
+  <meta name="description" content="哈拉少设计工作室操作系统。品牌、产品、动效、土酷标杆。小树不倒我就不倒。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/pages.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -19,13 +21,16 @@
   <a class="skip" href="#main">跳到内容</a>
 
   <header class="top">
-    <a class="brand" href="#top" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span></div>
+    <a class="brand" href="index.html" data-scramble>哈拉少</a>
+    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
     <nav class="top-nav" aria-label="主导航">
-      <a href="#pin">宣言</a>
-      <a href="#work">作品</a>
-      <a href="#reel">片源</a>
-      <a href="#contact" class="top-cta">开干</a>
+      <a href="index.html" data-nav class="is-active">首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="reel.html" data-nav>片源</a>
+      <a href="studio.html" data-nav>工作室</a>
+      <a href="biao.html" data-nav>彪哥</a>
+      <a href="fx.html" data-nav>特效</a>
+      <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
       <span></span><span></span>
@@ -34,11 +39,13 @@
 
   <div class="drawer" id="drawer" hidden>
     <nav class="drawer-nav" aria-label="移动导航">
-      <a href="#pin" data-close>宣言</a>
-      <a href="#work" data-close>作品</a>
-      <a href="#reel" data-close>片源</a>
-      <a href="#forge" data-close>锻造</a>
-      <a href="#contact" data-close>开干</a>
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="reel.html" data-close>片源</a>
+      <a href="studio.html" data-close>工作室</a>
+      <a href="biao.html" data-close>彪哥语录</a>
+      <a href="fx.html" data-close>特效场</a>
+      <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
@@ -53,7 +60,6 @@
   </button>
 
   <main id="main">
-    <!-- HERO kinetic -->
     <section class="hero" id="top">
       <div class="hero-stage">
         <video id="heroVid" class="hero-vid" autoplay muted loop playsinline poster="assets/hero-still.jpg">
@@ -64,32 +70,31 @@
       </div>
 
       <div class="hero-copy">
-        <p class="hero-kicker"><span class="pulse-dot"></span> LIVE STUDIO · 不接模板单</p>
-        <h1 class="hero-title" id="heroTitle" aria-label="哈拉少">
-          <!-- chars injected -->
-        </h1>
-        <p class="hero-en" data-scramble>HALASHAO</p>
+        <p class="hero-kicker"><span class="pulse-dot"></span> DESIGN OS · 土酷标杆系统</p>
+        <h1 class="hero-title" id="heroTitle" aria-label="哈拉少"></h1>
+        <p class="hero-en" data-scramble>HALASHAO SYSTEM</p>
         <p class="hero-line">
-          <span class="line-mask"><span>把火花锻成形态</span></span>
+          <span class="line-mask"><span>酷炫外壳 · 土味内核 · 小树不倒</span></span>
         </p>
         <div class="hero-row">
-          <a class="btn solid magnetic" href="#reel" data-magnetic>
-            看片源
-            <span class="btn-sq" aria-hidden="true">▶</span>
+          <a class="btn solid magnetic" href="work.html" data-magnetic>
+            进作品库
+            <span class="btn-sq" aria-hidden="true">→</span>
           </a>
+          <a class="btn line magnetic" href="biao.html" data-magnetic>彪哥语录</a>
           <button type="button" class="btn line magnetic" id="heroVoice" data-magnetic>播放语音</button>
         </div>
+        <p class="stamp" style="margin-top:1.25rem">本市著名硬仗主打</p>
       </div>
 
       <div class="hero-ticker" aria-hidden="true">
         <div class="hero-ticker-track">
-          <span>少即是刃</span><span>少即是刃</span><span>少即是刃</span><span>少即是刃</span>
-          <span>少即是刃</span><span>少即是刃</span><span>少即是刃</span><span>少即是刃</span>
+          <span>小树不倒我就不倒</span><span>欧了</span><span>少即是刃</span><span>土酷到底</span>
+          <span>小树不倒我就不倒</span><span>欧了</span><span>少即是刃</span><span>土酷到底</span>
         </div>
       </div>
     </section>
 
-    <!-- PIN STACK manifesto -->
     <section class="pin" id="pin">
       <div class="pin-stack">
         <article class="pin-card" data-pin>
@@ -105,219 +110,90 @@
         <article class="pin-card" data-pin>
           <p class="pin-tag">03</p>
           <h2 class="pin-h">少，<em>是刃</em></h2>
-          <p class="pin-p">删到只剩必要。然后再删一次。</p>
+          <p class="pin-p">「论成败，人生豪迈；大不了从头再来。」</p>
         </article>
       </div>
     </section>
 
-    <!-- KINETIC STRIP -->
-    <section class="kinetic" aria-hidden="true">
+    <section class="home-modules">
+      <h2>系统入口 · 不止一页</h2>
+    </section>
+    <div class="sys-grid three">
+      <a class="sys-card" href="work.html" data-hot>
+        <span class="tag">Work</span>
+        <h3>作品库</h3>
+        <p>悬停播影像。品牌 / 产品 / 动效三条硬仗。</p>
+      </a>
+      <a class="sys-card" href="reel.html" data-hot>
+        <span class="tag">Reel</span>
+        <h3>片源台</h3>
+        <p>自定义播放器 + 多分镜切换。带声开干。</p>
+      </a>
+      <a class="sys-card" href="studio.html" data-hot>
+        <span class="tag">Studio</span>
+        <h3>工作室叙事</h3>
+        <p>方法、态度、相处哲学。处不好你自己找原因。</p>
+      </a>
+      <a class="sys-card" href="biao.html" data-hot>
+        <span class="tag">Biao</span>
+        <h3>彪哥语录</h3>
+        <p>范德彪金句墙 + 砸一下互动。土味武器化。</p>
+      </a>
+      <a class="sys-card" href="fx.html" data-hot>
+        <span class="tag">FX</span>
+        <h3>特效场</h3>
+        <p>粒子井、倾斜卡、故障字、弹幕。零件摊开。</p>
+      </a>
+      <a class="sys-card" href="contact.html" data-hot>
+        <span class="tag">Contact</span>
+        <h3>开干</h3>
+        <p>有火花？48 小时内回复。欧了。</p>
+      </a>
+    </div>
+
+    <section class="kinetic" aria-hidden="true" style="margin-top:2.5rem">
       <div class="kinetic-row kinetic-a">
-        <span>品牌</span><span>产品</span><span>动效</span><span>影像</span><span>系统</span>
-        <span>品牌</span><span>产品</span><span>动效</span><span>影像</span><span>系统</span>
+        <span>品牌</span><span>产品</span><span>动效</span><span>影像</span><span>土酷</span>
+        <span>品牌</span><span>产品</span><span>动效</span><span>影像</span><span>土酷</span>
       </div>
       <div class="kinetic-row kinetic-b">
-        <span>BRAND</span><span>PRODUCT</span><span>MOTION</span><span>FILM</span><span>SYSTEM</span>
-        <span>BRAND</span><span>PRODUCT</span><span>MOTION</span><span>FILM</span><span>SYSTEM</span>
+        <span>小树不倒</span><span>欧了</span><span>硬仗主打</span><span>从头再来</span>
+        <span>小树不倒</span><span>欧了</span><span>硬仗主打</span><span>从头再来</span>
       </div>
     </section>
 
-    <!-- WORK horizontal + hover video -->
-    <section class="work" id="work">
-      <div class="work-head">
-        <h2><span data-scramble>精选锻造</span></h2>
-        <p>悬停播影像 · 拖动横滑</p>
-      </div>
-      <div class="work-track-wrap" id="workWrap">
-        <div class="work-track" id="workTrack">
-          <article class="work-slide" data-work>
-            <div class="work-media">
-              <img src="assets/work-brand.jpg" alt="熔光品牌系统" loading="lazy" />
-              <video class="work-vid" muted loop playsinline preload="none" poster="assets/work-brand.jpg">
-                <source src="assets/work-hover-1.mp4" type="video/mp4" />
-              </video>
-              <div class="work-live">HOVER PLAY</div>
-            </div>
-            <div class="work-meta">
-              <span>Brand System</span>
-              <h3>熔光</h3>
-              <p>标识矩阵。电光边缘。全触点延展。</p>
-            </div>
-          </article>
-          <article class="work-slide" data-work>
-            <div class="work-media">
-              <img src="assets/work-product.jpg" alt="墨界产品界面" loading="lazy" />
-              <video class="work-vid" muted loop playsinline preload="none" poster="assets/work-product.jpg">
-                <source src="assets/work-hover-2.mp4" type="video/mp4" />
-              </video>
-              <div class="work-live">HOVER PLAY</div>
-            </div>
-            <div class="work-meta">
-              <span>Product UI</span>
-              <h3>墨界</h3>
-              <p>暗色密度控制台。信息先站稳。</p>
-            </div>
-          </article>
-          <article class="work-slide" data-work>
-            <div class="work-media">
-              <img src="assets/work-motion.jpg" alt="脉冲动态影像" loading="lazy" />
-              <video class="work-vid" muted loop playsinline preload="none" poster="assets/work-motion.jpg">
-                <source src="assets/work-hover-3.mp4" type="video/mp4" />
-              </video>
-              <div class="work-live">HOVER PLAY</div>
-            </div>
-            <div class="work-meta">
-              <span>Motion</span>
-              <h3>脉冲</h3>
-              <p>粒子轨迹与符号的节奏编排。</p>
-            </div>
-          </article>
-          <article class="work-slide work-slide-cta">
-            <div class="work-cta-card">
-              <p class="work-cta-big">下一块<br />空白<br /><em>留给你</em></p>
-              <a class="btn solid magnetic" href="#contact" data-magnetic>预约档期</a>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="work-progress" aria-hidden="true">
-        <div class="work-progress-bar" id="workBar"></div>
-      </div>
-    </section>
-
-    <!-- CUSTOM REEL PLAYER -->
-    <section class="reel" id="reel">
-      <div class="reel-head">
-        <h2>工作室片源</h2>
-        <p>自定义播放器 · 旁白直出</p>
-      </div>
-      <div class="player" id="player">
-        <div class="player-stage" id="playerStage">
-          <video id="reelVid" class="player-vid" playsinline preload="metadata" poster="assets/showreel-poster.jpg">
-            <source src="assets/showreel.mp4" type="video/mp4" />
-          </video>
-          <button type="button" class="player-big" id="playerBig" aria-label="播放">
-            <span></span>
-          </button>
-          <div class="player-scan" aria-hidden="true"></div>
-        </div>
-        <div class="player-bar">
-          <button type="button" class="player-toggle" id="playerToggle" aria-label="播放/暂停">▶</button>
-          <div class="player-scrub" id="playerScrub" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-            <div class="player-scrub-fill" id="playerFill"></div>
-          </div>
-          <span class="player-time" id="playerTime">0:00 / 0:00</span>
-          <button type="button" class="player-mute" id="playerMute" aria-label="静音切换">🔊</button>
-        </div>
-        <div class="player-meta">
-          <span>SHOWREEL · 2026</span>
-          <span>HALASHAO / 火花 · 形态 · 记忆</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FORGE sticky -->
-    <section class="forge" id="forge">
-      <div class="forge-sticky">
-        <h2 class="forge-title">三条刃</h2>
-        <p class="forge-lead">每条都够锋利。不互相稀释。</p>
-      </div>
-      <div class="forge-list">
-        <article class="forge-item" data-forge>
-          <div class="forge-num">Brand</div>
-          <h3>品牌识别</h3>
-          <p>命名、标识、色板、语气。每个触点都像同一个人说话。</p>
-          <ul>
-            <li>标识与字标</li>
-            <li>视觉规范</li>
-            <li>包装触点</li>
-          </ul>
-        </article>
-        <article class="forge-item" data-forge>
-          <div class="forge-num">Product</div>
-          <h3>产品体验</h3>
-          <p>信息架构到组件库。复杂流程压成清晰路径。</p>
-          <ul>
-            <li>Web / App</li>
-            <li>设计系统</li>
-            <li>原型可用性</li>
-          </ul>
-        </article>
-        <article class="forge-item" data-forge>
-          <div class="forge-num">Motion</div>
-          <h3>动态视觉</h3>
-          <p>发布片、微交互、空间装置。品牌在时间轴上活起来。</p>
-          <ul>
-            <li>品牌影像</li>
-            <li>UI 动效</li>
-            <li>互动装置</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- QUOTE -->
-    <section class="quote">
-      <blockquote>
-        <p>他们把混乱压成一条清晰的线。上线后，转化立刻抬升。</p>
-        <footer>林知夏 · 北境科技创始人</footer>
+    <section class="quote" style="padding:3rem clamp(1rem,3vw,2.5rem);max-width:var(--max);margin:0 auto">
+      <blockquote style="margin:0;padding:1.6rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2)">
+        <p style="margin:0;font-family:var(--font-cn);font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;max-width:24ch">你就慢慢跟我处，处不好你自己找原因。</p>
+        <footer style="margin-top:1rem;color:var(--gold);font-size:0.9rem">范德彪 · 被哈拉少征用为项目哲学</footer>
       </blockquote>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="contact-left">
-        <h2 class="contact-title">
-          <span class="ct-line">有</span>
-          <span class="ct-line accent">火花</span>
-          <span class="ct-line">？</span>
-        </h2>
-        <p class="contact-sub">产品 · 时间线 · 想要的感觉。48 小时内回复。</p>
-        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
-        <p class="contact-slot">本季度剩余 <em>2</em> 个项目位</p>
-      </div>
-      <form class="contact-form" id="form" novalidate>
-        <label>
-          <span>名字</span>
-          <input name="name" type="text" required autocomplete="name" placeholder="陈以安" />
-        </label>
-        <label>
-          <span>邮箱</span>
-          <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
-        </label>
-        <label class="full">
-          <span>项目简述</span>
-          <textarea name="message" rows="4" required placeholder="品牌升级 / 新产品界面 / 发布片……"></textarea>
-        </label>
-        <div class="form-row full">
-          <button class="btn solid magnetic" type="submit" data-magnetic>发送消息</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </div>
-      </form>
     </section>
   </main>
 
   <footer class="foot">
     <div class="foot-marquee" aria-hidden="true">
       <div class="foot-marquee-track">
-        <span>哈拉少</span><span>HALASHAO</span><span>哈拉少</span><span>HALASHAO</span>
-        <span>哈拉少</span><span>HALASHAO</span><span>哈拉少</span><span>HALASHAO</span>
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
       </div>
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design Studio · Brand / Product / Motion</p>
+      <p>Design OS · Brand / Product / Motion / 土酷</p>
       <div class="foot-links">
-        <a href="mailto:hello@halashao.studio">邮箱</a>
-        <a href="#work">作品</a>
-        <a href="#reel">片源</a>
+        <a href="work.html">作品</a>
+        <a href="reel.html">片源</a>
+        <a href="biao.html">彪哥</a>
+        <a href="fx.html">特效</a>
+        <a href="contact.html">开干</a>
       </div>
-      <p class="foot-copy">&copy; <span id="year"></span> HALASHAO</p>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/system.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

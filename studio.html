@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>工作室 · 哈拉少</title>
+  <meta name="description" content="哈拉少工作室叙事：方法、态度、土酷哲学。" />
+  <meta name="theme-color" content="#050506" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/system.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="top">
+    <a class="brand" href="index.html" data-scramble>哈拉少</a>
+    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
+
+    <nav class="top-nav" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="reel.html" data-nav>片源</a>
+      <a href="studio.html" data-nav>工作室</a>
+      <a href="biao.html" data-nav>彪哥</a>
+      <a href="fx.html" data-nav>特效</a>
+      <a href="contact.html" data-nav class="top-cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+
+    <nav class="drawer-nav" aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="reel.html" data-close>片源</a>
+      <a href="studio.html" data-close>工作室</a>
+      <a href="biao.html" data-close>彪哥语录</a>
+      <a href="fx.html" data-close>特效场</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <header class="page-hero">
+      <p class="page-kicker">STUDIO</p>
+      <h1 class="page-title">工作室叙事<br /><em>少即是刃</em></h1>
+      <p class="page-lead">酷炫外壳，土味内核。新二式反差：精致特效配辽北狠话。</p>
+    </header>
+    <section class="studio-chapters">
+      <article class="chapter">
+        <div class="chapter-id">CH.01</div>
+        <div>
+          <h2>不生产模板</h2>
+          <p>模板是安全的。我们卖的是锋利。客户要的是被记住，不是被归档。</p>
+          <p class="biao">「肉眼凡胎，量你也看不出来」——直到上线的那一刻。</p>
+        </div>
+      </article>
+      <article class="chapter">
+        <div class="chapter-id">CH.02</div>
+        <div>
+          <h2>锻造记忆</h2>
+          <p>品牌、产品、动效三条刃。每条都够硬，不互相稀释。工作范围内，硬仗我们主打。</p>
+          <p class="biao">「本市几场著名硬仗都是我主打的」</p>
+        </div>
+      </article>
+      <article class="chapter">
+        <div class="chapter-id">CH.03</div>
+        <div>
+          <h2>土酷进行到底</h2>
+          <p>高端质感不够，还要有人间烟火。卡拉OK金字、红章、彪哥语录——反差即记忆点。</p>
+          <p class="biao">「论成败，人生豪迈；大不了从头再来」</p>
+        </div>
+      </article>
+      <article class="chapter">
+        <div class="chapter-id">CH.04</div>
+        <div>
+          <h2>相处哲学</h2>
+          <p>项目是处出来的。节奏对齐、审美对齐、野心对齐。处不好？先找原因，再找我们。</p>
+          <p class="biao">「你就慢慢跟我处，处不好你自己找原因」</p>
+        </div>
+      </article>
+    </section>
+  
+  </main>
+
+  <footer class="foot">
+    <div class="foot-marquee" aria-hidden="true">
+      <div class="foot-marquee-track">
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+      </div>
+    </div>
+    <p class="foot-big" data-scramble>哈拉少</p>
+    <div class="foot-row">
+      <p>Design OS · 土酷标杆系统</p>
+      <div class="foot-links">
+        <a href="work.html">作品</a>
+        <a href="reel.html">片源</a>
+        <a href="biao.html">彪哥</a>
+        <a href="fx.html">特效</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/system.js"></script>
+  
+</body>
+</html>
