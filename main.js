@@ -1,163 +1,77 @@
 (() => {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
-  // Year
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  // Top nav scroll state
+  const top = document.querySelector(".top");
+  const onScrollNav = () => {
+    if (!top) return;
+    top.classList.toggle("is-scrolled", window.scrollY > 20);
+  };
+  onScrollNav();
+  window.addEventListener("scroll", onScrollNav, { passive: true });
 
-  // Mobile nav
-  const toggle = document.getElementById("navToggle");
-  const overlay = document.getElementById("menuOverlay");
-  const menuLinks = document.querySelectorAll("[data-menu-link]");
-
-  const setMenu = (open) => {
-    if (!toggle || !overlay) return;
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
-    overlay.classList.toggle("is-open", open);
-    if (open) overlay.removeAttribute("hidden");
-    else overlay.setAttribute("hidden", "");
+  // Drawer
+  const burger = document.getElementById("burger");
+  const drawer = document.getElementById("drawer");
+  const setDrawer = (open) => {
+    if (!burger || !drawer) return;
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    drawer.classList.toggle("is-open", open);
+    if (open) drawer.removeAttribute("hidden");
+    else drawer.setAttribute("hidden", "");
     document.body.style.overflow = open ? "hidden" : "";
   };
-
-  toggle?.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") !== "true";
-    setMenu(open);
+  burger?.addEventListener("click", () => {
+    setDrawer(burger.getAttribute("aria-expanded") !== "true");
+  });
+  drawer?.querySelectorAll("[data-close]").forEach((a) => {
+    a.addEventListener("click", () => setDrawer(false));
   });
 
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", () => setMenu(false));
-  });
-
-  overlay?.addEventListener("click", (e) => {
-    if (e.target === overlay) setMenu(false);
-  });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll(".reveal");
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
-    );
-    reveals.forEach((el) => io.observe(el));
-  } else {
-    reveals.forEach((el) => el.classList.add("is-in"));
-  }
-
-  // Cursor glow
-  const glow = document.getElementById("cursorGlow");
-  if (glow && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
-    let x = -9999;
-    let y = -9999;
-    let tx = x;
-    let ty = y;
-    let raf = 0;
-
-    const tick = () => {
-      x += (tx - x) * 0.12;
-      y += (ty - y) * 0.12;
-      glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener(
-      "pointermove",
-      (e) => {
-        tx = e.clientX;
-        ty = e.clientY;
-        glow.classList.add("is-on");
-      },
-      { passive: true }
-    );
-
-    window.addEventListener(
-      "pointerleave",
-      () => {
-        glow.classList.remove("is-on");
-      },
-      { passive: true }
-    );
-
-    raf = requestAnimationFrame(tick);
-  }
-
-  // Contact form (demo)
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("formStatus");
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    const message = String(data.get("message") || "").trim();
-
-    if (!name || !email || !message) {
-      if (status) status.textContent = "请填写完整信息后再发送。";
-      return;
+  // Hero video
+  const heroVid = document.getElementById("heroVid");
+  if (heroVid) {
+    heroVid.muted = true;
+    const play = () => heroVid.play().catch(() => {});
+    if (!reduce) play();
+    else {
+      heroVid.pause();
+      heroVid.removeAttribute("autoplay");
     }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      if (status) status.textContent = "邮箱格式看起来不太对。";
-      return;
-    }
-
-    if (status) status.textContent = "已收到。我们会尽快回复你。";
-    form.reset();
-  });
-
-  // Hero video + brand voice + showreel
-  const heroVideo = document.getElementById("heroVideo");
-  const brandVoice = document.getElementById("brandVoice");
-  const audioDock = document.getElementById("audioDock");
-  const audioDockLabel = document.getElementById("audioDockLabel");
-  const playVoiceBtn = document.getElementById("playVoiceBtn");
-  const showreelVideo = document.getElementById("showreelVideo");
-  const showreelPlay = document.getElementById("showreelPlay");
-
-  if (heroVideo) {
-    heroVideo.muted = true;
-    const tryPlay = () => heroVideo.play().catch(() => {});
-    tryPlay();
     document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) tryPlay();
+      if (!document.hidden && !reduce) play();
     });
-    if (reduceMotion) {
-      heroVideo.pause();
-      heroVideo.removeAttribute("autoplay");
-    }
   }
 
-  const setVoiceUI = (playing) => {
-    audioDock?.classList.toggle("is-playing", playing);
-    audioDock?.setAttribute("aria-pressed", playing ? "true" : "false");
-    audioDock?.setAttribute("aria-label", playing ? "暂停品牌语音" : "播放品牌语音");
-    if (audioDockLabel) audioDockLabel.textContent = playing ? "播放中" : "品牌语音";
-    if (playVoiceBtn) playVoiceBtn.textContent = playing ? "暂停语音" : "聆听介绍";
+  // Voice
+  const voice = document.getElementById("voice");
+  const voiceFab = document.getElementById("voiceFab");
+  const voiceLabel = document.getElementById("voiceLabel");
+  const heroVoice = document.getElementById("heroVoice");
+  const reelVid = document.getElementById("reelVid");
+  const reelPlay = document.getElementById("reelPlay");
+
+  const setVoiceUI = (on) => {
+    voiceFab?.classList.toggle("is-on", on);
+    voiceFab?.setAttribute("aria-pressed", on ? "true" : "false");
+    if (voiceLabel) voiceLabel.textContent = on ? "播放中" : "听介绍";
+    if (heroVoice) heroVoice.textContent = on ? "暂停语音" : "播放语音";
   };
 
   const pauseVoice = () => {
-    if (!brandVoice) return;
-    brandVoice.pause();
+    if (!voice) return;
+    voice.pause();
     setVoiceUI(false);
   };
 
   const playVoice = async () => {
-    if (!brandVoice) return;
-    // Avoid two audio sources fighting
-    if (showreelVideo && !showreelVideo.paused) {
-      showreelVideo.pause();
-    }
+    if (!voice) return;
+    if (reelVid && !reelVid.paused) reelVid.pause();
     try {
-      brandVoice.currentTime = brandVoice.ended ? 0 : brandVoice.currentTime;
-      await brandVoice.play();
+      if (voice.ended) voice.currentTime = 0;
+      await voice.play();
       setVoiceUI(true);
     } catch {
       setVoiceUI(false);
@@ -165,237 +79,329 @@
   };
 
   const toggleVoice = async () => {
-    if (!brandVoice) return;
-    if (brandVoice.paused || brandVoice.ended) await playVoice();
+    if (!voice) return;
+    if (voice.paused || voice.ended) await playVoice();
     else pauseVoice();
   };
 
-  audioDock?.addEventListener("click", toggleVoice);
-  playVoiceBtn?.addEventListener("click", toggleVoice);
-
-  brandVoice?.addEventListener("ended", () => setVoiceUI(false));
-  brandVoice?.addEventListener("pause", () => {
-    if (brandVoice.ended) return;
-    // only update if truly paused by user / conflict
-    if (brandVoice.paused) setVoiceUI(false);
+  voiceFab?.addEventListener("click", toggleVoice);
+  heroVoice?.addEventListener("click", toggleVoice);
+  voice?.addEventListener("ended", () => setVoiceUI(false));
+  voice?.addEventListener("pause", () => {
+    if (!voice.ended && voice.paused) setVoiceUI(false);
   });
 
-  showreelPlay?.addEventListener("click", async () => {
-    if (!showreelVideo) return;
+  reelPlay?.addEventListener("click", async () => {
+    if (!reelVid) return;
     pauseVoice();
     try {
-      showreelVideo.muted = false;
-      showreelVideo.currentTime = 0;
-      await showreelVideo.play();
-      showreelVideo.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-    } catch {
-      // user can use native controls
+      reelVid.muted = false;
+      reelVid.currentTime = 0;
+      await reelVid.play();
+      reelVid.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    } catch { /* native controls fallback */ }
+  });
+  reelVid?.addEventListener("play", pauseVoice);
+
+  // Form
+  const form = document.getElementById("form");
+  const formStatus = document.getElementById("formStatus");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || !email || !message) {
+      if (formStatus) formStatus.textContent = "请填写完整信息。";
+      return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (formStatus) formStatus.textContent = "邮箱格式不对。";
+      return;
+    }
+    if (formStatus) formStatus.textContent = "已收到。我们尽快回复。";
+    form.reset();
   });
 
-  showreelVideo?.addEventListener("play", () => {
-    pauseVoice();
+  // Horizontal work drag + progress
+  const workWrap = document.getElementById("workWrap");
+  const workBar = document.getElementById("workBar");
+  if (workWrap) {
+    let down = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const updateBar = () => {
+      if (!workBar) return;
+      const max = workWrap.scrollWidth - workWrap.clientWidth;
+      const p = max > 0 ? (workWrap.scrollLeft / max) * 100 : 0;
+      workBar.style.width = `${p}%`;
+    };
+    workWrap.addEventListener("scroll", updateBar, { passive: true });
+    updateBar();
+
+    workWrap.addEventListener("pointerdown", (e) => {
+      if (e.target.closest("a,button")) return;
+      down = true;
+      workWrap.classList.add("is-dragging");
+      startX = e.clientX;
+      scrollLeft = workWrap.scrollLeft;
+      workWrap.setPointerCapture?.(e.pointerId);
+    });
+    workWrap.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      workWrap.scrollLeft = scrollLeft - dx;
+    });
+    const endDrag = () => {
+      down = false;
+      workWrap.classList.remove("is-dragging");
+    };
+    workWrap.addEventListener("pointerup", endDrag);
+    workWrap.addEventListener("pointercancel", endDrag);
+    workWrap.addEventListener("pointerleave", endDrag);
+
+    // Shift vertical wheel to horizontal when over track
+    workWrap.addEventListener(
+      "wheel",
+      (e) => {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        if (workWrap.scrollWidth <= workWrap.clientWidth) return;
+        e.preventDefault();
+        workWrap.scrollLeft += e.deltaY;
+      },
+      { passive: false }
+    );
+  }
+
+  // Text scramble
+  const glyphs = "ハラ少ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const scramble = (el) => {
+    const original = el.dataset.original || el.textContent || "";
+    el.dataset.original = original;
+    let frame = 0;
+    const total = Math.min(12, original.length + 4);
+    const id = setInterval(() => {
+      el.textContent = original
+        .split("")
+        .map((ch, i) => {
+          if (ch === " " || ch === "·") return ch;
+          if (i < (frame / total) * original.length) return original[i];
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        })
+        .join("");
+      frame++;
+      if (frame > total) {
+        clearInterval(id);
+        el.textContent = original;
+      }
+    }, 28);
+  };
+
+  document.querySelectorAll("[data-scramble]").forEach((el) => {
+    el.dataset.original = el.textContent || "";
+    el.addEventListener("mouseenter", () => {
+      if (!reduce) scramble(el);
+    });
   });
 
-  // Particles
-  const canvas = document.getElementById("particles");
-  if (!canvas || reduceMotion) return;
+  // GSAP scroll: statement light-up + forge items
+  if (!reduce && window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
 
+    const lines = gsap.utils.toArray("#statementText span");
+    if (lines.length) {
+      lines.forEach((line, i) => {
+        ScrollTrigger.create({
+          trigger: line,
+          start: "top 78%",
+          end: "top 40%",
+          onEnter: () => line.classList.add("is-lit"),
+          onEnterBack: () => line.classList.add("is-lit"),
+          onLeaveBack: () => {
+            if (i > 0) line.classList.remove("is-lit");
+          },
+        });
+      });
+    }
+
+    gsap.utils.toArray(".forge-item").forEach((item, i) => {
+      gsap.from(item, {
+        opacity: 0.25,
+        y: 40,
+        duration: 0.9,
+        ease: "power3.out",
+        delay: i * 0.05,
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    gsap.from(".hero-cn", {
+      y: 60,
+      opacity: 0,
+      duration: 1.1,
+      ease: "power4.out",
+    });
+    gsap.from(".hero-en", {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.12,
+      ease: "power4.out",
+    });
+    gsap.from(".hero-line, .hero-row, .hero-kicker", {
+      y: 24,
+      opacity: 0,
+      duration: 0.9,
+      delay: 0.22,
+      stagger: 0.08,
+      ease: "power3.out",
+    });
+  } else {
+    document.querySelectorAll("#statementText span").forEach((s) => s.classList.add("is-lit"));
+  }
+
+  // Particle field — acid lime constellation
+  const canvas = document.getElementById("field");
+  if (!canvas || reduce) return;
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let width = 0;
-  let height = 0;
-  let particles = [];
-  let mouse = { x: null, y: null, active: false };
-  let animId = 0;
+  let w = 0;
+  let h = 0;
+  let pts = [];
+  let mx = -9999;
+  let my = -9999;
+  let raf = 0;
   let last = 0;
 
-  const COPPER = { r: 224, g: 122, b: 69 };
-  const INK = { r: 244, g: 240, b: 234 };
+  const LIME = { r: 200, g: 245, b: 66 };
+  const BONE = { r: 244, g: 244, b: 238 };
 
   const rand = (a, b) => a + Math.random() * (b - a);
 
-  function countForSize() {
-    const area = width * height;
-    return Math.max(48, Math.min(140, Math.floor(area / 14000)));
-  }
+  const count = () => Math.max(40, Math.min(110, Math.floor((w * h) / 16000)));
 
-  function spawnParticle() {
-    const isAccent = Math.random() < 0.18;
-    return {
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: rand(-0.25, 0.25),
-      vy: rand(-0.25, 0.25),
-      r: rand(0.8, isAccent ? 2.4 : 1.8),
-      accent: isAccent,
-      pulse: Math.random() * Math.PI * 2,
-    };
-  }
+  const spawn = () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    vx: rand(-0.2, 0.2),
+    vy: rand(-0.2, 0.2),
+    r: rand(0.7, 2.1),
+    hot: Math.random() < 0.2,
+    ph: Math.random() * Math.PI * 2,
+  });
 
-  function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = Math.floor(width * dpr);
-    canvas.height = Math.floor(height * dpr);
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
+  const resize = () => {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = count();
+    if (!pts.length) pts = Array.from({ length: n }, spawn);
+    else if (pts.length < n) while (pts.length < n) pts.push(spawn());
+    else pts.length = n;
+  };
 
-    const n = countForSize();
-    if (particles.length === 0) {
-      particles = Array.from({ length: n }, spawnParticle);
-    } else if (particles.length < n) {
-      while (particles.length < n) particles.push(spawnParticle());
-    } else if (particles.length > n) {
-      particles.length = n;
+  const step = (t) => {
+    const dt = Math.min(32, t - last || 16) / 16.67;
+    last = t;
+    ctx.clearRect(0, 0, w, h);
+
+    const maxD = Math.min(130, w * 0.11);
+    const maxD2 = maxD * maxD;
+
+    for (const p of pts) {
+      const dx = p.x - mx;
+      const dy = p.y - my;
+      const dist = Math.hypot(dx, dy) || 1;
+      if (dist < 150) {
+        const f = (1 - dist / 150) * 0.09;
+        p.vx += (dx / dist) * f;
+        p.vy += (dy / dist) * f;
+      }
+
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vx *= 0.99;
+      p.vy *= 0.99;
+      p.vx += rand(-0.008, 0.008);
+      p.vy += rand(-0.008, 0.008);
+      p.ph += 0.025 * dt;
+
+      if (p.x < -30) p.x = w + 30;
+      if (p.x > w + 30) p.x = -30;
+      if (p.y < -30) p.y = h + 30;
+      if (p.y > h + 30) p.y = -30;
     }
-  }
 
-  function connect() {
-    const maxDist = Math.min(140, width * 0.12);
-    const maxDist2 = maxDist * maxDist;
-
-    for (let i = 0; i < particles.length; i++) {
-      const a = particles[i];
-      for (let j = i + 1; j < particles.length; j++) {
-        const b = particles[j];
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i];
+      for (let j = i + 1; j < pts.length; j++) {
+        const b = pts[j];
         const dx = a.x - b.x;
         const dy = a.y - b.y;
         const d2 = dx * dx + dy * dy;
-        if (d2 > maxDist2) continue;
-        const t = 1 - Math.sqrt(d2) / maxDist;
-        const alpha = t * 0.22;
+        if (d2 > maxD2) continue;
+        const alpha = (1 - Math.sqrt(d2) / maxD) * 0.18;
         if (alpha < 0.02) continue;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(${COPPER.r}, ${COPPER.g}, ${COPPER.b}, ${alpha})`;
+        ctx.strokeStyle = `rgba(${LIME.r},${LIME.g},${LIME.b},${alpha})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
     }
-  }
 
-  function step(ts) {
-    const dt = Math.min(32, ts - last || 16);
-    last = ts;
-    const factor = dt / 16.67;
-
-    ctx.clearRect(0, 0, width, height);
-
-    // soft vignette field
-    const g = ctx.createRadialGradient(
-      width * 0.5,
-      height * 0.35,
-      0,
-      width * 0.5,
-      height * 0.4,
-      Math.max(width, height) * 0.7
-    );
-    g.addColorStop(0, "rgba(224, 122, 69, 0.04)");
-    g.addColorStop(1, "rgba(0, 0, 0, 0)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, width, height);
-
-    for (const p of particles) {
-      if (mouse.active && mouse.x != null) {
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.hypot(dx, dy) || 1;
-        const radius = 160;
-        if (dist < radius) {
-          const force = (1 - dist / radius) * 0.085;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force;
-        }
-      }
-
-      p.x += p.vx * factor;
-      p.y += p.vy * factor;
-      p.vx *= 0.992;
-      p.vy *= 0.992;
-      p.vx += rand(-0.01, 0.01);
-      p.vy += rand(-0.01, 0.01);
-
-      // soft bounds
-      if (p.x < -20) p.x = width + 20;
-      if (p.x > width + 20) p.x = -20;
-      if (p.y < -20) p.y = height + 20;
-      if (p.y > height + 20) p.y = -20;
-
-      p.pulse += 0.02 * factor;
-      const pulse = 0.55 + Math.sin(p.pulse) * 0.45;
-      const c = p.accent ? COPPER : INK;
-      const alpha = p.accent ? 0.55 + pulse * 0.35 : 0.18 + pulse * 0.22;
-
+    for (const p of pts) {
+      const pulse = 0.55 + Math.sin(p.ph) * 0.45;
+      const c = p.hot ? LIME : BONE;
+      const alpha = p.hot ? 0.5 + pulse * 0.4 : 0.12 + pulse * 0.18;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * (0.85 + pulse * 0.25), 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
+      ctx.arc(p.x, p.y, p.r * (0.9 + pulse * 0.2), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c.r},${c.g},${c.b},${alpha})`;
       ctx.fill();
-
-      if (p.accent) {
+      if (p.hot) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 3.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${COPPER.r}, ${COPPER.g}, ${COPPER.b}, ${0.06 * pulse})`;
+        ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${LIME.r},${LIME.g},${LIME.b},${0.05 * pulse})`;
         ctx.fill();
       }
     }
 
-    connect();
-
-    // mouse magnetic ring
-    if (mouse.active && mouse.x != null) {
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 48, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(224, 122, 69, 0.12)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    animId = requestAnimationFrame(step);
-  }
+    raf = requestAnimationFrame(step);
+  };
 
   window.addEventListener(
     "pointermove",
     (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      mouse.active = true;
+      mx = e.clientX;
+      my = e.clientY;
     },
     { passive: true }
   );
-
-  window.addEventListener(
-    "pointerleave",
-    () => {
-      mouse.active = false;
-    },
-    { passive: true }
-  );
-
-  window.addEventListener(
-    "resize",
-    () => {
-      resize();
-    },
-    { passive: true }
-  );
-
-  // pause when tab hidden
+  window.addEventListener("resize", resize, { passive: true });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      cancelAnimationFrame(animId);
-      animId = 0;
-    } else if (!animId) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    } else if (!raf) {
       last = performance.now();
-      animId = requestAnimationFrame(step);
+      raf = requestAnimationFrame(step);
     }
   });
 
   resize();
   last = performance.now();
-  animId = requestAnimationFrame(step);
+  raf = requestAnimationFrame(step);
 })();

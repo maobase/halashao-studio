@@ -3,75 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>哈拉少 · 设计工作室</title>
-  <meta name="description" content="哈拉少设计工作室 — 品牌、产品与动态视觉。把想法锻造成可感知的形态。" />
+  <title>哈拉少 HALASHAO · 设计工作室</title>
+  <meta name="description" content="哈拉少设计工作室。品牌、产品、动态。不生产模板，只锻造记忆。" />
+  <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <!-- Hallmark · macrostructure: Horizontal Work + Manifesto · genre: atmospheric
+       theme: custom (ink / bone / acid-lime) · nav: N7 split · footer: Ft5 statement -->
 
-  <header class="nav-wrap">
-    <nav class="nav" aria-label="主导航">
-      <a class="nav-logo" href="#top">
-        <span class="nav-mark" aria-hidden="true"></span>
-        <span>哈拉少</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#showreel">片源</a></li>
-        <li><a href="#work">作品</a></li>
-        <li><a href="#craft">能力</a></li>
-        <li><a href="#contact">联系</a></li>
-      </ul>
-      <a class="nav-cta" href="#contact">
-        <span>开始项目</span>
-        <span class="nav-cta-icon" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <a class="skip" href="#main">跳到内容</a>
+
+  <header class="top">
+    <a class="brand" href="#top" data-scramble>哈拉少</a>
+    <nav class="top-nav" aria-label="主导航">
+      <a href="#work">作品</a>
+      <a href="#reel">片源</a>
+      <a href="#forge">锻造</a>
+      <a href="#contact" class="top-cta">开干</a>
     </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
   </header>
 
-  <div class="menu-overlay" id="menuOverlay" hidden>
-    <nav class="menu-panel" aria-label="移动导航">
-      <a href="#showreel" data-menu-link>片源</a>
-      <a href="#work" data-menu-link>作品</a>
-      <a href="#craft" data-menu-link>能力</a>
-      <a href="#contact" data-menu-link>联系</a>
+  <div class="drawer" id="drawer" hidden>
+    <nav class="drawer-nav" aria-label="移动导航">
+      <a href="#work" data-close>作品 Work</a>
+      <a href="#reel" data-close>片源 Reel</a>
+      <a href="#forge" data-close>锻造 Forge</a>
+      <a href="#contact" data-close>开干 Start</a>
     </nav>
   </div>
 
-  <!-- Brand voice (user-triggered; browsers block autoplay with sound) -->
-  <audio id="brandVoice" src="assets/voice-intro.mp3" preload="auto"></audio>
+  <audio id="voice" src="assets/voice-intro.mp3" preload="metadata"></audio>
 
-  <button type="button" class="audio-dock" id="audioDock" aria-pressed="false" aria-label="播放品牌语音">
-    <span class="audio-dock-rings" aria-hidden="true"></span>
-    <span class="audio-dock-icon" aria-hidden="true">
-      <svg class="icon-play" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6.5 4.2v9.6L14.2 9 6.5 4.2z" fill="currentColor"/></svg>
-      <svg class="icon-pause" width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="5" y="4" width="2.8" height="10" rx="0.6" fill="currentColor"/><rect x="10.2" y="4" width="2.8" height="10" rx="0.6" fill="currentColor"/></svg>
-    </span>
-    <span class="audio-dock-text">
-      <strong id="audioDockLabel">品牌语音</strong>
-      <small>哈拉少 · 工作室导览</small>
-    </span>
-    <span class="audio-wave" aria-hidden="true">
-      <i></i><i></i><i></i><i></i>
+  <button type="button" class="fab" id="voiceFab" aria-pressed="false" aria-label="播放品牌语音">
+    <span class="fab-orb" aria-hidden="true"></span>
+    <span class="fab-label">
+      <strong id="voiceLabel">听介绍</strong>
+      <small>约 20 秒</small>
     </span>
   </button>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-media" aria-hidden="true">
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-stage">
         <video
-          id="heroVideo"
-          class="hero-video"
+          id="heroVid"
+          class="hero-vid"
           autoplay
           muted
           loop
@@ -80,69 +67,100 @@
         >
           <source src="assets/hero-cinematic.mp4" type="video/mp4" />
         </video>
-        <div class="hero-scrim"></div>
+        <div class="hero-veil"></div>
       </div>
 
-      <div class="hero-inner">
-        <p class="hero-eyebrow reveal">Design Studio · est. 2019</p>
+      <div class="hero-copy">
+        <p class="hero-kicker">Design Studio · Brand / Product / Motion</p>
         <h1 class="hero-title">
-          <span class="hero-line reveal" style="--d: 0.05s">哈拉少</span>
-          <span class="hero-line hero-line-sub reveal" style="--d: 0.15s">把火花锻成形态</span>
+          <span class="hero-cn" data-scramble>哈拉少</span>
+          <span class="hero-en">HALASHAO</span>
         </h1>
-        <p class="hero-lead reveal" style="--d: 0.28s">
-          品牌识别、产品体验与动态影像。为有态度的团队打造可被记住的视觉系统。
-        </p>
-        <div class="hero-actions reveal" style="--d: 0.4s">
-          <a class="btn btn-primary" href="#showreel">
-            <span>播放片源</span>
-            <span class="btn-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3.5v7l5.5-3.5L5 3.5z" fill="currentColor"/></svg>
+        <p class="hero-line">把火花锻成形态。</p>
+        <div class="hero-row">
+          <a class="btn solid" href="#reel">
+            看片源
+            <span class="btn-sq" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 2.2v7.6L9.8 6 3 2.2z" fill="currentColor"/></svg>
             </span>
           </a>
-          <button type="button" class="btn btn-ghost" id="playVoiceBtn">聆听介绍</button>
+          <button type="button" class="btn line" id="heroVoice">播放语音</button>
         </div>
       </div>
-      <div class="hero-meta reveal" style="--d: 0.5s">
-        <div class="hero-stat">
-          <strong>120+</strong>
-          <span>交付项目</span>
+
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement" id="statement">
+      <p class="statement-text" id="statementText">
+        <span>我们不生产模板。</span>
+        <span>我们锻造记忆。</span>
+        <span class="accent">少，是刃。</span>
+      </p>
+    </section>
+
+    <!-- WORK HORIZONTAL -->
+    <section class="work" id="work">
+      <div class="work-head">
+        <h2>精选锻造</h2>
+        <p>横向拖动或滚轮浏览</p>
+      </div>
+      <div class="work-track-wrap" id="workWrap">
+        <div class="work-track" id="workTrack">
+          <article class="work-slide">
+            <div class="work-media">
+              <img src="assets/work-brand.jpg" alt="熔光品牌系统" loading="lazy" />
+            </div>
+            <div class="work-meta">
+              <span>Brand System</span>
+              <h3>熔光</h3>
+              <p>铜焰转电光的标识矩阵，消费电子全触点延展。</p>
+            </div>
+          </article>
+          <article class="work-slide">
+            <div class="work-media">
+              <img src="assets/work-product.jpg" alt="墨界产品界面" loading="lazy" />
+            </div>
+            <div class="work-meta">
+              <span>Product UI</span>
+              <h3>墨界</h3>
+              <p>暗色密度控制台。信息先站稳，再谈好看。</p>
+            </div>
+          </article>
+          <article class="work-slide">
+            <div class="work-media">
+              <img src="assets/work-motion.jpg" alt="脉冲动态影像" loading="lazy" />
+            </div>
+            <div class="work-meta">
+              <span>Motion</span>
+              <h3>脉冲</h3>
+              <p>粒子轨迹与品牌符号的节奏编排。</p>
+            </div>
+          </article>
+          <article class="work-slide work-slide-cta">
+            <div class="work-cta-card">
+              <p>下一块空白留给你。</p>
+              <a class="btn solid" href="#contact">预约档期</a>
+            </div>
+          </article>
         </div>
-        <div class="hero-stat">
-          <strong>8</strong>
-          <span>年锻造经验</span>
-        </div>
-        <div class="hero-stat">
-          <strong>CN / JP</strong>
-          <span>跨城协作</span>
-        </div>
+      </div>
+      <div class="work-progress" aria-hidden="true">
+        <div class="work-progress-bar" id="workBar"></div>
       </div>
     </section>
 
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Brand Systems</span><span class="dot"></span>
-        <span>Product UI</span><span class="dot"></span>
-        <span>Motion Design</span><span class="dot"></span>
-        <span>Art Direction</span><span class="dot"></span>
-        <span>Spatial Experience</span><span class="dot"></span>
-        <span>Brand Systems</span><span class="dot"></span>
-        <span>Product UI</span><span class="dot"></span>
-        <span>Motion Design</span><span class="dot"></span>
-        <span>Art Direction</span><span class="dot"></span>
-        <span>Spatial Experience</span><span class="dot"></span>
-      </div>
-    </div>
-
-    <section class="section showreel" id="showreel">
-      <div class="section-head">
-        <h2 class="section-title reveal">工作室片源</h2>
-        <p class="section-desc reveal">影像 + 品牌语音，感受哈拉少的温度与节奏。</p>
-      </div>
-      <div class="showreel-shell reveal">
-        <div class="showreel-core">
+    <!-- REEL -->
+    <section class="reel" id="reel">
+      <div class="reel-shell">
+        <div class="reel-top">
+          <h2>工作室片源</h2>
+          <p>影像 + 旁白。感受节奏，不听空话。</p>
+        </div>
+        <div class="reel-frame">
           <video
-            id="showreelVideo"
-            class="showreel-video"
+            id="reelVid"
+            class="reel-vid"
             controls
             playsinline
             preload="metadata"
@@ -150,204 +168,106 @@
           >
             <source src="assets/showreel.mp4" type="video/mp4" />
           </video>
-          <div class="showreel-bar">
-            <div>
-              <p class="showreel-kicker">Showreel · 2026</p>
-              <p class="showreel-title">HALASHAO / 火花 · 形态 · 记忆</p>
-            </div>
-            <button type="button" class="btn btn-primary showreel-play" id="showreelPlay">
-              <span>带声播放</span>
-              <span class="btn-icon" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3.5v7l5.5-3.5L5 3.5z" fill="currentColor"/></svg>
-              </span>
-            </button>
-          </div>
+        </div>
+        <div class="reel-bottom">
+          <span>Showreel · 2026</span>
+          <button type="button" class="btn solid" id="reelPlay">带声播放</button>
         </div>
       </div>
     </section>
 
-    <section class="section work" id="work">
-      <div class="section-head">
-        <h2 class="section-title reveal">精选作品</h2>
-        <p class="section-desc reveal">从标识到动效，我们只做能站住脚的东西。</p>
+    <!-- FORGE sticky -->
+    <section class="forge" id="forge">
+      <div class="forge-sticky">
+        <h2 class="forge-title">我们锻造什么</h2>
+        <p class="forge-lead">三条刃。每条都够锋利，不互相稀释。</p>
       </div>
-
-      <div class="work-bento">
-        <article class="work-card work-card-lg reveal">
-          <div class="work-frame">
-            <img src="assets/work-brand.jpg" alt="熔光品牌视觉系统" loading="lazy" />
-            <div class="work-overlay">
-              <span class="work-tag">Brand</span>
-              <h3>熔光 · 品牌系统</h3>
-              <p>铜焰色板、标识矩阵与触点延展，为消费电子打造可扩展的视觉语言。</p>
-            </div>
-          </div>
+      <div class="forge-list">
+        <article class="forge-item">
+          <div class="forge-num">Brand</div>
+          <h3>品牌识别</h3>
+          <p>命名、标识、色板、语气。让品牌在每个触点都像同一个人说话。</p>
+          <ul>
+            <li>标识与字标系统</li>
+            <li>视觉规范与延展</li>
+            <li>包装与触点</li>
+          </ul>
         </article>
-
-        <article class="work-card reveal" style="--d: 0.08s">
-          <div class="work-frame">
-            <img src="assets/work-product.jpg" alt="产品界面设计" loading="lazy" />
-            <div class="work-overlay">
-              <span class="work-tag">Product</span>
-              <h3>墨界 · 控制台</h3>
-              <p>暗色密度界面与信息层级重构。</p>
-            </div>
-          </div>
+        <article class="forge-item">
+          <div class="forge-num">Product</div>
+          <h3>产品体验</h3>
+          <p>信息架构到组件库。把复杂流程压成清晰路径，并保持像素级质感。</p>
+          <ul>
+            <li>Web / App 界面</li>
+            <li>设计系统</li>
+            <li>原型与可用性</li>
+          </ul>
         </article>
-
-        <article class="work-card reveal" style="--d: 0.16s">
-          <div class="work-frame">
-            <img src="assets/work-motion.jpg" alt="动态影像与动效" loading="lazy" />
-            <div class="work-overlay">
-              <span class="work-tag">Motion</span>
-              <h3>脉冲 · 发布片</h3>
-              <p>粒子轨迹与品牌符号的节奏编排。</p>
-            </div>
-          </div>
+        <article class="forge-item">
+          <div class="forge-num">Motion</div>
+          <h3>动态视觉</h3>
+          <p>发布片、界面微交互、空间装置。让品牌在时间轴上活起来。</p>
+          <ul>
+            <li>品牌影像与片头</li>
+            <li>UI 动效语言</li>
+            <li>互动装置视觉</li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section class="section craft" id="craft">
-      <div class="section-head">
-        <h2 class="section-title reveal">我们锻造什么</h2>
-      </div>
-      <div class="craft-grid">
-        <article class="craft-card reveal">
-          <div class="craft-shell">
-            <div class="craft-core">
-              <span class="craft-index">Brand</span>
-              <h3>品牌识别</h3>
-              <p>命名、标识、色板与声音语气。让品牌在每一处触点都像同一个人说话。</p>
-              <ul>
-                <li>标识与字标系统</li>
-                <li>视觉规范与延展</li>
-                <li>包装与触点设计</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-        <article class="craft-card reveal" style="--d: 0.1s">
-          <div class="craft-shell">
-            <div class="craft-core">
-              <span class="craft-index">Product</span>
-              <h3>产品体验</h3>
-              <p>从信息架构到组件库，把复杂流程压成清晰路径，并保持像素级质感。</p>
-              <ul>
-                <li>Web / App 界面</li>
-                <li>设计系统搭建</li>
-                <li>原型与可用性</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-        <article class="craft-card reveal" style="--d: 0.2s">
-          <div class="craft-shell">
-            <div class="craft-core">
-              <span class="craft-index">Motion</span>
-              <h3>动态视觉</h3>
-              <p>发布片、界面微交互与空间装置动效，让品牌在时间轴上活起来。</p>
-              <ul>
-                <li>品牌影像与片头</li>
-                <li>UI 动效语言</li>
-                <li>互动装置视觉</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-      </div>
+    <!-- QUOTE -->
+    <section class="quote">
+      <blockquote>
+        <p>他们把我们的混乱想法压成一条清晰的线，上线后转化立刻抬升。</p>
+        <footer>林知夏 · 北境科技创始人</footer>
+      </blockquote>
     </section>
 
-    <section class="section studio" id="studio">
-      <div class="studio-layout">
-        <div class="studio-copy">
-          <h2 class="section-title reveal">少即是刃</h2>
-          <p class="reveal" style="--d: 0.08s">
-            哈拉少不是堆特效的工厂。我们先问清楚问题，再动手。
-            每一个像素、每一次粒子轨迹，都服务于可被感知的品牌意图。
-          </p>
-          <p class="reveal" style="--d: 0.16s">
-            工作室横跨品牌策略、界面设计与动态导演。我们与创始团队、产品负责人、营销负责人并肩，把模糊的野心锻成可上线的系统。
-          </p>
-          <blockquote class="studio-quote reveal" style="--d: 0.24s">
-            <p>“他们把我们的混乱想法压成一条清晰的线，上线后转化立刻抬升。”</p>
-            <cite>林知夏 · 创始人，北境科技</cite>
-          </blockquote>
-        </div>
-        <div class="studio-panel reveal" style="--d: 0.12s">
-          <div class="studio-orb" aria-hidden="true"></div>
-          <dl class="studio-facts">
-            <div>
-              <dt>工作方式</dt>
-              <dd>冲刺式共创 · 远程优先</dd>
-            </div>
-            <div>
-              <dt>典型周期</dt>
-              <dd>品牌 6-10 周 · 产品 4-12 周</dd>
-            </div>
-            <div>
-              <dt>当前档期</dt>
-              <dd class="accent">本季度剩 2 个项目位</dd>
-            </div>
-            <div>
-              <dt>联系</dt>
-              <dd>hello@halashao.studio</dd>
-            </div>
-          </dl>
-        </div>
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="contact-left">
+        <h2 class="contact-title">有火花？</h2>
+        <p class="contact-sub">描述产品、时间线、想要的感觉。48 小时内回复。</p>
+        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
+        <p class="contact-slot">本季度剩余 <em>2</em> 个项目位</p>
       </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="contact-shell">
-        <div class="contact-core">
-          <div class="contact-copy">
-            <h2 class="section-title reveal">有火花？告诉我们。</h2>
-            <p class="reveal" style="--d: 0.08s">
-              简单描述你的产品、时间线和想达成的感觉。我们会在 48 小时内回复。
-            </p>
-          </div>
-          <form class="contact-form reveal" style="--d: 0.16s" id="contactForm" novalidate>
-            <div class="field">
-              <label for="name">你的名字</label>
-              <input id="name" name="name" type="text" autocomplete="name" required placeholder="例如：陈以安" />
-            </div>
-            <div class="field">
-              <label for="email">邮箱</label>
-              <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@company.com" />
-            </div>
-            <div class="field field-full">
-              <label for="message">项目简述</label>
-              <textarea id="message" name="message" rows="4" required placeholder="品牌升级 / 新产品界面 / 发布片……"></textarea>
-            </div>
-            <div class="form-actions field-full">
-              <button class="btn btn-primary" type="submit">
-                <span>发送消息</span>
-                <span class="btn-icon" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-              </button>
-              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-            </div>
-          </form>
+      <form class="contact-form" id="form" novalidate>
+        <label>
+          <span>名字</span>
+          <input name="name" type="text" required autocomplete="name" placeholder="陈以安" />
+        </label>
+        <label>
+          <span>邮箱</span>
+          <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+        </label>
+        <label class="full">
+          <span>项目简述</span>
+          <textarea name="message" rows="4" required placeholder="品牌升级 / 新产品界面 / 发布片……"></textarea>
+        </label>
+        <div class="form-row full">
+          <button class="btn solid" type="submit">发送消息</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </div>
-      </div>
+      </form>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <a class="footer-logo" href="#top">哈拉少</a>
-      <p class="footer-tag">Design Studio · Brand / Product / Motion</p>
-      <div class="footer-links">
-        <a href="mailto:hello@halashao.studio">hello@halashao.studio</a>
+  <footer class="foot">
+    <p class="foot-big" data-scramble>哈拉少</p>
+    <div class="foot-row">
+      <p>Design Studio · Brand / Product / Motion</p>
+      <div class="foot-links">
+        <a href="mailto:hello@halashao.studio">邮箱</a>
         <a href="#work">作品</a>
-        <a href="#contact">联系</a>
+        <a href="#reel">片源</a>
       </div>
-      <p class="footer-copy">&copy; <span id="year"></span> 哈拉少设计工作室</p>
+      <p class="foot-copy">&copy; <span id="year"></span> HALASHAO</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
