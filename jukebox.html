@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>彪哥语录 · 哈拉少土酷</title>
-  <meta name="description" content="范德彪语录墙 + 土酷互动。哈拉少标杆案例模块。" />
+  <title>语录点唱机 · 哈拉少</title>
+  <meta name="description" content="范德彪语录点唱机：点一句播一句。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,9 +37,7 @@
     </nav>
     <div class="top-tools">
       <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <div class="drawer" id="drawer" hidden>
@@ -62,29 +60,17 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">BIAO PROTOCOL</p>
-      <h1 class="page-title">彪哥<br /><span class="karaoke">语录系统</span></h1>
-      <p class="page-lead">把辽北狠人装进 Awwwards 外壳。土味不是缺陷，是武器。</p>
-      <div class="biao-hero-extra">
-        <span class="stamp">辽北第一狠人</span>
-        <span class="stamp" style="transform:rotate(6deg);border-color:var(--gold);color:var(--gold)">欧了</span>
-      </div>
+      <p class="page-kicker gold">JUKEBOX</p>
+      <h1 class="page-title">语录<br /><span class="karaoke">点唱机</span></h1>
+      <p class="page-lead">点一句，彪哥替你说。土味音频，现场感拉满。</p>
     </header>
-    <section class="biao-stage">
-      <div class="biao-banner">
-        <h2 id="biaoMain">小树不倒我就不倒</h2>
-        <p class="sub">点击下方按钮切换 · 或砸一下互动台</p>
-        <div class="biao-hit">
-          <button type="button" class="btn gold" data-quote>随机语录</button>
-          <button type="button" class="btn hot" data-quote-all>连发三连</button>
-          <a class="btn line" href="fx.html">去特效场</a>
-        </div>
+    <section class="juke">
+      <div class="juke-screen" id="jukeScreen">
+        <p class="juke-now">待机中 · 点歌吧</p>
+        <div class="juke-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
-      <div class="shock" id="shock" data-hot>
-        <div class="shock-burst" aria-hidden="true"></div>
-        <p class="shock-text" id="shockText">砸我一下 · 欧了</p>
-      </div>
-      <div class="biao-grid quote-wall" id="quoteWall" style="margin-top:1.5rem"></div>
+      <div class="juke-pad" id="jukePad"></div>
+      <p class="juke-tip">「这个用户正在生气，稍后再拨」——忙线时也礼貌。</p>
     </section>
   
   </main>
@@ -93,12 +79,14 @@
     <div class="foot-marquee" aria-hidden="true">
       <div class="foot-marquee-track">
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
       </div>
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆系统</p>
+      <p>Design OS · 土酷标杆 · 11 模块</p>
       <div class="foot-links">
         <a href="work.html">作品</a>
         <a href="hard.html">硬仗</a>
@@ -111,6 +99,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/biao.js"></script>
+  <script src="js/jukebox.js"></script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>彪哥语录 · 哈拉少土酷</title>
-  <meta name="description" content="范德彪语录墙 + 土酷互动。哈拉少标杆案例模块。" />
+  <title>硬仗档案 · 哈拉少</title>
+  <meta name="description" content="哈拉少硬仗档案：滚动叙事案例深潜。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,9 +37,7 @@
     </nav>
     <div class="top-tools">
       <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <div class="drawer" id="drawer" hidden>
@@ -62,29 +60,61 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">BIAO PROTOCOL</p>
-      <h1 class="page-title">彪哥<br /><span class="karaoke">语录系统</span></h1>
-      <p class="page-lead">把辽北狠人装进 Awwwards 外壳。土味不是缺陷，是武器。</p>
-      <div class="biao-hero-extra">
-        <span class="stamp">辽北第一狠人</span>
-        <span class="stamp" style="transform:rotate(6deg);border-color:var(--gold);color:var(--gold)">欧了</span>
-      </div>
+      <p class="page-kicker">HARD CASES</p>
+      <h1 class="page-title">硬仗档案<br /><em>本市主打</em></h1>
+      <p class="page-lead">不是案例集，是战报。滚下去，一张压一张。</p>
     </header>
-    <section class="biao-stage">
-      <div class="biao-banner">
-        <h2 id="biaoMain">小树不倒我就不倒</h2>
-        <p class="sub">点击下方按钮切换 · 或砸一下互动台</p>
-        <div class="biao-hit">
-          <button type="button" class="btn gold" data-quote>随机语录</button>
-          <button type="button" class="btn hot" data-quote-all>连发三连</button>
-          <a class="btn line" href="fx.html">去特效场</a>
+    <section class="hard-stack">
+      <article class="hard-panel" data-hard>
+        <div class="hard-bg"><img src="assets/work-brand.jpg" alt="" /></div>
+        <div class="hard-copy">
+          <p class="hard-id">CASE 01 · BRAND</p>
+          <h2>熔光</h2>
+          <p class="hard-quote">「那长相就是证据」</p>
+          <p>从零到全触点：标识、色板、包装、屏幕。客户说「这回长得像我们」。欧了。</p>
+          <ul>
+            <li>周期 8 周</li>
+            <li>交付 40+ 触点</li>
+            <li>关键词：电光 / 矩阵 / 延展</li>
+          </ul>
         </div>
-      </div>
-      <div class="shock" id="shock" data-hot>
-        <div class="shock-burst" aria-hidden="true"></div>
-        <p class="shock-text" id="shockText">砸我一下 · 欧了</p>
-      </div>
-      <div class="biao-grid quote-wall" id="quoteWall" style="margin-top:1.5rem"></div>
+      </article>
+      <article class="hard-panel" data-hard>
+        <div class="hard-bg"><img src="assets/work-product.jpg" alt="" /></div>
+        <div class="hard-copy">
+          <p class="hard-id">CASE 02 · PRODUCT</p>
+          <h2>墨界</h2>
+          <p class="hard-quote">「你就慢慢跟我处」</p>
+          <p>控制台重构。信息架构先立，组件后长。暗色不是情绪，是效率。</p>
+          <ul>
+            <li>周期 12 周</li>
+            <li>设计系统 v1</li>
+            <li>关键词：密度 / 路径 / 像素</li>
+          </ul>
+        </div>
+      </article>
+      <article class="hard-panel" data-hard>
+        <div class="hard-bg"><video muted loop playsinline autoplay poster="assets/work-motion.jpg"><source src="assets/work-hover-3.mp4" type="video/mp4" /></video></div>
+        <div class="hard-copy">
+          <p class="hard-id">CASE 03 · MOTION</p>
+          <h2>脉冲</h2>
+          <p class="hard-quote">「小树不倒我就不倒」</p>
+          <p>发布片 + UI 动效语言一套出。粒子是皮，节奏是骨。</p>
+          <ul>
+            <li>周期 5 周</li>
+            <li>主片 + 15s 竖版</li>
+            <li>关键词：轨迹 / 符号 / 节拍</li>
+          </ul>
+        </div>
+      </article>
+      <article class="hard-panel hard-cta" data-hard>
+        <div class="hard-copy" style="max-width:36rem;margin:0 auto;text-align:center">
+          <p class="hard-id">NEXT</p>
+          <h2>下一块硬仗<br /><em style="color:var(--acid)">留给你</em></h2>
+          <p class="hard-quote">「论成败，人生豪迈；大不了从头再来」</p>
+          <a class="btn solid" href="contact.html" data-magnetic style="margin-top:1.25rem">预约档期</a>
+        </div>
+      </article>
     </section>
   
   </main>
@@ -93,12 +123,14 @@
     <div class="foot-marquee" aria-hidden="true">
       <div class="foot-marquee-track">
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
       </div>
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆系统</p>
+      <p>Design OS · 土酷标杆 · 11 模块</p>
       <div class="foot-links">
         <a href="work.html">作品</a>
         <a href="hard.html">硬仗</a>
@@ -111,6 +143,8 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/biao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/hard.js"></script>
 </body>
 </html>

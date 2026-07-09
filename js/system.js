@@ -28,11 +28,33 @@
     }
   });
 
-  // top scroll
+  // top scroll + progress
   const top = document.querySelector(".top");
-  const onScrollNav = () => top?.classList.toggle("is-scrolled", window.scrollY > 12);
+  const scrollBar = document.getElementById("scrollBar");
+  const onScrollNav = () => {
+    top?.classList.toggle("is-scrolled", window.scrollY > 12);
+    if (scrollBar) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      scrollBar.style.transform = `scaleX(${p / 100})`;
+    }
+  };
   onScrollNav();
   window.addEventListener("scroll", onScrollNav, { passive: true });
+
+  // 土 / 酷 mode toggle
+  const modeBtn = document.getElementById("modeBtn");
+  const applyMode = (mode) => {
+    document.documentElement.dataset.mode = mode;
+    if (modeBtn) modeBtn.textContent = mode === "tu" ? "土" : "酷";
+    try { localStorage.setItem("halashao-mode", mode); } catch { /* */ }
+  };
+  let mode = "ku";
+  try { mode = localStorage.getItem("halashao-mode") || "ku"; } catch { /* */ }
+  applyMode(mode);
+  modeBtn?.addEventListener("click", () => {
+    applyMode(document.documentElement.dataset.mode === "tu" ? "ku" : "tu");
+  });
 
   // drawer
   const burger = document.getElementById("burger");
