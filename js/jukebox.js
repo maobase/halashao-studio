@@ -6,6 +6,8 @@
     { t: "你就慢慢跟我处…", src: "assets/biao-4.mp3", tip: "TRACK 04" },
     { t: "本市几场著名硬仗…", src: "assets/biao-5.mp3", tip: "TRACK 05" },
     { t: "论成败，人生豪迈…", src: "assets/biao-6.mp3", tip: "TRACK 06" },
+    { t: "时光能不能倒流？豆角…", src: "assets/biao-7.mp3", tip: "TRACK 07" },
+    { t: "这个用户正在生气…", src: "assets/biao-8.mp3", tip: "TRACK 08" },
   ];
 
   const pad = document.getElementById("jukePad");

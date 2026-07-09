@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>彪哥语录 · 哈拉少土酷</title>
-  <meta name="description" content="范德彪语录墙 + 土酷互动。哈拉少标杆案例模块。" />
+  <title>直播感 · 哈拉少</title>
+  <meta name="description" content="伪直播间：夜场土酷、弹幕、打赏特效、彪哥音效。" />
   <meta name="theme-color" content="#050506" />
+  <meta property="og:title" content="直播感 · 哈拉少" />
+  <meta property="og:description" content="伪直播间：夜场土酷、弹幕、打赏特效、彪哥音效。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/pages.css" />
-  
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -42,9 +43,7 @@
     </nav>
     <div class="top-tools">
       <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <div class="drawer" id="drawer" hidden>
@@ -73,29 +72,34 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">BIAO PROTOCOL</p>
-      <h1 class="page-title">彪哥<br /><span class="karaoke">语录系统</span></h1>
-      <p class="page-lead">把辽北狠人装进 Awwwards 外壳。土味不是缺陷，是武器。</p>
-      <div class="biao-hero-extra">
-        <span class="stamp">辽北第一狠人</span>
-        <span class="stamp" style="transform:rotate(6deg);border-color:var(--gold);color:var(--gold)">欧了</span>
-      </div>
+      <p class="page-kicker hot">LIVE MODE</p>
+      <h1 class="page-title">伪直播间<br /><span class="karaoke">家人们好</span></h1>
+      <p class="page-lead">新二式网感：假直播、真节奏。点赞、刷礼、喊麦级字幕。</p>
     </header>
-    <section class="biao-stage">
-      <div class="biao-banner">
-        <h2 id="biaoMain">小树不倒我就不倒</h2>
-        <p class="sub">点击下方按钮切换 · 或砸一下互动台</p>
-        <div class="biao-hit">
-          <button type="button" class="btn gold" data-quote>随机语录</button>
-          <button type="button" class="btn hot" data-quote-all>连发三连</button>
-          <a class="btn line" href="fx.html">去特效场</a>
+    <section class="live-room">
+      <div class="live-stage">
+        <video id="liveVid" class="live-vid" muted loop playsinline autoplay poster="assets/hero-still.jpg">
+          <source src="assets/hero-cinematic.mp4" type="video/mp4" />
+        </video>
+        <div class="live-hud">
+          <span class="live-dot">LIVE</span>
+          <span id="liveViewers">12,480 在看</span>
+          <span class="live-room-name">哈拉少的硬仗夜</span>
         </div>
+        <div class="live-subs" id="liveSubs">小树不倒我就不倒</div>
+        <canvas id="liveFx" class="live-fx" aria-hidden="true"></canvas>
+        <div class="live-gifts" id="liveGifts"></div>
       </div>
-      <div class="shock" id="shock" data-hot>
-        <div class="shock-burst" aria-hidden="true"></div>
-        <p class="shock-text" id="shockText">砸我一下 · 欧了</p>
+      <div class="live-side">
+        <div class="live-chat" id="liveChat"></div>
+        <div class="live-actions">
+          <button type="button" class="btn hot" id="btnLike">点赞爆炸</button>
+          <button type="button" class="btn gold" id="btnGift">刷「欧了」</button>
+          <button type="button" class="btn solid" id="btnBiao">彪哥上麦</button>
+          <button type="button" class="btn line" id="btnFlip">切镜头</button>
+        </div>
+        <p class="live-tip">「这个用户正在生气，稍后再拨」——别急，先看片。</p>
       </div>
-      <div class="biao-grid quote-wall" id="quoteWall" style="margin-top:1.5rem"></div>
     </section>
   
   </main>
@@ -104,12 +108,14 @@
     <div class="foot-marquee" aria-hidden="true">
       <div class="foot-marquee-track">
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
       </div>
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆系统</p>
+      <p>Design OS · 土酷标杆 · 16+ 模块</p>
       <div class="foot-links">
         <a href="os.html">地图</a>
         <a href="live.html">直播感</a>
@@ -121,6 +127,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/biao.js"></script>
+  <script src="js/live.js"></script>
 </body>
 </html>

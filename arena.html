@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>彪哥语录 · 哈拉少土酷</title>
-  <meta name="description" content="范德彪语录墙 + 土酷互动。哈拉少标杆案例模块。" />
+  <title>土酷对决 · 哈拉少</title>
+  <meta name="description" content="土 vs 酷：互动对决小游戏，打分出冠军。" />
   <meta name="theme-color" content="#050506" />
+  <meta property="og:title" content="土酷对决 · 哈拉少" />
+  <meta property="og:description" content="土 vs 酷：互动对决小游戏，打分出冠军。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/system.css" />
   <link rel="stylesheet" href="css/pages.css" />
-  
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -42,9 +43,7 @@
     </nav>
     <div class="top-tools">
       <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
-      <span></span><span></span>
-    </button>
+      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
   <div class="drawer" id="drawer" hidden>
@@ -73,29 +72,29 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">BIAO PROTOCOL</p>
-      <h1 class="page-title">彪哥<br /><span class="karaoke">语录系统</span></h1>
-      <p class="page-lead">把辽北狠人装进 Awwwards 外壳。土味不是缺陷，是武器。</p>
-      <div class="biao-hero-extra">
-        <span class="stamp">辽北第一狠人</span>
-        <span class="stamp" style="transform:rotate(6deg);border-color:var(--gold);color:var(--gold)">欧了</span>
-      </div>
+      <p class="page-kicker">ARENA</p>
+      <h1 class="page-title">土酷对决<br /><em class="hot">三局两胜</em></h1>
+      <p class="page-lead">左土右酷。点你更要的一边。彪哥担任解说。</p>
     </header>
-    <section class="biao-stage">
-      <div class="biao-banner">
-        <h2 id="biaoMain">小树不倒我就不倒</h2>
-        <p class="sub">点击下方按钮切换 · 或砸一下互动台</p>
-        <div class="biao-hit">
-          <button type="button" class="btn gold" data-quote>随机语录</button>
-          <button type="button" class="btn hot" data-quote-all>连发三连</button>
-          <a class="btn line" href="fx.html">去特效场</a>
-        </div>
+    <section class="arena">
+      <div class="arena-score">
+        <div><b id="scoreTu">0</b><span>土</span></div>
+        <div class="arena-vs">VS</div>
+        <div><b id="scoreKu">0</b><span>酷</span></div>
       </div>
-      <div class="shock" id="shock" data-hot>
-        <div class="shock-burst" aria-hidden="true"></div>
-        <p class="shock-text" id="shockText">砸我一下 · 欧了</p>
+      <p class="arena-call" id="arenaCall">第 1 局 · 选边</p>
+      <div class="arena-ring">
+        <button type="button" class="arena-side tu" id="pickTu" data-hot>
+          <span class="arena-label">土</span>
+          <strong id="tuText">夜市音响 · 红章 · 卡拉OK金</strong>
+        </button>
+        <button type="button" class="arena-side ku" id="pickKu" data-hot>
+          <span class="arena-label">酷</span>
+          <strong id="kuText">酸柠粒子 · 暗金影像 · 磁吸</strong>
+        </button>
       </div>
-      <div class="biao-grid quote-wall" id="quoteWall" style="margin-top:1.5rem"></div>
+      <div class="arena-log" id="arenaLog"></div>
+      <button type="button" class="btn line" id="arenaReset">重开一局</button>
     </section>
   
   </main>
@@ -104,12 +103,14 @@
     <div class="foot-marquee" aria-hidden="true">
       <div class="foot-marquee-track">
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
         <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
+        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
       </div>
     </div>
     <p class="foot-big" data-scramble>哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆系统</p>
+      <p>Design OS · 土酷标杆 · 16+ 模块</p>
       <div class="foot-links">
         <a href="os.html">地图</a>
         <a href="live.html">直播感</a>
@@ -121,6 +122,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/biao.js"></script>
+  <script src="js/arena.js"></script>
 </body>
 </html>
