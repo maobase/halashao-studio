@@ -12,6 +12,9 @@
     { t: "遵纪守法积极进取…", src: "assets/biao-10.mp3", tip: "TRACK 10" },
     { t: "你说你是谁…", src: "assets/biao-11.mp3", tip: "TRACK 11" },
     { t: "该出手时就出手", src: "assets/biao-12.mp3", tip: "TRACK 12" },
+    { t: "兄弟你怎么回事", src: "assets/biao-13.mp3", tip: "TRACK 13" },
+    { t: "我这叫江湖义气", src: "assets/biao-14.mp3", tip: "TRACK 14" },
+    { t: "走自己的路…", src: "assets/biao-15.mp3", tip: "TRACK 15" },
   ];
 
   const pad = document.getElementById("jukePad");

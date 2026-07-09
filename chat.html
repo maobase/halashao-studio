@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土味盖章 · 哈拉少</title>
-  <meta name="description" content="生成红章土味印章。" />
+  <title>彪哥聊天 · 哈拉少</title>
+  <meta name="description" content="和彪哥风格 AI 顾问聊天（本地规则回复）。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,21 +98,17 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">STAMP</p>
-      <h1 class="page-title">土味盖章<br /><em>红章生成</em></h1>
-      <p class="page-lead">输入四个字，盖出公章气质。可拖到页面上乱盖。</p>
+      <p class="page-kicker gold">BIAO CHAT</p>
+      <h1 class="page-title">彪聊<br /><span class="karaoke">精神股东在线</span></h1>
+      <p class="page-lead">不是真 AI 大模型，是土酷规则引擎。问项目、问态度、问要不要接模板单。</p>
     </header>
-    <section class="stamp-lab">
-      <div class="stamp-preview">
-        <div class="stamp-seal" id="stampSeal"><span id="stampText">硬仗主打</span></div>
-      </div>
-      <div class="stamp-controls">
-        <input id="stampInput" maxlength="6" value="硬仗主打" />
-        <input id="stampRot" type="range" min="-30" max="30" value="-12" />
-        <button type="button" class="btn solid" id="stampGen">盖章</button>
-        <button type="button" class="btn gold" id="stampDrop">丢到画布</button>
-      </div>
-      <div class="stamp-canvas" id="stampCanvas"></div>
+    <section class="chat">
+      <div class="chat-log" id="chatLog"></div>
+      <form class="chat-form" id="chatForm">
+        <input id="chatInput" placeholder="例如：要不要做玻璃拟态官网？" autocomplete="off" />
+        <button class="btn solid" type="submit">发送</button>
+      </form>
+      <div class="chat-quick" id="chatQuick"></div>
     </section>
   
   </main>
@@ -140,6 +136,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/stamp.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>

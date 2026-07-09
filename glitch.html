@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土味盖章 · 哈拉少</title>
-  <meta name="description" content="生成红章土味印章。" />
+  <title>故障工坊 · 哈拉少</title>
+  <meta name="description" content="图片故障艺术生成器。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,21 +98,26 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">STAMP</p>
-      <h1 class="page-title">土味盖章<br /><em>红章生成</em></h1>
-      <p class="page-lead">输入四个字，盖出公章气质。可拖到页面上乱盖。</p>
+      <p class="page-kicker">GLITCH LAB</p>
+      <h1 class="page-title">故障工坊<br /><em>弄坏它</em></h1>
+      <p class="page-lead">选图、拉故障强度、导出气质。高级感有时要先脏一点。</p>
     </header>
-    <section class="stamp-lab">
-      <div class="stamp-preview">
-        <div class="stamp-seal" id="stampSeal"><span id="stampText">硬仗主打</span></div>
+    <section class="glitch-lab">
+      <canvas id="glitchCanvas" width="960" height="540"></canvas>
+      <div class="glitch-controls">
+        <label>素材
+          <select id="glitchSrc">
+            <option value="assets/hero-still.jpg">Hero</option>
+            <option value="assets/work-brand.jpg">Brand</option>
+            <option value="assets/work-product.jpg">Product</option>
+            <option value="assets/work-motion.jpg">Motion</option>
+          </select>
+        </label>
+        <label>故障 <input type="range" id="glitchAmt" min="0" max="40" value="12" /></label>
+        <label>色偏 <input type="range" id="glitchRGB" min="0" max="20" value="6" /></label>
+        <button type="button" class="btn solid" id="glitchApply">重采样</button>
+        <button type="button" class="btn gold" id="glitchVoice">上麦</button>
       </div>
-      <div class="stamp-controls">
-        <input id="stampInput" maxlength="6" value="硬仗主打" />
-        <input id="stampRot" type="range" min="-30" max="30" value="-12" />
-        <button type="button" class="btn solid" id="stampGen">盖章</button>
-        <button type="button" class="btn gold" id="stampDrop">丢到画布</button>
-      </div>
-      <div class="stamp-canvas" id="stampCanvas"></div>
     </section>
   
   </main>
@@ -140,6 +145,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/stamp.js"></script>
+  <script src="js/glitch.js"></script>
 </body>
 </html>

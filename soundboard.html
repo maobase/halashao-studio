@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土味盖章 · 哈拉少</title>
-  <meta name="description" content="生成红章土味印章。" />
+  <title>彪哥音板 · 哈拉少</title>
+  <meta name="description" content="15 键彪哥语录音板，可连打。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,22 +98,12 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">STAMP</p>
-      <h1 class="page-title">土味盖章<br /><em>红章生成</em></h1>
-      <p class="page-lead">输入四个字，盖出公章气质。可拖到页面上乱盖。</p>
+      <p class="page-kicker hot">SOUNDBOARD</p>
+      <h1 class="page-title">彪哥音板<br /><em>十五连击</em></h1>
+      <p class="page-lead">像直播间音效垫。点一下一句。连点会叠声，土到炸房。</p>
     </header>
-    <section class="stamp-lab">
-      <div class="stamp-preview">
-        <div class="stamp-seal" id="stampSeal"><span id="stampText">硬仗主打</span></div>
-      </div>
-      <div class="stamp-controls">
-        <input id="stampInput" maxlength="6" value="硬仗主打" />
-        <input id="stampRot" type="range" min="-30" max="30" value="-12" />
-        <button type="button" class="btn solid" id="stampGen">盖章</button>
-        <button type="button" class="btn gold" id="stampDrop">丢到画布</button>
-      </div>
-      <div class="stamp-canvas" id="stampCanvas"></div>
-    </section>
+    <section class="board" id="soundBoard"></section>
+    <p class="board-tip">快捷键 1-9 对应前九键 · 空格随机欧了</p>
   
   </main>
 
@@ -140,6 +130,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/stamp.js"></script>
+  <script src="js/soundboard.js"></script>
 </body>
 </html>

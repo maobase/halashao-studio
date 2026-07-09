@@ -268,13 +268,16 @@
     ["作品库", "work.html"], ["影库", "gallery.html"], ["故事条", "stories.html"],
     ["硬仗档案", "hard.html"], ["前后对比", "versus.html"], ["片源台", "reel.html"],
     ["新二流", "xin2.html"], ["直播感", "live.html"], ["夜场", "night.html"],
-    ["文字风暴", "storm.html"], ["硬仗骰子", "dice.html"], ["土味盖章", "stamp.html"],
-    ["老板看板", "boss.html"], ["土酷电台", "radio.html"], ["卡拉OK", "karaoke.html"],
-    ["城市灯牌", "billboard.html"], ["锻造工坊", "workshop.html"], ["审美罗盘", "mood.html"],
-    ["土酷对决", "arena.html"], ["弹幕墙", "wall.html"], ["特效场", "fx.html"],
-    ["点唱机", "jukebox.html"], ["彪哥语录", "biao.html"], ["人设卡", "cast.html"],
-    ["招人", "recruit.html"], ["媒体包", "press.html"], ["工作室", "studio.html"],
-    ["时间线", "timeline.html"], ["服务菜单", "menu.html"], ["开干", "contact.html"],
+    ["彪哥音板", "soundboard.html"], ["彪哥聊天", "chat.html"], ["字符矩阵", "matrix.html"],
+    ["硬仗闯关", "route.html"], ["故障工坊", "glitch.html"], ["模块轨道", "orbit.html"],
+    ["音频脉冲", "pulse.html"], ["文字风暴", "storm.html"], ["硬仗骰子", "dice.html"],
+    ["土味盖章", "stamp.html"], ["老板看板", "boss.html"], ["土酷电台", "radio.html"],
+    ["卡拉OK", "karaoke.html"], ["城市灯牌", "billboard.html"], ["锻造工坊", "workshop.html"],
+    ["审美罗盘", "mood.html"], ["土酷对决", "arena.html"], ["弹幕墙", "wall.html"],
+    ["特效场", "fx.html"], ["点唱机", "jukebox.html"], ["彪哥语录", "biao.html"],
+    ["人设卡", "cast.html"], ["招人", "recruit.html"], ["媒体包", "press.html"],
+    ["工作室", "studio.html"], ["时间线", "timeline.html"], ["服务菜单", "menu.html"],
+    ["硬问题", "faq.html"], ["开干", "contact.html"],
   ];
 
   const ensureCmd = () => {

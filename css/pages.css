@@ -2133,3 +2133,271 @@
   width: 2.5rem; height: 2.5rem; border-radius: 8px; border: 1px solid var(--line);
   display: block;
 }
+
+/* soundboard / chat / matrix / route / glitch / orbit / pulse / faq */
+.board {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 1rem;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (min-width: 800px) { .board { grid-template-columns: repeat(5, 1fr); } }
+.pad {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--bg-3), var(--bg-2));
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  gap: 0.25rem;
+  font-family: var(--font-cn);
+  font-weight: 900;
+  transition: transform 0.12s, border-color 0.2s, background 0.2s;
+}
+.pad b { color: var(--faint); font-family: var(--font-display); font-size: 0.75rem; }
+.pad span { font-size: 0.92rem; }
+.pad:hover { border-color: var(--acid); }
+.pad.hit {
+  transform: scale(0.94);
+  background: var(--acid);
+  color: var(--acid-ink);
+  border-color: var(--acid);
+}
+.board-tip { text-align: center; color: var(--muted); padding-bottom: 2.5rem; }
+
+.chat {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 3rem;
+}
+.chat-log {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  min-height: 360px;
+  max-height: 55vh;
+  overflow: auto;
+  padding: 0.85rem;
+}
+.chat-row { margin: 0 0 0.75rem; }
+.chat-row b {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--acid);
+  margin-bottom: 0.2rem;
+}
+.chat-row.user b { color: var(--gold); }
+.chat-row p {
+  margin: 0;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+}
+.chat-row.biao p { border-color: oklch(90% 0.24 125 / 0.25); }
+.chat-form {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+}
+.chat-form input {
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  color: var(--ink);
+}
+.chat-quick {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chat-quick button {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+.chat-quick button:hover { color: var(--acid); border-color: var(--acid); }
+
+.matrix-stage {
+  position: relative;
+  margin: 0 clamp(1rem,3vw,2.5rem) 3rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #050506;
+}
+#matrixCanvas { width: 100%; display: block; }
+.matrix-ui {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.route {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 3rem;
+  text-align: center;
+}
+.route-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  background: var(--bg-2);
+  text-align: left;
+}
+.route-step { margin: 0; color: var(--acid); font-size: 0.8rem; letter-spacing: 0.14em; font-weight: 800; }
+.route-card h2 { margin: 0.5rem 0 1rem; font-family: var(--font-cn); font-weight: 900; font-size: 1.35rem; }
+.route-choices { display: grid; gap: 0.55rem; }
+.route-btn {
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,0.2);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-cn);
+  font-weight: 800;
+}
+.route-btn:hover { border-color: var(--acid); color: var(--acid); }
+.route-biao { margin: 1rem 0 0; color: var(--gold); font-weight: 800; }
+.route-end { color: var(--muted); }
+.route-links { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem; }
+#routeReset { margin-top: 1rem; }
+
+.glitch-lab {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 3rem;
+}
+#glitchCanvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #000;
+}
+.glitch-controls {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+}
+.glitch-controls label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  min-width: 140px;
+}
+.glitch-controls select,
+.glitch-controls input[type="range"] { width: 100%; }
+
+.orbit {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem clamp(1rem,3vw,2.5rem) 3rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+.orbit-stage {
+  position: relative;
+  height: 280px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.orbit-card {
+  position: absolute;
+  min-width: 140px;
+  padding: 1.4rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-weight: 900;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: transform 0.45s var(--ease-out), opacity 0.35s, border-color 0.3s;
+}
+.orbit-card.is-on {
+  border-color: var(--acid);
+  box-shadow: 0 0 0 4px var(--acid-dim);
+}
+.orbit-nav {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  color: var(--ink);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.orbit-go { grid-column: 1 / -1; justify-self: center; margin-top: 0.5rem; }
+
+.pulse {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 3rem;
+  text-align: center;
+}
+#pulseCanvas {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #050506;
+  display: block;
+}
+.pulse-controls {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.pulse-now { color: var(--gold); font-weight: 800; }
+
+.faq {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem,3vw,2.5rem) 3rem;
+  display: grid;
+  gap: 0.65rem;
+}
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  background: var(--bg-2);
+}
+.faq summary {
+  cursor: pointer;
+  font-family: var(--font-cn);
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+.faq p { margin: 0.65rem 0 0; color: var(--muted); }
+.faq .biao-line { color: var(--gold); font-weight: 800; }

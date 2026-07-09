@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土味盖章 · 哈拉少</title>
-  <meta name="description" content="生成红章土味印章。" />
+  <title>硬仗闯关 · 哈拉少</title>
+  <meta name="description" content="选择你的硬仗路线，分支叙事。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,21 +98,18 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">STAMP</p>
-      <h1 class="page-title">土味盖章<br /><em>红章生成</em></h1>
-      <p class="page-lead">输入四个字，盖出公章气质。可拖到页面上乱盖。</p>
+      <p class="page-kicker">ROUTE</p>
+      <h1 class="page-title">硬仗闯关<br /><em class="hot">选边走</em></h1>
+      <p class="page-lead">三岔口叙事。每一步决定你的土酷配方，最后给结局与推荐模块。</p>
     </header>
-    <section class="stamp-lab">
-      <div class="stamp-preview">
-        <div class="stamp-seal" id="stampSeal"><span id="stampText">硬仗主打</span></div>
+    <section class="route">
+      <div class="route-card" id="routeCard">
+        <p class="route-step" id="routeStep">第 1 关</p>
+        <h2 id="routeQ">客户说：给我做个高级感官网</h2>
+        <div class="route-choices" id="routeChoices"></div>
+        <p class="route-biao" id="routeBiao"></p>
       </div>
-      <div class="stamp-controls">
-        <input id="stampInput" maxlength="6" value="硬仗主打" />
-        <input id="stampRot" type="range" min="-30" max="30" value="-12" />
-        <button type="button" class="btn solid" id="stampGen">盖章</button>
-        <button type="button" class="btn gold" id="stampDrop">丢到画布</button>
-      </div>
-      <div class="stamp-canvas" id="stampCanvas"></div>
+      <button type="button" class="btn line" id="routeReset">重开一局</button>
     </section>
   
   </main>
@@ -140,6 +137,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/stamp.js"></script>
+  <script src="js/route.js"></script>
 </body>
 </html>

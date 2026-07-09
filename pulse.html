@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土味盖章 · 哈拉少</title>
-  <meta name="description" content="生成红章土味印章。" />
+  <title>音频脉冲 · 哈拉少</title>
+  <meta name="description" content="语录驱动的音频脉冲可视化。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,21 +98,17 @@
   <main id="main">
 
     <header class="page-hero">
-      <p class="page-kicker hot">STAMP</p>
-      <h1 class="page-title">土味盖章<br /><em>红章生成</em></h1>
-      <p class="page-lead">输入四个字，盖出公章气质。可拖到页面上乱盖。</p>
+      <p class="page-kicker">PULSE</p>
+      <h1 class="page-title">音频脉冲<br /><span class="karaoke">跟着炸</span></h1>
+      <p class="page-lead">点播语录，圆环与粒子跟声压跳。土味声波科学。</p>
     </header>
-    <section class="stamp-lab">
-      <div class="stamp-preview">
-        <div class="stamp-seal" id="stampSeal"><span id="stampText">硬仗主打</span></div>
+    <section class="pulse">
+      <canvas id="pulseCanvas" width="900" height="420"></canvas>
+      <div class="pulse-controls">
+        <button type="button" class="btn solid" id="pulsePlay">随机硬话</button>
+        <button type="button" class="btn line" id="pulseStop">停</button>
       </div>
-      <div class="stamp-controls">
-        <input id="stampInput" maxlength="6" value="硬仗主打" />
-        <input id="stampRot" type="range" min="-30" max="30" value="-12" />
-        <button type="button" class="btn solid" id="stampGen">盖章</button>
-        <button type="button" class="btn gold" id="stampDrop">丢到画布</button>
-      </div>
-      <div class="stamp-canvas" id="stampCanvas"></div>
+      <p class="pulse-now" id="pulseNow">待机</p>
     </section>
   
   </main>
@@ -140,6 +136,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/stamp.js"></script>
+  <script src="js/pulse.js"></script>
 </body>
 </html>
