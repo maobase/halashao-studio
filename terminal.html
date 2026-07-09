@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>字符矩阵 · 哈拉少</title>
-  <meta name="description" content="数字雨矩阵，汉字土酷版。" />
+  <title>硬仗终端 · 哈拉少</title>
+  <meta name="description" content="命令行风土酷终端。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,8 +43,8 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
+      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="⌘K">⌘</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="土酷模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -83,17 +83,12 @@
 
   <main id="main">
 
-    <header class="page-hero">
-      <p class="page-kicker">MATRIX</p>
-      <h1 class="page-title">字符矩阵<br /><em>雨里有刃</em></h1>
-      <p class="page-lead">数字雨改成汉字硬话。点屏幕炸一句彪哥。</p>
-    </header>
-    <section class="matrix-stage">
-      <canvas id="matrixCanvas"></canvas>
-      <div class="matrix-ui">
-        <button type="button" class="btn gold" id="matrixBoom">雨暴</button>
-        <button type="button" class="btn line" id="matrixColor">换色</button>
-      </div>
+    <header class="page-hero"><p class="page-kicker">TERMINAL</p>
+    <h1 class="page-title">硬仗终端<br /><em>命令开干</em></h1>
+    <p class="page-lead">输入 help / fight / ou / reboot。像黑客，但说话像辽北。</p></header>
+    <section class="term" id="term">
+      <div class="term-screen" id="termOut"></div>
+      <form class="term-form" id="termForm"><span class="term-ps">HALA&gt;</span><input id="termIn" autocomplete="off" spellcheck="false" /></form>
     </section>
   
   </main>
@@ -121,6 +116,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/matrix.js"></script>
+  <script src="js/terminal.js"></script>
 </body>
 </html>

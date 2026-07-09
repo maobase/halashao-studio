@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>字符矩阵 · 哈拉少</title>
-  <meta name="description" content="数字雨矩阵，汉字土酷版。" />
+  <title>重力字 · 哈拉少</title>
+  <meta name="description" content="物理重力文字场。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,8 +43,8 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
+      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="⌘K">⌘</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="土酷模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -83,16 +83,13 @@
 
   <main id="main">
 
-    <header class="page-hero">
-      <p class="page-kicker">MATRIX</p>
-      <h1 class="page-title">字符矩阵<br /><em>雨里有刃</em></h1>
-      <p class="page-lead">数字雨改成汉字硬话。点屏幕炸一句彪哥。</p>
-    </header>
-    <section class="matrix-stage">
-      <canvas id="matrixCanvas"></canvas>
-      <div class="matrix-ui">
-        <button type="button" class="btn gold" id="matrixBoom">雨暴</button>
-        <button type="button" class="btn line" id="matrixColor">换色</button>
+    <header class="page-hero"><p class="page-kicker">GRAVITY</p>
+    <h1 class="page-title">重力字<br /><em>砸下来</em></h1>
+    <p class="page-lead">点屏幕落字。晃一晃（拖）改变重力方向。</p></header>
+    <section class="grav-stage" id="gravStage"><canvas id="gravCanvas"></canvas>
+      <div class="grav-ui">
+        <button type="button" class="btn solid" id="gravDrop">落一批</button>
+        <button type="button" class="btn line" id="gravClear">清场</button>
       </div>
     </section>
   
@@ -121,6 +118,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/matrix.js"></script>
+  <script src="js/gravity.js"></script>
 </body>
 </html>

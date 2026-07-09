@@ -1,0 +1,10 @@
+{
+  "name": "哈拉少 Design OS",
+  "short_name": "哈拉少",
+  "description": "土酷标杆设计操作系统",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050506",
+  "theme_color": "#050506",
+  "lang": "zh-CN"
+}

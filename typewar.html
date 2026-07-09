@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>字符矩阵 · 哈拉少</title>
-  <meta name="description" content="数字雨矩阵，汉字土酷版。" />
+  <title>打字战 · 哈拉少</title>
+  <meta name="description" content="限时打字挑战彪哥语录。" />
   <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,8 +43,8 @@
       <a href="contact.html" data-nav class="top-cta">开干</a>
     </nav>
     <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
+      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="⌘K">⌘</button>
+      <button type="button" class="mode-btn" id="modeBtn" aria-label="土酷模式">土</button>
       <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -83,17 +83,14 @@
 
   <main id="main">
 
-    <header class="page-hero">
-      <p class="page-kicker">MATRIX</p>
-      <h1 class="page-title">字符矩阵<br /><em>雨里有刃</em></h1>
-      <p class="page-lead">数字雨改成汉字硬话。点屏幕炸一句彪哥。</p>
-    </header>
-    <section class="matrix-stage">
-      <canvas id="matrixCanvas"></canvas>
-      <div class="matrix-ui">
-        <button type="button" class="btn gold" id="matrixBoom">雨暴</button>
-        <button type="button" class="btn line" id="matrixColor">换色</button>
-      </div>
+    <header class="page-hero"><p class="page-kicker hot">TYPE WAR</p>
+    <h1 class="page-title">打字战<br /><em>60 秒</em></h1>
+    <p class="page-lead">限时打完语录。错了重来。高分触发痛快语音。</p></header>
+    <section class="typewar">
+      <p class="tw-timer">剩余 <b id="twTime">60</b>s · 分 <b id="twScore">0</b></p>
+      <p class="tw-target" id="twTarget">准备</p>
+      <input class="tw-input" id="twInput" autocomplete="off" placeholder="在此跟打…" />
+      <button type="button" class="btn solid" id="twStart">开战</button>
     </section>
   
   </main>
@@ -121,6 +118,6 @@
     </div>
   </footer>
   <script src="js/system.js"></script>
-  <script src="js/matrix.js"></script>
+  <script src="js/typewar.js"></script>
 </body>
 </html>

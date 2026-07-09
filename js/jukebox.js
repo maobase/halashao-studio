@@ -15,6 +15,9 @@
     { t: "兄弟你怎么回事", src: "assets/biao-13.mp3", tip: "TRACK 13" },
     { t: "我这叫江湖义气", src: "assets/biao-14.mp3", tip: "TRACK 14" },
     { t: "走自己的路…", src: "assets/biao-15.mp3", tip: "TRACK 15" },
+    { t: "走着瞧", src: "assets/biao-16.mp3", tip: "TRACK 16" },
+    { t: "你给我记住", src: "assets/biao-17.mp3", tip: "TRACK 17" },
+    { t: "这才叫痛快", src: "assets/biao-18.mp3", tip: "TRACK 18" },
   ];
 
   const pad = document.getElementById("jukePad");
