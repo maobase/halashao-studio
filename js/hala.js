@@ -442,6 +442,12 @@
     { t: "落麦硬话", h: "micdrop.html", k: "MIC" },
     { t: "九宫格土酷", h: "gridmix.html", k: "GRID9" },
     { t: "硬仗台账", h: "ledger.html", k: "LEDGER" },
+    { t: "评论区硬话", h: "comment.html", k: "COMMENT" },
+    { t: "快闪硬话", h: "flash.html", k: "FLASH" },
+    { t: "土酷对口", h: "duet.html", k: "DUET" },
+    { t: "硬仗血条", h: "bossbar.html", k: "BOSS" },
+    { t: "公章墙", h: "sealwall.html", k: "SEALWALL" },
+    { t: "打字机硬话", h: "typecast.html", k: "TYPECAST" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
@@ -1697,6 +1703,275 @@
         }
       });
     });
+  }
+
+
+
+  /* ========== SYSTEM v10 handlers ========== */
+  const V10_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+  ];
+
+  /* comment feed */
+  const cmtList = document.getElementById("cmtList");
+  if (cmtList) {
+    const users = ["东北刀手", "气氛组", "雨姐备注", "新二转发", "吴总归档", "路人甲", "硬仗粉丝", "马大帅食堂"];
+    const seed = [
+      "小树不倒我就不倒 兄弟这句直接封神",
+      "那长相就是证据 哈哈太准了",
+      "少是刃 模板单免开尊口",
+      "酷是壳土是芯 这工作室懂",
+      "欧了 可以结案了",
+      "该出手时就出手 档期给满",
+    ];
+    const push = (text) => {
+      const el = document.createElement("div");
+      el.className = "cmt-item";
+      const u = users[(Math.random() * users.length) | 0];
+      const likes = 3 + ((Math.random() * 96) | 0);
+      el.innerHTML = `<span class="cmt-av">${u.slice(0, 1)}</span><div class="cmt-body"><b>${u}</b><p>${text}</p></div><button type="button" class="cmt-like" data-n="${likes}">♥ ${likes}</button>`;
+      const btn = el.querySelector(".cmt-like");
+      btn?.addEventListener("click", () => {
+        const on = btn.classList.toggle("is-on");
+        let n = Number(btn.dataset.n || "0");
+        n += on ? 1 : -1;
+        btn.dataset.n = String(n);
+        btn.textContent = `♥ ${n}`;
+      });
+      cmtList.prepend(el);
+      while (cmtList.children.length > 24) cmtList.lastElementChild?.remove();
+    };
+    seed.forEach((s, i) => setTimeout(() => push(s), i * 80));
+    document.getElementById("cmtPush")?.addEventListener("click", () => {
+      push(V10_LINES[(Math.random() * V10_LINES.length) | 0] + " —— 范德彪");
+    });
+    document.getElementById("cmtStorm")?.addEventListener("click", () => {
+      for (let i = 0; i < 8; i++) setTimeout(() => push(V10_LINES[(Math.random() * V10_LINES.length) | 0]), i * 70);
+    });
+  }
+
+  /* flash cuts */
+  const flashStage = document.getElementById("flashStage");
+  if (flashStage) {
+    const vid = document.getElementById("flashVid");
+    const line = document.getElementById("flashLine");
+    const countEl = document.getElementById("flashCount");
+    const srcs = [
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/work-hover-3.mp4",
+      "assets/showreel-motion.mp4",
+      "assets/clip-a.mp4",
+      "assets/clip-b.mp4",
+    ];
+    let cuts = 0;
+    let timer = 0;
+    let si = 0;
+    const cut = () => {
+      cuts += 1;
+      if (countEl) countEl.textContent = `CUT ${cuts}`;
+      if (line) line.textContent = V10_LINES[cuts % V10_LINES.length];
+      if (vid) {
+        si = (si + 1) % srcs.length;
+        if (!vid.src.includes(srcs[si].split("/").pop())) {
+          const t = vid.currentTime;
+          vid.src = srcs[si];
+          vid.play().catch(() => {});
+        }
+      }
+      flashStage.classList.remove("is-flash");
+      void flashStage.offsetWidth;
+      flashStage.classList.add("is-flash");
+      setTimeout(() => flashStage.classList.remove("is-flash"), 120);
+    };
+    document.getElementById("flashOnce")?.addEventListener("click", cut);
+    document.getElementById("flashGo")?.addEventListener("click", () => {
+      if (timer) return;
+      vid?.play().catch(() => {});
+      cut();
+      timer = setInterval(cut, 280);
+    });
+    document.getElementById("flashStop")?.addEventListener("click", () => {
+      clearInterval(timer);
+      timer = 0;
+    });
+  }
+
+  /* duet dialogue */
+  const duetStage = document.getElementById("duetStage");
+  if (duetStage) {
+    const pairs = [
+      ["那长相就是证据", "少，是刃"],
+      ["人间烟火要记得住", "系统交付要站得住"],
+      ["你就慢慢跟我处", "先对齐刀口再谈档期"],
+      ["土是芯", "酷是壳"],
+      ["本市著名硬仗", "跨尺度出刀"],
+      ["欧了", "不生产模板"],
+    ];
+    const tu = document.getElementById("duetTu");
+    const ku = document.getElementById("duetKu");
+    const tuLine = document.getElementById("duetTuLine");
+    const kuLine = document.getElementById("duetKuLine");
+    const said = document.getElementById("duetSaid");
+    let di = 0;
+    let side = 0;
+    let auto = 0;
+    const step = () => {
+      const pair = pairs[di % pairs.length];
+      if (side === 0) {
+        tu?.classList.add("is-on");
+        ku?.classList.remove("is-on");
+        if (tuLine) tuLine.textContent = pair[0];
+        if (said) said.textContent = `「${pair[0]}。」—— 土轨`;
+        side = 1;
+      } else {
+        ku?.classList.add("is-on");
+        tu?.classList.remove("is-on");
+        if (kuLine) kuLine.textContent = pair[1];
+        if (said) said.textContent = `「${pair[1]}。」—— 酷轨 · 范德彪工作室`;
+        side = 0;
+        di += 1;
+      }
+    };
+    document.getElementById("duetNext")?.addEventListener("click", step);
+    document.getElementById("duetAuto")?.addEventListener("click", (e) => {
+      const btn = e.currentTarget;
+      if (auto) {
+        clearInterval(auto);
+        auto = 0;
+        btn.textContent = "自动对口";
+        return;
+      }
+      step();
+      auto = setInterval(step, 1400);
+      btn.textContent = "停止对口";
+    });
+  }
+
+  /* boss bar */
+  const bossStage = document.getElementById("bossStage");
+  if (bossStage) {
+    let hp = 100;
+    let combo = 0;
+    const bar = document.getElementById("bossBar");
+    const hpEl = document.getElementById("bossHp");
+    const quote = document.getElementById("bossQuote");
+    const comboEl = document.getElementById("bossCombo");
+    const nameEl = document.getElementById("bossName");
+    const bosses = ["无边界「再高级一点」", "模板换皮需求", "无限轮无决策", "只有感觉没有问题"];
+    let bi = 0;
+    const render = () => {
+      if (bar) bar.style.width = `${Math.max(0, hp)}%`;
+      if (hpEl) hpEl.textContent = `HP ${Math.max(0, Math.round(hp))}%`;
+      if (comboEl) comboEl.textContent = `COMBO ${combo}`;
+    };
+    const hit = (dmg) => {
+      hp = Math.max(0, hp - dmg);
+      combo += 1;
+      if (quote) quote.textContent = `「${V10_LINES[combo % V10_LINES.length]}。」`;
+      bossStage.classList.remove("is-hit");
+      void bossStage.offsetWidth;
+      bossStage.classList.add("is-hit");
+      render();
+      if (hp <= 0) {
+        if (quote) quote.textContent = "「欧了。」—— Boss 已斩杀";
+        combo = 0;
+      }
+    };
+    document.getElementById("bossHit")?.addEventListener("click", () => hit(8 + Math.random() * 10));
+    document.getElementById("bossCrit")?.addEventListener("click", () => hit(22 + Math.random() * 18));
+    document.getElementById("bossReset")?.addEventListener("click", () => {
+      hp = 100;
+      combo = 0;
+      bi = (bi + 1) % bosses.length;
+      if (nameEl) nameEl.textContent = bosses[bi];
+      if (quote) quote.textContent = "「少，是刃。」";
+      render();
+    });
+    render();
+  }
+
+  /* seal wall */
+  const sealWall = document.getElementById("sealWall");
+  if (sealWall) {
+    const phrases = ["哈拉少", "硬仗", "欧了", "少是刃", "土是芯", "范德彪", "开干", "不模板", "东北", "交付"];
+    let count = 0;
+    const countEl = document.getElementById("sealCount");
+    const said = document.getElementById("sealSaid");
+    const cells = [];
+    for (let i = 0; i < 24; i++) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "seal-cell";
+      btn.textContent = "盖";
+      btn.style.setProperty("--r", `${(Math.random() - 0.5) * 20}deg`);
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("is-on")) return;
+        const text = phrases[i % phrases.length];
+        btn.classList.add("is-on");
+        btn.textContent = text;
+        count += 1;
+        if (countEl) countEl.textContent = `SEALS ${count}`;
+        if (said) said.textContent = `「${V10_LINES[count % V10_LINES.length]}。」—— 主理人范德彪`;
+      });
+      sealWall.appendChild(btn);
+      cells.push(btn);
+    }
+    document.getElementById("sealRain")?.addEventListener("click", () => {
+      cells.filter((c) => !c.classList.contains("is-on")).slice(0, 12).forEach((c, i) => setTimeout(() => c.click(), i * 60));
+    });
+    document.getElementById("sealClear")?.addEventListener("click", () => {
+      cells.forEach((c) => {
+        c.classList.remove("is-on");
+        c.textContent = "盖";
+      });
+      count = 0;
+      if (countEl) countEl.textContent = "SEALS 0";
+      if (said) said.textContent = "「本市著名硬仗。」—— 点格盖章。";
+    });
+  }
+
+  /* typecast typewriter */
+  const typecastLine = document.getElementById("typecastLine");
+  if (typecastLine) {
+    const lines = [
+      "小树不倒我就不倒。",
+      "那长相就是证据。",
+      "酷是壳，土是芯。",
+      "少，是刃。",
+      "本市著名硬仗，都是我主打的。",
+      "先对齐刀口，再谈档期。",
+      "不生产模板。",
+      "该出手时就出手。",
+    ];
+    let ti = 0;
+    let typing = false;
+    const type = async (fast = false) => {
+      if (typing) return;
+      typing = true;
+      const full = lines[ti % lines.length];
+      ti += 1;
+      typecastLine.textContent = "";
+      const delay = fast ? 18 : 55;
+      for (let i = 0; i < full.length; i++) {
+        typecastLine.textContent = full.slice(0, i + 1);
+        await new Promise((r) => setTimeout(r, delay));
+      }
+      typing = false;
+    };
+    type();
+    document.getElementById("typecastGo")?.addEventListener("click", () => type(false));
+    document.getElementById("typecastFast")?.addEventListener("click", () => type(true));
   }
 
 })();
