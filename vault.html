@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>库房 · 哈拉少</title>
+  <meta name="description" content="哈拉少实验库房：全部互动模块归档。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="creed.html" data-nav>信条</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker seal">VAULT</p>
+    <h1 class="page-h">库房<br /><em class="seal">实验归档</em></h1>
+    <p class="lead">主路径只留锋利的。这里是全部旧实验与玩具——需要时再翻。</p>
+
+    <div class="vault-list" id="vaultList"></div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">VAULT</p>
+    <div class="foot-row">
+      <p>归档不等于删除</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="index.html">首页</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+  <script>
+    const items = [
+      ["音板", "soundboard.html", "十五键语音"],
+      ["彪聊", "chat.html", "规则引擎顾问"],
+      ["终端", "terminal.html", "CLI 开干"],
+      ["夜场", "night.html", "沉浸光球"],
+      ["直播感", "live.html", "伪直播间"],
+      ["风暴", "storm.html", "轨迹字"],
+      ["矩阵", "matrix.html", "汉字雨"],
+      ["闯关", "route.html", "分支叙事"],
+      ["故障", "glitch.html", "切片色偏"],
+      ["海报", "poster.html", "下载 PNG"],
+      ["隧道", "tunnel.html", "霓虹加速"],
+      ["重力", "gravity.html", "落字物理"],
+      ["打字战", "typewar.html", "60 秒"],
+      ["扭曲", "warp.html", "搅画面"],
+      ["起名", "brandgen.html", "随机名"],
+      ["对撞", "clash.html", "双视频"],
+      ["划卡", "swipe.html", "项目点子"],
+      ["节拍", "beat.html", "砸点"],
+      ["老虎机", "slot.html", "配方"],
+      ["开箱", "loot.html", "随机模块"],
+      ["烟花", "fireworks.html", "点屏炸"],
+      ["雷达", "radar.html", "扫描"],
+      ["录像带", "vhs.html", "脏滤镜"],
+      ["追光", "spotlight.html", "光圈"],
+      ["镜像", "mirror.html", "撕裂字"],
+      ["连招", "combo.html", "QWE"],
+      ["宣言", "manifesto.html", "全屏字"],
+      ["点唱", "jukebox.html", "语录电台"],
+      ["电台", "radio.html", "频谱"],
+      ["K歌", "karaoke.html", "跟打"],
+      ["灯牌", "billboard.html", "LED"],
+      ["工坊", "workshop.html", "四步锻"],
+      ["罗盘", "mood.html", "土酷滑杆"],
+      ["对决", "arena.html", "土vs酷"],
+      ["弹幕", "wall.html", "发射"],
+      ["骰子", "dice.html", "随机硬仗"],
+      ["盖章", "stamp.html", "红章"],
+      ["老板", "boss.html", "假 KPI"],
+      ["轨道", "orbit.html", "旋转导航"],
+      ["脉冲", "pulse.html", "声波"],
+      ["新二流", "xin2.html", "信息流"],
+      ["故事条", "stories.html", "竖屏"],
+      ["影库", "gallery.html", "灯箱"],
+      ["硬仗旧版", "hard.html", "pin 旧"],
+      ["特效场", "fx.html", "零件"],
+      ["人设卡", "cast.html", "翻转"],
+      ["招人", "recruit.html", "岗位"],
+      ["媒体包", "press.html", "物料"],
+      ["工作室旧", "studio.html", "叙事"],
+      ["时间线", "timeline.html", "年表"],
+      ["菜单", "menu.html", "服务"],
+      ["手册", "docs.html", "说明"],
+      ["FAQ", "faq.html", "硬问题"],
+      ["导览旧", "tour.html", "打卡"],
+      ["地图旧", "os.html", "全模块"],
+    ];
+    const root = document.getElementById("vaultList");
+    if (root) {
+      root.innerHTML = items.map((it, i) =>
+        `<a class="vault-row" href="${it[1]}">
+          <b>${String(i + 1).padStart(2, "0")}</b>
+          <div><strong>${it[0]}</strong><span>${it[2]}</span></div>
+          <em>${it[1]}</em>
+        </a>`
+      ).join("");
+    }
+  </script>
+</body>
+</html>

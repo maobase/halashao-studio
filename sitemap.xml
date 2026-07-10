@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://maobase.github.io/halashao-studio/</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/work.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/film.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/creed.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/lab.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/vault.html</loc>
+  </url>
+  <url>
+    <loc>https://maobase.github.io/halashao-studio/contact.html</loc>
+  </url>
+  <url>
     <loc>https://maobase.github.io/halashao-studio/arena.html</loc>
   </url>
   <url>
@@ -31,9 +52,6 @@
     <loc>https://maobase.github.io/halashao-studio/combo.html</loc>
   </url>
   <url>
-    <loc>https://maobase.github.io/halashao-studio/contact.html</loc>
-  </url>
-  <url>
     <loc>https://maobase.github.io/halashao-studio/dice.html</loc>
   </url>
   <url>
@@ -59,9 +77,6 @@
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/hard.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/</loc>
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/jukebox.html</loc>
@@ -173,9 +188,6 @@
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/warp.html</loc>
-  </url>
-  <url>
-    <loc>https://maobase.github.io/halashao-studio/work.html</loc>
   </url>
   <url>
     <loc>https://maobase.github.io/halashao-studio/workshop.html</loc>

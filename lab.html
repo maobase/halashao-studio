@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>实验室 · 哈拉少</title>
+  <meta name="description" content="哈拉少实验室：精选互动特效，不是玩具堆。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="creed.html" data-nav>信条</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">LAB</p>
+    <h1 class="page-h">实验室<br /><em>九个够狠的</em></h1>
+    <p class="lead">不堆五十个半成品。只留能当展的互动。更多旧实验在库房。</p>
+
+    <div class="lab-grid">
+      <a class="lab-card" href="live.html">
+        <span class="tag">01 · NET</span>
+        <h3>伪直播间</h3>
+        <p>弹幕、刷礼、彪哥上麦。新二流网感的完整房间。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="soundboard.html">
+        <span class="tag">02 · SOUND</span>
+        <h3>彪哥音板</h3>
+        <p>十五键硬话。连点叠声，现场气氛组。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="night.html">
+        <span class="tag">03 · NIGHT</span>
+        <h3>夜场</h3>
+        <p>全屏光球沉浸。爆闪、上麦、土酷夜色。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="poster.html">
+        <span class="tag">04 · PRINT</span>
+        <h3>土酷海报</h3>
+        <p>灯牌字 + 红章。一键出街 PNG。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="storm.html">
+        <span class="tag">05 · TYPE</span>
+        <h3>文字风暴</h3>
+        <p>鼠标轨迹甩硬话。全屏轰炸。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="vhs.html">
+        <span class="tag">06 · VHS</span>
+        <h3>录像带</h3>
+        <p>扫描线、脏度、色偏。录像气质片源。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="route.html">
+        <span class="tag">07 · PATH</span>
+        <h3>硬仗闯关</h3>
+        <p>分支叙事。模板线会输，锋利线会赢。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="terminal.html">
+        <span class="tag">08 · CLI</span>
+        <h3>硬仗终端</h3>
+        <p>命令行开干。help / fight / ou。</p>
+        <span class="go">ENTER →</span>
+      </a>
+      <a class="lab-card" href="combo.html">
+        <span class="tag">09 · QWE</span>
+        <h3>土酷连招</h3>
+        <p>Q 土 W 酷 E 硬。连成招式放特效。</p>
+        <span class="go">ENTER →</span>
+      </a>
+    </div>
+
+    <p class="lead" style="margin-top:3rem">还不过瘾？</p>
+    <a class="btn btn-ghost" href="vault.html" style="margin-top:0.75rem">进库房翻旧实验</a>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">LAB</p>
+    <div class="foot-row">
+      <p>精选互动 · 不是页面农场</p>
+      <div class="foot-links">
+        <a href="vault.html">库房</a>
+        <a href="creed.html">信条</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

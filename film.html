@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开干 · 哈拉少</title>
-  <meta name="description" content="联系哈拉少设计工作室。开始项目。" />
+  <title>片源 · 哈拉少</title>
+  <meta name="description" content="哈拉少片源放映厅：showreel 与分镜。" />
   <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,38 +39,50 @@
     </nav>
   </div>
 
-  <main id="main" class="page">
-    <p class="kicker seal">CONTACT</p>
-    <h1 class="page-h">有火花？<br /><em class="seal">开干</em></h1>
-    <p class="lead">描述产品、时间线、想要的感觉。48 小时内回复。</p>
+  <main id="main" class="theater">
+    <p class="kicker">FILM</p>
+    <h1 class="page-h">放映厅</h1>
+    <p class="lead">自定义播放器。旁白直出。下面切分镜。</p>
 
-    <div class="contact-grid">
-      <div>
-        <span class="stamp">档期稀缺</span>
-        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
-        <p class="lead" style="margin-top:1.25rem">你就慢慢跟我们处。处不好，你自己找原因。</p>
-        <p class="lead">本季大约还能接 <strong style="color:var(--led)">2</strong> 个硬仗。</p>
+    <div class="player" id="player" style="margin-top:1.5rem">
+      <div class="player-stage">
+        <video id="filmVid" playsinline preload="metadata" poster="assets/showreel-poster.jpg">
+          <source src="assets/showreel.mp4" type="video/mp4" />
+        </video>
+        <button type="button" class="player-big" id="filmBig" aria-label="播放"></button>
       </div>
-      <form class="form" id="contactForm" novalidate>
-        <label>名字<input name="name" required autocomplete="name" placeholder="陈以安" /></label>
-        <label>邮箱<input name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>项目简述<textarea name="message" rows="5" required placeholder="品牌 / 界面 / 发布片…"></textarea></label>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-          <button class="btn btn-led" type="submit">发送</button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </div>
-      </form>
+      <div class="player-bar">
+        <button type="button" id="filmToggle" aria-label="播放暂停">▶</button>
+        <div class="scrub" id="scrub"><i id="scrubFill"></i></div>
+        <span class="player-time" id="filmTime">0:00 / 0:00</span>
+        <button type="button" id="filmMute" aria-label="静音">声</button>
+      </div>
+    </div>
+
+    <div class="clips">
+      <button type="button" class="clip is-on" data-clip="assets/showreel.mp4">
+        <img src="assets/showreel-poster.jpg" alt="" />
+        <p>主片源 · 旁白</p>
+      </button>
+      <button type="button" class="clip" data-clip="assets/hero-cinematic.mp4">
+        <img src="assets/hero-still.jpg" alt="" />
+        <p>电影镜头</p>
+      </button>
+      <button type="button" class="clip" data-clip="assets/showreel-motion.mp4">
+        <img src="assets/work-motion.jpg" alt="" />
+        <p>粒子漩涡</p>
+      </button>
     </div>
   </main>
 
   <footer class="foot">
-    <p class="foot-mega">开干</p>
+    <p class="foot-mega">FILM</p>
     <div class="foot-row">
-      <p>该出手时就出手</p>
+      <p>SHOWREEL · 2026</p>
       <div class="foot-links">
-        <a href="creed.html">信条</a>
         <a href="work.html">作品</a>
         <a href="lab.html">实验室</a>
+        <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>

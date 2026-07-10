@@ -1,10 +1,10 @@
 {
-  "name": "哈拉少 Design OS",
+  "name": "哈拉少设计工作室",
   "short_name": "哈拉少",
-  "description": "土酷标杆设计操作系统",
+  "description": "酷是壳，土是芯。把火花锻成形态。",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#050506",
-  "theme_color": "#050506",
+  "background_color": "#070706",
+  "theme_color": "#070706",
   "lang": "zh-CN"
 }

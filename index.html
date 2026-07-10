@@ -3,229 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>哈拉少 HALASHAO · 设计操作系统</title>
+  <title>哈拉少 · 把火花锻成形态</title>
+  <meta name="description" content="哈拉少设计工作室。酷是壳，土是芯。品牌、产品、影像。小树不倒我就不倒。" />
+  <meta name="theme-color" content="#070706" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <meta name="description" content="哈拉少设计工作室操作系统。土酷标杆：作品、硬仗、新二流、片源、点唱、特效。小树不倒我就不倒。" />
-  <meta name="theme-color" content="#050506" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/pages.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
-  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
-
+  <div class="led-grid" aria-hidden="true"></div>
   <a class="skip" href="#main">跳到内容</a>
 
-  <header class="top">
-    <a class="brand" href="index.html" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
-    <nav class="top-nav" aria-label="主导航">
-      <a href="index.html" data-nav>首页</a>
-      <a href="os.html" data-nav>地图</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav class="is-active">首页</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="reel.html" data-nav>片源</a>
-      <a href="tour.html" data-nav>导览</a>
-      <a href="beat.html" data-nav>节拍</a>
-      <a href="slot.html" data-nav>老虎机</a>
-      <a href="loot.html" data-nav>开箱</a>
-      <a href="fireworks.html" data-nav>烟花</a>
-      <a href="radar.html" data-nav>雷达</a>
-      <a href="vhs.html" data-nav>录像带</a>
-      <a href="spotlight.html" data-nav>追光</a>
-      <a href="mirror.html" data-nav>镜像</a>
-      <a href="combo.html" data-nav>连招</a>
-      <a href="manifesto.html" data-nav>宣言</a>
-      <a href="soundboard.html" data-nav>音板</a>
-      <a href="fx.html" data-nav>特效</a>
-      <a href="contact.html" data-nav class="top-cta">开干</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="creed.html" data-nav>信条</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
-    <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </div>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span>
+    </button>
   </header>
 
   <div class="drawer" id="drawer" hidden>
-    <nav class="drawer-nav" aria-label="移动导航">
+    <nav aria-label="移动导航">
       <a href="index.html" data-close>首页</a>
-      <a href="os.html" data-close>系统地图</a>
-      <a href="tour.html" data-close>导览</a>
-      <a href="docs.html" data-close>手册</a>
       <a href="work.html" data-close>作品</a>
-      <a href="reel.html" data-close>片源</a>
-      <a href="beat.html" data-close>节拍战</a>
-      <a href="slot.html" data-close>硬仗老虎机</a>
-      <a href="loot.html" data-close>模块开箱</a>
-      <a href="fireworks.html" data-close>语录烟花</a>
-      <a href="radar.html" data-close>模块雷达</a>
-      <a href="vhs.html" data-close>录像带滤镜</a>
-      <a href="spotlight.html" data-close>追光灯</a>
-      <a href="mirror.html" data-close>镜像字</a>
-      <a href="combo.html" data-close>土酷连招</a>
-      <a href="manifesto.html" data-close>全屏宣言</a>
-      <a href="terminal.html" data-close>终端</a>
-      <a href="soundboard.html" data-close>音板</a>
-      <a href="chat.html" data-close>彪聊</a>
-      <a href="night.html" data-close>夜场</a>
-      <a href="live.html" data-close>直播感</a>
-      <a href="storm.html" data-close>风暴</a>
-      <a href="fx.html" data-close>特效场</a>
-      <a href="biao.html" data-close>彪哥</a>
-      <a href="faq.html" data-close>硬问题</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="vault.html" data-close>库房</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
-  <audio id="voice" src="assets/voice-intro.mp3" preload="metadata"></audio>
-
-  <button type="button" class="fab" id="voiceFab" aria-pressed="false" aria-label="播放品牌语音">
-    <span class="fab-orb" aria-hidden="true"></span>
-    <span class="fab-label">
-      <strong id="voiceLabel">听介绍</strong>
-      <small>约 20 秒</small>
-    </span>
-  </button>
+  <audio id="brandVoice" src="assets/voice-intro.mp3" preload="metadata"></audio>
 
   <main id="main">
-    <section class="hero" id="top">
-      <div class="hero-stage">
-        <video id="heroVid" class="hero-vid" autoplay muted loop playsinline poster="assets/hero-still.jpg">
+    <section class="home-hero">
+      <div class="hero-film">
+        <video autoplay muted loop playsinline poster="assets/hero-still.jpg">
           <source src="assets/hero-cinematic.mp4" type="video/mp4" />
         </video>
-        <div class="hero-veil"></div>
-        <div class="hero-grid" aria-hidden="true"></div>
+        <span class="hero-film-tag">REC · FILM / 01</span>
       </div>
 
       <div class="hero-copy">
-        <p class="hero-kicker"><span class="pulse-dot"></span> DESIGN OS · 60 模块土酷系统</p>
-        <h1 class="hero-title" id="heroTitle" aria-label="哈拉少"></h1>
-        <p class="hero-en" data-scramble>HALASHAO SYSTEM</p>
-        <p class="hero-line">
-          <span class="line-mask"><span>酷炫外壳 · 土味内核 · 小树不倒</span></span>
+        <p class="hero-vertical" aria-hidden="true">COOL SHELL · EARTH CORE</p>
+        <p class="kicker">HALASHAO · DESIGN STUDIO</p>
+        <h1 class="hero-title">
+          <span>哈拉</span>
+          <span class="line-2">少</span>
+        </h1>
+        <p class="hero-sub">把火花锻成形态。</p>
+        <p class="hero-biao">
+          <strong>精神股东有话说</strong>
+          小树不倒我就不倒。模板单，免开尊口。
         </p>
-        <div class="hero-row">
-          <a class="btn solid magnetic" href="xin2.html" data-magnetic>
-            开导览
-            <span class="btn-sq" aria-hidden="true">→</span>
-          </a>
-          <a class="btn line magnetic" href="loot.html" data-magnetic>土酷对决</a>
-          <button type="button" class="btn line magnetic" id="heroVoice" data-magnetic>播放语音</button>
+        <div class="hero-actions">
+          <a class="btn btn-led" href="work.html">看作品</a>
+          <a class="btn btn-ghost" href="film.html">放片源</a>
+          <button type="button" class="btn btn-ghost" id="playVoice">听介绍</button>
         </div>
-        <p class="stamp" style="margin-top:1.25rem">本市著名硬仗主打</p>
-      </div>
-
-      <div class="hero-ticker" aria-hidden="true">
-        <div class="hero-ticker-track">
-          <span>小树不倒我就不倒</span><span>欧了</span><span>新二流</span><span>土酷到底</span>
-          <span>小树不倒我就不倒</span><span>欧了</span><span>新二流</span><span>土酷到底</span>
+        <div class="hero-meta">
+          <div><b>Brand</b><span>识别系统</span></div>
+          <div><b>Product</b><span>界面锻造</span></div>
+          <div><b>Motion</b><span>影像动效</span></div>
         </div>
       </div>
     </section>
 
-    <section class="pin" id="pin">
-      <div class="pin-stack">
-        <article class="pin-card" data-pin>
-          <p class="pin-tag">01</p>
-          <h2 class="pin-h">我们不生产<br /><em>模板</em></h2>
-          <p class="pin-p">模板是安全的。我们卖的是锋利。</p>
-        </article>
-        <article class="pin-card" data-pin>
-          <p class="pin-tag">02</p>
-          <h2 class="pin-h">我们锻造<br /><em>记忆</em></h2>
-          <p class="pin-p">被记住的形态，才算交付。</p>
-        </article>
-        <article class="pin-card" data-pin>
-          <p class="pin-tag">03</p>
-          <h2 class="pin-h">少，<em>是刃</em></h2>
-          <p class="pin-p">「论成败，人生豪迈；大不了从头再来。」</p>
-        </article>
+    <div class="strip" aria-hidden="true">
+      <div class="strip-track">
+        <span>酷是壳</span><span>土是芯</span><span>少是刃</span><span>欧了</span>
+        <span>硬仗主打</span><span>不生产模板</span><span>酷是壳</span><span>土是芯</span>
+        <span>少是刃</span><span>欧了</span><span>硬仗主打</span><span>不生产模板</span>
       </div>
-    </section>
-
-    <section class="home-modules">
-      <h2>系统地图 · 11 个入口</h2>
-    </section>
-    
-    <div class="sys-grid three">
-      <a class="sys-card" href="os.html" data-hot><span class="tag">OS</span><h3>系统地图</h3><p>60 模块 · ⌘K</p></a>
-      <a class="sys-card" href="tour.html" data-hot><span class="tag">Tour</span><h3>标杆导览</h3><p>五站打卡</p></a>
-      <a class="sys-card" href="loot.html" data-hot><span class="tag">Loot</span><h3>模块开箱</h3><p>随机跳转</p></a>
-      <a class="sys-card" href="beat.html" data-hot><span class="tag">Beat</span><h3>节拍战</h3><p>砸点连击</p></a>
-      <a class="sys-card" href="slot.html" data-hot><span class="tag">Slot</span><h3>硬仗老虎机</h3><p>配方三连</p></a>
-      <a class="sys-card" href="fireworks.html" data-hot><span class="tag">FW</span><h3>语录烟花</h3><p>点屏炸场</p></a>
-      <a class="sys-card" href="radar.html" data-hot><span class="tag">Radar</span><h3>模块雷达</h3><p>扫描进入</p></a>
-      <a class="sys-card" href="vhs.html" data-hot><span class="tag">VHS</span><h3>录像带</h3><p>脏滤镜</p></a>
-      <a class="sys-card" href="spotlight.html" data-hot><span class="tag">Spot</span><h3>追光灯</h3><p>照出硬话</p></a>
-      <a class="sys-card" href="mirror.html" data-hot><span class="tag">Mirror</span><h3>镜像字</h3><p>一撕两半</p></a>
-      <a class="sys-card" href="combo.html" data-hot><span class="tag">Combo</span><h3>土酷连招</h3><p>QWE 放招</p></a>
-      <a class="sys-card" href="manifesto.html" data-hot><span class="tag">Mani</span><h3>全屏宣言</h3><p>动能大字</p></a>
-      <a class="sys-card" href="soundboard.html" data-hot><span class="tag">Pads</span><h3>彪哥音板</h3><p>连打语音</p></a>
-      <a class="sys-card" href="terminal.html" data-hot><span class="tag">Term</span><h3>硬仗终端</h3><p>命令行</p></a>
-      <a class="sys-card" href="chat.html" data-hot><span class="tag">Chat</span><h3>彪哥聊天</h3><p>土酷顾问</p></a>
-      <a class="sys-card" href="night.html" data-hot><span class="tag">Night</span><h3>夜场</h3><p>沉浸</p></a>
-      <a class="sys-card" href="live.html" data-hot><span class="tag">Live</span><h3>直播感</h3><p>伪直播</p></a>
-      <a class="sys-card" href="hard.html" data-hot><span class="tag">Hard</span><h3>硬仗档案</h3><p>pin 战报</p></a>
-      <a class="sys-card" href="work.html" data-hot><span class="tag">Work</span><h3>作品库</h3><p>hover 视频</p></a>
-      <a class="sys-card" href="reel.html" data-hot><span class="tag">Reel</span><h3>片源台</h3><p>播放器</p></a>
-      <a class="sys-card" href="poster.html" data-hot><span class="tag">Poster</span><h3>土酷海报</h3><p>下载 PNG</p></a>
-      <a class="sys-card" href="faq.html" data-hot><span class="tag">FAQ</span><h3>硬问题</h3><p>直球</p></a>
-      <a class="sys-card" href="jukebox.html" data-hot><span class="tag">Juke</span><h3>点唱机</h3><p>20 轨</p></a>
-      <a class="sys-card" href="contact.html" data-hot><span class="tag">Go</span><h3>开干</h3><p>预约 · 欧了</p></a>
     </div>
-    <section class="kinetic" aria-hidden="true" style="margin-top:2.5rem">
-      <div class="kinetic-row kinetic-a">
-        <span>品牌</span><span>产品</span><span>动效</span><span>新二流</span><span>土酷</span>
-        <span>品牌</span><span>产品</span><span>动效</span><span>新二流</span><span>土酷</span>
+
+    <section class="dual">
+      <div class="dual-block dual-tu">
+        <p class="kicker seal">TU · 土</p>
+        <h2>夜市灯牌气质</h2>
+        <p class="quote">那长相就是证据。</p>
+        <p>字幕要土到能喊麦，红章要盖到屏幕上。网感不是廉价，是记忆点的燃料。</p>
       </div>
-      <div class="kinetic-row kinetic-b">
-        <span>小树不倒</span><span>欧了</span><span>硬仗主打</span><span>从头再来</span>
-        <span>小树不倒</span><span>欧了</span><span>硬仗主打</span><span>从头再来</span>
+      <div class="dual-block dual-ku">
+        <p class="kicker">KU · 酷</p>
+        <h2>电影画幅纪律</h2>
+        <p class="quote">少，是刃。</p>
+        <p>影像、层级、节奏。删到只剩必要，再删一次。锋利比花活重要。</p>
       </div>
     </section>
 
-    <section class="quote" style="padding:3rem clamp(1rem,3vw,2.5rem);max-width:var(--max);margin:0 auto">
-      <blockquote style="margin:0;padding:1.6rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2)">
-        <p style="margin:0;font-family:var(--font-cn);font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;max-width:28ch">你就慢慢跟我处，处不好你自己找原因。</p>
-        <footer style="margin-top:1rem;color:var(--gold);font-size:0.9rem">范德彪 · 项目哲学 / 顶栏可切「土」模式</footer>
-      </blockquote>
+    <section class="home-work">
+      <div class="home-work-head">
+        <h2>精选硬仗</h2>
+        <a class="btn btn-ghost" href="work.html">全部作品</a>
+      </div>
+      <div class="rail" data-rail>
+        <a class="rail-card" href="work.html" data-work>
+          <img src="assets/work-brand.jpg" alt="熔光" />
+          <video muted loop playsinline preload="none" poster="assets/work-brand.jpg">
+            <source src="assets/work-hover-1.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            <span>BRAND</span>
+            <strong>熔光</strong>
+          </figcaption>
+        </a>
+        <a class="rail-card" href="work.html" data-work>
+          <img src="assets/work-product.jpg" alt="墨界" />
+          <video muted loop playsinline preload="none" poster="assets/work-product.jpg">
+            <source src="assets/work-hover-2.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            <span>PRODUCT</span>
+            <strong>墨界</strong>
+          </figcaption>
+        </a>
+        <a class="rail-card" href="work.html" data-work>
+          <img src="assets/work-motion.jpg" alt="脉冲" />
+          <video muted loop playsinline preload="none" poster="assets/work-motion.jpg">
+            <source src="assets/work-hover-3.mp4" type="video/mp4" />
+          </video>
+          <figcaption>
+            <span>MOTION</span>
+            <strong>脉冲</strong>
+          </figcaption>
+        </a>
+        <a class="rail-card" href="film.html" style="display:grid;place-content:center;padding:2rem;text-align:center;background:#10100e">
+          <span class="stamp" style="justify-self:center">片源</span>
+          <strong style="margin-top:1.25rem;font-size:1.4rem">进放映厅</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="page" style="padding-top:1rem;padding-bottom:5rem">
+      <p class="kicker">NEXT</p>
+      <h2 class="page-h">有火花？<em class="seal">开干</em></h2>
+      <p class="lead">你就慢慢跟我们处。处不好，你自己找原因——先把需求丢过来。</p>
+      <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+        <a class="btn btn-seal" href="contact.html">开始项目</a>
+        <a class="btn btn-ghost" href="creed.html">先看信条</a>
+        <a class="btn btn-ghost" href="lab.html">去实验室玩</a>
+      </div>
     </section>
   </main>
 
   <footer class="foot">
-    <div class="foot-marquee" aria-hidden="true">
-      <div class="foot-marquee-track">
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-      </div>
-    </div>
-    <p class="foot-big" data-scramble>哈拉少</p>
+    <p class="foot-mega">哈拉少</p>
     <div class="foot-row">
-      <p>Design OS · 60 模块土酷系统</p>
+      <p>酷是壳 · 土是芯 · 少是刃</p>
       <div class="foot-links">
-        <a href="os.html">地图</a>
-        <a href="tour.html">导览</a>
-        <a href="loot.html">开箱</a>
-        <a href="beat.html">节拍</a>
+        <a href="work.html">作品</a>
+        <a href="film.html">片源</a>
+        <a href="lab.html">实验室</a>
+        <a href="vault.html">库房</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="js/system.js"></script>
-  <script src="main.js"></script>
+  <script src="js/hala.js"></script>
 </body>
 </html>
