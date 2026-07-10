@@ -6231,9 +6231,11 @@ body.stage-glitch .stage-wrap {
   background: linear-gradient(125deg, transparent 30%, rgba(255,255,255,0.18) 48%, transparent 62%);
   opacity: 0.5; backface-visibility: hidden;
 }
-.tilt-card.is-back .tilt-front { transform: rotateY(180deg); }
-.tilt-card.is-back .tilt-back { transform: rotateY(0deg); }
-.tilt-card.is-back { transform: rotateY(180deg) !important; }
+.tilt-front { transform: rotateY(0deg); }
+.tilt-back { transform: rotateY(180deg); }
+.tilt-card.is-back {
+  transform: rotateY(180deg) !important;
+}
 
 /* filter stack */
 .filt-stage video {
