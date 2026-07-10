@@ -4990,6 +4990,11 @@ body.stage-glitch .stage-wrap {
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--seal) 40%, transparent);
 }
 
+/* client path band honesty */
+.band footer {
+  letter-spacing: 0.04em;
+}
+
 
 /* ========== SYSTEM v12 — overlay · countdown · mosaic · tele · rank · snap ========== */
 .ov-stage {
