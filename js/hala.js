@@ -431,28 +431,28 @@
 
   /* command palette — client path first, then demo branches */
   const MODULES = [
-    { t: "首页", h: "index.html", k: "HOME" },
-    { t: "关于工作室", h: "about.html", k: "ABOUT" },
-    { t: "服务", h: "services.html", k: "SERVICES" },
-    { t: "合作流程", h: "process.html", k: "PROCESS" },
-    { t: "作品硬仗", h: "work.html", k: "WORK" },
-    { t: "作品档案", h: "archive.html", k: "ARCHIVE" },
-    { t: "团队介绍", h: "team.html", k: "TEAM" },
-    { t: "班底海报卡", h: "cast.html", k: "CAST" },
-    { t: "片源放映厅", h: "film.html", k: "FILM" },
-    { t: "竖屏片场", h: "cinema.html", k: "CINEMA" },
-    { t: "片源时间轴", h: "scrub.html", k: "SCRUB" },
-    { t: "彪哥语录墙", h: "quotes.html", k: "QUOTES" },
-    { t: "彪哥电台", h: "radio.html", k: "RADIO" },
-    { t: "工作室叙事", h: "stories.html", k: "STORIES" },
-    { t: "工作室信条", h: "creed.html", k: "CREED" },
-    { t: "媒体资料", h: "press.html", k: "PRESS" },
-    { t: "客户走查导览", h: "tour.html", k: "TOUR" },
-    { t: "导览台", h: "dashboard.html", k: "DASH" },
-    { t: "系统地图", h: "system.html", k: "SYSTEM" },
-    { t: "开干", h: "contact.html", k: "CONTACT" },
-    { t: "招人", h: "recruit.html", k: "RECRUIT" },
-    { t: "实验室", h: "lab.html", k: "LAB" },
+    { t: "首页", h: "index.html", k: "HOME", a: "哈拉少 东北" },
+    { t: "关于工作室", h: "about.html", k: "ABOUT", a: "东北 土酷 身份" },
+    { t: "服务", h: "services.html", k: "SERVICES", a: "品牌 产品 全案 跨尺度" },
+    { t: "合作流程", h: "process.html", k: "PROCESS", a: "对齐 锻造 淬火 上线" },
+    { t: "作品硬仗", h: "work.html", k: "WORK", a: "熔光 墨界 脉冲 野市 案例" },
+    { t: "作品档案", h: "archive.html", k: "ARCHIVE", a: "筛选 硬仗" },
+    { t: "团队介绍", h: "team.html", k: "TEAM", a: "范德彪 新二 雨姐 老蒯 小阿giao 吴总 马大帅 班底" },
+    { t: "班底海报卡", h: "cast.html", k: "CAST", a: "范德彪 海报 人物卡" },
+    { t: "片源放映厅", h: "film.html", k: "FILM", a: "视频 播放 片源" },
+    { t: "竖屏片场", h: "cinema.html", k: "CINEMA", a: "新二 竖屏 短视频" },
+    { t: "片源时间轴", h: "scrub.html", k: "SCRUB", a: "scrub 字幕" },
+    { t: "彪哥语录墙", h: "quotes.html", k: "QUOTES", a: "范德彪 硬话 语录" },
+    { t: "彪哥电台", h: "radio.html", k: "RADIO", a: "范德彪 音频 连播" },
+    { t: "工作室叙事", h: "stories.html", k: "STORIES", a: "滚动 五章 故事" },
+    { t: "工作室信条", h: "creed.html", k: "CREED", a: "立场 纪律" },
+    { t: "媒体资料", h: "press.html", k: "PRESS", a: "口径 品牌 色彩" },
+    { t: "客户走查导览", h: "tour.html", k: "TOUR", a: "评审 演示 客户 走查" },
+    { t: "导览台", h: "dashboard.html", k: "DASH", a: "总控 捷径" },
+    { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
+    { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
+    { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
@@ -503,7 +503,7 @@
     overlay.id = "cmdOverlay";
     overlay.innerHTML = `
       <div class="cmd-panel" role="dialog" aria-modal="true" aria-label="命令面板">
-        <input id="cmdInput" type="search" placeholder="搜客户路径：服务 / 团队 / 作品 / 导览…" autocomplete="off" />
+        <input id="cmdInput" type="search" placeholder="搜：服务 / 范德彪 / 团队 / 导览 / 片源…" autocomplete="off" />
         <ul class="cmd-list" id="cmdList"></ul>
         <div class="cmd-hint"><span>↑↓ 选择 · Enter 进入</span><span>Esc 关闭 · ⌘K</span></div>
       </div>`;
@@ -559,9 +559,10 @@
     });
     input.addEventListener("input", () => {
       const q = input.value.trim().toLowerCase();
-      filtered = MODULES.filter(
-        (m) => m.t.toLowerCase().includes(q) || m.k.toLowerCase().includes(q) || m.h.includes(q)
-      );
+      filtered = MODULES.filter((m) => {
+        const bag = `${m.t} ${m.k} ${m.h} ${m.a || ""}`.toLowerCase();
+        return bag.includes(q) || m.h.includes(q);
+      });
       active = 0;
       render();
     });
