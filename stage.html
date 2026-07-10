@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>特效舞台 · 哈拉少</title>
+  <meta name="description" content="哈拉少特效舞台：点击盖章、语录爆发、故障美学——现场可演示。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="stage.html" data-close>特效舞台</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="fireworks.html" data-close>烟花</a>
+      <a href="storm.html" data-close>风暴</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">STAGE · LIVE FX</p>
+    <h1 class="page-h">特效舞台<br /><em class="seal kinetic">点一下</em></h1>
+    <p class="lead reveal">点击画布盖红章、甩硬话、放粒子。故障开关可开——土味进行到底，演示也要够狠。</p>
+
+    <div class="stage-wrap reveal">
+      <canvas class="stage-canvas" id="stageCanvas" aria-label="特效舞台画布"></canvas>
+      <div class="stage-title">
+        <h2><span id="stageQuote">小树不倒<br /><em>我就不倒</em></span></h2>
+        <p>点击任意位置 · 盖章爆发</p>
+      </div>
+      <div class="stage-hud">
+        <button type="button" id="stageBurst">语录轰炸</button>
+        <button type="button" id="stageGlitch">故障美学</button>
+        <button type="button" id="stageClear">清场</button>
+        <a class="btn btn-ghost" href="quotes.html" style="padding:0.45rem 0.8rem;font-size:0.72rem">去语录墙</a>
+        <a class="btn btn-ghost" href="fireworks.html" style="padding:0.45rem 0.8rem;font-size:0.72rem">去烟花</a>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:2rem">
+      <div class="reveal">
+        <h2>舞台怎么用</h2>
+        <p>提案现场、发布会暖场、或纯玩。红章与硬话是范德彪工作室的气氛组语言——酷炫外壳底下，土味芯子不能丢。</p>
+      </div>
+      <div class="reveal">
+        <h2>同族模块</h2>
+        <p>文字风暴、语录烟花、土酷连招、伪直播间——都在实验室。系统地图可一键跳转。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-led" href="lab.html">回实验室</a>
+      <a class="btn btn-ghost" href="combo.html">土酷连招</a>
+      <a class="btn btn-ghost" href="system.html">系统地图</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">舞台</p>
+    <div class="foot-row">
+      <p>盖章 · 粒子 · 故障 · 硬话</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

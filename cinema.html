@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>竖屏片场 · 哈拉少</title>
+  <meta name="description" content="哈拉少竖屏片场：新二气质短片流，字幕条硬话，滚动切镜。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="film.html" data-close>放映厅</a>
+      <a href="cinema.html" data-close>竖屏片场</a>
+      <a href="xin2.html" data-close>新二流</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">CINEMA · VERTICAL</p>
+    <h1 class="page-h">竖屏片场<br /><em class="seal">往下刷</em></h1>
+    <p class="lead reveal">新二气质的短片流：高饱和字幕条、红章阴影、硬话盖脸。滚动切镜，当前镜自动播放。</p>
+
+    <div class="cinema-shell reveal">
+      <div class="cinema-reel" id="cinemaReel">
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/hero-still.jpg">
+            <source src="assets/hero-cinematic.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">小树不倒我就不倒</div>
+          <div class="cin-meta">
+            <div><strong>电影镜头</strong>主理人范德彪 · 气氛组</div>
+            <span>01 / 06</span>
+          </div>
+        </section>
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/work-brand.jpg">
+            <source src="assets/work-hover-1.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">那长相就是证据</div>
+          <div class="cin-meta">
+            <div><strong>熔光 · 品牌</strong>识别要站得住</div>
+            <span>02 / 06</span>
+          </div>
+        </section>
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/work-product.jpg">
+            <source src="assets/work-hover-2.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">你就慢慢跟我处</div>
+          <div class="cin-meta">
+            <div><strong>墨界 · 产品</strong>路径先于装饰</div>
+            <span>03 / 06</span>
+          </div>
+        </section>
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/work-motion.jpg">
+            <source src="assets/work-hover-3.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">少 · 是刃</div>
+          <div class="cin-meta">
+            <div><strong>脉冲 · 动效</strong>节奏大于特效层数</div>
+            <span>04 / 06</span>
+          </div>
+        </section>
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/showreel-poster.jpg">
+            <source src="assets/showreel-motion.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">酷是壳 · 土是芯</div>
+          <div class="cin-meta">
+            <div><strong>粒子漩涡</strong>秀肌肉也要有芯</div>
+            <span>05 / 06</span>
+          </div>
+        </section>
+        <section class="cinema-shot">
+          <video muted loop playsinline preload="metadata" poster="assets/studio-space.jpg">
+            <source src="assets/clip-b.mp4" type="video/mp4" />
+          </video>
+          <div class="cin-cap">本市著名硬仗</div>
+          <div class="cin-meta">
+            <div><strong>野市 · 触点</strong>人间烟火也是设计</div>
+            <span>06 / 06</span>
+          </div>
+        </section>
+      </div>
+      <p class="cinema-hint">SCROLL · 竖滑切镜</p>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:0.65rem;justify-content:center">
+      <a class="btn btn-led" href="film.html">宽屏放映厅</a>
+      <a class="btn btn-ghost" href="xin2.html">新二流</a>
+      <a class="btn btn-ghost" href="archive.html">作品档案</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">竖屏</p>
+    <div class="foot-row">
+      <p>6 镜短片流 · 字幕盖脸 · 新二气质</p>
+      <div class="foot-links">
+        <a href="film.html">片源</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

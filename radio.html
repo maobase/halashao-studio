@@ -3,128 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>土酷电台 · 哈拉少</title>
-  <meta name="description" content="土酷电台：语录电台 + 频谱可视化。" />
-  <meta name="theme-color" content="#050506" />
+  <title>彪哥电台 · 哈拉少</title>
+  <meta name="description" content="范德彪电台：连续播放硬话语录旁白，土味气氛组。" />
+  <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
-  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
   <a class="skip" href="#main">跳到内容</a>
-  <header class="top">
-    <a class="brand" href="index.html" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
-
-    <nav class="top-nav" aria-label="主导航">
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
-      <a href="os.html" data-nav>地图</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="reel.html" data-nav>片源</a>
-      <a href="tour.html" data-nav>导览</a>
-      <a href="beat.html" data-nav>节拍</a>
-      <a href="slot.html" data-nav>老虎机</a>
-      <a href="loot.html" data-nav>开箱</a>
-      <a href="fireworks.html" data-nav>烟花</a>
-      <a href="radar.html" data-nav>雷达</a>
-      <a href="vhs.html" data-nav>录像带</a>
-      <a href="spotlight.html" data-nav>追光</a>
-      <a href="mirror.html" data-nav>镜像</a>
-      <a href="combo.html" data-nav>连招</a>
-      <a href="manifesto.html" data-nav>宣言</a>
-      <a href="soundboard.html" data-nav>音板</a>
-      <a href="fx.html" data-nav>特效</a>
-      <a href="contact.html" data-nav class="top-cta">开干</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
-    <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
-    </div>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="drawer" id="drawer" hidden>
-
-    <nav class="drawer-nav" aria-label="移动导航">
-      <a href="index.html" data-close>首页</a>
-      <a href="os.html" data-close>系统地图</a>
-      <a href="tour.html" data-close>导览</a>
-      <a href="docs.html" data-close>手册</a>
-      <a href="work.html" data-close>作品</a>
-      <a href="reel.html" data-close>片源</a>
-      <a href="beat.html" data-close>节拍战</a>
-      <a href="slot.html" data-close>硬仗老虎机</a>
-      <a href="loot.html" data-close>模块开箱</a>
-      <a href="fireworks.html" data-close>语录烟花</a>
-      <a href="radar.html" data-close>模块雷达</a>
-      <a href="vhs.html" data-close>录像带滤镜</a>
-      <a href="spotlight.html" data-close>追光灯</a>
-      <a href="mirror.html" data-close>镜像字</a>
-      <a href="combo.html" data-close>土酷连招</a>
-      <a href="manifesto.html" data-close>全屏宣言</a>
-      <a href="terminal.html" data-close>终端</a>
+    <nav aria-label="移动导航">
+      <a href="quotes.html" data-close>语录墙</a>
+      <a href="radio.html" data-close>电台</a>
       <a href="soundboard.html" data-close>音板</a>
-      <a href="chat.html" data-close>彪聊</a>
-      <a href="night.html" data-close>夜场</a>
-      <a href="live.html" data-close>直播感</a>
-      <a href="storm.html" data-close>风暴</a>
-      <a href="fx.html" data-close>特效场</a>
-      <a href="biao.html" data-close>彪哥</a>
-      <a href="faq.html" data-close>硬问题</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
-  <main id="main">
+  <main id="main" class="page">
+    <p class="kicker">RADIO · 范德彪</p>
+    <h1 class="page-h">彪哥电台<br /><em>连播硬话</em></h1>
+    <p class="lead reveal">点播放，语录自动连播。提案前热热气氛，或纯听东北硬气——土味进行到底。</p>
 
-    <header class="page-hero">
-      <p class="page-kicker gold">RADIO</p>
-      <h1 class="page-title">土酷电台<br /><span class="karaoke">FM 彪哥</span></h1>
-      <p class="page-lead">调频到辽北狠人频道。按下播放，频谱跟着炸。</p>
-    </header>
-    <section class="radio">
-      <div class="radio-deck">
-        <canvas id="radioViz" width="800" height="220"></canvas>
-        <p class="radio-now" id="radioNow">频率锁定中…</p>
-        <div class="radio-controls">
-          <button type="button" class="btn solid" id="radioPlay">播放 / 暂停</button>
-          <button type="button" class="btn gold" id="radioNext">下一首硬话</button>
-          <button type="button" class="btn line" id="radioRand">随机</button>
+    <div class="radio-deck reveal" id="radioDeck">
+      <p class="radio-now" id="radioNow">待命：<em>小树不倒我就不倒</em></p>
+      <div class="radio-controls">
+        <button type="button" class="btn btn-led" id="radioPlay">▶ 播放</button>
+        <button type="button" class="btn btn-ghost" id="radioPrev">上一句</button>
+        <button type="button" class="btn btn-ghost" id="radioNext">下一句</button>
+        <div class="radio-wave" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
         </div>
       </div>
-      <ol class="radio-list" id="radioList"></ol>
-    </section>
-  
+      <div class="radio-list">
+        <button type="button" data-radio-src="assets/biao-1.mp3" data-radio-label="小树不倒我就不倒">
+          <span class="n">01</span>
+          <p>小树不倒我就不倒</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-2.mp3" data-radio-label="你就慢慢跟我处">
+          <span class="n">02</span>
+          <p>你就慢慢跟我处</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-3.mp3" data-radio-label="本市著名硬仗">
+          <span class="n">03</span>
+          <p>本市著名硬仗都是我主打的</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-4.mp3" data-radio-label="那长相就是证据">
+          <span class="n">04</span>
+          <p>那长相就是证据</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-5.mp3" data-radio-label="欧了">
+          <span class="n">05</span>
+          <p>欧了</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-6.mp3" data-radio-label="肉眼凡胎">
+          <span class="n">06</span>
+          <p>肉眼凡胎，量你也看不出来</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-7.mp3" data-radio-label="该出手时就出手">
+          <span class="n">07</span>
+          <p>该出手时就出手</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-8.mp3" data-radio-label="人生豪迈">
+          <span class="n">08</span>
+          <p>论成败，人生豪迈</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-9.mp3" data-radio-label="少是刃">
+          <span class="n">09</span>
+          <p>少，是刃</p>
+          <span class="n">▶</span>
+        </button>
+        <button type="button" data-radio-src="assets/biao-10.mp3" data-radio-label="酷是壳土是芯">
+          <span class="n">10</span>
+          <p>酷是壳，土是芯</p>
+          <span class="n">▶</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-ghost" href="quotes.html">语录墙</a>
+      <a class="btn btn-ghost" href="soundboard.html">音板</a>
+      <a class="btn btn-led" href="live.html">伪直播间</a>
+    </div>
   </main>
 
   <footer class="foot">
-    <div class="foot-marquee" aria-hidden="true">
-      <div class="foot-marquee-track">
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-      </div>
-    </div>
-    <p class="foot-big" data-scramble>哈拉少</p>
+    <p class="foot-mega">电台</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 60 模块</p>
+      <p>范德彪 · 连播旁白 · 气氛组</p>
       <div class="foot-links">
-        <a href="os.html">地图</a>
-        <a href="tour.html">导览</a>
-        <a href="loot.html">开箱</a>
-        <a href="beat.html">节拍</a>
+        <a href="quotes.html">语录</a>
+        <a href="lab.html">实验室</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
-  <script src="js/system.js"></script>
-  <script src="js/radio.js"></script>
+  <script src="js/hala.js"></script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作品档案 · 哈拉少</title>
+  <meta name="description" content="哈拉少作品档案系统：品牌、产品、影像、空间、内容——可筛选的硬仗库。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="work.html" data-close>作品</a>
+      <a href="archive.html" data-close>档案</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="cinema.html" data-close>竖屏片场</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">ARCHIVE · WORK SYSTEM</p>
+    <h1 class="page-h">硬仗档案<br /><em>可筛选</em></h1>
+    <p class="lead reveal">比作品页更深一层的档案库。按刃口过滤，悬停出片——公开粒度，细节洽谈展开。</p>
+
+    <div class="archive-bar reveal" id="archiveBar">
+      <button type="button" class="is-on" data-filter="all">全部</button>
+      <button type="button" data-filter="brand">品牌</button>
+      <button type="button" data-filter="product">产品</button>
+      <button type="button" data-filter="motion">影像</button>
+      <button type="button" data-filter="space">空间</button>
+      <button type="button" data-filter="content">内容</button>
+    </div>
+
+    <div class="archive-grid">
+      <article class="arch-card reveal" data-arch="brand">
+        <div class="arch-media">
+          <img src="assets/work-brand.jpg" alt="熔光" />
+          <video muted loop playsinline preload="none" poster="assets/work-brand.jpg"><source src="assets/work-hover-1.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">BRAND</span>
+          <h3>熔光</h3>
+          <p>消费硬件识别系统：标识矩阵、包装到屏幕触点。</p>
+          <p class="said">「那长相就是证据。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="product">
+        <div class="arch-media">
+          <img src="assets/work-product.jpg" alt="墨界" />
+          <video muted loop playsinline preload="none" poster="assets/work-product.jpg"><source src="assets/work-hover-2.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">PRODUCT</span>
+          <h3>墨界</h3>
+          <p>工具型暗色控制台。路径先站稳，组件库可延展。</p>
+          <p class="said">「你就慢慢跟我处。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="motion">
+        <div class="arch-media">
+          <img src="assets/work-motion.jpg" alt="脉冲" />
+          <video muted loop playsinline preload="none" poster="assets/work-motion.jpg"><source src="assets/work-hover-3.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">MOTION</span>
+          <h3>脉冲</h3>
+          <p>发布片与 UI 动效语言同一套节奏出刀。</p>
+          <p class="said">「小树不倒我就不倒。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="brand content">
+        <div class="arch-media">
+          <img src="assets/studio-space.jpg" alt="野市" />
+          <video muted loop playsinline preload="none" poster="assets/studio-space.jpg"><source src="assets/clip-b.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">BRAND · CONTENT</span>
+          <h3>野市</h3>
+          <p>新消费零售触点：包装、店头短视频模板、会员语气。</p>
+          <p class="said">「欧了。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="brand">
+        <div class="arch-media">
+          <img src="assets/studio-desk.jpg" alt="北境" />
+          <video muted loop playsinline preload="none" poster="assets/studio-desk.jpg"><source src="assets/clip-a.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">BRAND · PRODUCT</span>
+          <h3>北境</h3>
+          <p>工具品牌升级：命名语气、官网关键页、发布节点同步。</p>
+          <p class="said">「本市著名硬仗。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="space motion">
+        <div class="arch-media">
+          <img src="assets/hero-still.jpg" alt="轨道" />
+          <video muted loop playsinline preload="none" poster="assets/hero-still.jpg"><source src="assets/hero-cinematic.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">SPACE · MOTION</span>
+          <h3>轨道叙事</h3>
+          <p>展陈主视觉 + 概念装置片。未来叙事压成可走进展区。</p>
+          <p class="said">「少，是刃。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="content">
+        <div class="arch-media">
+          <img src="assets/showreel-poster.jpg" alt="灯牌计划" />
+          <video muted loop playsinline preload="none" poster="assets/showreel-poster.jpg"><source src="assets/showreel-motion.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">CONTENT</span>
+          <h3>灯牌计划</h3>
+          <p>内容品牌的栏目识别与竖屏语法。字幕要土，系统要硬。</p>
+          <p class="said">「那长相就是证据。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="product brand">
+        <div class="arch-media">
+          <img src="assets/work-product.jpg" alt="方寸" />
+          <video muted loop playsinline preload="none" poster="assets/work-product.jpg"><source src="assets/work-hover-2.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">PRODUCT</span>
+          <h3>方寸</h3>
+          <p>本地生活小程序体验重构：下单路径砍半，视觉仍认得出品牌。</p>
+          <p class="said">「你就慢慢跟我处。」</p>
+        </div>
+      </article>
+
+      <article class="arch-card reveal" data-arch="motion">
+        <div class="arch-media">
+          <img src="assets/work-motion.jpg" alt="红章夜" />
+          <video muted loop playsinline preload="none" poster="assets/work-motion.jpg"><source src="assets/showreel.mp4" type="video/mp4" /></video>
+        </div>
+        <div class="arch-body">
+          <span class="tag">MOTION · FILM</span>
+          <h3>红章夜</h3>
+          <p>品牌发布会片头。公章红压画面，旁白硬气出声。</p>
+          <p class="said">「该出手时就出手。」</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="band reveal">
+      <p>档案不是橱窗。是打完还能复盘的硬仗目录。</p>
+      <footer>完整过程 · 洽谈展开</footer>
+    </div>
+
+    <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-led" href="contact.html">预约档期</a>
+      <a class="btn btn-ghost" href="work.html">精选硬仗</a>
+      <a class="btn btn-ghost" href="film.html">放片源</a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">档案</p>
+    <div class="foot-row">
+      <p>9 条可筛 · 悬停出片 · 跨刃口</p>
+      <div class="foot-links">
+        <a href="work.html">作品</a>
+        <a href="cinema.html">竖屏</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

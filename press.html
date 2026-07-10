@@ -3,145 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>媒体包 · 哈拉少</title>
-  <meta name="description" content="品牌媒体包与可引用语录。" />
-  <meta name="theme-color" content="#050506" />
+  <title>媒体资料 · 哈拉少</title>
+  <meta name="description" content="哈拉少媒体资料：简介、主理人、色彩、班底与可用素材入口。" />
+  <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
-  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
   <a class="skip" href="#main">跳到内容</a>
-  <header class="top">
-    <a class="brand" href="index.html" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
-
-    <nav class="top-nav" aria-label="主导航">
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
-      <a href="os.html" data-nav>地图</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="reel.html" data-nav>片源</a>
-      <a href="tour.html" data-nav>导览</a>
-      <a href="beat.html" data-nav>节拍</a>
-      <a href="slot.html" data-nav>老虎机</a>
-      <a href="loot.html" data-nav>开箱</a>
-      <a href="fireworks.html" data-nav>烟花</a>
-      <a href="radar.html" data-nav>雷达</a>
-      <a href="vhs.html" data-nav>录像带</a>
-      <a href="spotlight.html" data-nav>追光</a>
-      <a href="mirror.html" data-nav>镜像</a>
-      <a href="combo.html" data-nav>连招</a>
-      <a href="manifesto.html" data-nav>宣言</a>
-      <a href="soundboard.html" data-nav>音板</a>
-      <a href="fx.html" data-nav>特效</a>
-      <a href="contact.html" data-nav class="top-cta">开干</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
-    <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
-    </div>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="drawer" id="drawer" hidden>
-
-    <nav class="drawer-nav" aria-label="移动导航">
-      <a href="index.html" data-close>首页</a>
-      <a href="os.html" data-close>系统地图</a>
-      <a href="tour.html" data-close>导览</a>
-      <a href="docs.html" data-close>手册</a>
-      <a href="work.html" data-close>作品</a>
-      <a href="reel.html" data-close>片源</a>
-      <a href="beat.html" data-close>节拍战</a>
-      <a href="slot.html" data-close>硬仗老虎机</a>
-      <a href="loot.html" data-close>模块开箱</a>
-      <a href="fireworks.html" data-close>语录烟花</a>
-      <a href="radar.html" data-close>模块雷达</a>
-      <a href="vhs.html" data-close>录像带滤镜</a>
-      <a href="spotlight.html" data-close>追光灯</a>
-      <a href="mirror.html" data-close>镜像字</a>
-      <a href="combo.html" data-close>土酷连招</a>
-      <a href="manifesto.html" data-close>全屏宣言</a>
-      <a href="terminal.html" data-close>终端</a>
-      <a href="soundboard.html" data-close>音板</a>
-      <a href="chat.html" data-close>彪聊</a>
-      <a href="night.html" data-close>夜场</a>
-      <a href="live.html" data-close>直播感</a>
-      <a href="storm.html" data-close>风暴</a>
-      <a href="fx.html" data-close>特效场</a>
-      <a href="biao.html" data-close>彪哥</a>
-      <a href="faq.html" data-close>硬问题</a>
+    <nav aria-label="移动导航">
+      <a href="about.html" data-close>关于</a>
+      <a href="press.html" data-close>媒体资料</a>
+      <a href="team.html" data-close>团队</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
-  <main id="main">
+  <main id="main" class="page">
+    <p class="kicker">PRESS KIT</p>
+    <h1 class="page-h">媒体资料<br /><em>一页说清</em></h1>
+    <p class="lead reveal">标杆站点也要交得出「对外怎么讲」。简介、主理人、色彩与入口如下。</p>
 
-    <header class="page-hero">
-      <p class="page-kicker">PRESS KIT</p>
-      <h1 class="page-title">媒体包<br /><em>随便抄态度</em></h1>
-      <p class="page-lead">Logo 文字版、一句定位、可引用彪哥式工作室语录。</p>
-    </header>
-    <section class="press">
-      <div class="press-card">
-        <h2>名称</h2>
-        <p>哈拉少 / HALASHAO Design Studio</p>
+    <div class="press-grid">
+      <div class="press-block reveal">
+        <h3>一句话</h3>
+        <p>哈拉少是原生自东北的专业设计工作室，主理人范德彪。做品牌、产品、影像与跨尺度体验——酷是壳，土是芯。</p>
+        <h3 style="margin-top:1.25rem">稍长一点</h3>
+        <p>班底含伙计新二、雨姐、老蒯、小阿giao，办公室主任吴总，食堂主管马大帅。不接模板换皮；战场可从地方零售到系统产品与未来叙事。</p>
       </div>
-      <div class="press-card">
-        <h2>一句话</h2>
-        <p>酷炫外壳，土味内核。把火花锻成形态。</p>
-      </div>
-      <div class="press-card">
-        <h2>可引用</h2>
-        <ul class="press-quotes">
-          <li>「我们不生产模板，我们锻造记忆。」</li>
-          <li>「少，是刃。」</li>
-          <li>「小树不倒我就不倒。」——工作室精神股东范德彪（虚构授权）</li>
-          <li>「你就慢慢跟我处，处不好你自己找原因。」——项目哲学</li>
-        </ul>
-      </div>
-      <div class="press-card">
-        <h2>色板</h2>
-        <div class="press-swatches">
-          <i style="background:#0a0a0c"></i>
-          <i style="background:#c8f542"></i>
-          <i style="background:#ffd65a"></i>
-          <i style="background:#e23d2a"></i>
+      <div class="press-block reveal">
+        <h3>标识锁</h3>
+        <div class="logo-lockup"><span><i></i>哈拉少</span></div>
+        <h3 style="margin-top:1.25rem">色彩</h3>
+        <div class="swatch-row">
+          <div class="swatch" style="background:#070706;color:#f3efe6">void</div>
+          <div class="swatch" style="background:#ffe14a;color:#111">led</div>
+          <div class="swatch" style="background:#e8341a;color:#fff">seal</div>
+          <div class="swatch" style="background:#f3efe6;color:#111">ink</div>
         </div>
       </div>
-      <a class="btn solid" href="contact.html">媒体合作</a>
-    </section>
-  
+      <div class="press-block reveal">
+        <h3>主理人</h3>
+        <p><strong style="color:var(--ink)">范德彪</strong> — 创意总监。负责方向、关键提案与品味裁决。态度授权语录见语录墙与电台。</p>
+        <ul style="margin-top:0.75rem">
+          <li>「小树不倒我就不倒。」</li>
+          <li>「本市几场著名硬仗都是我主打的。」</li>
+          <li>「那长相就是证据。」</li>
+        </ul>
+      </div>
+      <div class="press-block reveal">
+        <h3>可用入口</h3>
+        <ul>
+          <li><a href="about.html">关于工作室</a></li>
+          <li><a href="team.html">班底介绍</a></li>
+          <li><a href="cast.html">海报卡</a></li>
+          <li><a href="film.html">片源放映厅</a></li>
+          <li><a href="archive.html">作品档案</a></li>
+          <li><a href="system.html">系统地图</a></li>
+          <li><a href="contact.html">联系开干</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="band reveal">
+      <p>采访、转载、合作？写信。说话算话。</p>
+      <footer>hello@halashao.studio</footer>
+    </div>
   </main>
 
   <footer class="foot">
-    <div class="foot-marquee" aria-hidden="true">
-      <div class="foot-marquee-track">
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-      </div>
-    </div>
-    <p class="foot-big" data-scramble>哈拉少</p>
+    <p class="foot-mega">媒体</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 60 模块 · ⌘K</p>
+      <p>PRESS · 对外口径</p>
       <div class="foot-links">
-        <a href="os.html">地图</a>
-        <a href="tour.html">导览</a>
-        <a href="loot.html">开箱</a>
-        <a href="beat.html">节拍</a>
+        <a href="about.html">关于</a>
+        <a href="team.html">团队</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
-  <script src="js/system.js"></script>
-  
+  <script src="js/hala.js"></script>
 </body>
 </html>
