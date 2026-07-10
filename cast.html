@@ -3,168 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>人设卡 · 哈拉少</title>
-  <meta name="description" content="工作室人设卡：土酷反差角色板。" />
-  <meta name="theme-color" content="#050506" />
-  <meta property="og:title" content="人设卡 · 哈拉少" />
-  <meta property="og:description" content="工作室人设卡：土酷反差角色板。" />
+  <title>班底卡 · 哈拉少</title>
+  <meta name="description" content="哈拉少班底海报墙：范德彪、新二、雨姐、老蒯、小阿giao、吴总、马大帅。" />
+  <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
-  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
   <a class="skip" href="#main">跳到内容</a>
-  <header class="top">
-    <a class="brand" href="index.html" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
-
-    <nav class="top-nav" aria-label="主导航">
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
-      <a href="os.html" data-nav>地图</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="reel.html" data-nav>片源</a>
-      <a href="tour.html" data-nav>导览</a>
-      <a href="beat.html" data-nav>节拍</a>
-      <a href="slot.html" data-nav>老虎机</a>
-      <a href="loot.html" data-nav>开箱</a>
-      <a href="fireworks.html" data-nav>烟花</a>
-      <a href="radar.html" data-nav>雷达</a>
-      <a href="vhs.html" data-nav>录像带</a>
-      <a href="spotlight.html" data-nav>追光</a>
-      <a href="mirror.html" data-nav>镜像</a>
-      <a href="combo.html" data-nav>连招</a>
-      <a href="manifesto.html" data-nav>宣言</a>
-      <a href="soundboard.html" data-nav>音板</a>
-      <a href="fx.html" data-nav>特效</a>
-      <a href="contact.html" data-nav class="top-cta">开干</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
-    <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式" title="土/酷模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
-    </div>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="drawer" id="drawer" hidden>
-
-    <nav class="drawer-nav" aria-label="移动导航">
-      <a href="index.html" data-close>首页</a>
-      <a href="os.html" data-close>系统地图</a>
-      <a href="tour.html" data-close>导览</a>
-      <a href="docs.html" data-close>手册</a>
-      <a href="work.html" data-close>作品</a>
-      <a href="reel.html" data-close>片源</a>
-      <a href="beat.html" data-close>节拍战</a>
-      <a href="slot.html" data-close>硬仗老虎机</a>
-      <a href="loot.html" data-close>模块开箱</a>
-      <a href="fireworks.html" data-close>语录烟花</a>
-      <a href="radar.html" data-close>模块雷达</a>
-      <a href="vhs.html" data-close>录像带滤镜</a>
-      <a href="spotlight.html" data-close>追光灯</a>
-      <a href="mirror.html" data-close>镜像字</a>
-      <a href="combo.html" data-close>土酷连招</a>
-      <a href="manifesto.html" data-close>全屏宣言</a>
-      <a href="terminal.html" data-close>终端</a>
-      <a href="soundboard.html" data-close>音板</a>
-      <a href="chat.html" data-close>彪聊</a>
-      <a href="night.html" data-close>夜场</a>
-      <a href="live.html" data-close>直播感</a>
-      <a href="storm.html" data-close>风暴</a>
-      <a href="fx.html" data-close>特效场</a>
-      <a href="biao.html" data-close>彪哥</a>
-      <a href="faq.html" data-close>硬问题</a>
+    <nav aria-label="移动导航">
+      <a href="team.html" data-close>团队文案</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="xin2.html" data-close>新二流</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="lab.html" data-close>实验室</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
-  <main id="main">
+  <main id="main" class="page">
+    <p class="kicker">CAST · 新二气质</p>
+    <h1 class="page-h">班底海报<br /><em>反差出场</em></h1>
+    <p class="lead reveal">影棚肖像 + 红章 + 字幕条。像人物卡，不像简历表——土酷反差，直接盖在脸上。</p>
 
-    <header class="page-hero">
-      <p class="page-kicker">CAST</p>
-      <h1 class="page-title">人设卡<br /><em>反差天团</em></h1>
-      <p class="page-lead">不是员工墙，是人设武器库。hover 翻转看土味技能。</p>
-    </header>
-    <section class="cast-grid">
-      <article class="cast-card" data-hot>
-        <div class="cast-inner">
-          <div class="cast-front" style="--img:url('assets/work-brand.jpg')">
-            <span>01</span><h2>熔光主理</h2><p>品牌硬仗主打</p>
-          </div>
-          <div class="cast-back">
-            <p class="cast-skill">技能</p>
-            <h3>那长相就是证据</h3>
-            <p>标识一出，全家桶延展。处不好先看你规范立没立住。</p>
-          </div>
+    <div class="cast-grid">
+      <article class="cast-card featured reveal">
+        <img src="assets/team/fan-debiao.jpg" alt="范德彪" width="1200" height="800" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">主理<br />硬仗</div>
+        <div class="cast-body">
+          <p class="cast-role">PRINCIPAL · 主理人</p>
+          <h3>范德彪</h3>
+          <p class="cast-line">创意总监。品味裁决、关键提案、本市著名硬仗主打。</p>
         </div>
       </article>
-      <article class="cast-card" data-hot>
-        <div class="cast-inner">
-          <div class="cast-front" style="--img:url('assets/work-product.jpg')">
-            <span>02</span><h2>墨界操盘</h2><p>产品密度控</p>
-          </div>
-          <div class="cast-back">
-            <p class="cast-skill">技能</p>
-            <h3>你就慢慢跟我处</h3>
-            <p>信息架构像水库浪子：先稳，再浪。</p>
-          </div>
+
+      <article class="cast-card reveal">
+        <img src="assets/team/xin-er.jpg" alt="新二" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">网感<br />刀手</div>
+        <div class="cast-body">
+          <p class="cast-role">BRAND · 伙计</p>
+          <h3>新二</h3>
+          <p class="cast-line">品牌与文化视觉。反差、字幕、记忆点。</p>
         </div>
       </article>
-      <article class="cast-card" data-hot>
-        <div class="cast-inner">
-          <div class="cast-front" style="--img:url('assets/work-motion.jpg')">
-            <span>03</span><h2>脉冲导演</h2><p>动效 / 片源</p>
-          </div>
-          <div class="cast-back">
-            <p class="cast-skill">技能</p>
-            <h3>小树不倒我就不倒</h3>
-            <p>粒子可以炫，节奏必须狠。倒了就重来。</p>
-          </div>
+
+      <article class="cast-card reveal">
+        <img src="assets/team/yu-jie.jpg" alt="雨姐" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">路径<br />先清</div>
+        <div class="cast-body">
+          <p class="cast-role">PRODUCT · 伙计</p>
+          <h3>雨姐</h3>
+          <p class="cast-line">产品体验。先路径，后装饰。</p>
         </div>
       </article>
-      <article class="cast-card" data-hot>
-        <div class="cast-inner">
-          <div class="cast-front" style="--img:url('assets/hero-still.jpg')">
-            <span>04</span><h2>彪哥顾问</h2><p>精神股东</p>
-          </div>
-          <div class="cast-back">
-            <p class="cast-skill">技能</p>
-            <h3>本市著名硬仗主打</h3>
-            <p>不接模板单。论成败，人生豪迈。</p>
-          </div>
+
+      <article class="cast-card reveal">
+        <img src="assets/team/lao-kuai.jpg" alt="老蒯" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">交得<br />出手</div>
+        <div class="cast-body">
+          <p class="cast-role">CRAFT · 伙计</p>
+          <h3>老蒯</h3>
+          <p class="cast-line">制作与工艺。看起来对，交得出。</p>
         </div>
       </article>
-    </section>
-  
+
+      <article class="cast-card reveal">
+        <img src="assets/team/xiao-agiao.jpg" alt="小阿giao" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">镜头<br />现场</div>
+        <div class="cast-body">
+          <p class="cast-role">MOTION · 伙计</p>
+          <h3>小阿giao</h3>
+          <p class="cast-line">影像与现场。节奏大于特效层数。</p>
+        </div>
+      </article>
+
+      <article class="cast-card reveal">
+        <img src="assets/team/wu-zong.jpg" alt="吴总" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">档期<br />清楚</div>
+        <div class="cast-body">
+          <p class="cast-role">OFFICE · 办公室主任</p>
+          <h3>吴总</h3>
+          <p class="cast-line">合同、节点、对外接口。混沌压成周计划。</p>
+        </div>
+      </article>
+
+      <article class="cast-card reveal">
+        <img src="assets/team/ma-dashuai.jpg" alt="马大帅" width="800" height="1000" />
+        <div class="cast-scrim"></div>
+        <div class="cast-stamp">先吃<br />再刀</div>
+        <div class="cast-body">
+          <p class="cast-role">HOSPITALITY · 食堂主管</p>
+          <h3>马大帅</h3>
+          <p class="cast-line">后勤稳了，刀口才稳。</p>
+        </div>
+      </article>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-led" href="team.html">读完整介绍</a>
+      <a class="btn btn-ghost" href="xin2.html">新二流信息流</a>
+      <a class="btn btn-ghost" href="contact.html">开干</a>
+    </div>
   </main>
 
   <footer class="foot">
-    <div class="foot-marquee" aria-hidden="true">
-      <div class="foot-marquee-track">
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-      </div>
-    </div>
-    <p class="foot-big" data-scramble>哈拉少</p>
+    <p class="foot-mega">班底</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 16+ 模块</p>
+      <p>海报出场 · 红章盖脸 · 土酷反差</p>
       <div class="foot-links">
-        <a href="os.html">地图</a>
-        <a href="tour.html">导览</a>
-        <a href="loot.html">开箱</a>
-        <a href="beat.html">节拍</a>
+        <a href="team.html">团队</a>
+        <a href="quotes.html">语录</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
-  <script src="js/system.js"></script>
-  
+  <script src="js/hala.js"></script>
 </body>
 </html>

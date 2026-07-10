@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>片源 · 哈拉少</title>
-  <meta name="description" content="哈拉少片源放映厅：showreel 与分镜。" />
+  <title>片源系统 · 哈拉少放映厅</title>
+  <meta name="description" content="哈拉少片源系统：showreel、电影镜头、粒子漩涡、作品悬停片。" />
   <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,37 +20,41 @@
     <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="services.html" data-nav>服务</a>
-      <a href="team.html" data-nav>团队</a>
-      <a href="process.html" data-nav>流程</a>
-      <a href="about.html" data-nav>关于</a>
       <a href="film.html" data-nav class="is-active">片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
       <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
     <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="drawer" id="drawer" hidden>
     <nav aria-label="移动导航">
-      <a href="index.html" data-close>首页</a>
-      <a href="work.html" data-close>作品</a>
-      <a href="services.html" data-close>服务</a>
-      <a href="team.html" data-close>团队</a>
-      <a href="process.html" data-close>流程</a>
-      <a href="about.html" data-close>关于</a>
       <a href="film.html" data-close>片源</a>
-      <a href="creed.html" data-close>信条</a>
+      <a href="vhs.html" data-close>录像带</a>
+      <a href="work.html" data-close>作品</a>
       <a href="lab.html" data-close>实验室</a>
-      <a href="vault.html" data-close>库房</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
   <main id="main" class="theater">
-    <p class="kicker">FILM</p>
-    <h1 class="page-h">放映厅</h1>
-    <p class="lead">自定义播放器。旁白直出。下面切分镜。</p>
+    <p class="kicker">FILM SYSTEM</p>
+    <h1 class="page-h">放映厅<br /><em>多轨片源</em></h1>
+    <p class="lead reveal">自定义播放器。章节切换 + 分镜墙。旁白与纯影像分轨——土味硬话可以出声，电影感也可以静看。</p>
 
-    <div class="player" id="player" style="margin-top:1.5rem">
+    <div class="film-chapters reveal" aria-label="片源章节">
+      <button type="button" class="is-on" data-chapter="assets/showreel.mp4">01 主片源</button>
+      <button type="button" data-chapter="assets/hero-cinematic.mp4">02 电影镜头</button>
+      <button type="button" data-chapter="assets/showreel-motion.mp4">03 粒子漩涡</button>
+      <button type="button" data-chapter="assets/work-hover-1.mp4">04 熔光片段</button>
+      <button type="button" data-chapter="assets/work-hover-2.mp4">05 墨界片段</button>
+      <button type="button" data-chapter="assets/work-hover-3.mp4">06 脉冲片段</button>
+      <button type="button" data-chapter="assets/clip-a.mp4">07 剪辑 A</button>
+      <button type="button" data-chapter="assets/clip-b.mp4">08 剪辑 B</button>
+    </div>
+
+    <div class="player" id="player" style="margin-top:1rem">
       <div class="player-stage">
         <video id="filmVid" playsinline preload="metadata" poster="assets/showreel-poster.jpg">
           <source src="assets/showreel.mp4" type="video/mp4" />
@@ -65,7 +69,7 @@
       </div>
     </div>
 
-    <div class="clips">
+    <div class="clips reveal">
       <button type="button" class="clip is-on" data-clip="assets/showreel.mp4">
         <img src="assets/showreel-poster.jpg" alt="" />
         <p>主片源 · 旁白</p>
@@ -78,13 +82,36 @@
         <img src="assets/work-motion.jpg" alt="" />
         <p>粒子漩涡</p>
       </button>
+      <button type="button" class="clip" data-clip="assets/work-hover-1.mp4">
+        <img src="assets/work-brand.jpg" alt="" />
+        <p>熔光 · 品牌</p>
+      </button>
+      <button type="button" class="clip" data-clip="assets/work-hover-2.mp4">
+        <img src="assets/work-product.jpg" alt="" />
+        <p>墨界 · 产品</p>
+      </button>
+      <button type="button" class="clip" data-clip="assets/work-hover-3.mp4">
+        <img src="assets/work-motion.jpg" alt="" />
+        <p>脉冲 · 动效</p>
+      </button>
+    </div>
+
+    <div class="band reveal" style="margin-top:2.5rem">
+      <p>小树不倒我就不倒——片源也一样，剪到站得住为止。</p>
+      <footer>范德彪 · 片源气氛组</footer>
+    </div>
+
+    <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-ghost" href="vhs.html">录像带滤镜</a>
+      <a class="btn btn-ghost" href="work.html">回作品</a>
+      <a class="btn btn-led" href="contact.html">谈影像项目</a>
     </div>
   </main>
 
   <footer class="foot">
     <p class="foot-mega">FILM</p>
     <div class="foot-row">
-      <p>SHOWREEL · 2026</p>
+      <p>8 轨片源 · 自定义播放器 · 2026</p>
       <div class="foot-links">
         <a href="work.html">作品</a>
         <a href="lab.html">实验室</a>
