@@ -4177,9 +4177,10 @@ body.stage-glitch .stage-wrap {
 }
 
 
-/* v10 client polish */
+/* v10/v11 client polish */
 .cmt-panel { box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
-.flash-stage, .typecast-stage, .duet-stage, .boss-stage {
+.flash-stage, .typecast-stage, .duet-stage, .boss-stage,
+.gift-stage, .lyric-stage, .wave-stage, .board-preview, .riot-stage {
   box-shadow: 0 20px 48px rgba(0,0,0,0.32);
 }
 .seal-cell:focus-visible {
