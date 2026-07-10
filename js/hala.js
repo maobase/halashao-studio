@@ -511,7 +511,13 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
-        { t: "刮刮乐硬话", h: "scratch.html", k: "SCRATCH", a: "刮刮乐 涂层 硬话 土酷" },
+            { t: "拍立得硬话卡", h: "polaroid.html", k: "POLAROID", a: "拍立得 翻面 班底 硬话" },
+    { t: "扫码出硬话", h: "barcode.html", k: "BARCODE", a: "扫码 扫描线 条码" },
+    { t: "双机位对切", h: "splitcam.html", k: "SPLITCAM", a: "双机位 土酷 对切" },
+    { t: "片源硬话热点", h: "hotspot.html", k: "HOTSPOT", a: "热点 片源 交互" },
+    { t: "LED点阵硬话", h: "marquee.html", k: "MARQUEE", a: "LED 点阵 灯牌" },
+    { t: "硬话爆破", h: "boom.html", k: "BOOM", a: "爆破 粒子 动能" },
+    { t: "刮刮乐硬话", h: "scratch.html", k: "SCRATCH", a: "刮刮乐 涂层 硬话 土酷" },
     { t: "推送硬话雨", h: "notify.html", k: "NOTIFY", a: "推送 通知 锁屏 信息流" },
     { t: "硬话小票机", h: "receipt.html", k: "RECEIPT", a: "小票 打印 夜市" },
     { t: "万花筒片源", h: "kaleido.html", k: "KALEIDO", a: "万花筒 对称 片源" },
@@ -3198,6 +3204,336 @@
       vid.play().catch(() => {});
       next();
     });
+  }
+
+
+
+
+  /* ========== SYSTEM v15 handlers ========== */
+  const V15_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* polaroid deck */
+  const poloDeck = document.getElementById("poloDeck");
+  if (poloDeck) {
+    const roster = [
+      ["范德彪", "assets/team/fan-debiao.jpg", "主理人"],
+      ["新二", "assets/team/xin-er.jpg", "伙计 · 品牌"],
+      ["雨姐", "assets/team/yu-jie.jpg", "伙计 · 产品"],
+      ["老蒯", "assets/team/lao-kuai.jpg", "伙计 · 工艺"],
+      ["小阿giao", "assets/team/xiao-agiao.jpg", "伙计 · 影像"],
+      ["吴总", "assets/team/wu-zong.jpg", "办公室主任"],
+      ["马大帅", "assets/team/ma-dashuai.jpg", "食堂主管"],
+    ];
+    let pi = 0;
+    let flipped = false;
+    const paint = () => {
+      const [name, img, role] = roster[pi % roster.length];
+      const q = V15_LINES[pi % V15_LINES.length];
+      flipped = false;
+      poloDeck.innerHTML = `
+        <article class="polo-card" id="poloCard">
+          <div class="polo-face">
+            <img src="${img}" alt="${name}" width="600" height="750" />
+            <span>${name} · ${role}</span>
+          </div>
+          <div class="polo-back">
+            <p>「${q}。」</p>
+            <span style="margin-top:0.75rem;color:var(--mute)">主理人范德彪</span>
+          </div>
+          <div class="polo-caption">HALASHAO · POLAROID · 0${(pi % 9) + 1}</div>
+        </article>`;
+      document.getElementById("poloCard")?.addEventListener("click", () => {
+        document.getElementById("poloFlip")?.click();
+      });
+    };
+    paint();
+    document.getElementById("poloFlip")?.addEventListener("click", () => {
+      const card = document.getElementById("poloCard");
+      if (!card) return;
+      flipped = !flipped;
+      card.classList.toggle("is-flip", flipped);
+    });
+    document.getElementById("poloNext")?.addEventListener("click", () => {
+      pi++;
+      paint();
+    });
+  }
+
+  /* barcode scan */
+  const scanStage = document.getElementById("scanStage");
+  if (scanStage) {
+    let si = 0;
+    const quote = document.getElementById("scanQuote");
+    const fire = () => {
+      scanStage.classList.remove("is-scan", "is-done");
+      void scanStage.offsetWidth;
+      scanStage.classList.add("is-scan");
+      setTimeout(() => {
+        if (quote) quote.textContent = `「${V15_LINES[si % V15_LINES.length]}。」`;
+        scanStage.classList.add("is-done");
+      }, 1000);
+    };
+    document.getElementById("scanFire")?.addEventListener("click", fire);
+    document.getElementById("scanNext")?.addEventListener("click", () => {
+      si++;
+      fire();
+    });
+    fire();
+  }
+
+  /* splitcam */
+  const splitStage = document.getElementById("splitStage");
+  if (splitStage) {
+    const tu = document.getElementById("splitTu");
+    const ku = document.getElementById("splitKu");
+    const cap = document.getElementById("splitCap");
+    let ci = 0;
+    const playBoth = async () => {
+      try {
+        await Promise.all([tu?.play(), ku?.play()]);
+      } catch {
+        /* */
+      }
+    };
+    const cut = () => {
+      if (cap) cap.textContent = `「${V15_LINES[ci++ % V15_LINES.length]}。」`;
+      splitStage.classList.remove("is-cut");
+      void splitStage.offsetWidth;
+      splitStage.classList.add("is-cut");
+    };
+    document.getElementById("splitCut")?.addEventListener("click", cut);
+    document.getElementById("splitPlay")?.addEventListener("click", playBoth);
+    document.getElementById("splitSwap")?.addEventListener("click", () => {
+      if (!tu || !ku) return;
+      const a = tu.querySelector("source")?.src || tu.currentSrc;
+      const b = ku.querySelector("source")?.src || ku.currentSrc;
+      const sa = tu.querySelector("source");
+      const sb = ku.querySelector("source");
+      if (sa && sb) {
+        const tmp = sa.getAttribute("src");
+        sa.setAttribute("src", sb.getAttribute("src"));
+        sb.setAttribute("src", tmp);
+        tu.load();
+        ku.load();
+        playBoth();
+      } else if (a && b) {
+        tu.src = b;
+        ku.src = a;
+        playBoth();
+      }
+      cut();
+    });
+    playBoth();
+    cut();
+  }
+
+  /* hotspot film */
+  const hotStage = document.getElementById("hotStage");
+  if (hotStage) {
+    const pop = document.getElementById("hotPop");
+    const quote = document.getElementById("hotQuote");
+    const vid = document.getElementById("hotVid");
+    const srcs = [
+      "assets/showreel.mp4",
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/clip-a.mp4",
+    ];
+    let hi = 0;
+    hotStage.querySelectorAll(".hot-dot").forEach((dot) => {
+      dot.addEventListener("click", () => {
+        if (quote) quote.textContent = `「${dot.dataset.q || "欧了"}。」—— 主理人范德彪`;
+        pop?.removeAttribute("hidden");
+        hotStage.classList.remove("is-pulse");
+      });
+    });
+    document.getElementById("hotPulse")?.addEventListener("click", () => {
+      hotStage.classList.toggle("is-pulse");
+    });
+    document.getElementById("hotSrc")?.addEventListener("click", () => {
+      if (!vid) return;
+      hi = (hi + 1) % srcs.length;
+      vid.src = srcs[hi];
+      vid.play().catch(() => {});
+    });
+  }
+
+  /* LED marquee dots */
+  const mqCanvas = document.getElementById("mqCanvas");
+  if (mqCanvas) {
+    const ctx = mqCanvas.getContext("2d");
+    const readout = document.getElementById("mqReadout");
+    let mi = 0;
+    let speed = 1.6;
+    let offset = 0;
+    let raf = 0;
+    const cols = 64;
+    const rows = 12;
+    const resize = () => {
+      const dpr = devicePixelRatio || 1;
+      const w = mqCanvas.clientWidth || 800;
+      const h = mqCanvas.clientHeight || 200;
+      mqCanvas.width = w * dpr;
+      mqCanvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const glyph = (ch) => {
+      // simple 5x7-ish via canvas measure + offscreen sample
+      const off = document.createElement("canvas");
+      off.width = 8;
+      off.height = 10;
+      const o = off.getContext("2d");
+      o.fillStyle = "#fff";
+      o.font = "bold 9px monospace";
+      o.textBaseline = "top";
+      o.fillText(ch, 0, 0);
+      return o.getImageData(0, 0, 8, 10).data;
+    };
+    const draw = () => {
+      const w = mqCanvas.clientWidth || 800;
+      const h = mqCanvas.clientHeight || 200;
+      const cw = w / cols;
+      const ch = h / rows;
+      ctx.fillStyle = "#0a0a06";
+      ctx.fillRect(0, 0, w, h);
+      const text = "  " + V15_LINES[mi % V15_LINES.length] + " · 哈拉少 · 范德彪 · 酷是壳土是芯 · ";
+      const scroll = ((offset % (text.length * 8)) + text.length * 8) % (text.length * 8);
+      for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+          const gx = Math.floor(scroll + c);
+          const charIndex = Math.floor(gx / 8) % text.length;
+          const px = gx % 8;
+          const data = glyph(text[charIndex]);
+          const py = r;
+          if (py >= 10) continue;
+          const a = data[(py * 8 + px) * 4 + 3];
+          const on = a > 40;
+          ctx.beginPath();
+          ctx.arc(c * cw + cw / 2, r * ch + ch / 2, Math.min(cw, ch) * 0.28, 0, Math.PI * 2);
+          ctx.fillStyle = on ? "#ffe14a" : "rgba(255,225,74,0.07)";
+          ctx.fill();
+        }
+      }
+      offset += speed;
+      raf = requestAnimationFrame(draw);
+    };
+    const setLine = () => {
+      if (readout) readout.textContent = V15_LINES[mi % V15_LINES.length];
+    };
+    document.getElementById("mqNext")?.addEventListener("click", () => {
+      mi++;
+      setLine();
+    });
+    document.getElementById("mqFaster")?.addEventListener("click", () => {
+      speed = Math.min(4.5, speed + 0.5);
+    });
+    document.getElementById("mqSlower")?.addEventListener("click", () => {
+      speed = Math.max(0.6, speed - 0.5);
+    });
+    addEventListener("resize", resize);
+    resize();
+    setLine();
+    draw();
+  }
+
+  /* boom type particles */
+  const boomStage = document.getElementById("boomStage");
+  if (boomStage) {
+    const canvas = document.getElementById("boomCanvas");
+    const word = document.getElementById("boomWord");
+    const ctx = canvas.getContext("2d");
+    let bi = 0;
+    let parts = [];
+    let auto = 0;
+    let raf = 0;
+    const resize = () => {
+      const r = boomStage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      canvas.style.width = r.width + "px";
+      canvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const spawn = () => {
+      const r = boomStage.getBoundingClientRect();
+      const cx = r.width / 2;
+      const cy = r.height / 2;
+      parts = [];
+      for (let i = 0; i < 48; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const sp = 2 + Math.random() * 7;
+        parts.push({
+          x: cx,
+          y: cy,
+          vx: Math.cos(ang) * sp,
+          vy: Math.sin(ang) * sp,
+          life: 1,
+          c: Math.random() > 0.5 ? "#ffe14a" : "#e8341a",
+        });
+      }
+    };
+    const tick = () => {
+      const r = boomStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      parts = parts.filter((p) => p.life > 0.02);
+      parts.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+        p.life *= 0.96;
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.c;
+        ctx.fillRect(p.x, p.y, 3, 3);
+      });
+      ctx.globalAlpha = 1;
+      if (parts.length) raf = requestAnimationFrame(tick);
+    };
+    const hit = () => {
+      if (word) word.textContent = V15_LINES[bi % V15_LINES.length];
+      boomStage.classList.remove("is-boom");
+      void boomStage.offsetWidth;
+      boomStage.classList.add("is-boom");
+      spawn();
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    };
+    document.getElementById("boomHit")?.addEventListener("click", hit);
+    document.getElementById("boomNext")?.addEventListener("click", () => {
+      bi++;
+      hit();
+    });
+    document.getElementById("boomAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = 0;
+        e.currentTarget.textContent = "自动爆破";
+        return;
+      }
+      hit();
+      auto = setInterval(() => {
+        bi++;
+        hit();
+      }, 1400);
+      e.currentTarget.textContent = "停止";
+    });
+    addEventListener("resize", resize);
+    resize();
+    hit();
   }
 
 
