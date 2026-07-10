@@ -427,6 +427,11 @@
     { t: "胶片横滑", h: "filmstrip.html", k: "STRIP" },
     { t: "酒桌转盘", h: "banquet.html", k: "BANQUET" },
     { t: "土酷分屏", h: "splitscroll.html", k: "SPLIT" },
+    { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
+    { t: "硬仗盲盒", h: "hardbox.html", k: "HARDBOX" },
+    { t: "霓虹硬话", h: "neon.html", k: "NEON" },
+    { t: "片源时间轴", h: "scrub.html", k: "SCRUB" },
+    { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "班底海报卡", h: "cast.html", k: "CAST" },
     { t: "团队介绍", h: "team.html", k: "TEAM" },
     { t: "滚动叙事", h: "stories.html", k: "STORIES" },
@@ -1295,4 +1300,193 @@
       }, 3200);
     });
   }
+
+
+  /* ========== SYSTEM v8 handlers ========== */
+  const HARD_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "跨尺度出刀",
+    "不生产模板",
+  ];
+
+  /* danmu wall */
+  const danmuLayer = document.getElementById("danmuLayer");
+  if (danmuLayer) {
+    const fireOne = (text) => {
+      const el = document.createElement("span");
+      el.className = "danmu-item" + (Math.random() > 0.66 ? " alt" : "") + (Math.random() > 0.82 ? " hot" : "");
+      el.textContent = text || HARD_LINES[(Math.random() * HARD_LINES.length) | 0];
+      const top = 8 + Math.random() * 78;
+      el.style.top = `${top}%`;
+      el.style.left = "100%";
+      const dur = 6.5 + Math.random() * 5.5;
+      el.style.animationDuration = `${dur}s`;
+      el.addEventListener("animationend", () => el.remove());
+      danmuLayer.appendChild(el);
+    };
+    const seed = () => {
+      for (let i = 0; i < 5; i++) setTimeout(() => fireOne(), i * 280);
+    };
+    seed();
+    document.getElementById("danmuFire")?.addEventListener("click", () => fireOne());
+    document.getElementById("danmuStorm")?.addEventListener("click", () => {
+      for (let i = 0; i < 16; i++) setTimeout(() => fireOne(), i * 90);
+    });
+    document.getElementById("danmuClear")?.addEventListener("click", () => {
+      danmuLayer.innerHTML = "";
+    });
+  }
+
+  /* hardbox loot */
+  const hardboxCard = document.getElementById("hardboxCard");
+  if (hardboxCard) {
+    const loot = [
+      { t: "品牌识别硬仗", d: "LOGO 系统、色彩语法、触点延展。地方气质进体系，不是贴贴纸。", q: "「那长相就是证据。」" },
+      { t: "产品界面锻造", d: "信息架构、组件节奏、发布节奏。删到只剩必要。", q: "「少，是刃。」" },
+      { t: "影像发布片", d: "片源系统、字幕气质、竖屏与横屏双轨。", q: "「酷是壳，土是芯。」" },
+      { t: "餐饮零售全案", d: "包装、店招、菜单、短视频语法一条线。", q: "「本市著名硬仗。」" },
+      { t: "空间叙事装置", d: "展陈动线、灯箱文案、可传播记忆点。", q: "「跨尺度出刀。」" },
+      { t: "活动视觉气氛组", d: "主视觉、物料、动效、现场气氛组一锅端。", q: "「该出手时就出手。」" },
+      { t: "内容语法重塑", d: "话术、字幕、封面、信息流节奏统一。", q: "「你就慢慢跟我处。」" },
+      { t: "设计系统落地", d: "token、组件库、协作规范——上线后沟通成本下降。", q: "「不生产模板。」" },
+    ];
+    const title = document.getElementById("hardboxTitle");
+    const desc = document.getElementById("hardboxDesc");
+    const quote = document.getElementById("hardboxQuote");
+    const open = () => {
+      const item = loot[(Math.random() * loot.length) | 0];
+      hardboxCard.classList.remove("is-spin");
+      void hardboxCard.offsetWidth;
+      hardboxCard.classList.add("is-spin");
+      if (title) title.innerHTML = item.t.replace(/硬仗|锻造|全案|落地|重塑|片|装置|组/, (m) => `<em>${m}</em>`);
+      if (desc) desc.textContent = item.d;
+      if (quote) quote.textContent = item.q;
+    };
+    document.getElementById("hardboxOpen")?.addEventListener("click", open);
+    document.getElementById("hardboxAgain")?.addEventListener("click", open);
+  }
+
+  /* neon hard words */
+  const neonStage = document.getElementById("neonStage");
+  if (neonStage) {
+    const neonText = document.getElementById("neonText");
+    const modes = ["", "mode-seal", "mode-ice"];
+    let mi = 0;
+    let qi = 0;
+    const setLine = () => {
+      if (!neonText) return;
+      const line = HARD_LINES[qi % HARD_LINES.length];
+      neonText.innerHTML = line.length > 6 ? line.replace(/(.{4})/, "$1<br />") : line;
+      qi += 1;
+    };
+    document.getElementById("neonNext")?.addEventListener("click", setLine);
+    document.getElementById("neonFlick")?.addEventListener("click", () => {
+      neonStage.classList.remove("is-flick");
+      void neonStage.offsetWidth;
+      neonStage.classList.add("is-flick");
+    });
+    document.getElementById("neonColor")?.addEventListener("click", () => {
+      modes.forEach((m) => m && neonStage.classList.remove(m));
+      mi = (mi + 1) % modes.length;
+      if (modes[mi]) neonStage.classList.add(modes[mi]);
+    });
+  }
+
+  /* scrub timeline */
+  const scrubVid = document.getElementById("scrubVid");
+  if (scrubVid) {
+    const range = document.getElementById("scrubRange");
+    const cap = document.getElementById("scrubCap");
+    const timeEl = document.getElementById("scrubTime");
+    const note = document.getElementById("scrubNote");
+    const marks = document.getElementById("scrubMarks");
+    const playBtn = document.getElementById("scrubPlay");
+    const nodes = [
+      { p: 0.05, t: "小树不倒我就不倒" },
+      { p: 0.22, t: "那长相就是证据" },
+      { p: 0.4, t: "酷是壳，土是芯" },
+      { p: 0.58, t: "少，是刃" },
+      { p: 0.75, t: "本市著名硬仗" },
+      { p: 0.9, t: "该出手时就出手" },
+    ];
+    let lastNode = -1;
+    const fmt = (s) => {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${String(sec).padStart(2, "0")}`;
+    };
+    const paintMarks = () => {
+      if (!marks) return;
+      marks.innerHTML = nodes.map((n) => `<i style="left:${n.p * 100}%"></i>`).join("");
+    };
+    paintMarks();
+    const syncCap = (ratio) => {
+      let idx = 0;
+      for (let i = 0; i < nodes.length; i++) {
+        if (ratio >= nodes[i].p) idx = i;
+      }
+      if (cap && idx !== lastNode) {
+        lastNode = idx;
+        cap.textContent = nodes[idx].t;
+        cap.classList.remove("is-hit");
+        void cap.offsetWidth;
+        cap.classList.add("is-hit");
+        if (note) note.textContent = `节点 ${idx + 1}/${nodes.length} · ${nodes[idx].t}`;
+      }
+    };
+    const applyRange = () => {
+      if (!range || !scrubVid.duration) return;
+      const ratio = Number(range.value) / 1000;
+      scrubVid.currentTime = ratio * scrubVid.duration;
+      if (timeEl) timeEl.textContent = fmt(scrubVid.currentTime);
+      syncCap(ratio);
+    };
+    scrubVid.addEventListener("loadedmetadata", () => {
+      if (timeEl) timeEl.textContent = `0:00 / ${fmt(scrubVid.duration || 0)}`;
+    });
+    scrubVid.addEventListener("timeupdate", () => {
+      if (!scrubVid.duration || !range) return;
+      if (document.activeElement === range) return;
+      const ratio = scrubVid.currentTime / scrubVid.duration;
+      range.value = String(Math.round(ratio * 1000));
+      if (timeEl) timeEl.textContent = `${fmt(scrubVid.currentTime)} / ${fmt(scrubVid.duration)}`;
+      syncCap(ratio);
+    });
+    range?.addEventListener("input", () => {
+      scrubVid.pause();
+      if (playBtn) playBtn.textContent = "▶";
+      applyRange();
+    });
+    playBtn?.addEventListener("click", () => {
+      if (scrubVid.paused) {
+        scrubVid.play().catch(() => {});
+        playBtn.textContent = "❚❚";
+      } else {
+        scrubVid.pause();
+        playBtn.textContent = "▶";
+      }
+    });
+  }
+
+  /* contrast slider */
+  const contrastTu = document.getElementById("contrastTu");
+  if (contrastTu) {
+    const range = document.getElementById("contrastRange");
+    const handle = document.getElementById("contrastHandle");
+    const apply = (v) => {
+      const n = Math.max(5, Math.min(95, Number(v) || 50));
+      contrastTu.style.clipPath = `inset(0 ${100 - n}% 0 0)`;
+      if (handle) handle.style.left = `${n}%`;
+    };
+    apply(range?.value || 50);
+    range?.addEventListener("input", () => apply(range.value));
+  }
+
 })();

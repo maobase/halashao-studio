@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开干 · 哈拉少设计工作室</title>
-  <meta name="description" content="联系哈拉少设计工作室。主理人范德彪。开始项目。" />
+  <title>片源时间轴 · 哈拉少</title>
+  <meta name="description" content="哈拉少片源时间轴：拖动 scrub，节点弹出范德彪硬话字幕。" />
   <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +24,7 @@
       <a href="team.html" data-nav>团队</a>
       <a href="services.html" data-nav>服务</a>
       <a href="quotes.html" data-nav>语录</a>
-      <a href="contact.html" data-nav class="is-active cta">开干</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
     <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
@@ -51,38 +51,42 @@
   </div>
 
   <main id="main" class="page">
-    <p class="kicker seal">CONTACT</p>
-    <h1 class="page-h">有火花？<br /><em class="seal">开干</em></h1>
-    <p class="lead">写清产品、时间线、想要的感觉。主理人范德彪工作室认真回——先对齐刀口，再谈档期。</p>
+    <p class="kicker">SCRUB · TIMELINE</p>
+    <h1 class="page-h">片源时间轴<br /><em class="seal">拖一下</em></h1>
+    <p class="lead reveal">拖动进度条切硬话字幕节点。片源系统再加一层——时间轴上的气氛组。</p>
 
-    <div class="contact-grid">
-      <div>
-        <span class="stamp">东北 · 协作</span>
-        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
-        <p class="lead" style="margin-top:1.25rem">你就慢慢跟我们处。处不好，你自己找原因——先对齐刀口，再谈脾气。</p>
-        <p class="lead">专业工作室，原生自东北；全国协作交付。对外接口由办公室主任吴总统筹，主理人范德彪审最终品味。</p>
-        <p class="lead">适合：品牌升级、产品界面、发布影像、空间与全案。模板换皮、无边界「再高级一点」，免开尊口。</p>
+    <div class="scrub-player" id="scrubPlayer">
+      <div class="scrub-stage">
+        <video id="scrubVid" playsinline preload="metadata" poster="assets/showreel-poster.jpg">
+          <source src="assets/showreel.mp4" type="video/mp4" />
+        </video>
+        <div class="scrub-cap" id="scrubCap">小树不倒我就不倒</div>
       </div>
-      <form class="form" id="contactForm" novalidate>
-        <label>名字<input name="name" required autocomplete="name" placeholder="怎么称呼" /></label>
-        <label>邮箱<input name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>项目简述<textarea name="message" rows="5" required placeholder="品牌 / 界面 / 发布片 / 时间线…"></textarea></label>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-          <button class="btn btn-led" type="submit">发送</button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </div>
-      </form>
+      <div class="scrub-bar-wrap">
+        <input type="range" id="scrubRange" min="0" max="1000" value="0" />
+        <div class="scrub-marks" id="scrubMarks"></div>
+      </div>
+      <div class="scrub-meta">
+        <button type="button" class="btn btn-led" id="scrubPlay">▶</button>
+        <span class="tag" id="scrubTime">0:00</span>
+        <span class="lead" style="margin:0;font-size:0.9rem" id="scrubNote">拖动时间轴，硬话跟着切</span>
+      </div>
     </div>
+    <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.55rem">
+      <a class="btn btn-ghost" href="film.html">放映厅</a>
+      <a class="btn btn-ghost" href="filmstrip.html">胶片横滑</a>
+    </div>
+
   </main>
 
   <footer class="foot">
-    <p class="foot-mega">开干</p>
+    <p class="foot-mega">时间轴</p>
     <div class="foot-row">
-      <p>主理人范德彪 · 该出手时就出手</p>
+      <p>Scrub · 硬话节点 · 片源</p>
       <div class="foot-links">
-        <a href="creed.html">信条</a>
-        <a href="work.html">作品</a>
         <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>

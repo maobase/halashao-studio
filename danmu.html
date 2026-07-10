@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开干 · 哈拉少设计工作室</title>
-  <meta name="description" content="联系哈拉少设计工作室。主理人范德彪。开始项目。" />
+  <title>硬话弹幕 · 哈拉少</title>
+  <meta name="description" content="哈拉少硬话弹幕墙：片源上飞过范德彪语录——新二直播感土酷。" />
   <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +24,7 @@
       <a href="team.html" data-nav>团队</a>
       <a href="services.html" data-nav>服务</a>
       <a href="quotes.html" data-nav>语录</a>
-      <a href="contact.html" data-nav class="is-active cta">开干</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
     <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
@@ -51,38 +51,37 @@
   </div>
 
   <main id="main" class="page">
-    <p class="kicker seal">CONTACT</p>
-    <h1 class="page-h">有火花？<br /><em class="seal">开干</em></h1>
-    <p class="lead">写清产品、时间线、想要的感觉。主理人范德彪工作室认真回——先对齐刀口，再谈档期。</p>
+    <p class="kicker">DANMU · LIVE</p>
+    <h1 class="page-h">硬话弹幕<br /><em class="seal">飞一下</em></h1>
+    <p class="lead reveal">片源底 + 弹幕硬话。点发射或风暴——直播感土酷，高端壳子底下气氛组拉满。</p>
 
-    <div class="contact-grid">
-      <div>
-        <span class="stamp">东北 · 协作</span>
-        <a class="contact-mail" href="mailto:hello@halashao.studio">hello@halashao.studio</a>
-        <p class="lead" style="margin-top:1.25rem">你就慢慢跟我们处。处不好，你自己找原因——先对齐刀口，再谈脾气。</p>
-        <p class="lead">专业工作室，原生自东北；全国协作交付。对外接口由办公室主任吴总统筹，主理人范德彪审最终品味。</p>
-        <p class="lead">适合：品牌升级、产品界面、发布影像、空间与全案。模板换皮、无边界「再高级一点」，免开尊口。</p>
+    <div class="danmu-stage" id="danmuStage">
+      <video class="danmu-bg" autoplay muted loop playsinline poster="assets/hero-still.jpg">
+        <source src="assets/hero-cinematic.mp4" type="video/mp4" />
+      </video>
+      <div class="danmu-layer" id="danmuLayer" aria-live="polite"></div>
+      <div class="danmu-hud">
+        <button type="button" class="btn btn-led" id="danmuFire">发射硬话</button>
+        <button type="button" class="btn btn-ghost" id="danmuStorm">弹幕风暴</button>
+        <button type="button" class="btn btn-ghost" id="danmuClear">清屏</button>
+        <a class="btn btn-ghost" href="live.html">伪直播间</a>
       </div>
-      <form class="form" id="contactForm" novalidate>
-        <label>名字<input name="name" required autocomplete="name" placeholder="怎么称呼" /></label>
-        <label>邮箱<input name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>项目简述<textarea name="message" rows="5" required placeholder="品牌 / 界面 / 发布片 / 时间线…"></textarea></label>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-          <button class="btn btn-led" type="submit">发送</button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </div>
-      </form>
     </div>
+    <div class="band reveal" style="margin-top:1.5rem">
+      <p>弹幕不是噪音。是气氛组的刀。</p>
+      <footer>范德彪 · 新二网感</footer>
+    </div>
+
   </main>
 
   <footer class="foot">
-    <p class="foot-mega">开干</p>
+    <p class="foot-mega">弹幕</p>
     <div class="foot-row">
-      <p>主理人范德彪 · 该出手时就出手</p>
+      <p>直播感 · 硬话飞过 · 范德彪</p>
       <div class="foot-links">
-        <a href="creed.html">信条</a>
-        <a href="work.html">作品</a>
         <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
