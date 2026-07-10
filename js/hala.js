@@ -385,8 +385,15 @@
     const form = e.target;
     const data = new FormData(form);
     const st = document.getElementById("formStatus");
-    if (![...data.values()].every((v) => String(v).trim())) {
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || !email || !message) {
       if (st) st.textContent = "请填全名字、邮箱与项目简述。";
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (st) st.textContent = "请填写有效邮箱。";
       return;
     }
     if (st) st.textContent = "意向已记录。正式沟通请同步邮件 hello@halashao.studio。";
