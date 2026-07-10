@@ -436,7 +436,8 @@
       st.textContent = "正在打开邮件草稿…若未弹出，请直接点上方 hello@halashao.studio。";
     }
     window.location.href = href;
-    form.reset();
+    // delay reset so page state remains readable if mail client fails to open
+    setTimeout(() => form.reset(), 800);
   });
 
   /* home voice */
