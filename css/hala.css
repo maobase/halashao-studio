@@ -2765,6 +2765,13 @@ body.stage-glitch .stage-wrap {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.tour-step .said {
+  margin: 0.15rem 0 0;
+  color: var(--led);
+  font-weight: 800;
+  font-size: 0.95rem;
 }
 .tour-step p {
   margin: 0;

@@ -87,7 +87,7 @@
       <form class="form" id="contactForm" novalidate>
         <label>名字<input name="name" required autocomplete="name" placeholder="怎么称呼" /></label>
         <label>邮箱<input name="email" type="email" required autocomplete="email" placeholder="you@company.com" /></label>
-        <label>项目简述<textarea name="message" rows="5" required placeholder="品牌 / 界面 / 发布片 / 时间线…"></textarea></label>
+        <label>项目简述<textarea name="message" rows="5" required placeholder="品牌 / 界面 / 发布片 / 时间线 / 决策人…"></textarea></label>
         <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
           <button class="btn btn-led" type="submit">发送意向</button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
@@ -113,6 +113,24 @@
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "哈拉少设计工作室",
+    "url": "https://maobase.github.io/halashao-studio/",
+    "email": "hello@halashao.studio",
+    "description": "原生自东北的专业设计工作室。主理人范德彪。品牌、产品、影像与跨尺度体验。",
+    "areaServed": "CN",
+    "founder": { "@type": "Person", "name": "范德彪", "jobTitle": "主理人 / 创意总监" },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@halashao.studio",
+      "contactType": "sales",
+      "availableLanguage": ["zh-CN"]
+    }
+  }
+  </script>
   <script src="js/hala.js"></script>
 </body>
 </html>
