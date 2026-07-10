@@ -4977,6 +4977,18 @@ body.stage-glitch .stage-wrap {
   text-decoration-color: var(--led);
 }
 
+/* voice btn state */
+#playVoice[aria-pressed="true"] {
+  border-color: var(--led);
+  color: var(--led);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--led) 35%, transparent);
+}
+
+/* tour email hint */
+.tour-step a.btn-seal {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--seal) 40%, transparent);
+}
+
 
 /* ========== SYSTEM v12 — overlay · countdown · mosaic · tele · rank · snap ========== */
 .ov-stage {

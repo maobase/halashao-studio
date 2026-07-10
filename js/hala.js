@@ -435,14 +435,25 @@
 
   /* home voice */
   const voice = document.getElementById("brandVoice");
-  document.getElementById("playVoice")?.addEventListener("click", async () => {
+  const voiceBtn = document.getElementById("playVoice");
+  const syncVoiceBtn = () => {
+    if (!voiceBtn || !voice) return;
+    const on = !voice.paused && !voice.ended;
+    voiceBtn.textContent = on ? "暂停介绍" : "听介绍";
+    voiceBtn.setAttribute("aria-pressed", on ? "true" : "false");
+  };
+  voice?.addEventListener("play", syncVoiceBtn);
+  voice?.addEventListener("pause", syncVoiceBtn);
+  voice?.addEventListener("ended", syncVoiceBtn);
+  voiceBtn?.addEventListener("click", async () => {
     if (!voice) return;
     try {
       if (voice.paused) await voice.play();
       else voice.pause();
     } catch {
-      /* */
+      voiceBtn.textContent = "暂不可播";
     }
+    syncVoiceBtn();
   });
 
   /* command palette — client path first, then demo branches */
