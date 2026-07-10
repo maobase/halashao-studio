@@ -422,6 +422,11 @@
     { t: "硬仗荣誉墙", h: "fame.html", k: "FAME" },
     { t: "硬话胶囊", h: "capsule.html", k: "CAPSULE" },
     { t: "节拍盖章", h: "beatdrop.html", k: "BEAT" },
+    { t: "硬话红包雨", h: "redpack.html", k: "REDPACK" },
+    { t: "盖章机", h: "chop.html", k: "CHOP" },
+    { t: "胶片横滑", h: "filmstrip.html", k: "STRIP" },
+    { t: "酒桌转盘", h: "banquet.html", k: "BANQUET" },
+    { t: "土酷分屏", h: "splitscroll.html", k: "SPLIT" },
     { t: "班底海报卡", h: "cast.html", k: "CAST" },
     { t: "团队介绍", h: "team.html", k: "TEAM" },
     { t: "滚动叙事", h: "stories.html", k: "STORIES" },
@@ -1138,5 +1143,155 @@
       requestAnimationFrame(tick);
     };
     tick();
+  }
+
+  /* redpack rain */
+  const rpFall = document.getElementById("rpFall");
+  if (rpFall) {
+    const lines = [
+      "小树不倒我就不倒。",
+      "那长相就是证据。",
+      "你就慢慢跟我处。",
+      "本市著名硬仗，都是我主打的。",
+      "少，是刃。",
+      "酷是壳，土是芯。",
+      "欧了。",
+      "该出手时就出手。",
+    ];
+    const modal = document.getElementById("rpModal");
+    const textEl = document.getElementById("rpText");
+    const spawn = (n = 14) => {
+      for (let i = 0; i < n; i++) {
+        const el = document.createElement("button");
+        el.type = "button";
+        el.className = "rp-item";
+        el.style.left = `${8 + Math.random() * 84}%`;
+        el.style.animationDuration = `${3.2 + Math.random() * 3.5}s`;
+        el.style.animationDelay = `${Math.random() * 1.2}s`;
+        el.addEventListener("click", () => {
+          if (textEl) textEl.textContent = lines[(Math.random() * lines.length) | 0];
+          modal?.classList.add("is-on");
+        });
+        el.addEventListener("animationend", () => el.remove());
+        rpFall.appendChild(el);
+      }
+    };
+    spawn(16);
+    document.getElementById("rpBurst")?.addEventListener("click", () => spawn(18));
+    document.getElementById("rpClose")?.addEventListener("click", () => modal?.classList.remove("is-on"));
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("is-on");
+    });
+  }
+
+  /* chop stamp canvas */
+  const chopStage = document.getElementById("chopStage");
+  if (chopStage) {
+    const canvas = document.getElementById("chopCanvas");
+    const ctx = canvas.getContext("2d");
+    const hint = document.getElementById("chopHint");
+    const countEl = document.getElementById("chopCount");
+    const phrases = ["哈拉少", "硬仗", "欧了", "少是刃", "土是芯", "范德彪", "开干", "不模板"];
+    let count = 0;
+    const resize = () => {
+      const r = chopStage.getBoundingClientRect();
+      canvas.width = r.width * devicePixelRatio;
+      canvas.height = r.height * devicePixelRatio;
+      canvas.style.width = `${r.width}px`;
+      canvas.style.height = `${r.height}px`;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+    resize();
+    addEventListener("resize", resize, { passive: true });
+    const stamp = (x, y) => {
+      hint && (hint.style.display = "none");
+      count += 1;
+      if (countEl) countEl.textContent = `SEALS ${count}`;
+      const text = phrases[(Math.random() * phrases.length) | 0];
+      const rot = (Math.random() - 0.5) * 0.9;
+      const r = 28 + Math.random() * 18;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rot);
+      ctx.strokeStyle = "rgba(232,52,26,0.9)";
+      ctx.fillStyle = "rgba(232,52,26,0.85)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 0, r - 6, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.font = `900 ${Math.max(12, r * 0.45)}px "Noto Sans SC", sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(text, 0, 0);
+      ctx.restore();
+    };
+    chopStage.addEventListener("pointerdown", (e) => {
+      const r = chopStage.getBoundingClientRect();
+      stamp(e.clientX - r.left, e.clientY - r.top);
+    });
+    document.getElementById("chopClear")?.addEventListener("click", () => {
+      const r = chopStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      count = 0;
+      if (countEl) countEl.textContent = "SEALS 0";
+      if (hint) hint.style.display = "";
+    });
+    document.getElementById("chopRain")?.addEventListener("click", () => {
+      const r = chopStage.getBoundingClientRect();
+      for (let i = 0; i < 10; i++) {
+        stamp(40 + Math.random() * (r.width - 80), 40 + Math.random() * (r.height - 100));
+      }
+    });
+  }
+
+  /* filmstrip autoplay center */
+  const filmstrip = document.getElementById("filmstrip");
+  if (filmstrip) {
+    const cards = [...filmstrip.querySelectorAll(".filmstrip-card")];
+    const sync = () => {
+      const mid = filmstrip.scrollLeft + filmstrip.clientWidth / 2;
+      cards.forEach((card) => {
+        const c = card.offsetLeft + card.offsetWidth / 2;
+        const vid = card.querySelector("video");
+        if (!vid) return;
+        if (Math.abs(c - mid) < card.offsetWidth * 0.55) vid.play().catch(() => {});
+        else vid.pause();
+      });
+    };
+    filmstrip.addEventListener("scroll", sync, { passive: true });
+    sync();
+    cards[0]?.querySelector("video")?.play().catch(() => {});
+  }
+
+  /* banquet wheel */
+  const banquetWheel = document.getElementById("banquetWheel");
+  if (banquetWheel) {
+    const results = [
+      "「小树不倒我就不倒。」",
+      "「那长相就是证据。」",
+      "「你就慢慢跟我处。」",
+      "「本市著名硬仗。」",
+      "「少，是刃。」",
+      "「酷是壳，土是芯。」",
+      "「欧了。」",
+      "「该出手时就出手。」",
+    ];
+    let angle = 0;
+    let spinning = false;
+    document.getElementById("banquetSpin")?.addEventListener("click", () => {
+      if (spinning) return;
+      spinning = true;
+      const idx = (Math.random() * results.length) | 0;
+      angle += 1440 + idx * (360 / results.length) + Math.random() * 20;
+      banquetWheel.style.transform = `rotate(${angle}deg)`;
+      setTimeout(() => {
+        const el = document.getElementById("banquetResult");
+        if (el) el.textContent = results[idx] + " —— 范德彪";
+        spinning = false;
+      }, 3200);
+    });
   }
 })();

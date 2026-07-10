@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>酒桌硬话转盘 · 哈拉少</title>
+  <meta name="description" content="哈拉少酒桌硬话转盘：东北酒桌气质，转出范德彪语录——土酷反差。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">BANQUET · 东北桌</p>
+    <h1 class="page-h">酒桌硬话<br /><em class="seal">转一下</em></h1>
+    <p class="lead reveal">圆桌转盘。转出一句范德彪——人间烟火的土，工作室立场的硬。高端交付也可以有酒桌气氛组。</p>
+    <div class="banquet-table">
+      <div class="banquet-pin" aria-hidden="true"></div>
+      <div class="banquet-wheel" id="banquetWheel">
+        <span style="transform:rotate(22deg) translate(8px,-6px)">小树不倒</span>
+        <span style="transform:rotate(67deg) translate(8px,-6px)">那长相</span>
+        <span style="transform:rotate(112deg) translate(8px,-6px)">慢慢处</span>
+        <span style="transform:rotate(157deg) translate(8px,-6px)">硬仗</span>
+        <span style="transform:rotate(202deg) translate(8px,-6px)">少是刃</span>
+        <span style="transform:rotate(247deg) translate(8px,-6px)">酷土芯</span>
+        <span style="transform:rotate(292deg) translate(8px,-6px)">欧了</span>
+        <span style="transform:rotate(337deg) translate(8px,-6px)">出手</span>
+      </div>
+      <div class="banquet-center">开<br />转</div>
+    </div>
+    <p class="banquet-result" id="banquetResult">点「转桌」听命运硬话</p>
+    <div style="text-align:center;display:flex;justify-content:center;gap:0.55rem;flex-wrap:wrap">
+      <button type="button" class="btn btn-led" id="banquetSpin">转桌</button>
+      <a class="btn btn-ghost" href="quotes.html">语录墙</a>
+      <a class="btn btn-ghost" href="radio.html">电台</a>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">酒桌</p>
+    <div class="foot-row">
+      <p>转盘 · 硬话 · 东北烟火</p>
+      <div class="foot-links"><a href="lab.html">实验室</a><a href="contact.html">开干</a></div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

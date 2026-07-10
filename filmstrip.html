@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>胶片横滑 · 哈拉少片源</title>
+  <meta name="description" content="哈拉少胶片横滑：多镜片源横向滚动，字幕盖脸，范德彪硬话。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">FILMSTRIP · SCROLL-X</p>
+    <h1 class="page-h">胶片横滑<br /><em>往右刷</em></h1>
+    <p class="lead reveal">横向胶片墙。每格一镜片源 + 硬话字幕——片源系统的新二刷法。</p>
+    <div class="filmstrip" id="filmstrip">
+      <div class="filmstrip-card"><span class="fs-n">01</span><video muted loop playsinline poster="assets/hero-still.jpg"><source src="assets/hero-cinematic.mp4" type="video/mp4" /></video><div class="fs-cap">小树不倒我就不倒</div></div>
+      <div class="filmstrip-card"><span class="fs-n">02</span><video muted loop playsinline poster="assets/work-brand.jpg"><source src="assets/work-hover-1.mp4" type="video/mp4" /></video><div class="fs-cap">那长相就是证据</div></div>
+      <div class="filmstrip-card"><span class="fs-n">03</span><video muted loop playsinline poster="assets/work-product.jpg"><source src="assets/work-hover-2.mp4" type="video/mp4" /></video><div class="fs-cap">你就慢慢跟我处</div></div>
+      <div class="filmstrip-card"><span class="fs-n">04</span><video muted loop playsinline poster="assets/work-motion.jpg"><source src="assets/work-hover-3.mp4" type="video/mp4" /></video><div class="fs-cap">少 · 是刃</div></div>
+      <div class="filmstrip-card"><span class="fs-n">05</span><video muted loop playsinline poster="assets/showreel-poster.jpg"><source src="assets/showreel-motion.mp4" type="video/mp4" /></video><div class="fs-cap">酷是壳 · 土是芯</div></div>
+      <div class="filmstrip-card"><span class="fs-n">06</span><video muted loop playsinline poster="assets/studio-space.jpg"><source src="assets/clip-b.mp4" type="video/mp4" /></video><div class="fs-cap">本市著名硬仗</div></div>
+      <div class="filmstrip-card"><span class="fs-n">07</span><video muted loop playsinline poster="assets/studio-desk.jpg"><source src="assets/clip-a.mp4" type="video/mp4" /></video><div class="fs-cap">欧了</div></div>
+      <div class="filmstrip-card"><span class="fs-n">08</span><video muted loop playsinline poster="assets/showreel-poster.jpg"><source src="assets/showreel.mp4" type="video/mp4" /></video><div class="fs-cap">该出手时就出手</div></div>
+    </div>
+    <p class="lead" style="margin-top:0.5rem">滚到中间自动播；两侧暂停。</p>
+    <div style="margin-top:1rem;display:flex;gap:0.55rem;flex-wrap:wrap">
+      <a class="btn btn-led" href="film.html">放映厅</a>
+      <a class="btn btn-ghost" href="montage.html">蒙太奇墙</a>
+      <a class="btn btn-ghost" href="cinema.html">竖屏片场</a>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">胶片</p>
+    <div class="foot-row">
+      <p>横滑 · 字幕 · 8 镜</p>
+      <div class="foot-links"><a href="film.html">片源</a><a href="lab.html">实验室</a></div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

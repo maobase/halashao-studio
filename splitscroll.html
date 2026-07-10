@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>土酷分屏叙事 · 哈拉少</title>
+  <meta name="description" content="哈拉少土酷分屏滚动叙事：左土右酷，影像与硬话对照。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <div class="page" style="padding-bottom:1rem">
+      <p class="kicker">SPLIT · SCROLL</p>
+      <h1 class="page-h">土酷分屏<br /><em>往下滚</em></h1>
+      <p class="lead reveal">影像与立场对照滚动。一边人间烟火，一边系统锋利——叠在一起才是哈拉少。</p>
+    </div>
+    <div class="split-scroll">
+      <section class="split-row">
+        <div class="split-media"><video autoplay muted loop playsinline poster="assets/studio-space.jpg"><source src="assets/clip-b.mp4" type="video/mp4" /></video></div>
+        <div class="split-copy tu">
+          <p class="kicker seal">01 · TU</p>
+          <h2>人间烟火<br /><em>记得住</em></h2>
+          <p>地方品牌、灯牌、包装、直球语气。土不是粗糙，是可传播的记忆点。</p>
+          <p class="said">「那长相就是证据。」</p>
+        </div>
+      </section>
+      <section class="split-row">
+        <div class="split-copy ku" style="order:0">
+          <p class="kicker">02 · KU</p>
+          <h2>电影画幅<br /><em>站得住</em></h2>
+          <p>层级、节奏、规范、可上线。酷不是堆特效，是删完还锋利。</p>
+          <p class="said">「少，是刃。」</p>
+        </div>
+        <div class="split-media"><video autoplay muted loop playsinline poster="assets/hero-still.jpg"><source src="assets/hero-cinematic.mp4" type="video/mp4" /></video></div>
+      </section>
+      <section class="split-row">
+        <div class="split-media"><video autoplay muted loop playsinline poster="assets/work-product.jpg"><source src="assets/work-hover-2.mp4" type="video/mp4" /></video></div>
+        <div class="split-copy tu">
+          <p class="kicker seal">03 · 交付</p>
+          <h2>专业工作室<br /><em>东北原生</em></h2>
+          <p>主理人范德彪带队。班底齐刃：新二、雨姐、老蒯、小阿giao、吴总、马大帅。</p>
+          <p class="said">「你就慢慢跟我处。」</p>
+        </div>
+      </section>
+      <section class="split-row">
+        <div class="split-copy ku">
+          <p class="kicker">04 · 开干</p>
+          <h2>小树不倒<br /><em>我就不倒</em></h2>
+          <p>对齐刀口，再谈档期。模板免谈。有火花，就来处。</p>
+          <p class="said">「欧了。」</p>
+          <div style="margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:0.55rem">
+            <a class="btn btn-seal" href="contact.html">开干</a>
+            <a class="btn btn-ghost" href="stories.html">完整叙事</a>
+          </div>
+        </div>
+        <div class="split-media"><video autoplay muted loop playsinline poster="assets/work-motion.jpg"><source src="assets/work-hover-3.mp4" type="video/mp4" /></video></div>
+      </section>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">分屏</p>
+    <div class="foot-row">
+      <p>土 · 酷 · 对照滚动</p>
+      <div class="foot-links"><a href="stories.html">叙事</a><a href="lab.html">实验室</a></div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>
