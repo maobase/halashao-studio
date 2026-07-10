@@ -512,7 +512,13 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
-                    { t: "烟雾揭硬话", h: "fog.html", k: "FOG", a: "烟雾 揭开 片源 硬话" },
+    { t: "翻页时钟硬话", h: "flipclock.html", k: "FLIP", a: "翻页 时钟 硬话" },
+    { t: "多米诺硬话", h: "domino.html", k: "DOMINO", a: "多米诺 骨牌 连招" },
+    { t: "快门硬话", h: "shutter.html", k: "SHUTTER", a: "快门 片源 闪切" },
+    { t: "大喇叭硬话", h: "megaphone.html", k: "MEGA", a: "喇叭 喊 夜市" },
+    { t: "磁吸硬话", h: "magnet.html", k: "MAGNET", a: "磁吸 吸合 字块" },
+    { t: "地铁线路硬话", h: "subway.html", k: "SUBWAY", a: "地铁 线路 换乘" },
+    { t: "烟雾揭硬话", h: "fog.html", k: "FOG", a: "烟雾 揭开 片源 硬话" },
     { t: "胶带撕开硬话", h: "tape.html", k: "TAPE", a: "胶带 撕开 硬话" },
     { t: "喷漆硬话", h: "stencil.html", k: "STENCIL", a: "喷漆 模板 街头" },
     { t: "水波硬话", h: "ripple.html", k: "RIPPLE", a: "水波 波纹 片源" },
@@ -4071,6 +4077,269 @@
     document.getElementById("packClear")?.addEventListener("click", () => {
       packLines.innerHTML = "";
       if (said) said.textContent = "「欧了。」";
+    });
+  }
+
+
+
+  /* ========== SYSTEM v18 handlers ========== */
+  const V18_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* flip clock */
+  const fclkStage = document.getElementById("fclkStage");
+  if (fclkStage) {
+    const a = document.getElementById("fclkA");
+    const b = document.getElementById("fclkB");
+    const c = document.getElementById("fclkC");
+    const line = document.getElementById("fclkLine");
+    const meta = document.getElementById("fclkMeta");
+    const cards = fclkStage.querySelectorAll(".fclk-card");
+    let fi = 0;
+    let auto = null;
+    let tick = 0;
+    const chunks = (s) => {
+      const t = s.replace(/[，。！？、\s]/g, "");
+      if (t.length <= 3) return [t[0] || "少", t[1] || "是", t.slice(2) || "刃"];
+      const mid = Math.ceil(t.length / 3);
+      return [t.slice(0, mid), t.slice(mid, mid * 2), t.slice(mid * 2) || "·"];
+    };
+    const flip = () => {
+      const q = V18_LINES[fi++ % V18_LINES.length];
+      const parts = chunks(q);
+      cards.forEach((card) => {
+        card.classList.remove("is-flip");
+        void card.offsetWidth;
+        card.classList.add("is-flip");
+      });
+      setTimeout(() => {
+        if (a) a.textContent = parts[0];
+        if (b) b.textContent = parts[1];
+        if (c) c.textContent = parts[2];
+        if (line) line.textContent = `「${q}。」`;
+        tick++;
+        if (meta) meta.textContent = `HALASHAO · T+${tick}`;
+      }, 200);
+    };
+    document.getElementById("fclkFlip")?.addEventListener("click", flip);
+    document.getElementById("fclkAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = null;
+        e.currentTarget.textContent = "自动翻";
+      } else {
+        flip();
+        auto = setInterval(flip, 1600);
+        e.currentTarget.textContent = "停自动";
+      }
+    });
+  }
+
+  /* domino chain */
+  const domRow = document.getElementById("domRow");
+  if (domRow) {
+    const quote = document.getElementById("domQuote");
+    let di = 0;
+    let busy = false;
+    const build = (text) => {
+      domRow.innerHTML = "";
+      [...text.replace(/[，。！？、\s]/g, "")].forEach((ch) => {
+        const el = document.createElement("div");
+        el.className = "dom-tile";
+        el.textContent = ch;
+        domRow.appendChild(el);
+      });
+    };
+    const push = () => {
+      if (busy) return;
+      const tiles = [...domRow.querySelectorAll(".dom-tile")];
+      if (!tiles.length) return;
+      busy = true;
+      tiles.forEach((t, i) => {
+        setTimeout(() => t.classList.add("is-down"), i * 90);
+      });
+      setTimeout(() => {
+        if (quote) quote.textContent = `「${V18_LINES[di % V18_LINES.length]}。」`;
+        busy = false;
+      }, tiles.length * 90 + 120);
+    };
+    const reset = () => {
+      domRow.querySelectorAll(".dom-tile").forEach((t) => t.classList.remove("is-down"));
+    };
+    const next = () => {
+      di++;
+      build(V18_LINES[di % V18_LINES.length]);
+      if (quote) quote.textContent = "「推一把。」";
+    };
+    build(V18_LINES[0]);
+    document.getElementById("domPush")?.addEventListener("click", push);
+    document.getElementById("domReset")?.addEventListener("click", reset);
+    document.getElementById("domNext")?.addEventListener("click", next);
+  }
+
+  /* shutter */
+  const shutStage = document.getElementById("shutStage");
+  if (shutStage) {
+    const cap = document.getElementById("shutCap");
+    const meta = document.getElementById("shutMeta");
+    const vid = document.getElementById("shutVid");
+    let si = 0;
+    let frame = 1;
+    const srcs = [
+      "assets/hero-cinematic.mp4",
+      "assets/showreel-motion.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/clip-a.mp4",
+    ];
+    const click = () => {
+      shutStage.classList.remove("is-click", "is-flash");
+      void shutStage.offsetWidth;
+      shutStage.classList.add("is-click", "is-flash");
+      if (cap) cap.textContent = `「${V18_LINES[si++ % V18_LINES.length]}。」`;
+      frame++;
+      if (meta) meta.textContent = `REC · FRAME ${String(frame).padStart(2, "0")}`;
+      setTimeout(() => shutStage.classList.remove("is-click"), 140);
+      setTimeout(() => shutStage.classList.remove("is-flash"), 240);
+    };
+    document.getElementById("shutClick")?.addEventListener("click", click);
+    document.getElementById("shutBurst")?.addEventListener("click", () => {
+      click();
+      setTimeout(click, 280);
+      setTimeout(click, 560);
+    });
+    document.getElementById("shutSrc")?.addEventListener("click", () => {
+      if (!vid) return;
+      const i = srcs.indexOf(vid.currentSrc.split("/").slice(-2).join("/"));
+      const next = srcs[((i >= 0 ? i : 0) + 1) % srcs.length];
+      vid.src = next;
+      vid.play().catch(() => {});
+    });
+  }
+
+  /* megaphone */
+  const megaStage = document.getElementById("megaStage");
+  if (megaStage) {
+    const quote = document.getElementById("megaQuote");
+    const level = document.getElementById("megaLevel");
+    let mi = 0;
+    let vol = 0;
+    const shout = () => {
+      const q = V18_LINES[mi++ % V18_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      vol = Math.min(99, vol + 11 + Math.floor(Math.random() * 9));
+      if (level) level.textContent = `VOL · ${String(vol).padStart(2, "0")}`;
+      megaStage.classList.remove("is-shout");
+      void megaStage.offsetWidth;
+      megaStage.classList.add("is-shout");
+      setTimeout(() => megaStage.classList.remove("is-shout"), 900);
+    };
+    document.getElementById("megaShout")?.addEventListener("click", shout);
+    document.getElementById("megaNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V18_LINES[mi++ % V18_LINES.length]}。」`;
+    });
+    document.getElementById("megaBlast")?.addEventListener("click", () => {
+      shout();
+      setTimeout(shout, 400);
+      setTimeout(shout, 800);
+    });
+  }
+
+  /* magnet snap */
+  const magField = document.getElementById("magField");
+  if (magField) {
+    const stage = document.getElementById("magStage");
+    const full = document.getElementById("magFull");
+    let mi = 0;
+    const place = (text, scatter) => {
+      magField.innerHTML = "";
+      const chars = [...text.replace(/[，。！？、\s]/g, "")];
+      const w = magField.clientWidth || 400;
+      const h = magField.clientHeight || 240;
+      chars.forEach((ch, i) => {
+        const el = document.createElement("span");
+        el.className = "mag-chip";
+        el.textContent = ch;
+        if (scatter) {
+          el.style.left = 8 + Math.random() * (w - 48) + "px";
+          el.style.top = 8 + Math.random() * (h - 40) + "px";
+        } else {
+          const total = chars.length;
+          const start = (w - total * 36) / 2;
+          el.style.left = Math.max(8, start + i * 36) + "px";
+          el.style.top = h / 2 - 16 + "px";
+        }
+        magField.appendChild(el);
+      });
+      if (full) full.textContent = `「${text}。」`;
+    };
+    const current = () => V18_LINES[mi % V18_LINES.length];
+    place(current(), true);
+    document.getElementById("magSnap")?.addEventListener("click", () => {
+      place(current(), false);
+      stage?.classList.add("is-snap");
+    });
+    document.getElementById("magScatter")?.addEventListener("click", () => {
+      stage?.classList.remove("is-snap");
+      place(current(), true);
+    });
+    document.getElementById("magNext")?.addEventListener("click", () => {
+      mi++;
+      stage?.classList.remove("is-snap");
+      place(current(), true);
+    });
+  }
+
+  /* subway map */
+  const subStops = document.getElementById("subStops");
+  if (subStops) {
+    const pop = document.getElementById("subPop");
+    const tag = document.getElementById("subTag");
+    const quote = document.getElementById("subQuote");
+    const stops = [
+      { n: "土门", line: "tu", q: "酷是壳，土是芯" },
+      { n: "夜市口", line: "tu", q: "欧了" },
+      { n: "班底站", line: "tu", q: "那长相就是证据" },
+      { n: "酷岭", line: "ku", q: "少，是刃" },
+      { n: "片源湾", line: "ku", q: "肉眼凡胎，量你也看不出来" },
+      { n: "动能台", line: "ku", q: "该出手时就出手" },
+      { n: "硬仗中心", line: "hard", q: "本市几场著名硬仗" },
+      { n: "交付口", line: "hard", q: "跨尺度出刀" },
+      { n: "开干站", line: "hard", q: "小树不倒我就不倒" },
+    ];
+    const show = (s) => {
+      subStops.querySelectorAll(".sub-stop").forEach((b) => b.classList.toggle("is-on", b.dataset.name === s.n));
+      if (tag) tag.textContent = s.line.toUpperCase();
+      if (quote) quote.textContent = `「${s.q}。」`;
+      if (pop) pop.hidden = false;
+    };
+    stops.forEach((s) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "sub-stop";
+      btn.dataset.line = s.line;
+      btn.dataset.name = s.n;
+      btn.textContent = s.n;
+      btn.addEventListener("click", () => show(s));
+      subStops.appendChild(btn);
+    });
+    document.getElementById("subRide")?.addEventListener("click", () => {
+      show(stops[Math.floor(Math.random() * stops.length)]);
+    });
+    document.getElementById("subClear")?.addEventListener("click", () => {
+      subStops.querySelectorAll(".sub-stop").forEach((b) => b.classList.remove("is-on"));
+      if (pop) pop.hidden = true;
     });
   }
 
