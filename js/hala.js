@@ -504,6 +504,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+    { t: "话题标签墙", h: "hashtag.html", k: "HASHTAG", a: "话题 标签 云" },
+    { t: "十五秒硬切", h: "punch.html", k: "PUNCH", a: "15秒 短视频 卡点" },
+    { t: "硬话贴条", h: "sticky.html", k: "STICKY", a: "便利贴 拖动" },
+    { t: "动能甩字", h: "thrash.html", k: "THRASH", a: "轨迹 甩字 动能" },
+    { t: "自动混剪条", h: "reelcut.html", k: "REELCUT", a: "自动切镜 混剪" },
+    { t: "故障字幕", h: "glitchsub.html", k: "GLITCHSUB", a: "故障 字幕 抖闪" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
@@ -2523,6 +2529,363 @@
     snapFeed.addEventListener("scroll", sync, { passive: true });
     sync();
     cards[0]?.querySelector("video")?.play().catch(() => {});
+  }
+
+
+
+  /* ========== SYSTEM v13 handlers ========== */
+  const V13_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+  ];
+
+  /* hashtag cloud */
+  const htagCloud = document.getElementById("htagCloud");
+  if (htagCloud) {
+    const tags = [
+      ["#哈拉少", "跨尺度出刀"],
+      ["#酷是壳", "酷是壳，土是芯"],
+      ["#土是芯", "土是芯"],
+      ["#少是刃", "少，是刃"],
+      ["#范德彪", "本市著名硬仗"],
+      ["#新二气质", "那长相就是证据"],
+      ["#东北原生", "小树不倒我就不倒"],
+      ["#不生产模板", "不生产模板"],
+      ["#开干", "该出手时就出手"],
+      ["#欧了", "欧了"],
+      ["#硬仗", "本市著名硬仗"],
+      ["#气氛组", "你就慢慢跟我处"],
+    ];
+    const pop = document.getElementById("htagPop");
+    const tagEl = document.getElementById("htagTag");
+    const quoteEl = document.getElementById("htagQuote");
+    const paint = () => {
+      const bag = tags.slice().sort(() => Math.random() - 0.5);
+      htagCloud.innerHTML = bag
+        .map(
+          ([t, q], i) =>
+            `<button type="button" data-q="${q}" data-t="${t}" style="font-size:${0.85 + (i % 4) * 0.12}rem">${t}</button>`
+        )
+        .join("");
+      htagCloud.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          htagCloud.querySelectorAll("button").forEach((b) => b.classList.remove("is-on"));
+          btn.classList.add("is-on");
+          if (tagEl) tagEl.textContent = btn.dataset.t || "";
+          if (quoteEl) quoteEl.textContent = `「${btn.dataset.q || ""}。」—— 主理人范德彪`;
+          pop?.removeAttribute("hidden");
+        });
+      });
+    };
+    paint();
+    document.getElementById("htagShuffle")?.addEventListener("click", paint);
+    document.getElementById("htagStorm")?.addEventListener("click", () => {
+      paint();
+      const btns = [...htagCloud.querySelectorAll("button")];
+      btns.slice(0, 5).forEach((b, i) => setTimeout(() => b.click(), i * 120));
+    });
+  }
+
+  /* 15s punch cut */
+  const punchStage = document.getElementById("punchStage");
+  if (punchStage) {
+    const vid = document.getElementById("punchVid");
+    const fill = document.getElementById("punchFill");
+    const marks = document.getElementById("punchMarks");
+    const timeEl = document.getElementById("punchTime");
+    const hitEl = document.getElementById("punchHit");
+    const cap = document.getElementById("punchCap");
+    const nodes = [
+      { t: 0.0, q: "小树不倒我就不倒" },
+      { t: 3.0, q: "那长相就是证据" },
+      { t: 6.5, q: "酷是壳，土是芯" },
+      { t: 9.5, q: "少，是刃" },
+      { t: 12.5, q: "该出手时就出手" },
+      { t: 14.5, q: "欧了" },
+    ];
+    const DUR = 15;
+    let last = -1;
+    let raf = 0;
+    if (marks) {
+      marks.innerHTML = nodes.map((n) => `<b style="left:${(n.t / DUR) * 100}%"></b>`).join("");
+    }
+    const sync = () => {
+      if (!vid) return;
+      const t = Math.min(DUR, vid.currentTime % DUR || 0);
+      if (fill) fill.style.width = `${(t / DUR) * 100}%`;
+      if (timeEl) timeEl.textContent = `${t.toFixed(1)}s / ${DUR.toFixed(1)}s`;
+      let idx = 0;
+      for (let i = 0; i < nodes.length; i++) if (t >= nodes[i].t) idx = i;
+      if (idx !== last) {
+        last = idx;
+        if (cap) cap.textContent = nodes[idx].q;
+        if (hitEl) hitEl.textContent = `NODE ${String(idx + 1).padStart(2, "0")}`;
+        punchStage.classList.remove("is-hit");
+        void punchStage.offsetWidth;
+        punchStage.classList.add("is-hit");
+      }
+      if (!vid.paused) raf = requestAnimationFrame(sync);
+    };
+    document.getElementById("punchPlay")?.addEventListener("click", async () => {
+      if (!vid) return;
+      if (vid.paused) {
+        try {
+          await vid.play();
+        } catch {
+          /* */
+        }
+        document.getElementById("punchPlay").textContent = "❚❚ 暂停";
+        raf = requestAnimationFrame(sync);
+      } else {
+        vid.pause();
+        document.getElementById("punchPlay").textContent = "▶ 开剪";
+      }
+    });
+    document.getElementById("punchRestart")?.addEventListener("click", () => {
+      if (!vid) return;
+      vid.currentTime = 0;
+      last = -1;
+      vid.play().catch(() => {});
+      document.getElementById("punchPlay").textContent = "❚❚ 暂停";
+      raf = requestAnimationFrame(sync);
+    });
+    vid?.addEventListener("timeupdate", () => {
+      if (vid.currentTime >= DUR) {
+        vid.pause();
+        vid.currentTime = 0;
+        document.getElementById("punchPlay").textContent = "▶ 开剪";
+      }
+    });
+  }
+
+  /* sticky notes */
+  const stickyLayer = document.getElementById("stickyLayer");
+  if (stickyLayer) {
+    const stage = document.getElementById("stickyStage");
+    let z = 10;
+    const add = () => {
+      const note = document.createElement("div");
+      note.className = "sticky-note";
+      note.textContent = V13_LINES[(Math.random() * V13_LINES.length) | 0];
+      note.style.left = `${12 + Math.random() * 55}%`;
+      note.style.top = `${12 + Math.random() * 55}%`;
+      note.style.setProperty("--r", `${(Math.random() - 0.5) * 14}deg`);
+      note.style.zIndex = String(++z);
+      let ox = 0;
+      let oy = 0;
+      let drag = false;
+      const down = (e) => {
+        drag = true;
+        note.style.zIndex = String(++z);
+        const p = e.touches ? e.touches[0] : e;
+        const r = note.getBoundingClientRect();
+        ox = p.clientX - r.left;
+        oy = p.clientY - r.top;
+        e.preventDefault();
+      };
+      const move = (e) => {
+        if (!drag || !stage) return;
+        const p = e.touches ? e.touches[0] : e;
+        const sr = stage.getBoundingClientRect();
+        note.style.left = `${Math.max(0, Math.min(sr.width - 80, p.clientX - sr.left - ox))}px`;
+        note.style.top = `${Math.max(0, Math.min(sr.height - 40, p.clientY - sr.top - oy))}px`;
+      };
+      const up = () => {
+        drag = false;
+      };
+      note.addEventListener("pointerdown", down);
+      addEventListener("pointermove", move);
+      addEventListener("pointerup", up);
+      stickyLayer.appendChild(note);
+    };
+    for (let i = 0; i < 3; i++) add();
+    document.getElementById("stickyAdd")?.addEventListener("click", add);
+    document.getElementById("stickyClear")?.addEventListener("click", () => {
+      stickyLayer.innerHTML = "";
+    });
+  }
+
+  /* thrash type trail */
+  const thrashStage = document.getElementById("thrashStage");
+  if (thrashStage) {
+    const canvas = document.getElementById("thrashCanvas");
+    const ctx = canvas.getContext("2d");
+    const hint = document.getElementById("thrashHint");
+    let parts = [];
+    let drawing = false;
+    let li = 0;
+    const resize = () => {
+      const r = thrashStage.getBoundingClientRect();
+      canvas.width = r.width * devicePixelRatio;
+      canvas.height = r.height * devicePixelRatio;
+      canvas.style.width = `${r.width}px`;
+      canvas.style.height = `${r.height}px`;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+    resize();
+    addEventListener("resize", resize, { passive: true });
+    const spawn = (x, y, burst = false) => {
+      thrashStage.classList.add("is-on");
+      if (hint) hint.style.opacity = "0";
+      const n = burst ? 12 : 1;
+      for (let i = 0; i < n; i++) {
+        parts.push({
+          x: x + (Math.random() - 0.5) * (burst ? 80 : 8),
+          y: y + (Math.random() - 0.5) * (burst ? 40 : 8),
+          vx: (Math.random() - 0.5) * 2,
+          vy: -0.6 - Math.random() * 1.4,
+          life: 1,
+          text: V13_LINES[li++ % V13_LINES.length],
+          rot: (Math.random() - 0.5) * 0.6,
+        });
+      }
+    };
+    const tick = () => {
+      const r = thrashStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      parts = parts.filter((p) => p.life > 0.02);
+      parts.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life *= 0.985;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.life > 0.5 ? "#ffe14a" : "#ff4d35";
+        ctx.font = '900 18px "Noto Sans SC", sans-serif';
+        ctx.fillText(p.text, 0, 0);
+        ctx.restore();
+      });
+      requestAnimationFrame(tick);
+    };
+    tick();
+    const pos = (e) => {
+      const r = thrashStage.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    };
+    thrashStage.addEventListener("pointerdown", (e) => {
+      drawing = true;
+      const p = pos(e);
+      spawn(p.x, p.y);
+    });
+    thrashStage.addEventListener("pointermove", (e) => {
+      if (!drawing) return;
+      const p = pos(e);
+      if (Math.random() > 0.55) spawn(p.x, p.y);
+    });
+    addEventListener("pointerup", () => {
+      drawing = false;
+    });
+    document.getElementById("thrashBurst")?.addEventListener("click", () => {
+      const r = thrashStage.getBoundingClientRect();
+      spawn(r.width * 0.5, r.height * 0.5, true);
+    });
+    document.getElementById("thrashClear")?.addEventListener("click", () => {
+      parts = [];
+    });
+  }
+
+  /* auto reel cut */
+  const reelcutStage = document.getElementById("reelcutStage");
+  if (reelcutStage) {
+    const shots = [
+      { src: "assets/hero-cinematic.mp4", poster: "assets/hero-still.jpg", q: "小树不倒我就不倒" },
+      { src: "assets/work-hover-1.mp4", poster: "assets/work-brand.jpg", q: "那长相就是证据" },
+      { src: "assets/work-hover-2.mp4", poster: "assets/work-product.jpg", q: "你就慢慢跟我处" },
+      { src: "assets/work-hover-3.mp4", poster: "assets/work-motion.jpg", q: "少，是刃" },
+      { src: "assets/showreel-motion.mp4", poster: "assets/showreel-poster.jpg", q: "酷是壳，土是芯" },
+      { src: "assets/clip-b.mp4", poster: "assets/studio-space.jpg", q: "该出手时就出手" },
+    ];
+    const vid = document.getElementById("reelcutVid");
+    const cap = document.getElementById("reelcutCap");
+    const strip = document.getElementById("reelcutStrip");
+    const idxEl = document.getElementById("reelcutIdx");
+    let i = 0;
+    let timer = 0;
+    if (strip) {
+      strip.innerHTML = shots
+        .map(
+          (s, n) =>
+            `<button type="button" data-i="${n}" class="${n === 0 ? "is-on" : ""}"><span>${String(n + 1).padStart(2, "0")}</span><img src="${s.poster}" alt="" loading="lazy" /></button>`
+        )
+        .join("");
+    }
+    const show = (n) => {
+      i = ((n % shots.length) + shots.length) % shots.length;
+      const s = shots[i];
+      if (vid) {
+        vid.poster = s.poster;
+        vid.src = s.src;
+        vid.play().catch(() => {});
+      }
+      if (cap) cap.textContent = s.q;
+      if (idxEl) idxEl.textContent = `SHOT ${String(i + 1).padStart(2, "0")} / ${String(shots.length).padStart(2, "0")}`;
+      strip?.querySelectorAll("button").forEach((b, bi) => b.classList.toggle("is-on", bi === i));
+    };
+    show(0);
+    strip?.querySelectorAll("button").forEach((b) => {
+      b.addEventListener("click", () => {
+        clearInterval(timer);
+        timer = 0;
+        document.getElementById("reelcutPlay").textContent = "▶ 自动连切";
+        show(Number(b.dataset.i));
+      });
+    });
+    document.getElementById("reelcutNext")?.addEventListener("click", () => show(i + 1));
+    document.getElementById("reelcutPlay")?.addEventListener("click", (e) => {
+      if (timer) {
+        clearInterval(timer);
+        timer = 0;
+        e.currentTarget.textContent = "▶ 自动连切";
+        return;
+      }
+      e.currentTarget.textContent = "❚❚ 停止";
+      show(i);
+      timer = setInterval(() => show(i + 1), 1800);
+    });
+  }
+
+  /* glitch subtitles */
+  const gsubStage = document.getElementById("gsubStage");
+  if (gsubStage) {
+    const line = document.getElementById("gsubLine");
+    let qi = 0;
+    let auto = 0;
+    const hit = () => {
+      gsubStage.classList.remove("is-glitch");
+      void gsubStage.offsetWidth;
+      gsubStage.classList.add("is-glitch");
+    };
+    const next = () => {
+      if (!line) return;
+      const t = V13_LINES[qi++ % V13_LINES.length];
+      line.textContent = t;
+      line.dataset.text = t;
+      hit();
+    };
+    document.getElementById("gsubHit")?.addEventListener("click", hit);
+    document.getElementById("gsubNext")?.addEventListener("click", next);
+    document.getElementById("gsubAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = 0;
+        e.currentTarget.textContent = "自动故障";
+        return;
+      }
+      next();
+      auto = setInterval(next, 1100);
+      e.currentTarget.textContent = "停止";
+    });
   }
 
 })();
