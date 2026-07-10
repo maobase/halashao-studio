@@ -10,7 +10,10 @@
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase() || "index.html";
   document.querySelectorAll("[data-nav], .drawer a[href]").forEach((a) => {
     const href = (a.getAttribute("href") || "").split("/").pop().toLowerCase();
-    if (href === path || (path === "" && href === "index.html")) a.classList.add("is-active");
+    if (href === path || (path === "" && href === "index.html")) {
+      a.classList.add("is-active");
+      a.setAttribute("aria-current", "page");
+    }
   });
 
   /* prefetch client-critical pages on intent */
