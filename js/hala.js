@@ -427,7 +427,7 @@
       if (st) st.textContent = "请填写有效邮箱。";
       return;
     }
-    const subject = encodeURIComponent("哈拉少项目咨询 · " + name);
+    const subject = encodeURIComponent("哈拉少设计工作室 · 项目咨询 · " + name);
     const body = encodeURIComponent(
       "称呼：" + name + "\n回复邮箱：" + email + "\n\n项目简述：\n" + message + "\n\n—— 来自 哈拉少设计工作室官网 · 开干页"
     );
