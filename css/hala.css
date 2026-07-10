@@ -4184,7 +4184,8 @@ body.stage-glitch .stage-wrap {
 .cmt-panel { box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
 .flash-stage, .typecast-stage, .duet-stage, .boss-stage,
 .gift-stage, .lyric-stage, .wave-stage, .board-preview, .riot-stage,
-.ov-stage, .cd-stage, .tele-stage, .rank-hero {
+.ov-stage, .cd-stage, .tele-stage, .rank-hero,
+.htag-stage, .punch-stage, .sticky-stage, .thrash-stage, .reelcut-stage, .gsub-stage {
   box-shadow: 0 20px 48px rgba(0,0,0,0.32);
 }
 .snap-card .snap-meta .btn {

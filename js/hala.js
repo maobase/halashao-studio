@@ -2816,7 +2816,7 @@
       strip.innerHTML = shots
         .map(
           (s, n) =>
-            `<button type="button" data-i="${n}" class="${n === 0 ? "is-on" : ""}"><span>${String(n + 1).padStart(2, "0")}</span><img src="${s.poster}" alt="" loading="lazy" /></button>`
+            `<button type="button" data-i="${n}" class="${n === 0 ? "is-on" : ""}"><span>${String(n + 1).padStart(2, "0")}</span><img src="${s.poster}" alt="分镜 ${n + 1}" loading="lazy" /></button>`
         )
         .join("");
     }
