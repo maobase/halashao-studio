@@ -487,7 +487,7 @@
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
     { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位" },
-    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 倾斜 滤镜 折纸 记分 黑胶 刀切 拍立得" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 烟雾 胶带 喷漆 水波 硬币 面单 倾斜 拍立得" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
