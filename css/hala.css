@@ -186,6 +186,9 @@ button, input, textarea { font: inherit; color: inherit; }
   .burger { display: none; }
 }
 
+.drawer a.is-active {
+  color: var(--led);
+}
 .drawer {
   position: fixed;
   inset: 0;

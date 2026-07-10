@@ -8,7 +8,7 @@
   });
 
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase() || "index.html";
-  document.querySelectorAll("[data-nav]").forEach((a) => {
+  document.querySelectorAll("[data-nav], .drawer a[href]").forEach((a) => {
     const href = (a.getAttribute("href") || "").split("/").pop().toLowerCase();
     if (href === path || (path === "" && href === "index.html")) a.classList.add("is-active");
   });
@@ -470,7 +470,7 @@
     { t: "波形硬话", h: "wave.html", k: "WAVE", a: "音频 波形 节拍" },
     { t: "钉住叙事", h: "pin.html", k: "PIN", a: "滚动 钉住 章节" },
     { t: "分镜板", h: "board.html", k: "BOARD", a: "分镜 片源 提案" },
-    { t: "气氛组暴走", h: "riot.html", k: "RIOT", a: "粒子 风暴 特效" },
+    { t: "气氛组特效", h: "riot.html", k: "RIOT", a: "粒子 风暴 特效 暴走" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
