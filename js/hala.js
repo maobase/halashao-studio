@@ -505,6 +505,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+        { t: "刮刮乐硬话", h: "scratch.html", k: "SCRATCH", a: "刮刮乐 涂层 硬话 土酷" },
+    { t: "推送硬话雨", h: "notify.html", k: "NOTIFY", a: "推送 通知 锁屏 信息流" },
+    { t: "硬话小票机", h: "receipt.html", k: "RECEIPT", a: "小票 打印 夜市" },
+    { t: "万花筒片源", h: "kaleido.html", k: "KALEIDO", a: "万花筒 对称 片源" },
+    { t: "回声叠字", h: "echo.html", k: "ECHO", a: "回声 叠字 动能" },
+    { t: "新闻硬话条", h: "ticker.html", k: "TICKER", a: "新闻 联播 滚动 字幕" },
     { t: "话题标签墙", h: "hashtag.html", k: "HASHTAG", a: "话题 标签 云" },
     { t: "十五秒硬切", h: "punch.html", k: "PUNCH", a: "15秒 短视频 卡点" },
     { t: "硬话贴条", h: "sticky.html", k: "STICKY", a: "便利贴 拖动" },
@@ -2888,5 +2894,305 @@
       e.currentTarget.textContent = "停止";
     });
   }
+
+
+
+  /* ========== SYSTEM v14 handlers ========== */
+  const V14_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗，都是我主打的",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* scratch card */
+  const scratchCanvas = document.getElementById("scratchCanvas");
+  if (scratchCanvas) {
+    const stage = document.getElementById("scratchStage");
+    const quoteEl = document.getElementById("scratchQuote");
+    const ctx = scratchCanvas.getContext("2d");
+    let drawing = false;
+    let qi = 0;
+    const resize = () => {
+      const r = stage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      scratchCanvas.width = r.width * dpr;
+      scratchCanvas.height = r.height * dpr;
+      scratchCanvas.style.width = r.width + "px";
+      scratchCanvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      paintCoat();
+    };
+    const paintCoat = () => {
+      const w = scratchCanvas.clientWidth;
+      const h = scratchCanvas.clientHeight;
+      const g = ctx.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, "#c9a227");
+      g.addColorStop(0.45, "#ffe14a");
+      g.addColorStop(1, "#e8341a");
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(0,0,0,0.18)";
+      for (let i = 0; i < 40; i++) {
+        ctx.fillRect(Math.random() * w, Math.random() * h, 2 + Math.random() * 8, 1);
+      }
+      ctx.fillStyle = "rgba(7,7,6,0.55)";
+      ctx.font = "700 14px IBM Plex Mono, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("SCRATCH · 哈拉少", w / 2, h / 2);
+      stage?.classList.remove("is-done");
+    };
+    const dig = (x, y) => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, 22, 0, Math.PI * 2);
+      ctx.fill();
+    };
+    const cleared = () => {
+      try {
+        const w = scratchCanvas.clientWidth;
+        const h = scratchCanvas.clientHeight;
+        const sample = ctx.getImageData(0, 0, Math.min(w, 200), Math.min(h, 120));
+        let empty = 0;
+        for (let i = 3; i < sample.data.length; i += 16) if (sample.data[i] < 32) empty++;
+        if (empty / (sample.data.length / 16) > 0.42) stage?.classList.add("is-done");
+      } catch {
+        /* tainted / security */
+      }
+    };
+    const pos = (e) => {
+      const r = scratchCanvas.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    };
+    const down = (e) => {
+      drawing = true;
+      const p = pos(e);
+      dig(p.x, p.y);
+      e.preventDefault();
+    };
+    const move = (e) => {
+      if (!drawing) return;
+      const p = pos(e);
+      dig(p.x, p.y);
+      cleared();
+    };
+    const up = () => {
+      drawing = false;
+      cleared();
+    };
+    scratchCanvas.addEventListener("pointerdown", down);
+    scratchCanvas.addEventListener("pointermove", move);
+    addEventListener("pointerup", up);
+    scratchCanvas.addEventListener("touchstart", down, { passive: false });
+    scratchCanvas.addEventListener("touchmove", move, { passive: false });
+    scratchCanvas.addEventListener("touchend", up);
+    const nextQ = () => {
+      const t = V14_LINES[qi++ % V14_LINES.length];
+      if (quoteEl) quoteEl.textContent = `「${t}。」`;
+    };
+    document.getElementById("scratchReset")?.addEventListener("click", () => {
+      nextQ();
+      paintCoat();
+    });
+    document.getElementById("scratchAuto")?.addEventListener("click", () => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillRect(0, 0, scratchCanvas.clientWidth, scratchCanvas.clientHeight);
+      stage?.classList.add("is-done");
+    });
+    addEventListener("resize", resize);
+    resize();
+  }
+
+  /* notify rain */
+  const notifyStack = document.getElementById("notifyStack");
+  if (notifyStack) {
+    let ni = 0;
+    const apps = ["哈拉少", "范德彪", "新二", "气氛组", "硬仗台"];
+    const push = () => {
+      const card = document.createElement("article");
+      card.className = "notify-card";
+      const app = apps[ni % apps.length];
+      const line = V14_LINES[ni++ % V14_LINES.length];
+      card.innerHTML = `<b>${app} · 现在</b><p>${line}</p>`;
+      notifyStack.prepend(card);
+      while (notifyStack.children.length > 8) notifyStack.lastElementChild?.remove();
+    };
+    for (let i = 0; i < 3; i++) push();
+    document.getElementById("notifyPush")?.addEventListener("click", push);
+    document.getElementById("notifyStorm")?.addEventListener("click", () => {
+      for (let i = 0; i < 5; i++) setTimeout(push, i * 140);
+    });
+    document.getElementById("notifyClear")?.addEventListener("click", () => {
+      notifyStack.innerHTML = "";
+    });
+    const clock = document.getElementById("notifyClock");
+    const tick = () => {
+      if (!clock) return;
+      const d = new Date();
+      clock.textContent = `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    };
+    tick();
+    setInterval(tick, 20000);
+  }
+
+  /* receipt printer */
+  const receiptLines = document.getElementById("receiptLines");
+  if (receiptLines) {
+    let ri = 0;
+    const paper = document.getElementById("receiptPaper");
+    const said = document.getElementById("receiptSaid");
+    const total = document.getElementById("receiptTotal");
+    const add = () => {
+      const line = V14_LINES[ri++ % V14_LINES.length];
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${line}</span><em>硬</em>`;
+      receiptLines.appendChild(li);
+      if (said) said.textContent = `「${line}。」`;
+      if (total) total.textContent = `合计 · 锋利 × ${receiptLines.children.length}`;
+      if (paper) {
+        paper.classList.remove("is-print");
+        void paper.offsetWidth;
+        paper.classList.add("is-print");
+      }
+    };
+    add();
+    document.getElementById("receiptPrint")?.addEventListener("click", add);
+    document.getElementById("receiptFull")?.addEventListener("click", () => {
+      for (let i = 0; i < 5; i++) setTimeout(add, i * 90);
+    });
+    document.getElementById("receiptClear")?.addEventListener("click", () => {
+      receiptLines.innerHTML = "";
+      if (total) total.textContent = "合计 · 锋利 × 0";
+      if (said) said.textContent = "「欧了。」";
+    });
+  }
+
+  /* kaleido film */
+  const kaleidoGrid = document.getElementById("kaleidoGrid");
+  if (kaleidoGrid) {
+    const srcs = [
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/work-hover-3.mp4",
+      "assets/clip-a.mp4",
+      "assets/showreel-motion.mp4",
+    ];
+    let si = 0;
+    let ki = 0;
+    const cap = document.getElementById("kaleidoCap");
+    const stage = document.getElementById("kaleidoStage");
+    const mount = () => {
+      const src = srcs[si % srcs.length];
+      kaleidoGrid.innerHTML = "";
+      for (let i = 0; i < 4; i++) {
+        const v = document.createElement("video");
+        v.muted = true;
+        v.loop = true;
+        v.playsInline = true;
+        v.autoplay = true;
+        v.src = src;
+        v.play().catch(() => {});
+        kaleidoGrid.appendChild(v);
+      }
+    };
+    const spin = () => {
+      if (cap) cap.textContent = `「${V14_LINES[ki++ % V14_LINES.length]}。」`;
+      stage?.classList.remove("is-spin");
+      void stage?.offsetWidth;
+      stage?.classList.add("is-spin");
+    };
+    mount();
+    spin();
+    document.getElementById("kaleidoSpin")?.addEventListener("click", spin);
+    document.getElementById("kaleidoSrc")?.addEventListener("click", () => {
+      si++;
+      mount();
+      spin();
+    });
+  }
+
+  /* echo type */
+  const echoStage = document.getElementById("echoStage");
+  if (echoStage) {
+    let ei = 0;
+    let auto = 0;
+    const layers = [...echoStage.querySelectorAll(".echo-l")];
+    const hit = () => {
+      const t = V14_LINES[ei % V14_LINES.length];
+      layers.forEach((el) => {
+        el.textContent = t;
+      });
+      echoStage.classList.remove("is-hit");
+      void echoStage.offsetWidth;
+      echoStage.classList.add("is-hit");
+    };
+    const next = () => {
+      ei++;
+      hit();
+    };
+    document.getElementById("echoHit")?.addEventListener("click", hit);
+    document.getElementById("echoNext")?.addEventListener("click", next);
+    document.getElementById("echoAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = 0;
+        e.currentTarget.textContent = "自动回声";
+        return;
+      }
+      next();
+      auto = setInterval(next, 1200);
+      e.currentTarget.textContent = "停止";
+    });
+    hit();
+  }
+
+  /* news ticker */
+  const tickerTrack = document.getElementById("tickerTrack");
+  if (tickerTrack) {
+    const hitEl = document.getElementById("tickerHit");
+    const vid = document.getElementById("tickerVid");
+    const stage = document.getElementById("tickerStage");
+    const srcs = [
+      "assets/showreel.mp4",
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/clip-b.mp4",
+    ];
+    let ti = 0;
+    let si = 0;
+    const paint = () => {
+      const bag = V14_LINES.concat(V14_LINES).join("  ·  ");
+      tickerTrack.innerHTML = `<span>${bag}  ·  ${bag}</span>`;
+    };
+    const next = () => {
+      const t = V14_LINES[ti++ % V14_LINES.length];
+      if (hitEl) hitEl.textContent = `「${t}。」`;
+      stage?.classList.remove("is-hit");
+      void stage?.offsetWidth;
+      stage?.classList.add("is-hit");
+    };
+    paint();
+    next();
+    document.getElementById("tickerNext")?.addEventListener("click", next);
+    document.getElementById("tickerSrc")?.addEventListener("click", () => {
+      if (!vid) return;
+      si = (si + 1) % srcs.length;
+      vid.src = srcs[si];
+      vid.play().catch(() => {});
+      next();
+    });
+  }
+
 
 })();
