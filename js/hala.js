@@ -511,7 +511,13 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
-            { t: "拍立得硬话卡", h: "polaroid.html", k: "POLAROID", a: "拍立得 翻面 班底 硬话" },
+                { t: "倾斜硬话卡", h: "tiltcard.html", k: "TILT", a: "倾斜 3D 卡片 硬话" },
+    { t: "土酷滤镜叠层", h: "filterstack.html", k: "FILTER", a: "滤镜 土酷 叠层 片源" },
+    { t: "折纸展开硬话", h: "paperfold.html", k: "FOLD", a: "折纸 展开 硬话" },
+    { t: "土酷记分牌", h: "scoreboard.html", k: "SCORE", a: "记分 土酷 暴击" },
+    { t: "黑胶硬话机", h: "vinyl.html", k: "VINYL", a: "黑胶 转盘 硬话" },
+    { t: "刀切字幕", h: "slice.html", k: "SLICE", a: "刀切 字幕 动能" },
+    { t: "拍立得硬话卡", h: "polaroid.html", k: "POLAROID", a: "拍立得 翻面 班底 硬话" },
     { t: "扫码出硬话", h: "barcode.html", k: "BARCODE", a: "扫码 扫描线 条码" },
     { t: "双机位对切", h: "splitcam.html", k: "SPLITCAM", a: "双机位 土酷 对切" },
     { t: "片源硬话热点", h: "hotspot.html", k: "HOTSPOT", a: "热点 片源 交互" },
@@ -3534,6 +3540,227 @@
     addEventListener("resize", resize);
     resize();
     hit();
+  }
+
+
+
+
+  /* ========== SYSTEM v16 handlers ========== */
+  const V16_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* tilt card 3d */
+  const tiltCard = document.getElementById("tiltCard");
+  if (tiltCard) {
+    const stage = document.getElementById("tiltStage");
+    const quote = document.getElementById("tiltQuote");
+    let ti = 0;
+    let flipped = false;
+    const onMove = (e) => {
+      if (flipped || !stage) return;
+      const r = stage.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      const x = (p.clientX - r.left) / r.width - 0.5;
+      const y = (p.clientY - r.top) / r.height - 0.5;
+      tiltCard.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 16}deg)`;
+    };
+    const reset = () => {
+      if (!flipped) tiltCard.style.transform = "rotateY(0) rotateX(0)";
+    };
+    stage?.addEventListener("pointermove", onMove);
+    stage?.addEventListener("pointerleave", reset);
+    document.getElementById("tiltFlip")?.addEventListener("click", () => {
+      flipped = !flipped;
+      tiltCard.classList.toggle("is-back", flipped);
+      tiltCard.classList.add("is-flip");
+      if (flipped) tiltCard.style.transform = "";
+      else reset();
+    });
+    document.getElementById("tiltNext")?.addEventListener("click", () => {
+      ti++;
+      if (quote) quote.textContent = `「${V16_LINES[ti % V16_LINES.length]}。」`;
+      flipped = true;
+      tiltCard.classList.add("is-back");
+    });
+  }
+
+  /* filter stack */
+  const filtStage = document.getElementById("filtStage");
+  if (filtStage) {
+    const cap = document.getElementById("filtCap");
+    const badge = document.getElementById("filtBadge");
+    const vid = document.getElementById("filtVid");
+    const srcs = [
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/showreel-motion.mp4",
+      "assets/clip-a.mp4",
+    ];
+    let fi = 0;
+    let si = 0;
+    const setMode = (mode) => {
+      filtStage.dataset.mode = mode;
+      if (badge) {
+        badge.textContent = mode === "both" ? "TU + KU" : mode === "tu" ? "TU · 土" : "KU · 酷";
+      }
+    };
+    const nextQ = () => {
+      if (cap) cap.textContent = `「${V16_LINES[fi++ % V16_LINES.length]}。」`;
+    };
+    document.getElementById("filtBoth")?.addEventListener("click", () => setMode("both"));
+    document.getElementById("filtTu")?.addEventListener("click", () => setMode("tu"));
+    document.getElementById("filtKu")?.addEventListener("click", () => setMode("ku"));
+    document.getElementById("filtNext")?.addEventListener("click", nextQ);
+    document.getElementById("filtSrc")?.addEventListener("click", () => {
+      if (!vid) return;
+      si = (si + 1) % srcs.length;
+      vid.src = srcs[si];
+      vid.play().catch(() => {});
+      nextQ();
+    });
+    nextQ();
+  }
+
+  /* paper fold */
+  const foldSheet = document.getElementById("foldSheet");
+  if (foldSheet) {
+    const quote = document.getElementById("foldQuote");
+    let oi = 0;
+    let open = false;
+    const setOpen = (v) => {
+      open = v;
+      foldSheet.classList.toggle("is-open", open);
+    };
+    document.getElementById("foldToggle")?.addEventListener("click", () => setOpen(!open));
+    document.getElementById("foldNext")?.addEventListener("click", () => {
+      oi++;
+      if (quote) quote.textContent = `「${V16_LINES[oi % V16_LINES.length]}。」`;
+      setOpen(true);
+    });
+    foldSheet.addEventListener("click", () => setOpen(!open));
+  }
+
+  /* scoreboard */
+  const scoreStage = document.getElementById("scoreStage");
+  if (scoreStage) {
+    let tu = 0;
+    let ku = 0;
+    let qi = 0;
+    const elTu = document.getElementById("scoreTu");
+    const elKu = document.getElementById("scoreKu");
+    const quote = document.getElementById("scoreQuote");
+    const pad = (n) => String(n).padStart(2, "0");
+    const paint = () => {
+      if (elTu) elTu.textContent = pad(tu);
+      if (elKu) elKu.textContent = pad(ku);
+    };
+    const crit = () => {
+      if (quote) quote.textContent = `「${V16_LINES[qi++ % V16_LINES.length]}。」`;
+      scoreStage.classList.remove("is-crit");
+      void scoreStage.offsetWidth;
+      scoreStage.classList.add("is-crit");
+    };
+    document.getElementById("scoreTuAdd")?.addEventListener("click", () => {
+      tu = Math.min(99, tu + 1);
+      paint();
+      if (tu % 3 === 0) crit();
+    });
+    document.getElementById("scoreKuAdd")?.addEventListener("click", () => {
+      ku = Math.min(99, ku + 1);
+      paint();
+      if (ku % 3 === 0) crit();
+    });
+    document.getElementById("scoreCrit")?.addEventListener("click", crit);
+    document.getElementById("scoreReset")?.addEventListener("click", () => {
+      tu = 0;
+      ku = 0;
+      paint();
+    });
+    paint();
+  }
+
+  /* vinyl */
+  const vinylStage = document.getElementById("vinylStage");
+  if (vinylStage) {
+    let on = false;
+    let vi = 0;
+    const quote = document.getElementById("vinylQuote");
+    const track = document.getElementById("vinylTrack");
+    const setTrack = () => {
+      if (quote) quote.textContent = `「${V16_LINES[vi % V16_LINES.length]}。」`;
+      if (track) track.textContent = `${String((vi % 12) + 1).padStart(2, "0")} / 硬话面`;
+    };
+    document.getElementById("vinylPlay")?.addEventListener("click", (e) => {
+      on = !on;
+      vinylStage.classList.toggle("is-on", on);
+      e.currentTarget.textContent = on ? "停转" : "转 / 停";
+    });
+    document.getElementById("vinylNext")?.addEventListener("click", () => {
+      vi++;
+      setTrack();
+      on = true;
+      vinylStage.classList.add("is-on");
+      const btn = document.getElementById("vinylPlay");
+      if (btn) btn.textContent = "停转";
+    });
+    setTrack();
+  }
+
+  /* slice type */
+  const sliceStage = document.getElementById("sliceStage");
+  if (sliceStage) {
+    const top = document.getElementById("sliceTop");
+    const bot = document.getElementById("sliceBot");
+    let si = 0;
+    let auto = 0;
+    const setText = (t) => {
+      if (top) top.textContent = t;
+      if (bot) bot.textContent = t;
+    };
+    const cut = () => {
+      const t = V16_LINES[si % V16_LINES.length];
+      setText(t);
+      sliceStage.classList.remove("is-join", "is-cut");
+      void sliceStage.offsetWidth;
+      sliceStage.classList.add("is-cut");
+      setTimeout(() => {
+        sliceStage.classList.add("is-join");
+        sliceStage.classList.remove("is-cut");
+      }, 420);
+    };
+    document.getElementById("sliceCut")?.addEventListener("click", cut);
+    document.getElementById("sliceNext")?.addEventListener("click", () => {
+      si++;
+      cut();
+    });
+    document.getElementById("sliceAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = 0;
+        e.currentTarget.textContent = "自动切";
+        return;
+      }
+      cut();
+      auto = setInterval(() => {
+        si++;
+        cut();
+      }, 1300);
+      e.currentTarget.textContent = "停止";
+    });
+    cut();
   }
 
 
