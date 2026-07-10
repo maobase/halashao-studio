@@ -427,9 +427,15 @@
       if (st) st.textContent = "请填写有效邮箱。";
       return;
     }
+    const subject = encodeURIComponent("哈拉少项目咨询 · " + name);
+    const body = encodeURIComponent(
+      "称呼：" + name + "\n回复邮箱：" + email + "\n\n项目简述：\n" + message + "\n\n—— 来自 halashao-studio 开干页"
+    );
+    const href = "mailto:hello@halashao.studio?subject=" + subject + "&body=" + body;
     if (st) {
-      st.textContent = "意向已记录。请再发一封邮件到 hello@halashao.studio（主题：哈拉少项目咨询），正式对齐更快。";
+      st.textContent = "正在打开邮件草稿…若未弹出，请直接点上方 hello@halashao.studio。";
     }
+    window.location.href = href;
     form.reset();
   });
 
