@@ -4170,6 +4170,19 @@ body.stage-glitch .stage-wrap {
 }
 
 
+/* v10 client polish */
+.cmt-panel { box-shadow: 0 18px 40px rgba(0,0,0,0.28); }
+.flash-stage, .typecast-stage, .duet-stage, .boss-stage {
+  box-shadow: 0 20px 48px rgba(0,0,0,0.32);
+}
+.seal-cell:focus-visible {
+  outline: 2px solid var(--led);
+  outline-offset: 2px;
+}
+.boss-stage.is-hit .boss-bar {
+  filter: brightness(1.15);
+}
+
 /* print handoff — press / about readable on paper */
 @media print {
   .noise, .led-grid, .cmd-fab, .cmd-overlay, #fx-field, .burger, .drawer, .skip { display: none !important; }
