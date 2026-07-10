@@ -6892,3 +6892,256 @@ body.stage-glitch .stage-wrap {
   margin: 0; font-size: clamp(1.15rem, 2.8vw, 1.55rem); font-weight: 900; color: var(--led);
 }
 .sub-pop[hidden] { display: none; }
+
+/* ========== SYSTEM v19 — crane · curtain · pager · jukebox · firecracker · taxilamp ========== */
+.crane-stage, .curt-stage, .pager-stage, .juke-stage, .fc-stage, .taxi-stage {
+  position: relative;
+  margin-top: 1.25rem;
+  min-height: min(62vh, 560px);
+  border: 1px solid var(--line);
+  background: #0a0a08;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.crane-hud, .curt-hud, .pager-hud, .juke-hud, .fc-hud, .taxi-hud {
+  margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.55rem;
+}
+
+/* crane */
+.crane-stage {
+  display: grid; place-content: end center; padding: 1rem 1rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,225,74,0.08), transparent 45%),
+    linear-gradient(180deg, #141412 0 28%, #0c0c0a 28%);
+}
+.crane-arm {
+  position: absolute; top: 0; left: 50%; width: 8px; height: 28%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #666, #333);
+  transition: height 0.45s var(--ease), left 0.5s var(--ease);
+  z-index: 3;
+}
+.crane-arm i {
+  position: absolute; bottom: -10px; left: 50%; width: 42px; height: 18px;
+  transform: translateX(-50%);
+  border: 3px solid var(--led); border-top: none; border-radius: 0 0 8px 8px;
+  box-shadow: 0 0 12px rgba(255,225,74,0.25);
+}
+.crane-arm b {
+  position: absolute; top: 0; left: 50%; width: 36px; height: 10px;
+  transform: translateX(-50%); background: #888; border-radius: 2px;
+}
+.crane-stage.is-drop .crane-arm { height: 62%; }
+.crane-bin {
+  display: flex; flex-wrap: wrap; gap: 0.45rem; justify-content: center;
+  align-content: flex-end; max-width: 420px; min-height: 120px; z-index: 1;
+}
+.crane-pill {
+  padding: 0.45rem 0.7rem; background: #1a1a16; border: 1px solid rgba(255,225,74,0.3);
+  color: var(--led); font-weight: 900; font-size: 0.85rem; border-radius: 999px;
+  transform: translateY(8px) scale(0.9); opacity: 0;
+  transition: transform 0.35s var(--ease), opacity 0.3s;
+}
+.crane-pill.is-in { transform: none; opacity: 1; }
+.crane-prize {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  margin: 0; z-index: 2; text-align: center; max-width: 14ch;
+  font-size: clamp(1.25rem, 3.2vw, 1.85rem); font-weight: 900; color: #fff;
+  text-shadow: 0 2px 0 #000, 0 0 20px rgba(255,225,74,0.25);
+  pointer-events: none;
+}
+.crane-stage.is-win .crane-prize { animation: kaleido-pop 0.4s var(--ease); color: var(--led); }
+.crane-meta {
+  position: absolute; top: 0.85rem; right: 0.9rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--mute); letter-spacing: 0.08em;
+}
+
+/* curtain */
+.curt-stage video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.05);
+}
+.curt-left, .curt-right {
+  position: absolute; top: 0; bottom: 0; width: 52%; z-index: 2;
+  background:
+    repeating-linear-gradient(90deg, #9a1210 0 14px, #c41e0a 14px 28px);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.35);
+  transition: transform 0.85s cubic-bezier(0.22, 0.9, 0.2, 1);
+}
+.curt-left { left: 0; transform-origin: left; border-right: 2px solid rgba(0,0,0,0.25); }
+.curt-right { right: 0; transform-origin: right; border-left: 2px solid rgba(0,0,0,0.25); }
+.curt-stage.is-open .curt-left { transform: translateX(-96%); }
+.curt-stage.is-open .curt-right { transform: translateX(96%); }
+.curt-cap {
+  position: absolute; z-index: 3; left: 50%; bottom: 16%; transform: translateX(-50%);
+  margin: 0; padding: 0.5rem 0.9rem; max-width: min(90%, 16ch); text-align: center;
+  font-size: clamp(1.15rem, 3vw, 1.65rem); font-weight: 900; color: #fff;
+  background: rgba(7,7,6,0.78); border: 1px solid rgba(255,225,74,0.45);
+  opacity: 0; transition: opacity 0.4s 0.35s;
+}
+.curt-stage.is-open .curt-cap { opacity: 1; }
+.curt-meta {
+  position: absolute; z-index: 3; top: 0.85rem; left: 0.9rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--led); letter-spacing: 0.08em;
+}
+
+/* pager */
+.pager-stage {
+  display: grid; place-content: center; gap: 1.25rem; padding: 2rem 1rem;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(110,200,255,0.08), transparent 45%),
+    #0b0b09;
+}
+.pager-body {
+  width: min(280px, 86vw); background: linear-gradient(160deg, #2a2a28, #151513);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+  padding: 1rem 1rem 1.15rem; box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+}
+.pager-brand {
+  display: block; font-family: var(--font-mono); font-size: 0.68rem; color: var(--mute);
+  letter-spacing: 0.12em; margin-bottom: 0.55rem;
+}
+.pager-screen {
+  min-height: 4.5rem; background: #0d1f14; color: #7dff9a;
+  font-family: var(--font-mono); font-size: 0.92rem; font-weight: 700;
+  padding: 0.75rem; border-radius: 4px; border: 2px solid #1a3a28;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.45);
+  line-height: 1.45;
+}
+.pager-stage.is-beep .pager-screen {
+  animation: pager-flash 0.35s ease;
+}
+@keyframes pager-flash {
+  0%, 100% { filter: none; }
+  50% { filter: brightness(1.4); }
+}
+.pager-leds {
+  display: flex; gap: 0.35rem; margin-top: 0.65rem;
+}
+.pager-leds i {
+  width: 8px; height: 8px; border-radius: 50%; background: #333;
+}
+.pager-stage.is-beep .pager-leds i {
+  background: var(--seal);
+  box-shadow: 0 0 8px var(--seal);
+  animation: mega-wave 0.6s ease infinite;
+}
+.pager-quote {
+  margin: 0; text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 900; color: var(--led);
+  max-width: 16ch; justify-self: center;
+}
+
+/* jukebox */
+.juke-stage {
+  padding: 1.25rem 1rem 1.5rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(232,52,26,0.1), transparent 45%),
+    #0c0c0a;
+}
+.juke-panel {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem;
+  max-width: 820px; margin: 0 auto;
+}
+.juke-list {
+  display: grid; gap: 0.35rem; max-height: min(48vh, 360px); overflow: auto;
+  padding-right: 0.25rem;
+}
+.juke-track {
+  appearance: none; text-align: left; border: 1px solid var(--line);
+  background: #141412; color: #eee; font: inherit; font-weight: 700;
+  padding: 0.55rem 0.75rem; cursor: pointer; border-radius: 2px;
+  display: flex; justify-content: space-between; gap: 0.5rem;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.juke-track:hover, .juke-track.is-on {
+  border-color: var(--led); background: rgba(255,225,74,0.1); color: var(--led);
+}
+.juke-track span { font-family: var(--font-mono); font-size: 0.72rem; color: var(--mute); }
+.juke-now {
+  border: 1px solid var(--line); background: rgba(16,16,14,0.95);
+  padding: 1.15rem; display: grid; gap: 0.65rem; align-content: center;
+  min-height: 160px;
+}
+.juke-now .said {
+  margin: 0; font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 900; color: var(--led);
+}
+.juke-now span:last-child {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--mute); letter-spacing: 0.06em;
+}
+@media (max-width: 720px) {
+  .juke-panel { grid-template-columns: 1fr; }
+}
+
+/* firecracker */
+.fc-stage {
+  background:
+    radial-gradient(circle at 50% 70%, rgba(232,52,26,0.12), transparent 40%),
+    #0a0a08;
+}
+#fcCanvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none;
+}
+.fc-string {
+  position: absolute; left: 50%; bottom: 18%; transform: translateX(-50%);
+  width: 10px; height: 42%; z-index: 1;
+  background: repeating-linear-gradient(180deg, #e8341a 0 12px, #b91c12 12px 16px);
+  border-radius: 4px;
+  box-shadow: 0 0 16px rgba(232,52,26,0.25);
+}
+.fc-string::before {
+  content: ""; position: absolute; top: -8px; left: 50%; width: 14px; height: 14px;
+  transform: translateX(-50%); border-radius: 50%; background: #ffe14a;
+  box-shadow: 0 0 10px #ffe14a;
+}
+.fc-stage.is-bang .fc-string { opacity: 0; transition: opacity 0.2s; }
+.fc-quote {
+  position: absolute; z-index: 3; left: 50%; top: 38%; transform: translate(-50%, -50%);
+  margin: 0; text-align: center; max-width: 14ch;
+  font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 900; color: #fff;
+  text-shadow: 0 2px 0 #000, 0 0 22px rgba(255,225,74,0.3);
+}
+.fc-stage.is-bang .fc-quote { color: var(--led); animation: kaleido-pop 0.4s var(--ease); }
+.fc-meta {
+  position: absolute; z-index: 3; top: 0.85rem; right: 0.9rem;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--mute); letter-spacing: 0.08em;
+}
+
+/* taxi lamp */
+.taxi-stage {
+  display: grid; place-content: center; gap: 1.25rem; padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,225,74,0.1), transparent 50%),
+    linear-gradient(180deg, #12141a, #0a0a08);
+}
+.taxi-lamp {
+  width: min(280px, 78vw); height: 100px; margin: 0 auto;
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease);
+}
+.taxi-face {
+  position: absolute; inset: 0; display: grid; place-content: center;
+  font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 900; letter-spacing: 0.12em;
+  border-radius: 8px; border: 3px solid rgba(0,0,0,0.35);
+  backface-visibility: hidden;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.08);
+}
+.taxi-front {
+  background: linear-gradient(180deg, #ffe14a, #e0c12a); color: #111;
+}
+.taxi-back {
+  background: linear-gradient(180deg, #e8341a, #a81610); color: #fff;
+  transform: rotateY(180deg);
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem); letter-spacing: 0.04em; padding: 0.5rem;
+  text-align: center;
+}
+.taxi-lamp.is-flip { transform: rotateY(180deg); }
+.taxi-quote {
+  margin: 0; text-align: center;
+  font-size: clamp(1.2rem, 3vw, 1.7rem); font-weight: 900; color: var(--led);
+  max-width: 16ch; justify-self: center; min-height: 2.2em;
+}
+.taxi-meta {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--mute);
+  letter-spacing: 0.08em; text-align: center;
+}

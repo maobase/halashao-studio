@@ -512,6 +512,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+    { t: "抓娃娃硬话", h: "crane.html", k: "CRANE", a: "抓娃娃 街机 爪子 硬话" },
+    { t: "红幕硬话", h: "curtain.html", k: "CURTAIN", a: "红幕 拉开 片源 硬话" },
+    { t: "寻呼机硬话", h: "pager.html", k: "PAGER", a: "寻呼 BB机 哔哔 硬话" },
+    { t: "点唱机硬话", h: "jukebox.html", k: "JUKE", a: "点唱 选曲 硬话" },
+    { t: "鞭炮硬话", h: "firecracker.html", k: "BANG", a: "鞭炮 粒子 爆炸 硬话" },
+    { t: "出租顶灯硬话", h: "taxilamp.html", k: "TAXI", a: "出租 顶灯 夜色 硬话" },
     { t: "翻页时钟硬话", h: "flipclock.html", k: "FLIP", a: "翻页 时钟 硬话" },
     { t: "多米诺硬话", h: "domino.html", k: "DOMINO", a: "多米诺 骨牌 连招" },
     { t: "快门硬话", h: "shutter.html", k: "SHUTTER", a: "快门 片源 闪切" },
@@ -4340,6 +4346,222 @@
     document.getElementById("subClear")?.addEventListener("click", () => {
       subStops.querySelectorAll(".sub-stop").forEach((b) => b.classList.remove("is-on"));
       if (pop) pop.hidden = true;
+    });
+  }
+
+
+
+  /* ========== SYSTEM v19 handlers ========== */
+  const V19_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* crane claw */
+  const craneStage = document.getElementById("craneStage");
+  if (craneStage) {
+    const bin = document.getElementById("craneBin");
+    const prize = document.getElementById("cranePrize");
+    const meta = document.getElementById("craneMeta");
+    let ci = 0;
+    let credit = 0;
+    const grab = () => {
+      craneStage.classList.remove("is-drop", "is-win");
+      void craneStage.offsetWidth;
+      craneStage.classList.add("is-drop");
+      setTimeout(() => {
+        const q = V19_LINES[ci++ % V19_LINES.length];
+        if (prize) prize.textContent = `「${q}。」`;
+        const pill = document.createElement("span");
+        pill.className = "crane-pill";
+        pill.textContent = q.slice(0, 6);
+        bin?.appendChild(pill);
+        requestAnimationFrame(() => pill.classList.add("is-in"));
+        credit++;
+        if (meta) meta.textContent = `CREDIT · ${String(credit).padStart(2, "0")}`;
+        craneStage.classList.add("is-win");
+        setTimeout(() => craneStage.classList.remove("is-drop"), 200);
+      }, 450);
+    };
+    document.getElementById("craneGrab")?.addEventListener("click", grab);
+    document.getElementById("craneShake")?.addEventListener("click", () => {
+      craneStage.classList.remove("is-win");
+      void craneStage.offsetWidth;
+      grab();
+    });
+  }
+
+  /* curtain */
+  const curtStage = document.getElementById("curtStage");
+  if (curtStage) {
+    const cap = document.getElementById("curtCap");
+    let qi = 0;
+    document.getElementById("curtOpen")?.addEventListener("click", () => {
+      curtStage.classList.add("is-open");
+    });
+    document.getElementById("curtClose")?.addEventListener("click", () => {
+      curtStage.classList.remove("is-open");
+    });
+    document.getElementById("curtNext")?.addEventListener("click", () => {
+      if (cap) cap.textContent = `「${V19_LINES[qi++ % V19_LINES.length]}。」`;
+      curtStage.classList.remove("is-open");
+      void curtStage.offsetWidth;
+      curtStage.classList.add("is-open");
+    });
+  }
+
+  /* pager */
+  const pagerStage = document.getElementById("pagerStage");
+  if (pagerStage) {
+    const screen = document.getElementById("pagerScreen");
+    const quote = document.getElementById("pagerQuote");
+    let pi = 0;
+    const beep = () => {
+      const q = V19_LINES[pi++ % V19_LINES.length];
+      if (screen) screen.textContent = `※ 新消息\n${q}`;
+      if (quote) quote.textContent = `「${q}。」`;
+      pagerStage.classList.remove("is-beep");
+      void pagerStage.offsetWidth;
+      pagerStage.classList.add("is-beep");
+      setTimeout(() => pagerStage.classList.remove("is-beep"), 700);
+    };
+    document.getElementById("pagerBeep")?.addEventListener("click", beep);
+    document.getElementById("pagerBurst")?.addEventListener("click", () => {
+      beep();
+      setTimeout(beep, 400);
+      setTimeout(beep, 800);
+    });
+  }
+
+  /* jukebox */
+  const jukeList = document.getElementById("jukeList");
+  if (jukeList) {
+    const now = document.getElementById("jukeNow");
+    const track = document.getElementById("jukeTrack");
+    let ji = 0;
+    const play = (i) => {
+      ji = i % V19_LINES.length;
+      const q = V19_LINES[ji];
+      if (now) now.textContent = `「${q}。」`;
+      if (track) track.textContent = `TRACK · ${String.fromCharCode(65 + (ji % 6))}${1 + (ji % 9)}`;
+      jukeList.querySelectorAll(".juke-track").forEach((b, idx) => b.classList.toggle("is-on", idx === ji));
+    };
+    V19_LINES.forEach((q, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "juke-track";
+      btn.setAttribute("role", "option");
+      btn.innerHTML = `<b>${q}</b><span>${String.fromCharCode(65 + (i % 6))}${1 + (i % 9)}</span>`;
+      btn.addEventListener("click", () => play(i));
+      jukeList.appendChild(btn);
+    });
+    play(0);
+    document.getElementById("jukeRandom")?.addEventListener("click", () => {
+      play(Math.floor(Math.random() * V19_LINES.length));
+    });
+    document.getElementById("jukeNext")?.addEventListener("click", () => play(ji + 1));
+  }
+
+  /* firecracker */
+  const fcStage = document.getElementById("fcStage");
+  if (fcStage) {
+    const canvas = document.getElementById("fcCanvas");
+    const quote = document.getElementById("fcQuote");
+    const meta = document.getElementById("fcMeta");
+    const ctx = canvas.getContext("2d");
+    let parts = [];
+    let raf = 0;
+    let fi = 0;
+    const resize = () => {
+      const r = fcStage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      canvas.style.width = r.width + "px";
+      canvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const bang = () => {
+      const r = fcStage.getBoundingClientRect();
+      const cx = r.width * 0.5;
+      const cy = r.height * 0.45;
+      parts = [];
+      for (let i = 0; i < 90; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const sp = 2 + Math.random() * 7;
+        parts.push({
+          x: cx, y: cy,
+          vx: Math.cos(ang) * sp,
+          vy: Math.sin(ang) * sp - 2,
+          a: 1,
+          c: Math.random() > 0.45 ? "#ffe14a" : "#e8341a",
+        });
+      }
+      const q = V19_LINES[fi++ % V19_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      if (meta) meta.textContent = `FUSE · BANG ${String(fi).padStart(2, "0")}`;
+      fcStage.classList.remove("is-bang");
+      void fcStage.offsetWidth;
+      fcStage.classList.add("is-bang");
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const tick = () => {
+      const r = fcStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      parts = parts.filter((p) => p.a > 0.04);
+      parts.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.12;
+        p.a *= 0.96;
+        ctx.fillStyle = p.c;
+        ctx.globalAlpha = p.a;
+        ctx.fillRect(p.x, p.y, 3, 3);
+      });
+      ctx.globalAlpha = 1;
+      if (parts.length) raf = requestAnimationFrame(tick);
+      else raf = 0;
+    };
+    document.getElementById("fcLight")?.addEventListener("click", bang);
+    document.getElementById("fcNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V19_LINES[fi++ % V19_LINES.length]}。」`;
+    });
+    addEventListener("resize", resize);
+    resize();
+  }
+
+  /* taxi lamp */
+  const taxiStage = document.getElementById("taxiStage");
+  if (taxiStage) {
+    const lamp = document.getElementById("taxiLamp");
+    const back = document.getElementById("taxiBack");
+    const quote = document.getElementById("taxiQuote");
+    const meta = document.getElementById("taxiMeta");
+    let ti = 0;
+    let flipped = false;
+    const flip = () => {
+      const q = V19_LINES[ti++ % V19_LINES.length];
+      flipped = !flipped;
+      if (back) back.textContent = q.length > 8 ? q.slice(0, 8) : q;
+      if (quote) quote.textContent = `「${q}。」`;
+      if (meta) meta.textContent = flipped ? "HIRED · HARD" : "NIGHT · CITY";
+      lamp?.classList.toggle("is-flip", flipped);
+    };
+    document.getElementById("taxiFlip")?.addEventListener("click", flip);
+    document.getElementById("taxiCruise")?.addEventListener("click", () => {
+      flip();
+      setTimeout(flip, 750);
+      setTimeout(flip, 1500);
     });
   }
 
