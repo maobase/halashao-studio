@@ -429,7 +429,7 @@
     }
     const subject = encodeURIComponent("哈拉少项目咨询 · " + name);
     const body = encodeURIComponent(
-      "称呼：" + name + "\n回复邮箱：" + email + "\n\n项目简述：\n" + message + "\n\n—— 来自 halashao-studio 开干页"
+      "称呼：" + name + "\n回复邮箱：" + email + "\n\n项目简述：\n" + message + "\n\n—— 来自 哈拉少设计工作室官网 · 开干页"
     );
     const href = "mailto:hello@halashao.studio?subject=" + subject + "&body=" + body;
     if (st) {
@@ -465,7 +465,7 @@
   /* command palette — client path first, then demo branches */
   const MODULES = [
     { t: "首页", h: "index.html", k: "HOME", a: "哈拉少 东北" },
-    { t: "关于工作室", h: "about.html", k: "ABOUT", a: "东北 土酷 身份" },
+    { t: "关于工作室", h: "about.html", k: "ABOUT", a: "东北 土酷 身份 哈拉少 范德彪" },
     { t: "服务", h: "services.html", k: "SERVICES", a: "品牌 产品 全案 跨尺度" },
     { t: "合作流程", h: "process.html", k: "PROCESS", a: "对齐 锻造 淬火 上线" },
     { t: "作品硬仗", h: "work.html", k: "WORK", a: "熔光 墨界 脉冲 野市 案例" },
@@ -486,7 +486,7 @@
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
     { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位" },
-    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 拍立得 扫码 双机位 爆破" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
