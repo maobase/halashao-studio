@@ -512,7 +512,13 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
-                { t: "倾斜硬话卡", h: "tiltcard.html", k: "TILT", a: "倾斜 3D 卡片 硬话" },
+                    { t: "烟雾揭硬话", h: "fog.html", k: "FOG", a: "烟雾 揭开 片源 硬话" },
+    { t: "胶带撕开硬话", h: "tape.html", k: "TAPE", a: "胶带 撕开 硬话" },
+    { t: "喷漆硬话", h: "stencil.html", k: "STENCIL", a: "喷漆 模板 街头" },
+    { t: "水波硬话", h: "ripple.html", k: "RIPPLE", a: "水波 波纹 片源" },
+    { t: "抛硬币硬话", h: "coin.html", k: "COIN", a: "硬币 土酷 抛掷" },
+    { t: "快递面单硬话", h: "packslip.html", k: "PACK", a: "快递 面单 打印" },
+    { t: "倾斜硬话卡", h: "tiltcard.html", k: "TILT", a: "倾斜 3D 卡片 硬话" },
     { t: "土酷滤镜叠层", h: "filterstack.html", k: "FILTER", a: "滤镜 土酷 叠层 片源" },
     { t: "折纸展开硬话", h: "paperfold.html", k: "FOLD", a: "折纸 展开 硬话" },
     { t: "土酷记分牌", h: "scoreboard.html", k: "SCORE", a: "记分 土酷 暴击" },
@@ -3762,6 +3768,310 @@
       e.currentTarget.textContent = "停止";
     });
     cut();
+  }
+
+
+
+
+  /* ========== SYSTEM v17 handlers ========== */
+  const V17_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* fog reveal */
+  const fogCanvas = document.getElementById("fogCanvas");
+  if (fogCanvas) {
+    const stage = document.getElementById("fogStage");
+    const quote = document.getElementById("fogQuote");
+    const ctx = fogCanvas.getContext("2d");
+    let drawing = false;
+    let qi = 0;
+    const resize = () => {
+      const r = stage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      fogCanvas.width = r.width * dpr;
+      fogCanvas.height = r.height * dpr;
+      fogCanvas.style.width = r.width + "px";
+      fogCanvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      paintFog();
+    };
+    const paintFog = () => {
+      const w = fogCanvas.clientWidth;
+      const h = fogCanvas.clientHeight;
+      ctx.globalCompositeOperation = "source-over";
+      const g = ctx.createRadialGradient(w * 0.5, h * 0.45, 10, w * 0.5, h * 0.5, Math.max(w, h) * 0.7);
+      g.addColorStop(0, "rgba(200,200,195,0.55)");
+      g.addColorStop(0.45, "rgba(120,120,115,0.72)");
+      g.addColorStop(1, "rgba(40,40,38,0.88)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(255,255,255,0.06)";
+      for (let i = 0; i < 60; i++) {
+        ctx.beginPath();
+        ctx.arc(Math.random() * w, Math.random() * h, 8 + Math.random() * 40, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      stage?.classList.remove("is-clear");
+    };
+    const wipe = (x, y) => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, 28, 0, Math.PI * 2);
+      ctx.fill();
+    };
+    const pos = (e) => {
+      const r = fogCanvas.getBoundingClientRect();
+      const p = e.touches ? e.touches[0] : e;
+      return { x: p.clientX - r.left, y: p.clientY - r.top };
+    };
+    fogCanvas.addEventListener("pointerdown", (e) => {
+      drawing = true;
+      const p = pos(e);
+      wipe(p.x, p.y);
+      e.preventDefault();
+    });
+    fogCanvas.addEventListener("pointermove", (e) => {
+      if (!drawing) return;
+      const p = pos(e);
+      wipe(p.x, p.y);
+    });
+    addEventListener("pointerup", () => {
+      drawing = false;
+    });
+    document.getElementById("fogClear")?.addEventListener("click", () => {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillRect(0, 0, fogCanvas.clientWidth, fogCanvas.clientHeight);
+      stage?.classList.add("is-clear");
+    });
+    document.getElementById("fogReset")?.addEventListener("click", paintFog);
+    document.getElementById("fogNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V17_LINES[qi++ % V17_LINES.length]}。」`;
+      paintFog();
+    });
+    addEventListener("resize", resize);
+    resize();
+  }
+
+  /* tape peel */
+  const tapeStage = document.getElementById("tapeStage");
+  if (tapeStage) {
+    const strip = document.getElementById("tapeStrip");
+    const quote = document.getElementById("tapeQuote");
+    let ti = 0;
+    document.getElementById("tapePeel")?.addEventListener("click", () => {
+      tapeStage.classList.add("is-peel");
+    });
+    document.getElementById("tapeReset")?.addEventListener("click", () => {
+      tapeStage.classList.remove("is-peel");
+    });
+    document.getElementById("tapeNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V17_LINES[ti++ % V17_LINES.length]}。」`;
+      tapeStage.classList.remove("is-peel");
+      void tapeStage.offsetWidth;
+      tapeStage.classList.add("is-peel");
+    });
+    strip?.addEventListener("click", () => tapeStage.classList.toggle("is-peel"));
+  }
+
+  /* stencil spray */
+  const stenStage = document.getElementById("stenStage");
+  if (stenStage) {
+    const canvas = document.getElementById("stenCanvas");
+    const quote = document.getElementById("stenQuote");
+    const ctx = canvas.getContext("2d");
+    let si = 0;
+    const resize = () => {
+      const r = stenStage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      canvas.style.width = r.width + "px";
+      canvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const spray = () => {
+      const r = stenStage.getBoundingClientRect();
+      const cx = r.width * (0.35 + Math.random() * 0.3);
+      const cy = r.height * (0.35 + Math.random() * 0.3);
+      for (let i = 0; i < 120; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 70;
+        ctx.fillStyle = Math.random() > 0.3 ? "rgba(255,225,74,0.35)" : "rgba(232,52,26,0.28)";
+        ctx.fillRect(cx + Math.cos(ang) * dist, cy + Math.sin(ang) * dist, 2, 2);
+      }
+      const t = V17_LINES[si % V17_LINES.length];
+      if (quote) {
+        quote.textContent = t;
+        quote.dataset.text = t;
+      }
+      stenStage.classList.remove("is-sprayed");
+      void stenStage.offsetWidth;
+      stenStage.classList.add("is-sprayed");
+    };
+    document.getElementById("stenSpray")?.addEventListener("click", spray);
+    document.getElementById("stenNext")?.addEventListener("click", () => {
+      si++;
+      spray();
+    });
+    document.getElementById("stenClear")?.addEventListener("click", () => {
+      const r = stenStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      stenStage.classList.remove("is-sprayed");
+    });
+    addEventListener("resize", resize);
+    resize();
+  }
+
+  /* ripple */
+  const ripStage = document.getElementById("ripStage");
+  if (ripStage) {
+    const canvas = document.getElementById("ripCanvas");
+    const quote = document.getElementById("ripQuote");
+    const vid = document.getElementById("ripVid");
+    const ctx = canvas.getContext("2d");
+    let waves = [];
+    let ri = 0;
+    let si = 0;
+    let raf = 0;
+    const srcs = [
+      "assets/showreel-motion.mp4",
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/clip-a.mp4",
+    ];
+    const resize = () => {
+      const r = ripStage.getBoundingClientRect();
+      const dpr = devicePixelRatio || 1;
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      canvas.style.width = r.width + "px";
+      canvas.style.height = r.height + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const hit = (x, y) => {
+      waves.push({ x, y, r: 4, a: 1 });
+      if (quote) quote.textContent = `「${V17_LINES[ri++ % V17_LINES.length]}。」`;
+      ripStage.classList.remove("is-hit");
+      void ripStage.offsetWidth;
+      ripStage.classList.add("is-hit");
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const tick = () => {
+      const r = ripStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      waves = waves.filter((w) => w.a > 0.03);
+      waves.forEach((w) => {
+        w.r += 3.2;
+        w.a *= 0.96;
+        ctx.beginPath();
+        ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255,225,74,${w.a})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(w.x, w.y, w.r * 0.7, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(232,52,26,${w.a * 0.7})`;
+        ctx.stroke();
+      });
+      if (waves.length) raf = requestAnimationFrame(tick);
+      else raf = 0;
+    };
+    canvas.addEventListener("pointerdown", (e) => {
+      const r = canvas.getBoundingClientRect();
+      hit(e.clientX - r.left, e.clientY - r.top);
+    });
+    document.getElementById("ripHit")?.addEventListener("click", () => {
+      const r = ripStage.getBoundingClientRect();
+      hit(r.width * 0.5, r.height * 0.5);
+    });
+    document.getElementById("ripNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V17_LINES[ri++ % V17_LINES.length]}。」`;
+    });
+    document.getElementById("ripSrc")?.addEventListener("click", () => {
+      if (!vid) return;
+      si = (si + 1) % srcs.length;
+      vid.src = srcs[si];
+      vid.play().catch(() => {});
+    });
+    addEventListener("resize", resize);
+    resize();
+  }
+
+  /* coin flip */
+  const coinStage = document.getElementById("coinStage");
+  if (coinStage) {
+    const coin = document.getElementById("coin3d");
+    const side = document.getElementById("coinSide");
+    const quote = document.getElementById("coinQuote");
+    let ci = 0;
+    const flip = () => {
+      if (!coin) return;
+      const isKu = Math.random() > 0.5;
+      const turns = 5 + Math.floor(Math.random() * 3);
+      const end = (turns * 360 + (isKu ? 180 : 0));
+      coin.style.setProperty("--coin-end", end + "deg");
+      coin.classList.remove("is-flip");
+      void coin.offsetWidth;
+      coin.classList.add("is-flip");
+      setTimeout(() => {
+        if (side) side.textContent = isKu ? "KU · 酷面" : "TU · 土面";
+        if (quote) quote.textContent = `「${V17_LINES[ci++ % V17_LINES.length]}。」`;
+      }, 850);
+    };
+    document.getElementById("coinFlip")?.addEventListener("click", flip);
+    document.getElementById("coinTriple")?.addEventListener("click", () => {
+      flip();
+      setTimeout(flip, 1000);
+      setTimeout(flip, 2000);
+    });
+  }
+
+  /* pack slip */
+  const packLines = document.getElementById("packLines");
+  if (packLines) {
+    let pi = 0;
+    let no = 1;
+    const slip = document.getElementById("packSlip");
+    const said = document.getElementById("packSaid");
+    const packNo = document.getElementById("packNo");
+    const packTo = document.getElementById("packTo");
+    const dests = ["品牌硬仗", "产品界面", "发布片源", "空间叙事", "全案节点"];
+    const add = () => {
+      const line = V17_LINES[pi++ % V17_LINES.length];
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${line}</span><em>硬</em>`;
+      packLines.appendChild(li);
+      if (said) said.textContent = `「${line}。」`;
+      if (packTo) packTo.textContent = dests[pi % dests.length];
+      if (packNo) packNo.textContent = String(1000 + no).slice(1);
+      no++;
+      if (slip) {
+        slip.classList.remove("is-print");
+        void slip.offsetWidth;
+        slip.classList.add("is-print");
+      }
+    };
+    add();
+    document.getElementById("packAdd")?.addEventListener("click", add);
+    document.getElementById("packFull")?.addEventListener("click", () => {
+      for (let i = 0; i < 4; i++) setTimeout(add, i * 100);
+    });
+    document.getElementById("packClear")?.addEventListener("click", () => {
+      packLines.innerHTML = "";
+      if (said) said.textContent = "「欧了。」";
+    });
   }
 
 
