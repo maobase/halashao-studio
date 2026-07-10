@@ -18,6 +18,8 @@
     { t: "走着瞧", src: "assets/biao-16.mp3", tip: "TRACK 16" },
     { t: "你给我记住", src: "assets/biao-17.mp3", tip: "TRACK 17" },
     { t: "这才叫痛快", src: "assets/biao-18.mp3", tip: "TRACK 18" },
+    { t: "稳了", src: "assets/biao-19.mp3", tip: "TRACK 19" },
+    { t: "接着奏乐接着舞", src: "assets/biao-20.mp3", tip: "TRACK 20" },
   ];
 
   const pad = document.getElementById("jukePad");

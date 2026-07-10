@@ -264,7 +264,7 @@
 
   // command palette ⌘K / Ctrl+K
   const MODULES = [
-    ["首页", "index.html"], ["系统地图", "os.html"], ["使用手册", "docs.html"],
+    ["首页", "index.html"], ["系统地图", "os.html"], ["使用手册", "docs.html"], ["导览", "tour.html"],
     ["作品库", "work.html"], ["影库", "gallery.html"], ["故事条", "stories.html"],
     ["硬仗档案", "hard.html"], ["前后对比", "versus.html"], ["片源台", "reel.html"],
     ["新二流", "xin2.html"], ["直播感", "live.html"], ["夜场", "night.html"],
@@ -277,10 +277,13 @@
     ["土味盖章", "stamp.html"], ["老板看板", "boss.html"], ["土酷电台", "radio.html"],
     ["卡拉OK", "karaoke.html"], ["城市灯牌", "billboard.html"], ["锻造工坊", "workshop.html"],
     ["审美罗盘", "mood.html"], ["土酷对决", "arena.html"], ["弹幕墙", "wall.html"],
-    ["特效场", "fx.html"], ["点唱机", "jukebox.html"], ["彪哥语录", "biao.html"],
-    ["人设卡", "cast.html"], ["招人", "recruit.html"], ["媒体包", "press.html"],
-    ["工作室", "studio.html"], ["时间线", "timeline.html"], ["服务菜单", "menu.html"],
-    ["硬问题", "faq.html"], ["开干", "contact.html"],
+    ["节拍战", "beat.html"], ["硬仗老虎机", "slot.html"], ["模块开箱", "loot.html"],
+    ["语录烟花", "fireworks.html"], ["模块雷达", "radar.html"], ["录像带", "vhs.html"],
+    ["追光灯", "spotlight.html"], ["镜像字", "mirror.html"], ["土酷连招", "combo.html"],
+    ["全屏宣言", "manifesto.html"], ["特效场", "fx.html"], ["点唱机", "jukebox.html"],
+    ["彪哥语录", "biao.html"], ["人设卡", "cast.html"], ["招人", "recruit.html"],
+    ["媒体包", "press.html"], ["工作室", "studio.html"], ["时间线", "timeline.html"],
+    ["服务菜单", "menu.html"], ["硬问题", "faq.html"], ["开干", "contact.html"],
   ];
 
   const ensureCmd = () => {
