@@ -412,6 +412,11 @@
     { t: "彪哥语录墙", h: "quotes.html", k: "QUOTES" },
     { t: "彪哥电台", h: "radio.html", k: "RADIO" },
     { t: "特效舞台", h: "stage.html", k: "STAGE" },
+    { t: "动能字墙", h: "typefx.html", k: "TYPEFX" },
+    { t: "土酷混剪", h: "mix.html", k: "MIX" },
+    { t: "夜市灯牌", h: "night-market.html", k: "MARKET" },
+    { t: "导览台", h: "dashboard.html", k: "DASH" },
+    { t: "硬仗导览", h: "tour.html", k: "TOUR" },
     { t: "班底海报卡", h: "cast.html", k: "CAST" },
     { t: "团队介绍", h: "team.html", k: "TEAM" },
     { t: "滚动叙事", h: "stories.html", k: "STORIES" },
@@ -770,5 +775,152 @@
       if (now) now.innerHTML = `待命：<em>${label}</em>`;
       tracks[0].classList.add("is-on");
     }
+  }
+
+  /* dashboard clock + quote feed */
+  const dashClock = document.getElementById("dashClock");
+  const dashFeed = document.getElementById("dashFeed");
+  if (dashClock) {
+    const tickClock = () => {
+      const d = new Date();
+      dashClock.textContent = [d.getHours(), d.getMinutes(), d.getSeconds()]
+        .map((n) => String(n).padStart(2, "0"))
+        .join(":");
+    };
+    tickClock();
+    setInterval(tickClock, 1000);
+  }
+  if (dashFeed) {
+    const lines = [
+      "小树不倒我就不倒",
+      "那长相就是证据",
+      "你就慢慢跟我处",
+      "本市著名硬仗",
+      "欧了",
+      "少，是刃",
+      "酷是壳 · 土是芯",
+      "该出手时就出手",
+    ];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % lines.length;
+      const p = document.createElement("p");
+      p.innerHTML = `<em>${lines[i]}</em>`;
+      dashFeed.prepend(p);
+      while (dashFeed.children.length > 6) dashFeed.lastElementChild?.remove();
+    }, 2800);
+  }
+
+  /* typefx kinetic wall */
+  const typeWord = document.getElementById("typefxWord");
+  if (typeWord) {
+    const lines = [
+      "小树不倒<br /><em>我就不倒</em>",
+      "那长相<br /><em>就是证据</em>",
+      "你就慢慢<br /><em>跟我处</em>",
+      "本市著名<br /><em>硬仗</em>",
+      "少，<br /><em>是刃</em>",
+      "酷是壳<br /><em>土是芯</em>",
+      "不生产<br /><em>模板</em>",
+      "欧了<br /><em>开干</em>",
+    ];
+    let idx = 0;
+    const bar = document.getElementById("typefxBar");
+    const meta = document.getElementById("typefxMeta");
+    const apply = (i) => {
+      idx = (i + lines.length) % lines.length;
+      typeWord.innerHTML = lines[idx];
+      if (meta) meta.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(lines.length).padStart(2, "0")} · 范德彪`;
+      const t = idx / (lines.length - 1 || 1);
+      typeWord.style.transform = `skewX(${(t - 0.5) * -8}deg) scale(${1 + t * 0.08})`;
+      typeWord.style.filter = t > 0.7 ? "contrast(1.15)" : "none";
+    };
+    apply(0);
+    const onScroll = () => {
+      const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      const p = Math.min(1, scrollY / max);
+      if (bar) bar.style.width = `${p * 100}%`;
+      const next = Math.min(lines.length - 1, Math.floor(p * lines.length));
+      if (next !== idx) apply(next);
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    document.getElementById("typefxPrev")?.addEventListener("click", () => apply(idx - 1));
+    document.getElementById("typefxNext")?.addEventListener("click", () => apply(idx + 1));
+    document.getElementById("typefxGlitch")?.addEventListener("click", () => {
+      typeWord.style.transform = "translate(4px,-2px) skewX(-12deg)";
+      typeWord.style.color = "var(--seal)";
+      setTimeout(() => {
+        typeWord.style.color = "";
+        apply(idx);
+      }, 180);
+    });
+  }
+
+  /* mix dual video */
+  const mixTu = document.getElementById("mixTu");
+  const mixKu = document.getElementById("mixKu");
+  if (mixTu && mixKu) {
+    const caps = [
+      ["那长相就是证据", "少 · 是刃"],
+      ["人间烟火", "电影画幅"],
+      ["你就慢慢跟我处", "小树不倒"],
+      ["夜市灯牌", "系统交付"],
+      ["欧了", "开干"],
+    ];
+    let capI = 0;
+    const playBoth = async () => {
+      try {
+        await Promise.all([mixTu.play(), mixKu.play()]);
+      } catch {
+        /* */
+      }
+    };
+    document.getElementById("mixPlay")?.addEventListener("click", playBoth);
+    document.getElementById("mixSwap")?.addEventListener("click", () => {
+      const a = document.getElementById("mixCapTu");
+      const b = document.getElementById("mixCapKu");
+      if (!a || !b) return;
+      const t = a.textContent;
+      a.textContent = b.textContent;
+      b.textContent = t;
+    });
+    document.getElementById("mixShuffle")?.addEventListener("click", () => {
+      capI = (capI + 1) % caps.length;
+      const a = document.getElementById("mixCapTu");
+      const b = document.getElementById("mixCapKu");
+      if (a) a.textContent = caps[capI][0];
+      if (b) b.textContent = caps[capI][1];
+    });
+    document.getElementById("mixRateTu")?.addEventListener("input", (e) => {
+      mixTu.playbackRate = Number(e.target.value) || 1;
+    });
+    document.getElementById("mixRateKu")?.addEventListener("input", (e) => {
+      mixKu.playbackRate = Number(e.target.value) || 1;
+    });
+  }
+
+  /* night market */
+  const marketWall = document.getElementById("marketWall");
+  if (marketWall) {
+    let paused = false;
+    document.getElementById("marketPause")?.addEventListener("click", () => {
+      paused = !paused;
+      marketWall.querySelectorAll(".market-row").forEach((r) => {
+        r.style.animationPlayState = paused ? "paused" : "running";
+      });
+    });
+    document.getElementById("marketBoost")?.addEventListener("click", () => {
+      marketWall.style.filter = "brightness(1.35) saturate(1.4)";
+      setTimeout(() => {
+        marketWall.style.filter = "";
+      }, 400);
+    });
+    const stamps = ["哈拉少<br />硬仗<br />主打", "范德彪<br />主理", "土是芯<br />酷是壳", "欧了<br />开干"];
+    let si = 0;
+    document.getElementById("marketStamp")?.addEventListener("click", () => {
+      si = (si + 1) % stamps.length;
+      const el = document.getElementById("marketSeal");
+      if (el) el.innerHTML = stamps[si];
+    });
   }
 })();

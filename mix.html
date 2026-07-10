@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>土酷混剪 · 哈拉少</title>
+  <meta name="description" content="哈拉少土酷混剪台：双轨视频同步，土轨/酷轨反差演示。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="mix.html" data-close>土酷混剪</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="cinema.html" data-close>竖屏</a>
+      <a href="lab.html" data-close>实验室</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">MIX · TU / KU</p>
+    <h1 class="page-h">土酷混剪台<br /><em>双轨反差</em></h1>
+    <p class="lead reveal">左土右酷，同步播放。新二气质的字幕盖脸，范德彪硬话当气氛组——一屏讲清工作室语法。</p>
+
+    <div class="mix-wrap" id="mixWrap">
+      <div class="mix-pane tu">
+        <video id="mixTu" muted loop playsinline poster="assets/studio-space.jpg">
+          <source src="assets/clip-b.mp4" type="video/mp4" />
+        </video>
+        <span class="mix-label">TU · 土轨</span>
+        <div class="mix-cap" id="mixCapTu">那长相就是证据</div>
+      </div>
+      <div class="mix-pane ku">
+        <video id="mixKu" muted loop playsinline poster="assets/hero-still.jpg">
+          <source src="assets/hero-cinematic.mp4" type="video/mp4" />
+        </video>
+        <span class="mix-label">KU · 酷轨</span>
+        <div class="mix-cap" id="mixCapKu">少 · 是刃</div>
+      </div>
+      <div class="mix-controls">
+        <button type="button" class="btn btn-led" id="mixPlay">▶ 同步播放</button>
+        <button type="button" class="btn btn-ghost" id="mixSwap">交换字幕</button>
+        <button type="button" class="btn btn-ghost" id="mixShuffle">换硬话</button>
+        <label>土轨速度 <input type="range" id="mixRateTu" min="0.5" max="1.5" step="0.05" value="1" /></label>
+        <label>酷轨速度 <input type="range" id="mixRateKu" min="0.5" max="1.5" step="0.05" value="1" /></label>
+        <a class="btn btn-ghost" href="film.html">放映厅</a>
+      </div>
+    </div>
+
+    <div class="band reveal">
+      <p>酷是壳，土是芯。两轨叠在一起，才是哈拉少。</p>
+      <footer>混剪台 · 反差语法</footer>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">混剪</p>
+    <div class="foot-row">
+      <p>双轨 · 同步 · 土酷反差</p>
+      <div class="foot-links">
+        <a href="film.html">片源</a>
+        <a href="cinema.html">竖屏</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

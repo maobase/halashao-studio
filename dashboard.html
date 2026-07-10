@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>导览台 · 哈拉少系统</title>
+  <meta name="description" content="哈拉少工作室导览台：实时时钟、硬话流、模块捷径——标杆走查总控。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="system.html" data-close>系统地图</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">DASHBOARD · OS</p>
+    <h1 class="page-h">导览台<br /><em class="kinetic">总控</em></h1>
+    <p class="lead reveal">标杆走查从这里开始。时钟、硬话流、模块捷径——土酷气质一眼齐，范德彪气氛组常驻。</p>
+
+    <div class="dash-grid">
+      <div class="dash-panel span2 reveal">
+        <h3>STUDIO STATUS · 东北原生</h3>
+        <div class="dash-stat">
+          <div><b id="dashClock">--:--:--</b><span>LOCAL TIME</span></div>
+          <div><b>7</b><span>班底人数</span></div>
+          <div><b>30+</b><span>可演示模块</span></div>
+        </div>
+        <p class="said" style="margin-top:1rem">主理人范德彪 · 「本市著名硬仗，都是我主打的。」</p>
+      </div>
+
+      <div class="dash-panel reveal">
+        <h3>LIVE QUOTE FEED</h3>
+        <div class="dash-feed" id="dashFeed" aria-live="polite">
+          <p><em>小树不倒我就不倒</em></p>
+          <p><em>那长相就是证据</em></p>
+          <p><em>你就慢慢跟我处</em></p>
+        </div>
+      </div>
+
+      <div class="dash-panel reveal">
+        <h3>PRIMARY PATH</h3>
+        <div class="dash-mods">
+          <a href="work.html">作品</a>
+          <a href="film.html">片源</a>
+          <a href="team.html">团队</a>
+          <a href="quotes.html">语录</a>
+          <a href="stories.html">叙事</a>
+          <a href="contact.html">开干</a>
+        </div>
+      </div>
+
+      <div class="dash-panel reveal">
+        <h3>FX ARENA</h3>
+        <div class="dash-mods">
+          <a href="stage.html">特效舞台</a>
+          <a href="typefx.html">动能字墙</a>
+          <a href="mix.html">土酷混剪</a>
+          <a href="night-market.html">夜市灯牌</a>
+          <a href="cinema.html">竖屏片场</a>
+          <a href="xin2.html">新二流</a>
+        </div>
+      </div>
+
+      <div class="dash-panel reveal">
+        <h3>CULTURE</h3>
+        <div class="dash-mods">
+          <a href="radio.html">彪哥电台</a>
+          <a href="cast.html">班底卡</a>
+          <a href="creed.html">信条</a>
+          <a href="soundboard.html">音板</a>
+          <a href="live.html">伪直播</a>
+          <a href="poster.html">海报机</a>
+        </div>
+      </div>
+
+      <div class="dash-panel wide reveal">
+        <h3>标杆走查建议顺序</h3>
+        <p class="lead" style="max-width:none;margin:0">
+          ① 首页气质 → ② 作品/档案 → ③ 片源/竖屏 → ④ 语录/电台 → ⑤ 班底卡 → ⑥ 动能字/舞台/灯牌 → ⑦ 系统地图 ⌘K
+        </p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.55rem">
+          <a class="btn btn-led" href="tour.html">开始导览</a>
+          <a class="btn btn-ghost" href="system.html">系统地图</a>
+          <a class="btn btn-ghost" href="lab.html">实验室</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">导览台</p>
+    <div class="foot-row">
+      <p>总控 · 硬话流 · 模块捷径</p>
+      <div class="foot-links">
+        <a href="tour.html">导览</a>
+        <a href="lab.html">实验室</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>
