@@ -465,6 +465,12 @@
     { t: "硬仗血条", h: "bossbar.html", k: "BOSS" },
     { t: "公章墙", h: "sealwall.html", k: "SEALWALL" },
     { t: "打字机硬话", h: "typecast.html", k: "TYPECAST" },
+    { t: "刷礼硬话", h: "gifts.html", k: "GIFTS", a: "直播 刷礼 礼物" },
+    { t: "歌词硬话", h: "lyric.html", k: "LYRIC", a: "卡拉OK 跟拍 歌词" },
+    { t: "波形硬话", h: "wave.html", k: "WAVE", a: "音频 波形 节拍" },
+    { t: "钉住叙事", h: "pin.html", k: "PIN", a: "滚动 钉住 章节" },
+    { t: "分镜板", h: "board.html", k: "BOARD", a: "分镜 片源 提案" },
+    { t: "气氛组暴走", h: "riot.html", k: "RIOT", a: "粒子 风暴 特效" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
@@ -1990,6 +1996,303 @@
     type();
     document.getElementById("typecastGo")?.addEventListener("click", () => type(false));
     document.getElementById("typecastFast")?.addEventListener("click", () => type(true));
+  }
+
+
+
+  /* ========== SYSTEM v11 handlers ========== */
+  const V11_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+  ];
+
+  /* gift rain */
+  const giftLayer = document.getElementById("giftLayer");
+  if (giftLayer) {
+    const modal = document.getElementById("giftModal");
+    const quote = document.getElementById("giftQuote");
+    const spawn = (n = 1) => {
+      for (let i = 0; i < n; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "gift-item";
+        btn.textContent = ["礼", "硬", "章", "欧"][i % 4];
+        btn.style.left = `${8 + Math.random() * 80}%`;
+        btn.style.animationDuration = `${3.2 + Math.random() * 3.2}s`;
+        btn.style.animationDelay = `${Math.random() * 0.6}s`;
+        btn.addEventListener("click", () => {
+          if (quote) quote.textContent = `「${V11_LINES[(Math.random() * V11_LINES.length) | 0]}。」`;
+          modal?.removeAttribute("hidden");
+        });
+        btn.addEventListener("animationend", () => btn.remove());
+        giftLayer.appendChild(btn);
+      }
+    };
+    document.getElementById("giftRain")?.addEventListener("click", () => spawn(16));
+    document.getElementById("giftOne")?.addEventListener("click", () => spawn(1));
+    document.getElementById("giftClose")?.addEventListener("click", () => modal?.setAttribute("hidden", ""));
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) modal.setAttribute("hidden", "");
+    });
+    spawn(6);
+  }
+
+  /* lyric karaoke */
+  const lyricStage = document.getElementById("lyricStage");
+  if (lyricStage) {
+    const lines = V11_LINES.slice();
+    let i = 0;
+    let timer = 0;
+    const prev = document.getElementById("lyricPrev");
+    const now = document.getElementById("lyricNow");
+    const next = document.getElementById("lyricNext");
+    const bar = document.getElementById("lyricBar");
+    let t0 = performance.now();
+    const render = () => {
+      if (prev) prev.textContent = i > 0 ? lines[(i - 1) % lines.length] : "";
+      if (now) now.textContent = lines[i % lines.length];
+      if (next) next.textContent = lines[(i + 1) % lines.length];
+      lyricStage.classList.remove("is-hit");
+      void lyricStage.offsetWidth;
+      lyricStage.classList.add("is-hit");
+      t0 = performance.now();
+    };
+    const tick = (t) => {
+      if (!timer) return;
+      const p = Math.min(1, (t - t0) / 2200);
+      if (bar) bar.style.width = `${p * 100}%`;
+      if (p >= 1) {
+        i += 1;
+        render();
+      }
+      requestAnimationFrame(tick);
+    };
+    render();
+    document.getElementById("lyricNextBtn")?.addEventListener("click", () => {
+      i += 1;
+      render();
+    });
+    document.getElementById("lyricPlay")?.addEventListener("click", (e) => {
+      const btn = e.currentTarget;
+      if (timer) {
+        timer = 0;
+        btn.textContent = "▶ 跟拍";
+        return;
+      }
+      timer = 1;
+      btn.textContent = "❚❚ 暂停";
+      t0 = performance.now();
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* wave visualizer */
+  const waveCanvas = document.getElementById("waveCanvas");
+  if (waveCanvas) {
+    const ctx = waveCanvas.getContext("2d");
+    const audio = document.getElementById("waveAudio");
+    const quote = document.getElementById("waveQuote");
+    const label = document.getElementById("waveLabel");
+    const tracks = Array.from({ length: 12 }, (_, i) => ({
+      src: `assets/biao-${i + 1}.mp3`,
+      q: V11_LINES[i % V11_LINES.length],
+      n: i + 1,
+    }));
+    let ti = 0;
+    let raf = 0;
+    let phase = 0;
+    let playing = false;
+    const draw = () => {
+      const w = waveCanvas.width;
+      const h = waveCanvas.height;
+      ctx.clearRect(0, 0, w, h);
+      const amp = playing ? 0.42 : 0.12;
+      phase += playing ? 0.18 : 0.04;
+      ctx.strokeStyle = "rgba(255,225,74,0.85)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 4) {
+        const y =
+          h / 2 +
+          Math.sin(x * 0.02 + phase) * h * amp * (0.55 + 0.45 * Math.sin(x * 0.01 + phase * 0.7)) +
+          Math.sin(x * 0.05 - phase * 1.4) * h * amp * 0.25;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.strokeStyle = "rgba(232,52,26,0.45)";
+      ctx.beginPath();
+      for (let x = 0; x < w; x += 6) {
+        const y = h / 2 + Math.cos(x * 0.03 - phase) * h * amp * 0.55;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    const load = (idx) => {
+      ti = ((idx % tracks.length) + tracks.length) % tracks.length;
+      const tr = tracks[ti];
+      if (audio) {
+        audio.src = tr.src;
+        audio.load();
+      }
+      if (quote) quote.textContent = `「${tr.q}。」`;
+      if (label) label.textContent = `BIAO · ${String(tr.n).padStart(2, "0")}`;
+    };
+    load(0);
+    document.getElementById("wavePlay")?.addEventListener("click", async () => {
+      if (!audio) return;
+      if (audio.paused) {
+        try {
+          await audio.play();
+          playing = true;
+          document.getElementById("wavePlay").textContent = "❚❚ 暂停";
+        } catch {
+          playing = true;
+        }
+      } else {
+        audio.pause();
+        playing = false;
+        document.getElementById("wavePlay").textContent = "▶ 播放";
+      }
+    });
+    document.getElementById("waveSkip")?.addEventListener("click", () => {
+      load(ti + 1);
+      if (playing) audio?.play().catch(() => {});
+    });
+    audio?.addEventListener("ended", () => {
+      load(ti + 1);
+      audio.play().catch(() => {});
+    });
+  }
+
+  /* pin scroll narrative */
+  const pinStack = document.getElementById("pinStack");
+  if (pinStack) {
+    const chs = [...pinStack.querySelectorAll(".pin-ch")];
+    const fixed = document.getElementById("pinFixed");
+    const sync = () => {
+      const mid = innerHeight * 0.45;
+      let active = chs[0];
+      let best = Infinity;
+      chs.forEach((ch) => {
+        const r = ch.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height * 0.35 - mid);
+        if (d < best) {
+          best = d;
+          active = ch;
+        }
+        const vid = ch.querySelector("video");
+        const on = d < r.height * 0.55;
+        if (vid) {
+          if (on) vid.play().catch(() => {});
+          else vid.pause();
+        }
+      });
+      if (fixed && active) fixed.textContent = `「${active.dataset.q || ""}。」—— 主理人范德彪`;
+    };
+    addEventListener("scroll", sync, { passive: true });
+    sync();
+  }
+
+  /* storyboard */
+  const boardGrid = document.getElementById("boardGrid");
+  if (boardGrid) {
+    const shots = [...boardGrid.querySelectorAll(".board-shot")];
+    const vid = document.getElementById("boardVid");
+    const tag = document.getElementById("boardTag");
+    const quote = document.getElementById("boardQuote");
+    const activate = (shot) => {
+      shots.forEach((s) => s.classList.toggle("is-on", s === shot));
+      if (vid) {
+        vid.poster = shot.dataset.poster || "";
+        vid.src = shot.dataset.src || "";
+        vid.play().catch(() => {});
+      }
+      if (tag) tag.textContent = `${shot.querySelector("span")?.textContent || ""} · ${shot.dataset.t || ""}`;
+      if (quote) quote.textContent = `「${shot.dataset.q || ""}。」`;
+    };
+    shots.forEach((s) => s.addEventListener("click", () => activate(s)));
+    if (shots[0]) activate(shots[0]);
+  }
+
+  /* riot fx */
+  const riotStage = document.getElementById("riotStage");
+  if (riotStage) {
+    const canvas = document.getElementById("riotCanvas");
+    const ctx = canvas.getContext("2d");
+    const line = document.getElementById("riotLine");
+    const state = document.getElementById("riotState");
+    let on = false;
+    let parts = [];
+    let raf = 0;
+    let li = 0;
+    const resize = () => {
+      const r = riotStage.getBoundingClientRect();
+      canvas.width = r.width * devicePixelRatio;
+      canvas.height = r.height * devicePixelRatio;
+      canvas.style.width = `${r.width}px`;
+      canvas.style.height = `${r.height}px`;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+    resize();
+    addEventListener("resize", resize, { passive: true });
+    const burst = (n = 40) => {
+      const r = riotStage.getBoundingClientRect();
+      for (let i = 0; i < n; i++) {
+        parts.push({
+          x: Math.random() * r.width,
+          y: Math.random() * r.height,
+          vx: (Math.random() - 0.5) * 6,
+          vy: (Math.random() - 0.5) * 6,
+          s: 2 + Math.random() * 4,
+          life: 1,
+          c: Math.random() > 0.5 ? "255,225,74" : "232,52,26",
+        });
+      }
+    };
+    const tick = () => {
+      const r = riotStage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      if (on && parts.length < 180) burst(8);
+      parts = parts.filter((p) => p.life > 0.02);
+      parts.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life *= 0.985;
+        ctx.fillStyle = `rgba(${p.c},${p.life})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    const setOn = (v) => {
+      on = v;
+      riotStage.classList.toggle("is-on", on);
+      if (state) state.textContent = on ? "RIOT" : "IDLE";
+      if (on) {
+        burst(50);
+        if (line) line.textContent = V11_LINES[li++ % V11_LINES.length];
+      }
+    };
+    document.getElementById("riotOn")?.addEventListener("click", () => setOn(true));
+    document.getElementById("riotOff")?.addEventListener("click", () => setOn(false));
+    document.getElementById("riotPulse")?.addEventListener("click", () => {
+      burst(60);
+      if (line) line.textContent = V11_LINES[li++ % V11_LINES.length];
+    });
   }
 
 })();
