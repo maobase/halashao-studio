@@ -567,7 +567,7 @@
     overlay.id = "cmdOverlay";
     overlay.innerHTML = `
       <div class="cmd-panel" role="dialog" aria-modal="true" aria-label="命令面板">
-        <input id="cmdInput" type="search" placeholder="搜：服务 / 范德彪 / 团队 / 导览 / 片源…" autocomplete="off" />
+        <input id="cmdInput" type="search" placeholder="搜：服务 / 团队 / 导览 / 开干 / FAQ / 范德彪…" autocomplete="off" />
         <ul class="cmd-list" id="cmdList"></ul>
         <div class="cmd-hint"><span>↑↓ 选择 · Enter 进入</span><span>Esc 关闭 · ⌘K</span></div>
       </div>`;
@@ -587,7 +587,7 @@
 
     const render = () => {
       if (!filtered.length) {
-        list.innerHTML = `<li class="cmd-empty">没有匹配模块。试试「服务」「团队」「导览」。</li>`;
+        list.innerHTML = `<li class="cmd-empty">没有匹配模块。试试「服务」「团队」「导览」「开干」「FAQ」。</li>`;
         return;
       }
       list.innerHTML = filtered
