@@ -4957,3 +4957,17 @@ body.stage-glitch .stage-wrap {
   padding: 0.85rem 1rem;
   background: linear-gradient(transparent, rgba(0,0,0,0.85));
 }
+
+
+/* contact mail delivery */
+.contact-mail {
+  word-break: break-all;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, var(--led) 55%, transparent);
+}
+.contact-mail:hover {
+  color: var(--led);
+  text-decoration-color: var(--led);
+}
