@@ -4183,6 +4183,26 @@ body.stage-glitch .stage-wrap {
   filter: brightness(1.15);
 }
 
+/* delivery shell polish */
+.page-h {
+  text-wrap: balance;
+}
+.lead {
+  text-wrap: pretty;
+}
+.tour-step {
+  border-left: 2px solid transparent;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.tour-step:hover {
+  border-left-color: var(--led);
+  background: rgba(255,225,74,0.03);
+}
+.mod-tile:hover h3,
+.lab-card:hover h3 {
+  color: var(--led);
+}
+
 /* print handoff — press / about readable on paper */
 @media print {
   .noise, .led-grid, .cmd-fab, .cmd-overlay, #fx-field, .burger, .drawer, .skip { display: none !important; }

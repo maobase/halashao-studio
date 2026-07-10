@@ -13,6 +13,23 @@
     if (href === path || (path === "" && href === "index.html")) a.classList.add("is-active");
   });
 
+  /* prefetch client-critical pages on intent */
+  const prefetchOnce = new Set();
+  const prefetch = (href) => {
+    if (!href || prefetchOnce.has(href) || !href.endsWith(".html")) return;
+    prefetchOnce.add(href);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = href;
+    document.head.appendChild(link);
+  };
+  document.querySelectorAll("a[href$='.html']").forEach((a) => {
+    const href = a.getAttribute("href");
+    a.addEventListener("pointerenter", () => prefetch(href), { passive: true, once: true });
+    a.addEventListener("focus", () => prefetch(href), { once: true });
+  });
+  ["about.html", "services.html", "team.html", "work.html", "contact.html", "tour.html"].forEach(prefetch);
+
   const nav = document.querySelector(".shell-nav");
   const onScroll = () => nav?.classList.toggle("is-on", scrollY > 12);
   onScroll();
