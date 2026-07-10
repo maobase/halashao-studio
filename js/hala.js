@@ -429,6 +429,12 @@
     { t: "开干", h: "contact.html", k: "CONTACT" },
     { t: "招人", h: "recruit.html", k: "RECRUIT" },
     { t: "实验室", h: "lab.html", k: "LAB" },
+    { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
+    { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
+    { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
+    { t: "落麦硬话", h: "micdrop.html", k: "MIC" },
+    { t: "九宫格土酷", h: "gridmix.html", k: "GRID9" },
+    { t: "硬仗台账", h: "ledger.html", k: "LEDGER" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
@@ -1495,6 +1501,195 @@
     };
     apply(range?.value || 50);
     range?.addEventListener("input", () => apply(range.value));
+  }
+
+
+
+  /* ========== SYSTEM v9 handlers ========== */
+  /* 3s hook machine */
+  const hookStage = document.getElementById("hookStage");
+  if (hookStage) {
+    const lines = [
+      "小树不倒<br />我就不倒",
+      "那长相<br />就是证据",
+      "你就慢慢<br />跟我处",
+      "少，是刃",
+      "酷是壳<br />土是芯",
+      "本市著名<br />硬仗",
+      "欧了",
+      "该出手时<br />就出手",
+    ];
+    const lineEl = document.getElementById("hookLine");
+    const timerEl = document.getElementById("hookTimer");
+    const bar = document.getElementById("hookBar");
+    let i = 0;
+    let t0 = performance.now();
+    let auto = true;
+    const punch = () => {
+      hookStage.classList.remove("is-punch");
+      void hookStage.offsetWidth;
+      hookStage.classList.add("is-punch");
+      if (lineEl) lineEl.innerHTML = lines[i % lines.length];
+      i += 1;
+      t0 = performance.now();
+      setTimeout(() => hookStage.classList.remove("is-punch"), 380);
+    };
+    const tick = (now) => {
+      if (!auto) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      const p = Math.min(1, (now - t0) / 3000);
+      if (bar) bar.style.width = `${p * 100}%`;
+      if (timerEl) timerEl.textContent = (3 - p * 3).toFixed(1);
+      if (p >= 1) punch();
+      requestAnimationFrame(tick);
+    };
+    punch();
+    requestAnimationFrame(tick);
+    document.getElementById("hookFire")?.addEventListener("click", punch);
+    document.getElementById("hookBeat")?.addEventListener("click", () => {
+      for (let n = 0; n < 3; n++) setTimeout(punch, n * 220);
+    });
+  }
+
+  /* sticker bomb */
+  const stickerLayer = document.getElementById("stickerLayer");
+  if (stickerLayer) {
+    const pool = [
+      { c: "seal", t: "硬仗\n盖章" },
+      { c: "seal", t: "欧了" },
+      { c: "led", t: "小树不倒我就不倒" },
+      { c: "led", t: "那长相就是证据" },
+      { c: "led", t: "酷是壳 · 土是芯" },
+      { c: "tag", t: "新二网感" },
+      { c: "tag", t: "范德彪" },
+      { c: "led", t: "少，是刃" },
+      { c: "tag", t: "LIVE" },
+      { c: "led", t: "该出手时就出手" },
+    ];
+    const drop = (n = 1) => {
+      for (let k = 0; k < n; k++) {
+        const item = pool[(Math.random() * pool.length) | 0];
+        const el = document.createElement("span");
+        el.className = `stk ${item.c}`;
+        el.textContent = item.t.replace("\\n", "\n");
+        if (item.c === "seal") el.innerHTML = item.t.replace("\n", "<br />");
+        el.style.left = `${6 + Math.random() * 78}%`;
+        el.style.top = `${8 + Math.random() * 70}%`;
+        el.style.setProperty("--r", `${(Math.random() - 0.5) * 24}deg`);
+        if (item.c === "led") el.style.transform = `rotate(var(--r))`;
+        stickerLayer.appendChild(el);
+      }
+    };
+    drop(5);
+    document.getElementById("stickerBomb")?.addEventListener("click", () => drop(10));
+    document.getElementById("stickerOne")?.addEventListener("click", () => drop(1));
+    document.getElementById("stickerClear")?.addEventListener("click", () => {
+      stickerLayer.innerHTML = "";
+    });
+  }
+
+  /* zoom cut */
+  const zoomStage = document.getElementById("zoomStage");
+  if (zoomStage) {
+    const caps = ["少，是刃", "小树不倒我就不倒", "那长相就是证据", "酷是壳，土是芯", "本市著名硬仗", "该出手时就出手", "欧了", "不生产模板"];
+    const cap = document.getElementById("zoomCap");
+    let zi = 0;
+    let autoTimer = 0;
+    const punch = () => {
+      zoomStage.classList.remove("is-punch");
+      void zoomStage.offsetWidth;
+      zoomStage.classList.add("is-punch");
+      if (cap) cap.textContent = caps[zi % caps.length];
+      zi += 1;
+      setTimeout(() => zoomStage.classList.remove("is-punch"), 320);
+    };
+    document.getElementById("zoomPunch")?.addEventListener("click", punch);
+    document.getElementById("zoomAuto")?.addEventListener("click", (e) => {
+      const btn = e.currentTarget;
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = 0;
+        btn.textContent = "自动连切";
+        return;
+      }
+      punch();
+      autoTimer = setInterval(punch, 900);
+      btn.textContent = "停止连切";
+    });
+  }
+
+  /* mic drop */
+  const micStage = document.getElementById("micStage");
+  if (micStage) {
+    const lines = ["欧了", "小树不倒我就不倒", "那长相就是证据", "少，是刃", "酷是壳，土是芯", "本市著名硬仗", "该出手时就出手", "不生产模板"];
+    const line = document.getElementById("micLine");
+    let mi = 0;
+    const drop = () => {
+      if (line) line.textContent = lines[mi % lines.length];
+      mi += 1;
+      micStage.classList.remove("is-drop");
+      void micStage.offsetWidth;
+      micStage.classList.add("is-drop");
+    };
+    document.getElementById("micDrop")?.addEventListener("click", drop);
+    document.getElementById("micChain")?.addEventListener("click", () => {
+      for (let n = 0; n < 3; n++) setTimeout(drop, n * 480);
+    });
+  }
+
+  /* grid 9 */
+  const grid9 = document.getElementById("grid9");
+  if (grid9) {
+    const cells = [...grid9.querySelectorAll(".g9-cell")];
+    const cap = document.getElementById("grid9Cap");
+    const activate = (cell) => {
+      cells.forEach((c) => {
+        c.classList.toggle("is-on", c === cell);
+        const v = c.querySelector("video");
+        if (!v) return;
+        if (c === cell) v.play().catch(() => {});
+        else v.pause();
+      });
+      if (cap) cap.textContent = `「${cell.dataset.cap || ""}。」—— 范德彪`;
+    };
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => activate(cell));
+      cell.addEventListener("mouseenter", () => {
+        if (matchMedia("(pointer:fine)").matches) cell.querySelector("video")?.play().catch(() => {});
+      });
+      cell.addEventListener("mouseleave", () => {
+        if (!cell.classList.contains("is-on")) cell.querySelector("video")?.pause();
+      });
+    });
+    if (cells[0]) activate(cells[0]);
+  }
+
+  /* hard ledger */
+  const ledger = document.getElementById("ledger");
+  if (ledger) {
+    const detail = document.getElementById("ledgerDetail");
+    const vid = document.getElementById("ledgerVid");
+    const title = document.getElementById("ledgerTitle");
+    const desc = document.getElementById("ledgerDesc");
+    const quote = document.getElementById("ledgerQuote");
+    const rows = [...ledger.querySelectorAll(".ledger-row")];
+    rows.forEach((row) => {
+      row.addEventListener("click", () => {
+        rows.forEach((r) => r.classList.remove("is-on"));
+        row.classList.add("is-on");
+        detail?.removeAttribute("hidden");
+        if (title) title.textContent = row.querySelector("b")?.textContent || "";
+        if (desc) desc.textContent = row.dataset.d || "";
+        if (quote) quote.textContent = `「${row.dataset.q || ""}。」—— 主理人范德彪`;
+        if (vid) {
+          vid.poster = row.dataset.poster || "";
+          vid.src = row.dataset.src || "";
+          vid.play().catch(() => {});
+        }
+      });
+    });
   }
 
 })();

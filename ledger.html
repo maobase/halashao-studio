@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>硬仗台账 · 哈拉少</title>
+  <meta name="description" content="哈拉少硬仗台账：交互式项目台账，点开出硬话与片源。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="press.html" data-close>媒体</a>
+      <a href="recruit.html" data-close>招人</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">LEDGER · HARD</p>
+    <h1 class="page-h">硬仗台账<br /><em class="seal">可回看</em></h1>
+    <p class="lead reveal">不是虚荣数字墙。是刀口、尺度、状态一览。点行展开片源与范德彪硬话——专业交付的土酷台账。</p>
+    <div class="ledger" id="ledger">
+      <div class="ledger-head"><span>刃口</span><span>尺度</span><span>状态</span><span>硬话</span></div>
+      <button type="button" class="ledger-row" data-src="assets/work-hover-1.mp4" data-poster="assets/work-brand.jpg" data-q="那长相就是证据" data-d="标识矩阵到屏幕触点。全触点像同一个人。">
+        <b>熔光 · 品牌系统</b><span>品牌</span><span class="ok">已交付</span><span>「那长相就是证据」</span>
+      </button>
+      <button type="button" class="ledger-row" data-src="assets/work-hover-2.mp4" data-poster="assets/work-product.jpg" data-q="你就慢慢跟我处" data-d="暗色密度控制台。路径先站稳，组件可延展。">
+        <b>墨界 · 产品界面</b><span>产品</span><span class="ok">已交付</span><span>「你就慢慢跟我处」</span>
+      </button>
+      <button type="button" class="ledger-row" data-src="assets/work-hover-3.mp4" data-poster="assets/work-motion.jpg" data-q="小树不倒我就不倒" data-d="发布片与动效语言一套出。节奏是骨。">
+        <b>脉冲 · 影像动效</b><span>影像</span><span class="ok">已交付</span><span>「小树不倒」</span>
+      </button>
+      <button type="button" class="ledger-row" data-src="assets/clip-b.mp4" data-poster="assets/studio-space.jpg" data-q="欧了" data-d="零售触点：包装、店头短视频、会员语气统一。">
+        <b>野市 · 零售触点</b><span>内容</span><span class="run">进行中</span><span>「欧了」</span>
+      </button>
+      <button type="button" class="ledger-row" data-src="assets/hero-cinematic.mp4" data-poster="assets/hero-still.jpg" data-q="少，是刃" data-d="展陈主视觉与概念装置片。未来叙事可走进。">
+        <b>轨道 · 空间叙事</b><span>空间</span><span class="run">进行中</span><span>「少，是刃」</span>
+      </button>
+      <button type="button" class="ledger-row" data-src="assets/showreel.mp4" data-poster="assets/showreel-poster.jpg" data-q="本市著名硬仗" data-d="全案发布节点：影像 + 触点 + 现场气氛组。">
+        <b>红章夜 · 全案</b><span>全案</span><span class="ok">已交付</span><span>「本市硬仗」</span>
+      </button>
+    </div>
+    <div class="ledger-detail" id="ledgerDetail" hidden>
+      <div class="ledger-media">
+        <video id="ledgerVid" muted loop playsinline poster="assets/showreel-poster.jpg"></video>
+      </div>
+      <div>
+        <p class="kicker" id="ledgerTag">DETAIL</p>
+        <h2 id="ledgerTitle">—</h2>
+        <p id="ledgerDesc" class="lead" style="margin:0.5rem 0 0"></p>
+        <p class="said" id="ledgerQuote" style="margin-top:1rem"></p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.55rem">
+          <a class="btn btn-ghost" href="work.html">作品页</a>
+          <a class="btn btn-ghost" href="archive.html">档案</a>
+          <a class="btn btn-led" href="contact.html">开干</a>
+        </div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.25rem;font-size:0.9rem;color:var(--mute)">公开粒度为能力切片，非伪造客户榜。完整过程洽谈展开。</p>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">台账</p>
+    <div class="foot-row">
+      <p>台账 · 刀口 · 可回看</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>
