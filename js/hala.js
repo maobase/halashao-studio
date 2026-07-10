@@ -383,10 +383,10 @@
     const data = new FormData(form);
     const st = document.getElementById("formStatus");
     if (![...data.values()].every((v) => String(v).trim())) {
-      if (st) st.textContent = "填全再发。";
+      if (st) st.textContent = "请填全再发。";
       return;
     }
-    if (st) st.textContent = "收到。我们尽快回——欧了。";
+    if (st) st.textContent = "意向已记录。正式沟通请同步邮件 hello@halashao.studio —— 欧了。";
     form.reset();
   });
 
