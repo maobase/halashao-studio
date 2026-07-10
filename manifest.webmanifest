@@ -1,7 +1,7 @@
 {
   "name": "哈拉少设计工作室",
   "short_name": "哈拉少",
-  "description": "从磨豆腐买早点到设计宇宙空间站，我们什么都干。一定得酷炫。",
+  "description": "哈拉少设计工作室，原生自东北。主理人范德彪。酷是壳，土是芯。",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#070706",

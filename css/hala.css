@@ -1087,13 +1087,27 @@ main { position: relative; z-index: 1; }
 }
 .person-visual {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   background:
     radial-gradient(circle at 30% 30%, var(--led-dim), transparent 50%),
     radial-gradient(circle at 80% 70%, var(--seal-dim), transparent 45%),
     #0c0c0a;
   display: grid;
   place-items: center;
+  overflow: hidden;
+}
+.person-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.person:hover .person-visual img {
+  transform: scale(1.04);
 }
 .person-visual .mono {
   font-size: clamp(3rem, 8vw, 4.5rem);
@@ -1106,11 +1120,13 @@ main { position: relative; z-index: 1; }
   position: absolute;
   left: 0.85rem;
   bottom: 0.85rem;
+  z-index: 1;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   color: var(--led);
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.62);
+  backdrop-filter: blur(6px);
   padding: 0.25rem 0.5rem;
 }
 .person-body {
