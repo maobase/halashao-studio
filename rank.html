@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>硬话热榜 · 哈拉少</title>
+  <meta name="description" content="哈拉少硬话热榜：可点赞排序的范德彪硬话榜，土酷信息流榜单。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="canonical" href="https://maobase.github.io/halashao-studio/rank.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="哈拉少设计工作室" />
+  <meta property="og:title" content="硬话热榜 · 哈拉少" />
+  <meta property="og:description" content="哈拉少硬话热榜：可点赞排序的范德彪硬话榜，土酷信息流榜单。" />
+  <meta property="og:url" content="https://maobase.github.io/halashao-studio/rank.html" />
+  <meta property="og:image" content="https://maobase.github.io/halashao-studio/assets/showreel-poster.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="硬话热榜 · 哈拉少" />
+  <meta name="twitter:description" content="哈拉少硬话热榜：可点赞排序的范德彪硬话榜，土酷信息流榜单。" />
+  <meta name="twitter:image" content="https://maobase.github.io/halashao-studio/assets/showreel-poster.jpg" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="press.html" data-close>媒体</a>
+      <a href="recruit.html" data-close>招人</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">RANK · HOT</p>
+    <h1 class="page-h">硬话热榜<br /><em class="seal">点赞排序</em></h1>
+    <p class="lead reveal">信息流热榜形态。给硬话点赞，榜单实时重排——演示不是刷量，是看哪句最能当气氛组刀口。主理人范德彪态度授权。</p>
+    <div class="rank-layout">
+      <ol class="rank-list" id="rankList"></ol>
+      <div class="rank-hero" id="rankHero">
+        <video autoplay muted loop playsinline poster="assets/hero-still.jpg">
+          <source src="assets/hero-cinematic.mp4" type="video/mp4" />
+        </video>
+        <p class="rank-top-q" id="rankTopQ">「小树不倒我就不倒。」</p>
+        <span class="tag" id="rankTopMeta">TOP 1 · 热度演示</span>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1rem;font-size:0.9rem;color:var(--mute)">热度为本地演示数据，刷新页面会重置。不对着空气堆 KPI。</p>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">热榜</p>
+    <div class="foot-row">
+      <p>热榜 · 点赞 · 硬话</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

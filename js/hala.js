@@ -474,6 +474,12 @@
     { t: "钉住叙事", h: "pin.html", k: "PIN", a: "滚动 钉住 章节" },
     { t: "分镜板", h: "board.html", k: "BOARD", a: "分镜 片源 提案" },
     { t: "气氛组特效", h: "riot.html", k: "RIOT", a: "粒子 风暴 特效 暴走" },
+    { t: "花字姓名条", h: "overlay.html", k: "OVERLAY", a: "下三分 花字 班底 出场" },
+    { t: "开播倒计时", h: "countdown.html", k: "COUNTDOWN", a: "直播 倒数 开播" },
+    { t: "马赛克片源", h: "mosaic.html", k: "MOSAIC", a: "多格 片源 墙" },
+    { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
+    { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
+    { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
     { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
     { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
     { t: "霓虹硬话", h: "neon.html", k: "NEON" },
@@ -2296,6 +2302,202 @@
       burst(60);
       if (line) line.textContent = V11_LINES[li++ % V11_LINES.length];
     });
+  }
+
+
+
+  /* ========== SYSTEM v12 handlers ========== */
+  const V12_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+  ];
+
+  /* flower lower-third overlay */
+  const ovStage = document.getElementById("ovStage");
+  if (ovStage) {
+    const cast = [
+      { role: "PRINCIPAL", name: "范德彪", title: "主理人 · 创意总监" },
+      { role: "BRAND", name: "新二", title: "伙计 · 品牌与文化视觉" },
+      { role: "PRODUCT", name: "雨姐", title: "伙计 · 产品体验" },
+      { role: "CRAFT", name: "老蒯", title: "伙计 · 制作与工艺" },
+      { role: "MOTION", name: "小阿giao", title: "伙计 · 影像与现场" },
+      { role: "OFFICE", name: "吴总", title: "办公室主任" },
+      { role: "LOGISTICS", name: "马大帅", title: "食堂主管" },
+    ];
+    let ci = 0;
+    let qi = 0;
+    const setCast = () => {
+      const c = cast[ci % cast.length];
+      const role = document.getElementById("ovRole");
+      const name = document.getElementById("ovName");
+      const title = document.getElementById("ovTitle");
+      if (role) role.textContent = c.role;
+      if (name) name.textContent = c.name;
+      if (title) title.textContent = c.title;
+    };
+    document.getElementById("ovNext")?.addEventListener("click", () => {
+      ci += 1;
+      setCast();
+    });
+    document.getElementById("ovQuote")?.addEventListener("click", () => {
+      const el = document.getElementById("ovFlower");
+      if (el) el.textContent = V12_LINES[qi++ % V12_LINES.length];
+    });
+    document.getElementById("ovPulse")?.addEventListener("click", () => {
+      ovStage.classList.remove("is-flash");
+      void ovStage.offsetWidth;
+      ovStage.classList.add("is-flash");
+    });
+  }
+
+  /* live countdown */
+  const cdStage = document.getElementById("cdStage");
+  if (cdStage) {
+    const num = document.getElementById("cdNum");
+    const quote = document.getElementById("cdQuote");
+    let timer = 0;
+    let left = 3;
+    const boom = (text) => {
+      if (num) num.textContent = text;
+      cdStage.classList.remove("is-boom");
+      void cdStage.offsetWidth;
+      cdStage.classList.add("is-boom");
+    };
+    const run = (sec) => {
+      clearInterval(timer);
+      left = sec;
+      boom(String(left));
+      if (quote) quote.textContent = "准备开干";
+      timer = setInterval(() => {
+        left -= 1;
+        if (left > 0) {
+          boom(String(left));
+        } else {
+          clearInterval(timer);
+          boom("欧");
+          if (quote) quote.textContent = `「${V12_LINES[(Math.random() * V12_LINES.length) | 0]}。」—— 开播`;
+        }
+      }, 1000);
+    };
+    document.getElementById("cdGo")?.addEventListener("click", () => run(3));
+    document.getElementById("cd3")?.addEventListener("click", () => run(3));
+    document.getElementById("cd5")?.addEventListener("click", () => run(5));
+  }
+
+  /* mosaic wall */
+  const mosaic = document.getElementById("mosaic");
+  if (mosaic) {
+    const cells = [...mosaic.querySelectorAll(".mos-cell")];
+    const cap = document.getElementById("mosaicCap");
+    const activate = (cell) => {
+      cells.forEach((c) => {
+        c.classList.toggle("is-on", c === cell);
+        const v = c.querySelector("video");
+        if (!v) return;
+        if (c === cell) v.play().catch(() => {});
+        else v.pause();
+      });
+      if (cap) cap.textContent = `「${cell.dataset.q || ""}。」—— 点格放大独奏`;
+    };
+    cells.forEach((c) => c.addEventListener("click", () => activate(c)));
+    if (cells[0]) activate(cells[0]);
+  }
+
+  /* teleprompter */
+  const teleTrack = document.getElementById("teleTrack");
+  if (teleTrack) {
+    let y = 0;
+    let speed = 0.45;
+    let on = false;
+    let raf = 0;
+    const tick = () => {
+      if (on) {
+        y -= speed;
+        const h = teleTrack.scrollHeight;
+        if (-y > h * 0.75) y = 120;
+        teleTrack.style.transform = `translateY(${y}px)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    document.getElementById("telePlay")?.addEventListener("click", (e) => {
+      on = !on;
+      e.currentTarget.textContent = on ? "❚❚ 暂停" : "▶ 滚读";
+    });
+    document.getElementById("teleSlow")?.addEventListener("click", () => {
+      speed = 0.28;
+    });
+    document.getElementById("teleFast")?.addEventListener("click", () => {
+      speed = 0.75;
+    });
+    document.getElementById("teleReset")?.addEventListener("click", () => {
+      y = 0;
+      teleTrack.style.transform = "translateY(0px)";
+    });
+  }
+
+  /* hard-word rank */
+  const rankList = document.getElementById("rankList");
+  if (rankList) {
+    const items = V12_LINES.map((q, i) => ({
+      q,
+      n: 40 + ((i * 17) % 55),
+    }));
+    const topQ = document.getElementById("rankTopQ");
+    const topMeta = document.getElementById("rankTopMeta");
+    const render = () => {
+      items.sort((a, b) => b.n - a.n);
+      rankList.innerHTML = items
+        .map(
+          (it, i) =>
+            `<li><span class="n">${String(i + 1).padStart(2, "0")}</span><strong>「${it.q}。」</strong><button type="button" class="rank-like" data-i="${i}">♥ ${it.n}</button></li>`
+        )
+        .join("");
+      if (topQ) topQ.textContent = `「${items[0].q}。」`;
+      if (topMeta) topMeta.textContent = `TOP 1 · 热度演示 ${items[0].n}`;
+      rankList.querySelectorAll(".rank-like").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.i);
+          // after sort, map by text
+          const text = btn.parentElement?.querySelector("strong")?.textContent || "";
+          const hit = items.find((x) => text.includes(x.q));
+          if (hit) {
+            hit.n += 1;
+            btn.classList.add("is-on");
+            render();
+          }
+        });
+      });
+    };
+    render();
+  }
+
+  /* snap vertical feed */
+  const snapFeed = document.getElementById("snapFeed");
+  if (snapFeed) {
+    const cards = [...snapFeed.querySelectorAll(".snap-card")];
+    const sync = () => {
+      const mid = snapFeed.scrollTop + snapFeed.clientHeight * 0.5;
+      cards.forEach((card) => {
+        const top = card.offsetTop;
+        const bottom = top + card.offsetHeight;
+        const vid = card.querySelector("video");
+        if (!vid) return;
+        if (mid >= top && mid < bottom) vid.play().catch(() => {});
+        else vid.pause();
+      });
+    };
+    snapFeed.addEventListener("scroll", sync, { passive: true });
+    sync();
+    cards[0]?.querySelector("video")?.play().catch(() => {});
   }
 
 })();
