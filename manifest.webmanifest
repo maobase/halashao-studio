@@ -1,7 +1,7 @@
 {
   "name": "哈拉少设计工作室",
   "short_name": "哈拉少",
-  "description": "哈拉少设计工作室，原生自东北。主理人范德彪。品牌、产品、影像与跨尺度体验。酷是壳，土是芯。",
+  "description": "东北原生哈拉少设计工作室，主理人范德彪。品牌、产品、影像与跨尺度体验。酷是壳，土是芯。",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#070706",
