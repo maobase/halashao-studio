@@ -417,6 +417,11 @@
     { t: "夜市灯牌", h: "night-market.html", k: "MARKET" },
     { t: "导览台", h: "dashboard.html", k: "DASH" },
     { t: "硬仗导览", h: "tour.html", k: "TOUR" },
+    { t: "土酷对决", h: "duel.html", k: "DUEL" },
+    { t: "四格蒙太奇", h: "montage.html", k: "MONTAGE" },
+    { t: "硬仗荣誉墙", h: "fame.html", k: "FAME" },
+    { t: "硬话胶囊", h: "capsule.html", k: "CAPSULE" },
+    { t: "节拍盖章", h: "beatdrop.html", k: "BEAT" },
     { t: "班底海报卡", h: "cast.html", k: "CAST" },
     { t: "团队介绍", h: "team.html", k: "TEAM" },
     { t: "滚动叙事", h: "stories.html", k: "STORIES" },
@@ -922,5 +927,216 @@
       const el = document.getElementById("marketSeal");
       if (el) el.innerHTML = stamps[si];
     });
+  }
+
+  /* duel TU vs KU */
+  const duelArena = document.getElementById("duelArena");
+  if (duelArena) {
+    let tu = 0;
+    let ku = 0;
+    const meterTu = document.getElementById("meterTu");
+    const meterKu = document.getElementById("meterKu");
+    const scoreTu = document.getElementById("scoreTu");
+    const scoreKu = document.getElementById("scoreKu");
+    const flash = document.getElementById("duelFlash");
+    const lines = [
+      "酷是壳，土是芯——叠在一起才是哈拉少。",
+      "小树不倒我就不倒。",
+      "那长相就是证据。",
+      "少，是刃。",
+      "欧了。两边都要。",
+    ];
+    const paint = () => {
+      if (meterTu) meterTu.style.width = `${tu}%`;
+      if (meterKu) meterKu.style.width = `${ku}%`;
+      if (scoreTu) scoreTu.textContent = `${tu}%`;
+      if (scoreKu) scoreKu.textContent = `${ku}%`;
+    };
+    const hit = (side) => {
+      if (side === "tu") tu = Math.min(100, tu + 8);
+      else ku = Math.min(100, ku + 8);
+      paint();
+      if (tu >= 100 && ku >= 100 && flash) {
+        flash.textContent = lines[(Math.random() * lines.length) | 0];
+        flash.classList.add("is-on");
+        setTimeout(() => flash.classList.remove("is-on"), 1400);
+        tu = 0;
+        ku = 0;
+        paint();
+      }
+    };
+    document.getElementById("duelTu")?.addEventListener("click", () => hit("tu"));
+    document.getElementById("duelKu")?.addEventListener("click", () => hit("ku"));
+    document.getElementById("duelReset")?.addEventListener("click", () => {
+      tu = 0;
+      ku = 0;
+      paint();
+    });
+  }
+
+  /* montage grid */
+  const montGrid = document.getElementById("montageGrid");
+  if (montGrid) {
+    const cells = [...montGrid.querySelectorAll("[data-mont]")];
+    const vids = cells.map((c) => c.querySelector("video")).filter(Boolean);
+    document.getElementById("montPlayAll")?.addEventListener("click", () => {
+      vids.forEach((v) => v.play().catch(() => {}));
+    });
+    document.getElementById("montPauseAll")?.addEventListener("click", () => {
+      vids.forEach((v) => v.pause());
+    });
+    const caps = [
+      "小树不倒",
+      "那长相就是证据",
+      "你就慢慢跟我处",
+      "少 · 是刃",
+      "酷是壳 · 土是芯",
+      "本市著名硬仗",
+      "欧了",
+      "该出手时就出手",
+    ];
+    document.getElementById("montShuffleCap")?.addEventListener("click", () => {
+      cells.forEach((c, i) => {
+        const cap = c.querySelector(".mont-cap");
+        if (cap) cap.textContent = caps[(i + ((Math.random() * caps.length) | 0)) % caps.length];
+      });
+    });
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        const was = cell.classList.contains("is-solo");
+        cells.forEach((c) => c.classList.remove("is-solo"));
+        montGrid.classList.remove("is-solo-mode");
+        if (!was) {
+          cell.classList.add("is-solo");
+          montGrid.classList.add("is-solo-mode");
+          cell.querySelector("video")?.play().catch(() => {});
+        }
+      });
+    });
+  }
+
+  /* fame wall hover video */
+  document.querySelectorAll("[data-fame]").forEach((card) => {
+    const vid = card.querySelector("video");
+    if (!vid || !fine || reduce) return;
+    card.addEventListener("pointerenter", () => {
+      card.classList.add("is-hot");
+      vid.play().catch(() => {});
+    });
+    card.addEventListener("pointerleave", () => {
+      card.classList.remove("is-hot");
+      vid.pause();
+      try {
+        vid.currentTime = 0;
+      } catch {
+        /* */
+      }
+    });
+  });
+
+  /* capsule flip */
+  document.querySelectorAll("[data-capsule]").forEach((cap) => {
+    cap.addEventListener("click", () => cap.classList.toggle("is-flip"));
+  });
+
+  /* beat drop */
+  const beatCanvas = document.getElementById("beatCanvas");
+  if (beatCanvas && !reduce) {
+    const stage = document.getElementById("beatStage");
+    const ctx = beatCanvas.getContext("2d");
+    const quoteEl = document.getElementById("beatQuote");
+    const pulse = document.getElementById("beatPulse");
+    const countEl = document.getElementById("beatCount");
+    const lines = [
+      "小树不倒<br /><em>我就不倒</em>",
+      "那长相<br /><em>就是证据</em>",
+      "你就慢慢<br /><em>跟我处</em>",
+      "少，<br /><em>是刃</em>",
+      "酷是壳<br /><em>土是芯</em>",
+      "欧了",
+      "本市著名<br /><em>硬仗</em>",
+      "该出手时<br /><em>就出手</em>",
+    ];
+    let particles = [];
+    let hits = 0;
+    let auto = null;
+    let qi = 0;
+    const resize = () => {
+      const r = stage.getBoundingClientRect();
+      beatCanvas.width = r.width * devicePixelRatio;
+      beatCanvas.height = r.height * devicePixelRatio;
+      beatCanvas.style.width = `${r.width}px`;
+      beatCanvas.style.height = `${r.height}px`;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    };
+    resize();
+    addEventListener("resize", resize, { passive: true });
+    const drop = () => {
+      hits += 1;
+      if (countEl) countEl.textContent = `HITS ${hits}`;
+      qi = (qi + 1) % lines.length;
+      if (quoteEl) quoteEl.innerHTML = lines[qi];
+      pulse?.classList.remove("is-on");
+      void pulse?.offsetWidth;
+      pulse?.classList.add("is-on");
+      const r = stage.getBoundingClientRect();
+      const cx = r.width / 2;
+      const cy = r.height / 2;
+      for (let i = 0; i < 28; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const sp = 2 + Math.random() * 6;
+        particles.push({
+          x: cx,
+          y: cy,
+          vx: Math.cos(a) * sp,
+          vy: Math.sin(a) * sp,
+          life: 1,
+          c: Math.random() > 0.45 ? "#e8341a" : "#ffe14a",
+          s: 2 + Math.random() * 4,
+        });
+      }
+    };
+    document.getElementById("beatHit")?.addEventListener("click", drop);
+    addEventListener("keydown", (e) => {
+      if (e.code === "Space" && document.getElementById("beatStage")) {
+        e.preventDefault();
+        drop();
+      }
+    });
+    document.getElementById("beatAuto")?.addEventListener("click", (e) => {
+      if (auto) {
+        clearInterval(auto);
+        auto = null;
+        e.currentTarget.classList.remove("is-on");
+        e.currentTarget.textContent = "自动节拍";
+      } else {
+        auto = setInterval(drop, 520);
+        e.currentTarget.classList.add("is-on");
+        e.currentTarget.textContent = "停止自动";
+      }
+    });
+    document.getElementById("beatClear")?.addEventListener("click", () => {
+      particles = [];
+      hits = 0;
+      if (countEl) countEl.textContent = "HITS 0";
+    });
+    const tick = () => {
+      const r = stage.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      particles = particles.filter((p) => p.life > 0.02);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life *= 0.94;
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.c;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    };
+    tick();
   }
 })();

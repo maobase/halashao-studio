@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>节拍盖章 · 哈拉少</title>
+  <meta name="description" content="哈拉少节拍盖章：节奏点炸硬话与红章粒子，土酷节拍演示。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="beatdrop.html" data-close>节拍盖章</a>
+      <a href="stage.html" data-close>舞台</a>
+      <a href="soundboard.html" data-close>音板</a>
+      <a href="lab.html" data-close>实验室</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">BEAT DROP · STAMP</p>
+    <h1 class="page-h">节拍盖章<br /><em class="seal">打点</em></h1>
+    <p class="lead reveal">空格或点击打点。每一下炸红章粒子 + 切一句范德彪硬话。酷炫节奏，土味芯子。</p>
+
+    <div class="beat-stage" id="beatStage">
+      <canvas class="beat-canvas" id="beatCanvas" aria-hidden="true"></canvas>
+      <div class="beat-pulse" id="beatPulse"></div>
+      <div class="beat-center">
+        <h2 id="beatQuote">小树不倒<br /><em>我就不倒</em></h2>
+      </div>
+      <div class="beat-hud">
+        <button type="button" class="btn btn-led" id="beatHit">打点 · 空格</button>
+        <button type="button" class="btn btn-ghost" id="beatAuto">自动节拍</button>
+        <button type="button" class="btn btn-ghost" id="beatClear">清场</button>
+        <a class="btn btn-ghost" href="soundboard.html">音板</a>
+        <span class="tag" id="beatCount">HITS 0</span>
+      </div>
+    </div>
+
+    <div class="band reveal">
+      <p>节拍是刃。打到站得住为止。</p>
+      <footer>盖章粒子 · 硬话切换</footer>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">节拍</p>
+    <div class="foot-row">
+      <p>打点 · 红章 · 硬话 · 粒子</p>
+      <div class="foot-links">
+        <a href="stage.html">舞台</a>
+        <a href="lab.html">实验室</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>四格蒙太奇 · 哈拉少片源墙</title>
+  <meta name="description" content="哈拉少四格蒙太奇：多轨视频同屏，点击独奏，新二字幕盖脸。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="montage.html" data-close>四格蒙太奇</a>
+      <a href="film.html" data-close>放映厅</a>
+      <a href="cinema.html" data-close>竖屏</a>
+      <a href="lab.html" data-close>实验室</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">MONTAGE · 4-UP</p>
+    <h1 class="page-h">四格蒙太奇<br /><em>同屏硬仗</em></h1>
+    <p class="lead reveal">四轨视频同时播。点击一格独奏放大感；再点恢复墙。字幕盖脸——新二气质，片源系统扩展。</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:0.55rem;margin-top:1rem">
+      <button type="button" class="btn btn-led" id="montPlayAll">全部播放</button>
+      <button type="button" class="btn btn-ghost" id="montPauseAll">全部暂停</button>
+      <button type="button" class="btn btn-ghost" id="montShuffleCap">换字幕</button>
+      <a class="btn btn-ghost" href="film.html">放映厅</a>
+    </div>
+
+    <div class="montage-grid" id="montageGrid">
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">01 · HERO</span>
+        <video muted loop playsinline poster="assets/hero-still.jpg"><source src="assets/hero-cinematic.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">小树不倒</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">02 · BRAND</span>
+        <video muted loop playsinline poster="assets/work-brand.jpg"><source src="assets/work-hover-1.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">那长相就是证据</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">03 · PRODUCT</span>
+        <video muted loop playsinline poster="assets/work-product.jpg"><source src="assets/work-hover-2.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">你就慢慢跟我处</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">04 · MOTION</span>
+        <video muted loop playsinline poster="assets/work-motion.jpg"><source src="assets/work-hover-3.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">少 · 是刃</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">05 · FX</span>
+        <video muted loop playsinline poster="assets/showreel-poster.jpg"><source src="assets/showreel-motion.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">酷是壳 · 土是芯</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">06 · STREET</span>
+        <video muted loop playsinline poster="assets/studio-space.jpg"><source src="assets/clip-b.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">本市著名硬仗</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">07 · CUT</span>
+        <video muted loop playsinline poster="assets/studio-desk.jpg"><source src="assets/clip-a.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">欧了</div>
+      </div>
+      <div class="mont-cell" data-mont>
+        <span class="mont-tag">08 · REEL</span>
+        <video muted loop playsinline poster="assets/showreel-poster.jpg"><source src="assets/showreel.mp4" type="video/mp4" /></video>
+        <div class="mont-cap">该出手时就出手</div>
+      </div>
+    </div>
+
+    <div class="band reveal">
+      <p>墙是全貌，独奏是刀口。片源系统要既能铺开，也能聚焦。</p>
+      <footer>蒙太奇墙 · 8 轨</footer>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">蒙太奇</p>
+    <div class="foot-row">
+      <p>8 格同屏 · 点击独奏 · 字幕盖脸</p>
+      <div class="foot-links">
+        <a href="film.html">片源</a>
+        <a href="cinema.html">竖屏</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

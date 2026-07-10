@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>土酷对决 · 哈拉少</title>
+  <meta name="description" content="哈拉少土酷对决：点土充能、点酷充能，硬话决胜——反差语法现场演示。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="lab.html" data-nav>实验室</a>
+      <a href="system.html" data-nav>系统</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="duel.html" data-close>土酷对决</a>
+      <a href="mix.html" data-close>混剪</a>
+      <a href="lab.html" data-close>实验室</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">DUEL · TU VS KU</p>
+    <h1 class="page-h">土酷对决<br /><em class="kinetic">点一下</em></h1>
+    <p class="lead reveal">连点左侧充土，连点右侧充酷。能量满触发硬话决胜——工作室语法：两边都要，缺一不可。</p>
+
+    <div class="duel-arena" id="duelArena">
+      <div class="duel-side tu" id="duelTu" role="button" tabindex="0">
+        <p class="kicker seal">TU · 土</p>
+        <h2>人间烟火</h2>
+        <p>灯牌、字幕、直球、记忆点。土是芯，不是粗糙。</p>
+        <div class="duel-meter"><i id="meterTu"></i></div>
+        <span class="tag" id="scoreTu">0%</span>
+      </div>
+      <div class="duel-vs">VS</div>
+      <div class="duel-side ku" id="duelKu" role="button" tabindex="0">
+        <p class="kicker">KU · 酷</p>
+        <h2>系统锋利</h2>
+        <p>画幅、层级、节奏、交付。酷是壳，删到站得住。</p>
+        <div class="duel-meter"><i id="meterKu"></i></div>
+        <span class="tag" id="scoreKu">0%</span>
+      </div>
+      <div class="duel-flash" id="duelFlash" aria-live="polite"></div>
+    </div>
+
+    <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.55rem">
+      <button type="button" class="btn btn-ghost" id="duelReset">清零再战</button>
+      <a class="btn btn-led" href="mix.html">去混剪台</a>
+      <a class="btn btn-ghost" href="creed.html">看信条</a>
+    </div>
+
+    <div class="band reveal">
+      <p>对决不是二选一。叠在一起，才是哈拉少。</p>
+      <footer>范德彪 · 酷是壳，土是芯</footer>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-mega">对决</p>
+    <div class="foot-row">
+      <p>土轨充能 · 酷轨充能 · 硬话决胜</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>
