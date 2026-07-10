@@ -33,6 +33,9 @@
   drawer?.addEventListener("click", (e) => {
     if (e.target === drawer) setDrawer(false);
   });
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && burger?.getAttribute("aria-expanded") === "true") setDrawer(false);
+  });
 
   /* particles */
   const mountParticles = () => {
@@ -383,10 +386,10 @@
     const data = new FormData(form);
     const st = document.getElementById("formStatus");
     if (![...data.values()].every((v) => String(v).trim())) {
-      if (st) st.textContent = "请填全再发。";
+      if (st) st.textContent = "请填全名字、邮箱与项目简述。";
       return;
     }
-    if (st) st.textContent = "意向已记录。正式沟通请同步邮件 hello@halashao.studio —— 欧了。";
+    if (st) st.textContent = "意向已记录。正式沟通请同步邮件 hello@halashao.studio。";
     form.reset();
   });
 
@@ -402,47 +405,49 @@
     }
   });
 
-  /* command palette */
+  /* command palette — client path first, then demo branches */
   const MODULES = [
     { t: "首页", h: "index.html", k: "HOME" },
+    { t: "关于工作室", h: "about.html", k: "ABOUT" },
+    { t: "服务", h: "services.html", k: "SERVICES" },
+    { t: "合作流程", h: "process.html", k: "PROCESS" },
     { t: "作品硬仗", h: "work.html", k: "WORK" },
     { t: "作品档案", h: "archive.html", k: "ARCHIVE" },
+    { t: "团队介绍", h: "team.html", k: "TEAM" },
+    { t: "班底海报卡", h: "cast.html", k: "CAST" },
     { t: "片源放映厅", h: "film.html", k: "FILM" },
     { t: "竖屏片场", h: "cinema.html", k: "CINEMA" },
+    { t: "片源时间轴", h: "scrub.html", k: "SCRUB" },
     { t: "彪哥语录墙", h: "quotes.html", k: "QUOTES" },
     { t: "彪哥电台", h: "radio.html", k: "RADIO" },
-    { t: "特效舞台", h: "stage.html", k: "STAGE" },
-    { t: "动能字墙", h: "typefx.html", k: "TYPEFX" },
-    { t: "土酷混剪", h: "mix.html", k: "MIX" },
-    { t: "夜市灯牌", h: "night-market.html", k: "MARKET" },
+    { t: "工作室叙事", h: "stories.html", k: "STORIES" },
+    { t: "工作室信条", h: "creed.html", k: "CREED" },
+    { t: "媒体资料", h: "press.html", k: "PRESS" },
+    { t: "客户走查导览", h: "tour.html", k: "TOUR" },
     { t: "导览台", h: "dashboard.html", k: "DASH" },
-    { t: "硬仗导览", h: "tour.html", k: "TOUR" },
+    { t: "系统地图", h: "system.html", k: "SYSTEM" },
+    { t: "开干", h: "contact.html", k: "CONTACT" },
+    { t: "招人", h: "recruit.html", k: "RECRUIT" },
+    { t: "实验室", h: "lab.html", k: "LAB" },
+    { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
+    { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
+    { t: "霓虹硬话", h: "neon.html", k: "NEON" },
+    { t: "硬仗盲盒", h: "hardbox.html", k: "HARDBOX" },
+    { t: "硬话红包雨", h: "redpack.html", k: "REDPACK" },
+    { t: "酒桌转盘", h: "banquet.html", k: "BANQUET" },
+    { t: "盖章机", h: "chop.html", k: "CHOP" },
+    { t: "胶片横滑", h: "filmstrip.html", k: "STRIP" },
+    { t: "土酷分屏", h: "splitscroll.html", k: "SPLIT" },
     { t: "土酷对决", h: "duel.html", k: "DUEL" },
     { t: "四格蒙太奇", h: "montage.html", k: "MONTAGE" },
     { t: "硬仗荣誉墙", h: "fame.html", k: "FAME" },
     { t: "硬话胶囊", h: "capsule.html", k: "CAPSULE" },
     { t: "节拍盖章", h: "beatdrop.html", k: "BEAT" },
-    { t: "硬话红包雨", h: "redpack.html", k: "REDPACK" },
-    { t: "盖章机", h: "chop.html", k: "CHOP" },
-    { t: "胶片横滑", h: "filmstrip.html", k: "STRIP" },
-    { t: "酒桌转盘", h: "banquet.html", k: "BANQUET" },
-    { t: "土酷分屏", h: "splitscroll.html", k: "SPLIT" },
-    { t: "硬话弹幕", h: "danmu.html", k: "DANMU" },
-    { t: "硬仗盲盒", h: "hardbox.html", k: "HARDBOX" },
-    { t: "霓虹硬话", h: "neon.html", k: "NEON" },
-    { t: "片源时间轴", h: "scrub.html", k: "SCRUB" },
-    { t: "土酷对照", h: "contrast.html", k: "CONTRAST" },
-    { t: "班底海报卡", h: "cast.html", k: "CAST" },
-    { t: "团队介绍", h: "team.html", k: "TEAM" },
-    { t: "滚动叙事", h: "stories.html", k: "STORIES" },
+    { t: "特效舞台", h: "stage.html", k: "STAGE" },
+    { t: "动能字墙", h: "typefx.html", k: "TYPEFX" },
+    { t: "土酷混剪", h: "mix.html", k: "MIX" },
+    { t: "夜市灯牌", h: "night-market.html", k: "MARKET" },
     { t: "新二流信息流", h: "xin2.html", k: "XIN2" },
-    { t: "实验室", h: "lab.html", k: "LAB" },
-    { t: "系统地图", h: "system.html", k: "SYSTEM" },
-    { t: "服务", h: "services.html", k: "SERVICES" },
-    { t: "流程", h: "process.html", k: "PROCESS" },
-    { t: "关于", h: "about.html", k: "ABOUT" },
-    { t: "信条", h: "creed.html", k: "CREED" },
-    { t: "媒体资料", h: "press.html", k: "PRESS" },
     { t: "伪直播间", h: "live.html", k: "LIVE" },
     { t: "彪哥音板", h: "soundboard.html", k: "SOUND" },
     { t: "夜场", h: "night.html", k: "NIGHT" },
@@ -453,8 +458,6 @@
     { t: "录像带", h: "vhs.html", k: "VHS" },
     { t: "硬仗终端", h: "terminal.html", k: "CLI" },
     { t: "库房", h: "vault.html", k: "VAULT" },
-    { t: "开干", h: "contact.html", k: "CONTACT" },
-    { t: "招人", h: "recruit.html", k: "RECRUIT" },
   ];
 
   const mountCmd = () => {
@@ -463,8 +466,8 @@
     overlay.className = "cmd-overlay";
     overlay.id = "cmdOverlay";
     overlay.innerHTML = `
-      <div class="cmd-panel" role="dialog" aria-label="命令面板">
-        <input id="cmdInput" type="search" placeholder="搜模块：语录 / 片源 / 舞台 / 新二…" autocomplete="off" />
+      <div class="cmd-panel" role="dialog" aria-modal="true" aria-label="命令面板">
+        <input id="cmdInput" type="search" placeholder="搜客户路径：服务 / 团队 / 作品 / 导览…" autocomplete="off" />
         <ul class="cmd-list" id="cmdList"></ul>
         <div class="cmd-hint"><span>↑↓ 选择 · Enter 进入</span><span>Esc 关闭 · ⌘K</span></div>
       </div>`;
@@ -483,6 +486,10 @@
     let filtered = MODULES.slice();
 
     const render = () => {
+      if (!filtered.length) {
+        list.innerHTML = `<li class="cmd-empty">没有匹配模块。试试「服务」「团队」「导览」。</li>`;
+        return;
+      }
       list.innerHTML = filtered
         .map(
           (m, i) =>
@@ -494,6 +501,7 @@
           location.href = filtered[Number(btn.dataset.i)].h;
         });
       });
+      list.querySelector("button.is-active")?.scrollIntoView({ block: "nearest" });
     };
 
     const open = () => {
