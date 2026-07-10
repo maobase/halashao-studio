@@ -449,6 +449,7 @@
     { t: "硬仗终端", h: "terminal.html", k: "CLI" },
     { t: "库房", h: "vault.html", k: "VAULT" },
     { t: "开干", h: "contact.html", k: "CONTACT" },
+    { t: "招人", h: "recruit.html", k: "RECRUIT" },
   ];
 
   const mountCmd = () => {

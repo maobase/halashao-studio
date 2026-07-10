@@ -3,134 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>招人 · 哈拉少</title>
-  <meta name="description" content="哈拉少招人：土酷岗位说明。" />
-  <meta name="theme-color" content="#050506" />
+  <title>招人 · 哈拉少设计工作室</title>
+  <meta name="description" content="哈拉少招人：东北原生专业设计工作室。主理人范德彪。能扛审美也能扛交付。" />
+  <meta name="theme-color" content="#070706" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/system.css" />
-  <link rel="stylesheet" href="css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" aria-hidden="true"></canvas>
-  <div class="cursor" id="cursor" aria-hidden="true"><i></i><b></b></div>
-  <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
   <a class="skip" href="#main">跳到内容</a>
-  <header class="top">
-    <a class="brand" href="index.html" data-scramble>哈拉少</a>
-    <div class="top-mid" aria-hidden="true"><span id="clock">00:00:00</span> · OS</div>
-
-    <nav class="top-nav" aria-label="主导航">
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
-      <a href="os.html" data-nav>地图</a>
       <a href="work.html" data-nav>作品</a>
-      <a href="reel.html" data-nav>片源</a>
-      <a href="tour.html" data-nav>导览</a>
-      <a href="beat.html" data-nav>节拍</a>
-      <a href="slot.html" data-nav>老虎机</a>
-      <a href="loot.html" data-nav>开箱</a>
-      <a href="fireworks.html" data-nav>烟花</a>
-      <a href="radar.html" data-nav>雷达</a>
-      <a href="vhs.html" data-nav>录像带</a>
-      <a href="spotlight.html" data-nav>追光</a>
-      <a href="mirror.html" data-nav>镜像</a>
-      <a href="combo.html" data-nav>连招</a>
-      <a href="manifesto.html" data-nav>宣言</a>
-      <a href="soundboard.html" data-nav>音板</a>
-      <a href="fx.html" data-nav>特效</a>
-      <a href="contact.html" data-nav class="top-cta">开干</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
-    <div class="top-tools">
-      <button type="button" class="cmd-btn" id="cmdBtn" aria-label="命令面板" title="搜索模块 ⌘K">⌘</button>
-      <button type="button" class="mode-btn" id="modeBtn" aria-label="切换土味/精致模式">土</button>
-      <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
-    </div>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
   </header>
   <div class="drawer" id="drawer" hidden>
-
-    <nav class="drawer-nav" aria-label="移动导航">
+    <nav aria-label="移动导航">
       <a href="index.html" data-close>首页</a>
-      <a href="os.html" data-close>系统地图</a>
-      <a href="tour.html" data-close>导览</a>
-      <a href="docs.html" data-close>手册</a>
       <a href="work.html" data-close>作品</a>
-      <a href="reel.html" data-close>片源</a>
-      <a href="beat.html" data-close>节拍战</a>
-      <a href="slot.html" data-close>硬仗老虎机</a>
-      <a href="loot.html" data-close>模块开箱</a>
-      <a href="fireworks.html" data-close>语录烟花</a>
-      <a href="radar.html" data-close>模块雷达</a>
-      <a href="vhs.html" data-close>录像带滤镜</a>
-      <a href="spotlight.html" data-close>追光灯</a>
-      <a href="mirror.html" data-close>镜像字</a>
-      <a href="combo.html" data-close>土酷连招</a>
-      <a href="manifesto.html" data-close>全屏宣言</a>
-      <a href="terminal.html" data-close>终端</a>
-      <a href="soundboard.html" data-close>音板</a>
-      <a href="chat.html" data-close>彪聊</a>
-      <a href="night.html" data-close>夜场</a>
-      <a href="live.html" data-close>直播感</a>
-      <a href="storm.html" data-close>风暴</a>
-      <a href="fx.html" data-close>特效场</a>
-      <a href="biao.html" data-close>彪哥</a>
-      <a href="faq.html" data-close>硬问题</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="vault.html" data-close>库房</a>
       <a href="contact.html" data-close>开干</a>
     </nav>
   </div>
 
-  <main id="main">
+  <main id="main" class="page">
+    <p class="kicker">RECRUIT · 哈拉少</p>
+    <h1 class="page-h">招人<br /><em>人少，刃要齐</em></h1>
+    <p class="lead">专业设计工作室，原生自东北。主理人范德彪带队。能扛审美，也能扛交付；认土酷反差，也认系统纪律。</p>
 
-    <header class="page-hero">
-      <p class="page-kicker">RECRUIT</p>
-      <h1 class="page-title">招人<br /><em>不招模板人</em></h1>
-      <p class="page-lead">小树不倒我就不倒。你要是容易倒，先别来。</p>
-    </header>
-    <section class="jobs">
-      <article class="job">
-        <h2>品牌刀手</h2>
-        <p>会做系统，也会写土。能把「欧了」做成规范里的语气。</p>
-        <ul><li>标识 / 延展</li><li>反差叙事</li><li>不怕红章</li></ul>
+    <div class="svc-grid" style="margin-top:2rem">
+      <article class="svc">
+        <span class="tag">01 · BRAND</span>
+        <h2>品牌 / 视觉</h2>
+        <p>识别系统、触点延展、土酷语气。对「模板味」过敏，能把人间烟火写进规范。</p>
+        <ul>
+          <li>标识与视觉规范</li>
+          <li>包装 / 物料 / 官网关键页</li>
+          <li>与新二气质对齐的网感分寸</li>
+        </ul>
       </article>
-      <article class="job">
-        <h2>界面锻造</h2>
-        <p>密度控。暗色不是皮肤，是纪律。</p>
-        <ul><li>设计系统</li><li>复杂后台</li><li>像素洁癖</li></ul>
+      <article class="svc">
+        <span class="tag">02 · PRODUCT</span>
+        <h2>产品体验</h2>
+        <p>信息架构、界面、组件库。先路径，后装饰——和雨姐同一套刀法。</p>
+        <ul>
+          <li>复杂后台与工具型界面</li>
+          <li>设计系统 / Token</li>
+          <li>和工程对齐可落地</li>
+        </ul>
       </article>
-      <article class="job">
-        <h2>动效浪子</h2>
-        <p>粒子可以炫，节奏必须狠。会剪会写会上麦更好。</p>
-        <ul><li>片头 / UI motion</li><li>竖屏网感</li><li>音频意识</li></ul>
+      <article class="svc">
+        <span class="tag">03 · MOTION</span>
+        <h2>影像 / 动效</h2>
+        <p>发布片、片头、UI 动效。节奏大于特效层数——和小阿giao同一战场。</p>
+        <ul>
+          <li>竖屏网感与电影画幅</li>
+          <li>动效规范与片源节奏</li>
+          <li>字幕 / 红章气氛组</li>
+        </ul>
       </article>
-    </section>
-    <p class="page-lead" style="max-width:var(--max);margin:0 auto;padding:0 1.25rem 3rem">投递：<a class="contact-mail" href="mailto:jobs@halashao.studio">jobs@halashao.studio</a> · 标题写「硬仗」</p>
-  
+      <article class="svc featured">
+        <span class="tag">04 · 协作</span>
+        <h2>我们要什么人</h2>
+        <p>不堆人头。愿意写清楚、改到位、对截止日期诚实。东北硬气可以学，专业纪律必须有。</p>
+        <ul>
+          <li>作品能讲清「为什么」</li>
+          <li>异步沟通、文档可回看</li>
+          <li>模板单与无边界修改，免开尊口</li>
+        </ul>
+        <p class="said" style="margin-top:0.85rem">「你就慢慢跟我处。」——主理人范德彪</p>
+      </article>
+    </div>
+
+    <div class="band">
+      <p>岗位随硬仗开启。简历与作品集丢邮箱，吴总会回。</p>
+      <footer>hello@halashao.studio · 主题注明「招人」</footer>
+    </div>
+
+    <div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-led" href="mailto:hello@halashao.studio?subject=%E5%93%88%E6%8B%89%E5%B0%91%E6%8B%9B%E4%BA%BA">写信</a>
+      <a class="btn btn-ghost" href="team.html">看班底</a>
+      <a class="btn btn-ghost" href="contact.html">项目合作</a>
+    </div>
   </main>
 
   <footer class="foot">
-    <div class="foot-marquee" aria-hidden="true">
-      <div class="foot-marquee-track">
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-        <span>哈拉少</span><span class="g">小树不倒</span><span>HALASHAO</span><span class="h">欧了</span>
-        <span>新二流</span><span class="g">硬仗主打</span><span>土酷到底</span><span class="h">从头再来</span>
-      </div>
-    </div>
-    <p class="foot-big" data-scramble>哈拉少</p>
+    <p class="foot-mega">招人</p>
     <div class="foot-row">
-      <p>Design OS · 土酷标杆 · 60 模块 · ⌘K</p>
+      <p>东北原生 · 专业工作室 · 主理人范德彪</p>
       <div class="foot-links">
-        <a href="os.html">地图</a>
-        <a href="tour.html">导览</a>
-        <a href="loot.html">开箱</a>
-        <a href="beat.html">节拍</a>
+        <a href="team.html">团队</a>
+        <a href="about.html">关于</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
     </div>
   </footer>
-  <script src="js/system.js"></script>
-  
+  <script src="js/hala.js"></script>
 </body>
 </html>

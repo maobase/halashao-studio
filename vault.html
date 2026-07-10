@@ -53,18 +53,21 @@
   <main id="main" class="page">
     <p class="kicker seal">VAULT</p>
     <h1 class="page-h">库房<br /><em class="seal">实验归档</em></h1>
-    <p class="lead">主路径只留锋利的。这里是全部旧实验与玩具——需要时再翻。</p>
+    <p class="lead">客户主路径只留锋利的。这里归档全部体验模块与旧实验——演示、翻旧账、找灵感时再进。</p>
 
+    <p class="kicker" style="margin-top:2rem">FLAGSHIP · 精选</p>
+    <div class="vault-list" id="vaultFlag"></div>
+    <p class="kicker" style="margin-top:2.5rem">ARCHIVE · 全部</p>
     <div class="vault-list" id="vaultList"></div>
   </main>
 
   <footer class="foot">
     <p class="foot-mega">VAULT</p>
     <div class="foot-row">
-      <p>归档不等于删除</p>
+      <p>归档不等于删除 · 主理人范德彪工作室</p>
       <div class="foot-links">
         <a href="lab.html">实验室</a>
-        <a href="index.html">首页</a>
+        <a href="system.html">系统</a>
         <a href="contact.html">开干</a>
       </div>
       <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
@@ -72,6 +75,26 @@
   </footer>
   <script src="js/hala.js"></script>
   <script>
+    const flagship = [
+      ["硬话红包雨", "redpack.html", "点开拆硬话"],
+      ["盖章机", "chop.html", "画布公章"],
+      ["胶片横滑", "filmstrip.html", "横刷片源"],
+      ["酒桌转盘", "banquet.html", "东北命运硬话"],
+      ["土酷分屏", "splitscroll.html", "对照叙事"],
+      ["土酷对决", "duel.html", "充能决胜"],
+      ["四格蒙太奇", "montage.html", "8 轨同屏"],
+      ["硬仗荣誉墙", "fame.html", "红章案例"],
+      ["硬话胶囊", "capsule.html", "翻转时间线"],
+      ["节拍盖章", "beatdrop.html", "空格打点"],
+      ["特效舞台", "stage.html", "盖章爆发"],
+      ["动能字墙", "typefx.html", "滚动硬话"],
+      ["土酷混剪", "mix.html", "双轨反差"],
+      ["夜市灯牌", "night-market.html", "LED 跑马"],
+      ["导览台", "dashboard.html", "总控"],
+      ["竖屏片场", "cinema.html", "新二短片流"],
+      ["彪哥电台", "radio.html", "硬话连播"],
+      ["新二流", "xin2.html", "信息流"],
+    ];
     const items = [
       ["音板", "soundboard.html", "十五键语音"],
       ["彪聊", "chat.html", "规则引擎顾问"],
@@ -90,7 +113,7 @@
       ["起名", "brandgen.html", "随机名"],
       ["对撞", "clash.html", "双视频"],
       ["划卡", "swipe.html", "项目点子"],
-      ["节拍", "beat.html", "砸点"],
+      ["节拍战", "beat.html", "砸点"],
       ["老虎机", "slot.html", "配方"],
       ["开箱", "loot.html", "随机模块"],
       ["烟花", "fireworks.html", "点屏炸"],
@@ -101,24 +124,20 @@
       ["连招", "combo.html", "QWE"],
       ["宣言", "manifesto.html", "全屏字"],
       ["点唱", "jukebox.html", "语录电台"],
-      ["电台", "radio.html", "频谱"],
       ["K歌", "karaoke.html", "跟打"],
-      ["灯牌", "billboard.html", "LED"],
+      ["灯牌旧", "billboard.html", "LED 旧版"],
       ["工坊", "workshop.html", "四步锻"],
       ["罗盘", "mood.html", "土酷滑杆"],
-      ["对决", "arena.html", "土vs酷"],
+      ["对决旧", "arena.html", "土vs酷"],
       ["弹幕", "wall.html", "发射"],
       ["骰子", "dice.html", "随机硬仗"],
-      ["盖章", "stamp.html", "红章"],
+      ["盖章旧", "stamp.html", "红章"],
       ["老板", "boss.html", "假 KPI"],
       ["轨道", "orbit.html", "旋转导航"],
       ["脉冲", "pulse.html", "声波"],
-      ["新二流", "xin2.html", "信息流"],
-      ["故事条", "stories.html", "竖屏"],
       ["影库", "gallery.html", "灯箱"],
       ["硬仗旧版", "hard.html", "pin 旧"],
       ["特效场", "fx.html", "零件"],
-      ["人设卡", "cast.html", "翻转"],
       ["招人", "recruit.html", "岗位"],
       ["媒体包", "press.html", "物料"],
       ["工作室旧", "studio.html", "叙事"],
@@ -126,19 +145,21 @@
       ["菜单", "menu.html", "服务"],
       ["手册", "docs.html", "说明"],
       ["FAQ", "faq.html", "硬问题"],
-      ["导览旧", "tour.html", "打卡"],
       ["地图旧", "os.html", "全模块"],
+      ["片源旧", "reel.html", "旧轨"],
     ];
-    const root = document.getElementById("vaultList");
-    if (root) {
-      root.innerHTML = items.map((it, i) =>
+    const render = (root, list, offset = 0) => {
+      if (!root) return;
+      root.innerHTML = list.map((it, i) =>
         `<a class="vault-row" href="${it[1]}">
-          <b>${String(i + 1).padStart(2, "0")}</b>
+          <b>${String(i + 1 + offset).padStart(2, "0")}</b>
           <div><strong>${it[0]}</strong><span>${it[2]}</span></div>
           <em>${it[1]}</em>
         </a>`
       ).join("");
-    }
+    };
+    render(document.getElementById("vaultFlag"), flagship);
+    render(document.getElementById("vaultList"), items);
   </script>
 </body>
 </html>
