@@ -5271,7 +5271,10 @@ body.stage-glitch .stage-wrap {
   bottom: 1rem;
 }
 
-.snap-main { padding-bottom: 0; }
+.snap-main {
+  padding-bottom: 0;
+  padding-top: calc(var(--nav) + 1.25rem);
+}
 .snap-intro {
   max-width: var(--max);
   margin-left: auto;
@@ -5285,6 +5288,7 @@ body.stage-glitch .stage-wrap {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   border-top: 1px solid var(--line);
+  scroll-behavior: smooth;
 }
 .snap-card {
   position: relative;
@@ -5297,16 +5301,18 @@ body.stage-glitch .stage-wrap {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.62);
+  filter: brightness(0.58) saturate(0.95);
 }
 .snap-meta {
   position: absolute;
   left: 1rem;
   right: 1rem;
-  bottom: 2rem;
+  bottom: max(2rem, env(safe-area-inset-bottom, 0px) + 1.5rem);
   z-index: 2;
   display: grid;
   gap: 0.55rem;
+  padding: 1.25rem 0.25rem 0.25rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
 }
 .snap-meta p {
   margin: 0;
@@ -5315,4 +5321,11 @@ body.stage-glitch .stage-wrap {
   color: #fff;
   text-shadow: 0 2px 8px #000;
   max-width: 16ch;
+}
+.snap-hint {
+  margin: 0.65rem auto 0;
+  max-width: var(--max);
+  padding: 0 clamp(1rem, 3vw, 2rem) 1rem;
+  font-size: 0.88rem;
+  color: var(--mute);
 }

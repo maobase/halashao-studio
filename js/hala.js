@@ -31,7 +31,18 @@
     a.addEventListener("pointerenter", () => prefetch(href), { passive: true, once: true });
     a.addEventListener("focus", () => prefetch(href), { once: true });
   });
-  ["about.html", "services.html", "team.html", "work.html", "contact.html", "tour.html"].forEach(prefetch);
+  [
+    "about.html",
+    "services.html",
+    "team.html",
+    "work.html",
+    "film.html",
+    "contact.html",
+    "tour.html",
+    "press.html",
+    "process.html",
+    "quotes.html",
+  ].forEach(prefetch);
 
   const nav = document.querySelector(".shell-nav");
   const onScroll = () => nav?.classList.toggle("is-on", scrollY > 12);
@@ -416,7 +427,9 @@
       if (st) st.textContent = "请填写有效邮箱。";
       return;
     }
-    if (st) st.textContent = "意向已记录。正式沟通请同步邮件 hello@halashao.studio。";
+    if (st) {
+      st.textContent = "意向已记录。请再发一封邮件到 hello@halashao.studio（主题：哈拉少项目咨询），正式对齐更快。";
+    }
     form.reset();
   });
 
@@ -2414,15 +2427,16 @@
   /* teleprompter */
   const teleTrack = document.getElementById("teleTrack");
   if (teleTrack) {
-    let y = 0;
+    let y = 40;
     let speed = 0.45;
     let on = false;
     let raf = 0;
+    teleTrack.style.transform = `translateY(${y}px)`;
     const tick = () => {
       if (on) {
         y -= speed;
         const h = teleTrack.scrollHeight;
-        if (-y > h * 0.75) y = 120;
+        if (-y > h * 0.75) y = 80;
         teleTrack.style.transform = `translateY(${y}px)`;
       }
       raf = requestAnimationFrame(tick);
