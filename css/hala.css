@@ -1248,6 +1248,71 @@ main { position: relative; z-index: 1; }
   font-size: 0.95rem;
 }
 
+/* spectrum: street → orbit */
+.spectrum-sec { padding-top: 2.5rem; }
+.spectrum {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .spectrum { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .spectrum { grid-template-columns: repeat(3, 1fr); }
+}
+.spec-card {
+  position: relative;
+  padding: 1.25rem 1.15rem 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--led) 6%, transparent), transparent 55%),
+    #0e0e0c;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.spec-card:hover {
+  border-color: color-mix(in srgb, var(--led) 55%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--led) 25%, transparent), 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+.spec-card.tu {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--seal) 12%, transparent), transparent 60%),
+    #120e0c;
+}
+.spec-card.ku {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--led) 14%, transparent), transparent 55%),
+    #0a1014;
+  border-color: color-mix(in srgb, var(--led) 22%, transparent);
+}
+.spec-lv {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--led);
+  margin-bottom: 0.65rem;
+}
+.spec-card.tu .spec-lv { color: var(--seal); }
+.spec-card strong {
+  display: block;
+  font-family: Syne, "Noto Sans SC", system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.45rem;
+}
+.spec-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+  max-width: 28ch;
+}
+
 /* clients */
 .clients {
   margin-top: 2.5rem;
