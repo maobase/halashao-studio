@@ -19,10 +19,12 @@
     <a class="logo" href="index.html"><i></i>哈拉少</a>
     <nav class="nav-core" aria-label="主导航">
       <a href="index.html" data-nav>首页</a>
-      <a href="work.html" data-nav>作品</a>
+      <a href="work.html" data-nav class="is-active">作品</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="process.html" data-nav>流程</a>
+      <a href="about.html" data-nav>关于</a>
       <a href="film.html" data-nav>片源</a>
-      <a href="creed.html" data-nav>信条</a>
-      <a href="lab.html" data-nav>实验室</a>
       <a href="contact.html" data-nav class="cta">开干</a>
     </nav>
     <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
@@ -31,6 +33,10 @@
     <nav aria-label="移动导航">
       <a href="index.html" data-close>首页</a>
       <a href="work.html" data-close>作品</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="about.html" data-close>关于</a>
       <a href="film.html" data-close>片源</a>
       <a href="creed.html" data-close>信条</a>
       <a href="lab.html" data-close>实验室</a>
@@ -89,10 +95,36 @@
           <p class="said">「小树不倒我就不倒。」</p>
         </div>
       </article>
+
+      <article class="work-item" data-work>
+        <div class="work-media">
+          <img src="assets/studio-space.jpg" alt="野市零售品牌触点" />
+          <video muted loop playsinline preload="none" poster="assets/studio-space.jpg">
+            <source src="assets/clip-b.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="work-body">
+          <span class="tag">BRAND / TOUCHPOINTS</span>
+          <h2>野市</h2>
+          <p>新消费零售的触点系统：包装、店头短视频模板、会员界面语气统一。</p>
+          <p class="said">「欧了。」上线当周内容产能明显拉齐。</p>
+        </div>
+      </article>
     </div>
 
-    <p class="lead" style="margin-top:3rem">下一块空白留给你。</p>
-    <a class="btn btn-led" href="contact.html" style="margin-top:1rem">预约档期</a>
+    <div class="prose" style="margin-top:3rem">
+      <div>
+        <h2>案例怎么讲</h2>
+        <p>公开页保留可展示的粒度。若你需要完整过程（简报、被淘汰方向、上线数据），沟通后可在洽谈中展开。</p>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:2rem">下一块空白留给你。</p>
+    <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:0.65rem">
+      <a class="btn btn-led" href="contact.html">预约档期</a>
+      <a class="btn btn-ghost" href="services.html">服务范围</a>
+      <a class="btn btn-ghost" href="process.html">合作流程</a>
+    </div>
   </main>
 
   <footer class="foot">

@@ -994,3 +994,306 @@ main { position: relative; z-index: 1; }
   outline: 2px solid var(--led);
   outline-offset: 3px;
 }
+
+/* ========== studio content: team / services / process / about ========== */
+.about-hero {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 900px) {
+  .about-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+    gap: 2rem;
+  }
+}
+.about-hero figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: #000;
+}
+.about-hero img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(0.92);
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+.about-stats b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: -0.02em;
+}
+.about-stats span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+.prose {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 62ch;
+}
+.prose h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 900;
+}
+.prose p {
+  margin: 0.65rem 0 0;
+  color: var(--mute);
+  line-height: 1.7;
+}
+.prose .said {
+  margin-top: 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--seal);
+  color: var(--led);
+  font-weight: 800;
+}
+
+/* team */
+.team-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1000px) {
+  .team-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+.person {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+}
+.person-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  background:
+    radial-gradient(circle at 30% 30%, var(--led-dim), transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--seal-dim), transparent 45%),
+    #0c0c0a;
+  display: grid;
+  place-items: center;
+}
+.person-visual .mono {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  opacity: 0.92;
+}
+.person-visual .role-chip {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--led);
+  background: rgba(0,0,0,0.55);
+  padding: 0.25rem 0.5rem;
+}
+.person-body {
+  padding: 1.2rem 1.15rem 1.35rem;
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+.person-body h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+.person-body .title {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+.person-body p {
+  margin: 0.35rem 0 0;
+  color: var(--mute);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.person-body .said {
+  margin-top: 0.55rem;
+  color: var(--led);
+  font-weight: 800;
+  font-size: 0.9rem;
+  border-left: 3px solid var(--seal);
+  padding-left: 0.7rem;
+}
+.person.wide {
+  grid-column: 1 / -1;
+}
+@media (min-width: 1000px) {
+  .person.wide {
+    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-rows: 1fr;
+  }
+  .person.wide .person-visual { aspect-ratio: auto; min-height: 280px; }
+}
+
+/* services */
+.svc-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+@media (min-width: 900px) {
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+}
+.svc {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 1.4rem 1.3rem 1.5rem;
+  display: grid;
+  gap: 0.55rem;
+}
+.svc .tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--led);
+}
+.svc h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.svc p { margin: 0; color: var(--mute); line-height: 1.65; }
+.svc ul {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.svc li {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+.svc.featured {
+  grid-column: 1 / -1;
+  background:
+    radial-gradient(ellipse at 100% 0%, var(--seal-dim), transparent 45%),
+    var(--panel);
+  border-color: rgba(232, 52, 26, 0.35);
+}
+
+/* process */
+.steps {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.step {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 800px) {
+  .step {
+    grid-template-columns: 7rem 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+.step .n {
+  font-family: var(--font-mono);
+  color: var(--seal);
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.step h2 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 900;
+}
+.step p {
+  margin: 0.5rem 0 0;
+  color: var(--mute);
+  max-width: 52ch;
+  line-height: 1.7;
+}
+.step .said {
+  margin-top: 0.75rem;
+  color: var(--led);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+/* clients */
+.clients {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 800px) {
+  .clients { grid-template-columns: repeat(4, 1fr); }
+}
+.client {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 1.1rem 1rem;
+  min-height: 110px;
+  display: grid;
+  align-content: center;
+  gap: 0.3rem;
+}
+.client strong {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+.client span {
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+
+/* quote band */
+.band {
+  margin-top: 3rem;
+  padding: 1.6rem 1.4rem;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 0% 0%, var(--led-dim), transparent 50%),
+    var(--panel);
+}
+.band p {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.4;
+  max-width: 28ch;
+}
+.band footer {
+  margin-top: 1rem;
+  color: var(--mute);
+  font-size: 0.88rem;
+}
