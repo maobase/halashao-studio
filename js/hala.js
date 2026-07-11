@@ -486,7 +486,7 @@
     { t: "导览台", h: "dashboard.html", k: "DASH", a: "总控 捷径" },
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
-    { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位" },
+    { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位 简历 班底" },
     { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 抓娃娃 红幕 寻呼 点唱 鞭炮 顶灯 翻页 烟雾" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
