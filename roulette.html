@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>转盘硬话 · 哈拉少设计工作室</title>
+  <meta name="description" content="东北原生哈拉少设计工作室转盘硬话：指针停在范德彪硬话上。新二土酷。酷是壳，土是芯。" />
+  <meta name="theme-color" content="#070706" />
+  <link rel="canonical" href="https://maobase.github.io/halashao-studio/roulette.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="哈拉少设计工作室" />
+  <meta property="og:title" content="转盘硬话 · 哈拉少设计工作室" />
+  <meta property="og:description" content="东北原生哈拉少设计工作室转盘硬话：指针停在范德彪硬话上。新二土酷。酷是壳，土是芯。" />
+  <meta property="og:url" content="https://maobase.github.io/halashao-studio/roulette.html" />
+  <meta property="og:image" content="https://maobase.github.io/halashao-studio/assets/showreel-poster.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="转盘硬话 · 哈拉少设计工作室" />
+  <meta name="twitter:description" content="东北原生哈拉少设计工作室转盘硬话：指针停在范德彪硬话上。新二土酷。酷是壳，土是芯。" />
+  <meta name="twitter:image" content="https://maobase.github.io/halashao-studio/assets/showreel-poster.jpg" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/hala.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="led-grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="shell-nav">
+    <a class="logo" href="index.html"><i></i>哈拉少</a>
+    <nav class="nav-core" aria-label="主导航">
+      <a href="index.html" data-nav>首页</a>
+      <a href="work.html" data-nav>作品</a>
+      <a href="film.html" data-nav>片源</a>
+      <a href="team.html" data-nav>团队</a>
+      <a href="services.html" data-nav>服务</a>
+      <a href="quotes.html" data-nav>语录</a>
+      <a href="contact.html" data-nav class="cta">开干</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="移动导航">
+      <a href="index.html" data-close>首页</a>
+      <a href="work.html" data-close>作品</a>
+      <a href="film.html" data-close>片源</a>
+      <a href="team.html" data-close>团队</a>
+      <a href="services.html" data-close>服务</a>
+      <a href="quotes.html" data-close>语录</a>
+      <a href="about.html" data-close>关于</a>
+      <a href="process.html" data-close>流程</a>
+      <a href="stories.html" data-close>叙事</a>
+      <a href="cast.html" data-close>班底卡</a>
+      <a href="lab.html" data-close>实验室</a>
+      <a href="system.html" data-close>系统</a>
+      <a href="dashboard.html" data-close>导览台</a>
+      <a href="tour.html" data-close>硬仗导览</a>
+      <a href="creed.html" data-close>信条</a>
+      <a href="press.html" data-close>媒体</a>
+      <a href="faq.html" data-close>硬问题</a>
+      <a href="recruit.html" data-close>招人</a>
+      <a href="vault.html" data-close>库房</a>
+      <a href="contact.html" data-close>开干</a>
+    </nav>
+  </div>
+
+  <main id="main" class="page">
+    <p class="kicker">ROULETTE · SPIN</p>
+    <h1 class="page-h">转盘硬话<br /><em>转一下</em></h1>
+    <p class="lead reveal">转盘一停，指针钉住主理人范德彪硬话。东北原生哈拉少设计工作室：运气是壳，刀口是芯。酷是壳，土是芯。</p>
+    <div class="rl-stage" id="rlStage">
+      <div class="rl-wheel-wrap">
+        <div class="rl-pointer" aria-hidden="true"></div>
+        <div class="rl-wheel" id="rlWheel" aria-hidden="true"></div>
+      </div>
+      <p class="rl-quote said" id="rlQuote">「少，是刃。」</p>
+      <span class="rl-meta" id="rlMeta">SPIN · READY</span>
+    </div>
+    <div class="rl-hud">
+      <button type="button" class="btn btn-led" id="rlSpin">转盘</button>
+      <button type="button" class="btn btn-ghost" id="rlAgain">再转一次</button>
+      <a class="btn btn-ghost" href="lottery.html">摇号硬话</a>
+      <a class="btn btn-ghost" href="hardbox.html">硬仗盲盒</a>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="foot-mega">转盘</p>
+    <div class="foot-row">
+      <p>转盘硬话 · 东北原生哈拉少设计工作室 · 主理人范德彪 · 酷是壳 · 土是芯</p>
+      <div class="foot-links">
+        <a href="lab.html">实验室</a>
+        <a href="quotes.html">语录</a>
+        <a href="contact.html">开干</a>
+      </div>
+      <p class="foot-copy">&copy; <span data-year></span> HALASHAO</p>
+    </div>
+  </footer>
+  <script src="js/hala.js"></script>
+</body>
+</html>

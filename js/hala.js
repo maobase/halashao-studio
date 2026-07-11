@@ -487,7 +487,7 @@
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
     { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位 简历 班底" },
-    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 售货 站牌 检查单 前台铃 黑板 叫号 公章 微信" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 麻将 铁锅 奖杯 闹钟 护照 转盘 售货 站牌" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
@@ -512,6 +512,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+    { t: "麻将硬话", h: "mahjong.html", k: "MJ", a: "麻将 摸打 牌桌 硬话" },
+    { t: "铁锅硬话", h: "wok.html", k: "WOK", a: "铁锅 颠锅 灶台 硬话" },
+    { t: "奖杯硬话", h: "trophy.html", k: "TROPHY", a: "奖杯 举杯 荣誉 硬话" },
+    { t: "闹钟硬话", h: "alarmclock.html", k: "ALARM", a: "闹钟 闹铃 起床 硬话" },
+    { t: "护照盖章硬话", h: "passport.html", k: "VISA", a: "护照 盖章 入境 硬话" },
+    { t: "转盘硬话", h: "roulette.html", k: "ROULETTE", a: "转盘 指针 随机 硬话" },
     { t: "售货机硬话", h: "vending.html", k: "VEND", a: "售货机 投币 出货 硬话" },
     { t: "公交站牌硬话", h: "busstop.html", k: "BUS", a: "公交 站牌 到站 硬话" },
     { t: "检查单硬话", h: "clipboard.html", k: "CLIP", a: "检查单 勾选 交付 硬话" },
@@ -5022,6 +5028,219 @@
       if (ticket) ticket.textContent = `取号条 · A${String(ticketNo).padStart(3, "0")}`;
       call();
     });
+  }
+
+
+
+  /* ========== SYSTEM v22 handlers ========== */
+  const V22_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* mahjong */
+  const mjHand = document.getElementById("mjHand");
+  if (mjHand) {
+    const river = document.getElementById("mjRiver");
+    const quote = document.getElementById("mjQuote");
+    const meta = document.getElementById("mjMeta");
+    const stage = document.getElementById("mjStage");
+    let mi = 0;
+    let round = 1;
+    const faces = ["东", "南", "西", "北", "中", "发", "白", "一", "九", "五"];
+    const fillHand = () => {
+      mjHand.innerHTML = "";
+      for (let i = 0; i < 8; i++) {
+        const t = document.createElement("button");
+        t.type = "button";
+        t.className = "mj-tile";
+        t.textContent = faces[(mi + i) % faces.length];
+        t.addEventListener("click", () => discard(t.textContent));
+        mjHand.appendChild(t);
+      }
+    };
+    const discard = (face) => {
+      const q = V22_LINES[mi++ % V22_LINES.length];
+      const tile = document.createElement("div");
+      tile.className = "mj-tile";
+      tile.textContent = face || faces[mi % faces.length];
+      river?.appendChild(tile);
+      if (quote) quote.textContent = `「${q}。」`;
+      if (meta) meta.textContent = `东风 · 局 ${String(round).padStart(2, "0")}`;
+      fillHand();
+    };
+    fillHand();
+    document.getElementById("mjDraw")?.addEventListener("click", () => {
+      discard(faces[Math.floor(Math.random() * faces.length)]);
+    });
+    document.getElementById("mjRon")?.addEventListener("click", () => {
+      stage?.classList.remove("is-ron");
+      void stage?.offsetWidth;
+      stage?.classList.add("is-ron");
+      if (quote) quote.textContent = `「${V22_LINES[mi++ % V22_LINES.length]}。」`;
+    });
+    document.getElementById("mjReset")?.addEventListener("click", () => {
+      if (river) river.innerHTML = "";
+      round++;
+      fillHand();
+      if (quote) quote.textContent = "「欧了。」";
+      if (meta) meta.textContent = `东风 · 局 ${String(round).padStart(2, "0")}`;
+      stage?.classList.remove("is-ron");
+    });
+  }
+
+  /* wok */
+  const wokStage = document.getElementById("wokStage");
+  if (wokStage) {
+    const quote = document.getElementById("wokQuote");
+    const meta = document.getElementById("wokMeta");
+    const bits = document.getElementById("wokBits");
+    let wi = 0;
+    let n = 0;
+    const flip = () => {
+      if (bits) {
+        bits.innerHTML = "";
+        for (let i = 0; i < 10; i++) {
+          const b = document.createElement("span");
+          b.className = "wok-bit";
+          const ang = Math.random() * Math.PI * 2;
+          const dist = 40 + Math.random() * 80;
+          b.style.setProperty("--x", Math.cos(ang) * dist + "px");
+          b.style.setProperty("--y", Math.sin(ang) * dist - 40 + "px");
+          b.style.background = Math.random() > 0.5 ? "#ffe14a" : "#e8341a";
+          bits.appendChild(b);
+        }
+      }
+      const q = V22_LINES[wi++ % V22_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      n++;
+      if (meta) meta.textContent = `灶台 · FLIP ${String(n).padStart(2, "0")}`;
+      wokStage.classList.remove("is-flip");
+      void wokStage.offsetWidth;
+      wokStage.classList.add("is-flip");
+    };
+    document.getElementById("wokFlip")?.addEventListener("click", flip);
+    document.getElementById("wokBurst")?.addEventListener("click", () => {
+      flip();
+      setTimeout(flip, 500);
+      setTimeout(flip, 1000);
+    });
+  }
+
+  /* trophy */
+  const trStage = document.getElementById("trStage");
+  if (trStage) {
+    const quote = document.getElementById("trQuote");
+    const meta = document.getElementById("trMeta");
+    const label = document.getElementById("trLabel");
+    let ti = 0;
+    const lift = () => {
+      const q = V22_LINES[ti++ % V22_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      if (label) label.textContent = q.slice(0, 1);
+      if (meta) meta.textContent = `PODIUM · ${String(ti).padStart(2, "0")}`;
+      trStage.classList.remove("is-lift");
+      void trStage.offsetWidth;
+      trStage.classList.add("is-lift");
+    };
+    document.getElementById("trLift")?.addEventListener("click", lift);
+    document.getElementById("trNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V22_LINES[ti++ % V22_LINES.length]}。」`;
+    });
+  }
+
+  /* alarm */
+  const alStage = document.getElementById("alStage");
+  if (alStage) {
+    const time = document.getElementById("alTime");
+    const quote = document.getElementById("alQuote");
+    const meta = document.getElementById("alMeta");
+    let ai = 0;
+    const ring = () => {
+      const q = V22_LINES[ai++ % V22_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      if (time) {
+        const h = 5 + (ai % 4);
+        const m = (ai * 7) % 60;
+        time.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+      }
+      if (meta) meta.textContent = "SNOOZE · RING";
+      alStage.classList.add("is-ring");
+      setTimeout(() => alStage.classList.remove("is-ring"), 1600);
+    };
+    document.getElementById("alRing")?.addEventListener("click", ring);
+    document.getElementById("alSnooze")?.addEventListener("click", () => {
+      alStage.classList.remove("is-ring");
+      if (meta) meta.textContent = "SNOOZE · +5";
+      if (quote) quote.textContent = "「你就慢慢跟我处。」";
+      setTimeout(ring, 500);
+    });
+  }
+
+  /* passport */
+  const ppStamps = document.getElementById("ppStamps");
+  if (ppStamps) {
+    const quote = document.getElementById("ppQuote");
+    const meta = document.getElementById("ppMeta");
+    let pi = 0;
+    let n = 0;
+    const stamp = () => {
+      const q = V22_LINES[pi++ % V22_LINES.length];
+      const el = document.createElement("div");
+      el.className = "pp-mark";
+      el.style.left = 6 + Math.random() * 58 + "%";
+      el.style.top = 8 + Math.random() * 55 + "%";
+      el.style.setProperty("--r", Math.random() * 40 - 20 + "deg");
+      el.innerHTML = (q.length > 6 ? q.slice(0, 6) : q) + "<br/>入";
+      ppStamps.appendChild(el);
+      requestAnimationFrame(() => el.classList.add("is-in"));
+      if (quote) quote.textContent = `「${q}。」`;
+      n++;
+      if (meta) meta.textContent = `VISA · ${String(n).padStart(2, "0")}`;
+    };
+    document.getElementById("ppStamp")?.addEventListener("click", stamp);
+    document.getElementById("ppBurst")?.addEventListener("click", () => {
+      stamp();
+      setTimeout(stamp, 200);
+      setTimeout(stamp, 400);
+    });
+  }
+
+  /* roulette */
+  const rlWheel = document.getElementById("rlWheel");
+  if (rlWheel) {
+    const quote = document.getElementById("rlQuote");
+    const meta = document.getElementById("rlMeta");
+    let ri = 0;
+    let rot = 0;
+    let busy = false;
+    const spin = () => {
+      if (busy) return;
+      busy = true;
+      const extra = 4 + Math.floor(Math.random() * 3);
+      const slice = Math.floor(Math.random() * 6);
+      rot += extra * 360 + slice * 60 + 20;
+      rlWheel.style.transform = `rotate(${rot}deg)`;
+      if (meta) meta.textContent = "SPIN · …";
+      setTimeout(() => {
+        const q = V22_LINES[ri++ % V22_LINES.length];
+        if (quote) quote.textContent = `「${q}。」`;
+        if (meta) meta.textContent = `SPIN · ${String(ri).padStart(2, "0")}`;
+        busy = false;
+      }, 2200);
+    };
+    document.getElementById("rlSpin")?.addEventListener("click", spin);
+    document.getElementById("rlAgain")?.addEventListener("click", spin);
   }
 
 
