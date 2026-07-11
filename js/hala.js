@@ -487,7 +487,7 @@
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
     { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位 简历 班底" },
-    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 公章 摇号 电梯 遥控 灯笼 微信 抓娃娃 红幕" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 售货 站牌 检查单 前台铃 黑板 叫号 公章 微信" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
@@ -512,6 +512,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+    { t: "售货机硬话", h: "vending.html", k: "VEND", a: "售货机 投币 出货 硬话" },
+    { t: "公交站牌硬话", h: "busstop.html", k: "BUS", a: "公交 站牌 到站 硬话" },
+    { t: "检查单硬话", h: "clipboard.html", k: "CLIP", a: "检查单 勾选 交付 硬话" },
+    { t: "前台铃硬话", h: "hotelbell.html", k: "BELL", a: "前台铃 叮 服务 硬话" },
+    { t: "黑板硬话", h: "blackboard.html", k: "BOARDX", a: "黑板 粉笔 板书 硬话" },
+    { t: "叫号硬话", h: "queue.html", k: "QUEUE", a: "叫号 取号 窗口 硬话" },
     { t: "连盖公章硬话", h: "sealpress.html", k: "CHOPX", a: "公章 连盖 红章 硬话" },
     { t: "摇号硬话", h: "lottery.html", k: "LOTTO", a: "摇号 滚筒 抽签 硬话" },
     { t: "电梯硬话", h: "elevator.html", k: "ELEV", a: "电梯 楼层 硬话" },
@@ -4797,6 +4803,224 @@
     });
     document.getElementById("wxStorm")?.addEventListener("click", () => {
       for (let i = 0; i < 5; i++) setTimeout(biao, i * 280);
+    });
+  }
+
+
+
+  /* ========== SYSTEM v21 handlers ========== */
+  const V21_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* vending */
+  const venGrid = document.getElementById("venGrid");
+  if (venGrid) {
+    const slot = document.getElementById("venSlot");
+    const quote = document.getElementById("venQuote");
+    const stage = document.getElementById("venStage");
+    let vi = 0;
+    const skus = ["A1", "A2", "B1", "B2", "C1", "C2"];
+    skus.forEach((code, i) => {
+      const cell = document.createElement("div");
+      cell.className = "ven-cell";
+      cell.innerHTML = `<b>${code}</b><span>${V21_LINES[i % V21_LINES.length].slice(0, 4)}</span>`;
+      venGrid.appendChild(cell);
+    });
+    const buy = () => {
+      const q = V21_LINES[vi++ % V21_LINES.length];
+      if (slot) slot.innerHTML = `<span>出货 · ${q.slice(0, 6)}</span>`;
+      if (quote) quote.textContent = `「${q}。」`;
+      stage?.classList.remove("is-drop");
+      void stage?.offsetWidth;
+      stage?.classList.add("is-drop");
+    };
+    document.getElementById("venBuy")?.addEventListener("click", buy);
+    document.getElementById("venBurst")?.addEventListener("click", () => {
+      buy();
+      setTimeout(buy, 400);
+      setTimeout(buy, 800);
+    });
+  }
+
+  /* bus stop */
+  const busStops = document.getElementById("busStops");
+  if (busStops) {
+    const led = document.getElementById("busLed");
+    const quote = document.getElementById("busQuote");
+    const route = document.getElementById("busRoute");
+    const stops = [
+      { n: "土门", q: "酷是壳，土是芯" },
+      { n: "班底口", q: "那长相就是证据" },
+      { n: "片源湾", q: "少，是刃" },
+      { n: "硬仗中心", q: "本市几场著名硬仗" },
+      { n: "交付站", q: "该出手时就出手" },
+      { n: "开干站", q: "小树不倒我就不倒" },
+    ];
+    let bi = 0;
+    const render = () => {
+      busStops.innerHTML = "";
+      stops.forEach((s, i) => {
+        const li = document.createElement("li");
+        if (i === bi) li.className = "is-on";
+        li.innerHTML = `<span>${s.n}</span><em>${String(i + 1).padStart(2, "0")}</em>`;
+        busStops.appendChild(li);
+      });
+      const cur = stops[bi];
+      if (led) led.textContent = `下一站 · ${cur.n}`;
+      if (quote) quote.textContent = `「${cur.q}。」`;
+      if (route) route.textContent = `线路 ${String(7 + (bi % 3)).padStart(2, "0")}`;
+    };
+    render();
+    document.getElementById("busNext")?.addEventListener("click", () => {
+      bi = (bi + 1) % stops.length;
+      render();
+    });
+    document.getElementById("busLoop")?.addEventListener("click", () => {
+      let n = 0;
+      const iv = setInterval(() => {
+        bi = (bi + 1) % stops.length;
+        render();
+        n++;
+        if (n >= stops.length) clearInterval(iv);
+      }, 450);
+    });
+  }
+
+  /* clipboard */
+  const clipList = document.getElementById("clipList");
+  if (clipList) {
+    const score = document.getElementById("clipScore");
+    const quote = document.getElementById("clipQuote");
+    const items = [
+      "问题定义写清",
+      "不做什么写清",
+      "主线方向敢删",
+      "文件交得出",
+      "上线节点对齐",
+      "修订窗口说清",
+    ];
+    let ci = 0;
+    const sync = () => {
+      const on = clipList.querySelectorAll("li.is-on").length;
+      if (score) score.textContent = `完成 ${on} / ${items.length}`;
+    };
+    items.forEach((label, i) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<i></i><span>${label}</span>`;
+      li.addEventListener("click", () => {
+        li.classList.toggle("is-on");
+        if (li.classList.contains("is-on")) {
+          const q = V21_LINES[ci++ % V21_LINES.length];
+          if (quote) quote.textContent = `「${q}。」`;
+          li.querySelector("i").textContent = "✓";
+        } else {
+          li.querySelector("i").textContent = "";
+        }
+        sync();
+      });
+      clipList.appendChild(li);
+    });
+    sync();
+    document.getElementById("clipAll")?.addEventListener("click", () => {
+      clipList.querySelectorAll("li").forEach((li, i) => {
+        setTimeout(() => {
+          if (!li.classList.contains("is-on")) li.click();
+        }, i * 120);
+      });
+    });
+    document.getElementById("clipReset")?.addEventListener("click", () => {
+      clipList.querySelectorAll("li").forEach((li) => {
+        li.classList.remove("is-on");
+        li.querySelector("i").textContent = "";
+      });
+      if (quote) quote.textContent = "「少，是刃。」";
+      sync();
+    });
+  }
+
+  /* hotel bell */
+  const bellStage = document.getElementById("bellStage");
+  if (bellStage) {
+    const quote = document.getElementById("bellQuote");
+    const meta = document.getElementById("bellMeta");
+    let bi = 0;
+    let n = 0;
+    const ding = () => {
+      const q = V21_LINES[bi++ % V21_LINES.length];
+      if (quote) quote.textContent = `「${q}。」`;
+      n++;
+      if (meta) meta.textContent = `DESK · ${String(n).padStart(2, "0")}`;
+      bellStage.classList.remove("is-ding");
+      void bellStage.offsetWidth;
+      bellStage.classList.add("is-ding");
+      setTimeout(() => bellStage.classList.remove("is-ding"), 700);
+    };
+    document.getElementById("bellHit")?.addEventListener("click", ding);
+    document.getElementById("bellDing")?.addEventListener("click", ding);
+    document.getElementById("bellBurst")?.addEventListener("click", () => {
+      ding();
+      setTimeout(ding, 350);
+      setTimeout(ding, 700);
+    });
+  }
+
+  /* blackboard */
+  const bbStage = document.getElementById("bbStage");
+  if (bbStage) {
+    const textEl = document.getElementById("bbText");
+    const quote = document.getElementById("bbQuote");
+    let bi = 0;
+    const write = () => {
+      const q = V21_LINES[bi++ % V21_LINES.length];
+      if (textEl) textEl.textContent = q + "。";
+      if (quote) quote.textContent = `「${q}。」`;
+      bbStage.classList.remove("is-write");
+      void bbStage.offsetWidth;
+      bbStage.classList.add("is-write");
+    };
+    document.getElementById("bbWrite")?.addEventListener("click", write);
+    document.getElementById("bbErase")?.addEventListener("click", () => {
+      if (textEl) textEl.textContent = "……";
+      setTimeout(write, 280);
+    });
+  }
+
+  /* queue */
+  const queStage = document.getElementById("queStage");
+  if (queStage) {
+    const num = document.getElementById("queNum");
+    const win = document.getElementById("queWin");
+    const ticket = document.getElementById("queTicket");
+    const quote = document.getElementById("queQuote");
+    let qi = 0;
+    let ticketNo = 11;
+    const call = () => {
+      const q = V21_LINES[qi++ % V21_LINES.length];
+      const n = 12 + (qi % 80);
+      if (num) num.textContent = "A" + String(n).padStart(3, "0");
+      if (win) win.textContent = `到 ${String((qi % 4) + 1).padStart(2, "0")} 号窗`;
+      if (quote) quote.textContent = `「${q}。」`;
+      queStage.classList.remove("is-call");
+      void queStage.offsetWidth;
+      queStage.classList.add("is-call");
+    };
+    document.getElementById("queCall")?.addEventListener("click", call);
+    document.getElementById("queTake")?.addEventListener("click", () => {
+      ticketNo++;
+      if (ticket) ticket.textContent = `取号条 · A${String(ticketNo).padStart(3, "0")}`;
+      call();
     });
   }
 
