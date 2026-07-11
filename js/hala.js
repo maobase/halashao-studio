@@ -482,7 +482,7 @@
     { t: "工作室信条", h: "creed.html", k: "CREED", a: "立场 纪律" },
     { t: "媒体资料", h: "press.html", k: "PRESS", a: "口径 品牌 色彩" },
     { t: "硬问题 FAQ", h: "faq.html", k: "FAQ", a: "问题 周期 报价 模板 直球" },
-    { t: "客户走查导览", h: "tour.html", k: "TOUR", a: "评审 演示 客户 走查" },
+    { t: "客户走查导览", h: "tour.html", k: "TOUR", a: "评审 演示 客户 走查 硬仗 8步" },
     { t: "导览台", h: "dashboard.html", k: "DASH", a: "总控 捷径" },
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
