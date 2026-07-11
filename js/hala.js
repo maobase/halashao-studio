@@ -487,7 +487,7 @@
     { t: "系统地图", h: "system.html", k: "SYSTEM", a: "全站 地图 模块" },
     { t: "开干", h: "contact.html", k: "CONTACT", a: "联系 合作 邮箱 项目" },
     { t: "招人", h: "recruit.html", k: "RECRUIT", a: "招聘 岗位 简历 班底" },
-    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 抓娃娃 红幕 寻呼 点唱 鞭炮 顶灯 翻页 烟雾" },
+    { t: "实验室", h: "lab.html", k: "LAB", a: "特效 演示 模块 公章 摇号 电梯 遥控 灯笼 微信 抓娃娃 红幕" },
     { t: "三秒钩子机", h: "hook.html", k: "HOOK" },
     { t: "贴图轰炸", h: "stickers.html", k: "STICKER" },
     { t: "硬切变焦", h: "zoomcut.html", k: "ZOOM" },
@@ -512,6 +512,12 @@
     { t: "提词器硬话", h: "tele.html", k: "TELE", a: "提词 滚读 提案" },
     { t: "硬话热榜", h: "rank.html", k: "RANK", a: "热榜 点赞 排序" },
     { t: "吸附短片流", h: "snap.html", k: "SNAP", a: "竖滑 吸附 短视频" },
+    { t: "连盖公章硬话", h: "sealpress.html", k: "CHOPX", a: "公章 连盖 红章 硬话" },
+    { t: "摇号硬话", h: "lottery.html", k: "LOTTO", a: "摇号 滚筒 抽签 硬话" },
+    { t: "电梯硬话", h: "elevator.html", k: "ELEV", a: "电梯 楼层 硬话" },
+    { t: "遥控硬话", h: "remote.html", k: "REMOTE", a: "遥控 换台 片源 硬话" },
+    { t: "红灯笼硬话", h: "lantern.html", k: "LANTERN", a: "灯笼 年味 点亮 硬话" },
+    { t: "微信硬话", h: "wechat.html", k: "WECHAT", a: "微信 聊天 气泡 网感 硬话" },
     { t: "抓娃娃硬话", h: "crane.html", k: "CRANE", a: "抓娃娃 街机 爪子 硬话" },
     { t: "红幕硬话", h: "curtain.html", k: "CURTAIN", a: "红幕 拉开 片源 硬话" },
     { t: "寻呼机硬话", h: "pager.html", k: "PAGER", a: "寻呼 BB机 哔哔 硬话" },
@@ -4562,6 +4568,235 @@
       flip();
       setTimeout(flip, 750);
       setTimeout(flip, 1500);
+    });
+  }
+
+
+
+  /* ========== SYSTEM v20 handlers ========== */
+  const V20_LINES = [
+    "小树不倒我就不倒",
+    "那长相就是证据",
+    "你就慢慢跟我处",
+    "本市几场著名硬仗",
+    "少，是刃",
+    "酷是壳，土是芯",
+    "欧了",
+    "该出手时就出手",
+    "不生产模板",
+    "跨尺度出刀",
+    "肉眼凡胎，量你也看不出来",
+    "论成败，人生豪迈",
+  ];
+
+  /* seal press */
+  const spPaper = document.getElementById("spPaper");
+  if (spPaper) {
+    const quote = document.getElementById("spQuote");
+    const meta = document.getElementById("spMeta");
+    let si = 0;
+    let n = 0;
+    const chop = () => {
+      const q = V20_LINES[si++ % V20_LINES.length];
+      const el = document.createElement("div");
+      el.className = "sp-stamp";
+      el.style.left = 8 + Math.random() * 70 + "%";
+      el.style.top = 8 + Math.random() * 65 + "%";
+      el.style.setProperty("--r", (Math.random() * 40 - 20) + "deg");
+      el.innerHTML = q.length > 6 ? q.slice(0, 6) + "<br/>硬" : q;
+      spPaper.appendChild(el);
+      requestAnimationFrame(() => el.classList.add("is-in"));
+      if (quote) quote.textContent = `「${q}。」`;
+      n++;
+      if (meta) meta.textContent = `CHOP · ${String(n).padStart(2, "0")}`;
+    };
+    document.getElementById("spChop")?.addEventListener("click", chop);
+    document.getElementById("spBurst")?.addEventListener("click", () => {
+      for (let i = 0; i < 5; i++) setTimeout(chop, i * 120);
+    });
+    document.getElementById("spClear")?.addEventListener("click", () => {
+      spPaper.innerHTML = "";
+      n = 0;
+      if (meta) meta.textContent = "CHOP · 00";
+      if (quote) quote.textContent = "「少，是刃。」";
+    });
+  }
+
+  /* lottery */
+  const lotStage = document.getElementById("lotStage");
+  if (lotStage) {
+    const spin = document.getElementById("lotSpin");
+    const quote = document.getElementById("lotQuote");
+    const meta = document.getElementById("lotMeta");
+    let li = 0;
+    let busy = false;
+    const draw = () => {
+      if (busy) return;
+      busy = true;
+      lotStage.classList.add("is-spin");
+      lotStage.classList.remove("is-win");
+      let ticks = 0;
+      const iv = setInterval(() => {
+        if (spin) spin.textContent = V20_LINES[Math.floor(Math.random() * V20_LINES.length)].slice(0, 4);
+        ticks++;
+        if (ticks > 12) {
+          clearInterval(iv);
+          const q = V20_LINES[li++ % V20_LINES.length];
+          if (spin) spin.textContent = q.slice(0, 4);
+          if (quote) quote.textContent = `「${q}。」`;
+          if (meta) meta.textContent = `DRAW · ${String(li).padStart(2, "0")}`;
+          lotStage.classList.remove("is-spin");
+          lotStage.classList.add("is-win");
+          busy = false;
+        }
+      }, 70);
+    };
+    document.getElementById("lotDraw")?.addEventListener("click", draw);
+    document.getElementById("lotTriple")?.addEventListener("click", () => {
+      draw();
+      setTimeout(draw, 1100);
+      setTimeout(draw, 2200);
+    });
+  }
+
+  /* elevator */
+  const elvPad = document.getElementById("elvPad");
+  if (elvPad) {
+    const display = document.getElementById("elvDisplay");
+    const quote = document.getElementById("elvQuote");
+    const floors = [
+      { f: "1", q: "酷是壳，土是芯" },
+      { f: "2", q: "欧了" },
+      { f: "3", q: "少，是刃" },
+      { f: "4", q: "该出手时就出手" },
+      { f: "5", q: "那长相就是证据" },
+      { f: "6", q: "你就慢慢跟我处" },
+      { f: "7", q: "小树不倒我就不倒" },
+      { f: "8", q: "跨尺度出刀" },
+      { f: "B1", q: "不生产模板" },
+    ];
+    const go = (item) => {
+      elvPad.querySelectorAll(".elv-btn").forEach((b) => b.classList.toggle("is-on", b.dataset.f === item.f));
+      if (display) display.textContent = item.f;
+      if (quote) quote.textContent = `「${item.q}。」`;
+    };
+    floors.forEach((item) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "elv-btn";
+      btn.dataset.f = item.f;
+      btn.textContent = item.f;
+      btn.addEventListener("click", () => go(item));
+      elvPad.appendChild(btn);
+    });
+    document.getElementById("elvRandom")?.addEventListener("click", () => {
+      go(floors[Math.floor(Math.random() * floors.length)]);
+    });
+    document.getElementById("elvLobby")?.addEventListener("click", () => go(floors[0]));
+  }
+
+  /* remote */
+  const remStage = document.getElementById("remStage");
+  if (remStage) {
+    const vid = document.getElementById("remVid");
+    const cap = document.getElementById("remCap");
+    const bug = document.getElementById("remBug");
+    let ri = 0;
+    let ch = 1;
+    const srcs = [
+      "assets/showreel-motion.mp4",
+      "assets/hero-cinematic.mp4",
+      "assets/work-hover-1.mp4",
+      "assets/work-hover-2.mp4",
+      "assets/work-hover-3.mp4",
+      "assets/clip-a.mp4",
+    ];
+    const zap = () => {
+      const q = V20_LINES[ri++ % V20_LINES.length];
+      ch = (ch % 12) + 1;
+      if (cap) cap.textContent = `「${q}。」`;
+      if (bug) bug.textContent = `CH · ${String(ch).padStart(2, "0")}`;
+      if (vid) {
+        vid.src = srcs[ri % srcs.length];
+        vid.play().catch(() => {});
+      }
+      remStage.classList.remove("is-zap");
+      void remStage.offsetWidth;
+      remStage.classList.add("is-zap");
+      setTimeout(() => remStage.classList.remove("is-zap"), 200);
+    };
+    document.getElementById("remZap")?.addEventListener("click", zap);
+    document.getElementById("remSurf")?.addEventListener("click", () => {
+      zap();
+      setTimeout(zap, 350);
+      setTimeout(zap, 700);
+    });
+  }
+
+  /* lantern */
+  const lanRow = document.getElementById("lanRow");
+  if (lanRow) {
+    const quote = document.getElementById("lanQuote");
+    const meta = document.getElementById("lanMeta");
+    const stage = document.getElementById("lanStage");
+    let li = 0;
+    const labels = ["少", "是", "刃", "土", "酷", "芯"];
+    labels.forEach((lab, i) => {
+      const el = document.createElement("button");
+      el.type = "button";
+      el.className = "lan-item";
+      el.innerHTML = `<div class="bulb"></div><em>${lab}</em>`;
+      el.addEventListener("click", () => {
+        el.classList.toggle("is-on");
+        const q = V20_LINES[li++ % V20_LINES.length];
+        if (quote) quote.textContent = `「${q}。」`;
+        const on = lanRow.querySelectorAll(".lan-item.is-on").length;
+        if (meta) meta.textContent = on ? `NIGHT · ON ${on}` : "NIGHT · OFF";
+      });
+      lanRow.appendChild(el);
+    });
+    document.getElementById("lanLight")?.addEventListener("click", () => {
+      const items = [...lanRow.querySelectorAll(".lan-item")];
+      const off = items.find((x) => !x.classList.contains("is-on")) || items[0];
+      off.click();
+    });
+    document.getElementById("lanAll")?.addEventListener("click", () => {
+      lanRow.querySelectorAll(".lan-item").forEach((el, i) => {
+        setTimeout(() => {
+          if (!el.classList.contains("is-on")) el.click();
+        }, i * 100);
+      });
+    });
+    document.getElementById("lanNext")?.addEventListener("click", () => {
+      if (quote) quote.textContent = `「${V20_LINES[li++ % V20_LINES.length]}。」`;
+    });
+  }
+
+  /* wechat */
+  const wxThread = document.getElementById("wxThread");
+  if (wxThread) {
+    let wi = 0;
+    const push = (who, text) => {
+      const el = document.createElement("div");
+      el.className = "wx-bubble " + who;
+      el.textContent = text;
+      wxThread.appendChild(el);
+      wxThread.scrollTop = wxThread.scrollHeight;
+    };
+    const biao = () => {
+      const q = V20_LINES[wi++ % V20_LINES.length];
+      push("them", q + "。");
+    };
+    // seed
+    push("me", "彪哥，这项目咋整？");
+    push("them", "你就慢慢跟我处。");
+    document.getElementById("wxPing")?.addEventListener("click", biao);
+    document.getElementById("wxSend")?.addEventListener("click", () => {
+      push("me", "对齐刀口，再谈档期。");
+      setTimeout(biao, 350);
+    });
+    document.getElementById("wxStorm")?.addEventListener("click", () => {
+      for (let i = 0; i < 5; i++) setTimeout(biao, i * 280);
     });
   }
 
